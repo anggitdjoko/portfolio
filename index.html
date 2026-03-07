@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anggit Djoko — Data Analyst Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #1f1f35;
+            --accent: #6c63ff;
+            --accent-light: #8b83ff;
+            --accent-glow: rgba(108, 99, 255, 0.15);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9090a8;
+            --text-muted: #5a5a72;
+            --border: #2a2a3e;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --gradient-1: linear-gradient(135deg, #6c63ff, #3b82f6);
+            --gradient-2: linear-gradient(135deg, #f59e0b, #ef4444);
+            --gradient-3: linear-gradient(135deg, #22c55e, #06b6d4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            transition: all 0.3s;
+        }
+        nav .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
+        }
+        nav .logo {
+            font-weight: 800; font-size: 1.1rem;
+            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+        nav .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
+            font-weight: 500; transition: color 0.3s; letter-spacing: 0.02em;
+        }
+        nav .nav-links a:hover { color: var(--accent-light); }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; padding: 6rem 2rem 4rem;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(108,99,255,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.06) 0%, transparent 50%);
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236c63ff' fill-opacity='0.03'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero-content { text-align: center; position: relative; max-width: 800px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--accent-glow); border: 1px solid rgba(108,99,255,0.3);
+            padding: 0.4rem 1rem; border-radius: 50px;
+            font-size: 0.8rem; color: var(--accent-light); font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .hero-badge::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--success); animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900;
+            line-height: 1.1; margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #6c63ff 50%, #3b82f6 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.15rem; color: var(--text-secondary);
+            max-width: 600px; margin: 0 auto 2rem;
+        }
+        .hero-stats {
+            display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        .hero-stat {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            background: rgba(26, 26, 46, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        .hero-stat .value {
+            font-size: 1.8rem; font-weight: 800;
+            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-stat .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* ─── SECTION COMMON ─── */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
+        }
+        .section-title {
+            font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;
+        }
+        .section-desc { color: var(--text-secondary); max-width: 600px; margin-bottom: 3rem; }
+
+        /* ─── CARDS ─── */
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2rem; transition: all 0.3s;
+        }
+        .card:hover { background: var(--bg-card-hover); border-color: rgba(108,99,255,0.3); transform: translateY(-2px); }
+        .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .card-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+        }
+        .card-icon.purple { background: rgba(108,99,255,0.15); }
+        .card-icon.blue { background: rgba(59,130,246,0.15); }
+        .card-icon.green { background: rgba(34,197,94,0.15); }
+        .card-icon.orange { background: rgba(245,158,11,0.15); }
+        .card-title { font-size: 1.1rem; font-weight: 700; }
+        .card-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* ─── GRID ─── */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+
+        /* ─── KPI CARDS ─── */
+        .kpi-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 1.5rem; text-align: center; position: relative; overflow: hidden;
+        }
+        .kpi-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        }
+        .kpi-card.purple::before { background: var(--gradient-1); }
+        .kpi-card.green::before { background: var(--gradient-3); }
+        .kpi-card.orange::before { background: var(--gradient-2); }
+        .kpi-card.blue::before { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+        .kpi-value { font-size: 2rem; font-weight: 800; margin: 0.5rem 0 0.25rem; }
+        .kpi-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+        .kpi-sub { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; }
+
+        /* ─── TABLES ─── */
+        .table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        thead { background: rgba(108,99,255,0.08); }
+        th {
+            padding: 0.8rem 1rem; text-align: left; font-weight: 600;
+            color: var(--accent-light); font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.06em; white-space: nowrap;
+        }
+        td { padding: 0.7rem 1rem; border-top: 1px solid var(--border); color: var(--text-secondary); }
+        tr:hover td { background: rgba(108,99,255,0.04); }
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+
+        /* ─── CHART WRAPPER ─── */
+        .chart-container {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .chart-title {
+            font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .chart-title .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+        /* ─── INSIGHT CARDS ─── */
+        .insight-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 1.5rem; border-left: 3px solid var(--accent);
+        }
+        .insight-card h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--accent-light); }
+        .insight-card p { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* ─── TAGS ─── */
+        .tag {
+            display: inline-block; padding: 0.25rem 0.7rem;
+            border-radius: 6px; font-size: 0.7rem; font-weight: 600;
+        }
+        .tag-purple { background: rgba(108,99,255,0.15); color: var(--accent-light); }
+        .tag-green { background: rgba(34,197,94,0.15); color: #4ade80; }
+        .tag-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+        .tag-orange { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+        /* ─── FORMULA BOX ─── */
+        .formula-box {
+            background: rgba(108,99,255,0.06); border: 1px solid rgba(108,99,255,0.2);
+            border-radius: 12px; padding: 1.2rem 1.5rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: var(--accent-light);
+        }
+
+        /* ─── PROGRESS BAR ─── */
+        .progress-bar-wrap { margin: 0.4rem 0; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.3rem; }
+        .progress-label span:first-child { color: var(--text-primary); }
+        .progress-label span:last-child { color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+        .progress-track {
+            height: 8px; background: rgba(108,99,255,0.1); border-radius: 4px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; border-radius: 4px; transition: width 1s ease;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center; padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted); font-size: 0.8rem;
+        }
+
+        /* ─── DIVIDER ─── */
+        .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+        /* ─── ABOUT SECTION ─── */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .about-text h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.92rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .skill-tag {
+            padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.78rem; font-weight: 500;
+            background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+        }
+
+        /* ─── SCROLL ANIMATIONS ─── */
+        .fade-up {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── ACTIVE NAV LINK ─── */
+        nav .nav-links a.active {
+            color: var(--accent-light);
+            position: relative;
+        }
+        nav .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        /* ─── HAMBURGER BUTTON ─── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border: none;
+            background: none;
+            z-index: 1100;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ─── BACK TO TOP ─── */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(108,99,255,0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 999;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            box-shadow: 0 6px 28px rgba(108,99,255,0.6);
+            transform: translateY(-3px);
+        }
+
+        /* ─── PROGRESS BAR ─── */
+        .scroll-progress {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            z-index: 1001;
+            transition: width 0.1s linear;
+            width: 0%;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hamburger { display: flex; }
+            nav .nav-links {
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(10, 10, 15, 0.97);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s;
+                z-index: 1050;
+            }
+            nav .nav-links.open {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            nav .nav-links a {
+                font-size: 1.3rem !important;
+                color: var(--text-primary);
+            }
+            nav .nav-links a.active::after {
+                bottom: -6px;
+                height: 3px;
+            }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-stats { gap: 1rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        .highlight-row td { background: rgba(108,99,255,0.08) !important; }
+        .text-right { text-align: right; }
+        .text-green { color: #4ade80; }
+        .text-red { color: #f87171; }
+        .text-accent { color: var(--accent-light); }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-2 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">AD</div>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#test1" onclick="closeMenu()">Recipe Conversion</a></li>
+            <li><a href="#test2" onclick="closeMenu()">Data Entry</a></li>
+            <li><a href="#test3" onclick="closeMenu()">Data Analysis</a></li>
+            <li><a href="#insights" onclick="closeMenu()">Insights</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+    <div class="hero-content fade-up">
+        <div class="hero-badge">Available for Opportunities</div>
+        <h1>Anggit Djoko</h1>
+        <p>Data Analyst yang berdedikasi dalam mengubah data mentah menjadi insight yang actionable. Test Offline — PT JAR Andalan Rasa.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="value">7,437</div>
+                <div class="label">Data Records</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">Rp 164.8M</div>
+                <div class="label">Net Sales Analyzed</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">2,254</div>
+                <div class="label">Transactions</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">3</div>
+                <div class="label">Test Completed</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about" style="background: var(--bg-secondary);">
+    <div class="container">
+        <div class="about-grid fade-up">
+            <div class="about-text">
+                <div class="section-label">About Me</div>
+                <h3>Turning Raw Data Into Business Decisions</h3>
+                <p>Saya Anggit Djoko, seorang Data Analyst dengan kemampuan analisis yang kuat, termasuk Exploratory Data Analysis (EDA), recipe conversion, serta pengolahan data mentah menjadi insight bisnis yang actionable.</p>
+                <p>Portfolio ini menampilkan hasil Test Offline sebagai Data Analyst untuk PT JAR Andalan Rasa, mencakup 3 kompetensi utama: Recipe Conversion, Data Entry & Cleansing, dan Exploratory Data Analysis.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">📊 Data Analysis</span>
+                    <span class="skill-tag">📈 EDA</span>
+                    <span class="skill-tag">🧮 Excel</span>
+                    <span class="skill-tag">🐍 Python</span>
+                    <span class="skill-tag">📉 Data Visualization</span>
+                    <span class="skill-tag">🔍 Business Intelligence</span>
+                    <span class="skill-tag">🧹 Data Cleaning</span>
+                    <span class="skill-tag">📋 Reporting</span>
+                </div>
+            </div>
+            <div>
+                <div class="grid-2" style="gap:1rem;">
+                    <div class="kpi-card purple">
+                        <div class="kpi-label">Test 1</div>
+                        <div class="kpi-value" style="font-size:1.3rem;">Recipe Conversion</div>
+                        <div class="kpi-sub">Konversi resep proporsional</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="kpi-label">Test 2</div>
+                        <div class="kpi-value" style="font-size:1.3rem;">Data Entry</div>
+                        <div class="kpi-sub">Input & pembersihan data</div>
+                    </div>
+                    <div class="kpi-card orange">
+                        <div class="kpi-label">Test 3</div>
+                        <div class="kpi-value" style="font-size:1.3rem;">Data Analysis</div>
+                        <div class="kpi-sub">EDA & insight bisnis</div>
+                    </div>
+                    <div class="kpi-card blue">
+                        <div class="kpi-label">Tools</div>
+                        <div class="kpi-value" style="font-size:1.3rem;">Multi-Skill</div>
+                        <div class="kpi-sub">Excel, Charts, SQL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ TEST 1 : RECIPE CONVERSION ═══════════════ -->
+<section id="test1">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label">Test 1</div>
+            <h2 class="section-title">Recipe Conversion</h2>
+            <p class="section-desc">Menghitung Qty setiap bahan baku secara teoritis dengan konsep perbandingan untuk Adonan Ice Cream Yogurt sebanyak 7.563 gram.</p>
+        </div>
+
+        <div class="grid-2 fade-up">
+            <!-- ORIGINAL RECIPE -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon purple">📝</div>
+                    <div>
+                        <div class="card-title">Resep Awal</div>
+                        <div class="card-subtitle">Total: 5.442 gram</div>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Bahan</th><th class="text-right">Qty</th><th>Satuan</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Susu</td><td class="text-right mono">1.150</td><td>gr</td></tr>
+                            <tr><td>Powder Ice Cream Yogurt</td><td class="text-right mono">2.215</td><td>gr</td></tr>
+                            <tr><td>Powder Yogurt</td><td class="text-right mono">457</td><td>gr</td></tr>
+                            <tr><td>Air</td><td class="text-right mono">900</td><td>ml</td></tr>
+                            <tr><td>Gula Pasir</td><td class="text-right mono">720</td><td>gr</td></tr>
+                            <tr class="highlight-row"><td><strong>TOTAL</strong></td><td class="text-right mono"><strong>5.442</strong></td><td><strong>gr</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONVERTED RECIPE -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon green">✅</div>
+                    <div>
+                        <div class="card-title">Resep Baru (Jawaban)</div>
+                        <div class="card-subtitle">Total: 7.563 gram — Rasio: ×1.3897</div>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Bahan</th><th class="text-right">Qty Baru</th><th>Satuan</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Susu</td><td class="text-right mono">1.598,21</td><td>gr</td></tr>
+                            <tr><td>Powder Ice Cream Yogurt</td><td class="text-right mono">3.078,29</td><td>gr</td></tr>
+                            <tr><td>Powder Yogurt</td><td class="text-right mono">635,11</td><td>gr</td></tr>
+                            <tr><td>Air</td><td class="text-right mono">1.250,77</td><td>ml</td></tr>
+                            <tr><td>Gula Pasir</td><td class="text-right mono">1.000,62</td><td>gr</td></tr>
+                            <tr class="highlight-row"><td><strong>TOTAL</strong></td><td class="text-right mono"><strong>7.563,00</strong></td><td><strong>gr</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="formula-box fade-up mt-2">
+            <strong>Formula:</strong> Qty Baru = Qty Awal × (Total Resep Baru / Total Resep Awal) = Qty Awal × (7.563 / 5.442) = Qty Awal × <strong>1,3897</strong>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ TEST 2 : DATA ENTRY ═══════════════ -->
+<section id="test2" style="background: var(--bg-secondary);">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label">Test 2</div>
+            <h2 class="section-title">Data Entry & Cleansing</h2>
+            <p class="section-desc">Menginput data produk, menghitung waste, dan menentukan jumlah bersih yang terjual (Jumlah - Waste).</p>
+        </div>
+
+        <div class="grid-2 fade-up">
+            <!-- ICE CREAM PRODUCTS -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon orange">🍦</div>
+                    <div>
+                        <div class="card-title">Ice Cream & Dessert Products</div>
+                        <div class="card-subtitle">24 item — Total Bersih: 285 pcs</div>
+                    </div>
+                </div>
+                <div class="table-wrapper" style="max-height:500px;overflow-y:auto;">
+                    <table>
+                        <thead><tr><th>No</th><th>Nama Item</th><th class="text-right">Jumlah</th><th class="text-right">Waste</th><th class="text-right">Bersih</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Tokyo Cheesecake Berry</td><td class="text-right mono">20</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">16</td></tr>
+                            <tr><td>2</td><td>Orenji Pop</td><td class="text-right mono">10</td><td class="text-right mono text-red">5</td><td class="text-right mono text-green">5</td></tr>
+                            <tr><td>3</td><td>Kiwi Breez</td><td class="text-right mono">9</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">5</td></tr>
+                            <tr><td>4</td><td>Kuroku</td><td class="text-right mono">10</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">7</td></tr>
+                            <tr><td>5</td><td>Nuteru</td><td class="text-right mono">34</td><td class="text-right mono text-red">6</td><td class="text-right mono text-green">28</td></tr>
+                            <tr><td>6</td><td>Yoru Mitsu</td><td class="text-right mono">16</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">15</td></tr>
+                            <tr><td>7</td><td>Cherry Moon</td><td class="text-right mono">22</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">18</td></tr>
+                            <tr><td>8</td><td>Milk Dust</td><td class="text-right mono">44</td><td class="text-right mono text-red">7</td><td class="text-right mono text-green">37</td></tr>
+                            <tr><td>9</td><td>Choco Hima</td><td class="text-right mono">5</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">1</td></tr>
+                            <tr><td>10</td><td>Choco Ame</td><td class="text-right mono">20</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">19</td></tr>
+                            <tr><td>11</td><td>Dorayaki</td><td class="text-right mono">6</td><td class="text-right mono text-red">2</td><td class="text-right mono text-green">4</td></tr>
+                            <tr><td>12</td><td>Snow Almond</td><td class="text-right mono">20</td><td class="text-right mono text-red">5</td><td class="text-right mono text-green">15</td></tr>
+                            <tr><td>13</td><td>Pistachoco</td><td class="text-right mono">15</td><td class="text-right mono text-red">6</td><td class="text-right mono text-green">9</td></tr>
+                            <tr><td>14</td><td>White Pistachio</td><td class="text-right mono">5</td><td class="text-right mono text-red">2</td><td class="text-right mono text-green">3</td></tr>
+                            <tr><td>15</td><td>Vanilla Brulee</td><td class="text-right mono">15</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">11</td></tr>
+                            <tr><td>16</td><td>Matchako</td><td class="text-right mono">18</td><td class="text-right mono text-red">7</td><td class="text-right mono text-green">11</td></tr>
+                            <tr><td>17</td><td>Wagashi Bom</td><td class="text-right mono">5</td><td class="text-right mono text-red">0</td><td class="text-right mono text-green">5</td></tr>
+                            <tr><td>18</td><td>Kyoto Mist</td><td class="text-right mono">10</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">9</td></tr>
+                            <tr><td>19</td><td>Ichigo Matcha</td><td class="text-right mono">18</td><td class="text-right mono text-red">0</td><td class="text-right mono text-green">18</td></tr>
+                            <tr><td>20</td><td>Matcha Yume</td><td class="text-right mono">18</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">15</td></tr>
+                            <tr><td>21</td><td>Donburi</td><td class="text-right mono">10</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">7</td></tr>
+                            <tr><td>22</td><td>Shirokuma</td><td class="text-right mono">20</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">17</td></tr>
+                            <tr><td>23</td><td>Torikara Bomb</td><td class="text-right mono">20</td><td class="text-right mono text-red">6</td><td class="text-right mono text-green">14</td></tr>
+                            <tr><td>24</td><td>Pista Kuro</td><td class="text-right mono">23</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">22</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DONUT PRODUCTS -->
+            <div>
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <div class="card-icon blue">🍩</div>
+                        <div>
+                            <div class="card-title">Donat & Bomboloni Polos</div>
+                            <div class="card-subtitle">4 item — Total Bersih: 382 pcs</div>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>No</th><th>Nama Item</th><th class="text-right">Jumlah</th><th class="text-right">Waste</th><th class="text-right">Bersih</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Ring Polos</td><td class="text-right mono">156</td><td class="text-right mono text-red">18</td><td class="text-right mono text-green">138</td></tr>
+                                <tr><td>2</td><td>Bomboloni Polos</td><td class="text-right mono">228</td><td class="text-right mono text-red">34</td><td class="text-right mono text-green">194</td></tr>
+                                <tr><td>3</td><td>Ring Matcha Polos</td><td class="text-right mono">12</td><td class="text-right mono text-red">5</td><td class="text-right mono text-green">7</td></tr>
+                                <tr><td>4</td><td>Bomboloni Matcha Polos</td><td class="text-right mono">60</td><td class="text-right mono text-red">17</td><td class="text-right mono text-green">43</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="chart-title"><div class="dot" style="background:var(--danger);"></div>Waste Rate per Produk Ice Cream (Top 10)</div>
+                    <canvas id="wasteChart" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ TEST 3 : DATA ANALYSIS (EDA) ═══════════════ -->
+<section id="test3">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label">Test 3</div>
+            <h2 class="section-title">Exploratory Data Analysis</h2>
+            <p class="section-desc">Analisis mendalam terhadap 7.437 records transaksi penjualan Oktober 2025 di PT JAR Andalan Rasa, meliputi 6 tema analisis utama.</p>
+        </div>
+
+        <!-- KPI ROW -->
+        <div class="grid-4 fade-up mb-2">
+            <div class="kpi-card purple">
+                <div class="kpi-label">Net Sales</div>
+                <div class="kpi-value">Rp 164.8M</div>
+                <div class="kpi-sub">Oktober 2025</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-label">Total Transaksi</div>
+                <div class="kpi-value">2,254</div>
+                <div class="kpi-sub">Unique Receipts</div>
+            </div>
+            <div class="kpi-card orange">
+                <div class="kpi-label">Avg Order Value</div>
+                <div class="kpi-value">Rp 73.1K</div>
+                <div class="kpi-sub">Per transaksi</div>
+            </div>
+            <div class="kpi-card blue">
+                <div class="kpi-label">Total Items Sold</div>
+                <div class="kpi-value">8,398</div>
+                <div class="kpi-sub">Qty terjual</div>
+            </div>
+        </div>
+
+        <!-- ─── TEMA 1: BEST & WORST SELLING ─── -->
+        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+            <span class="tag tag-purple">Tema 1</span> Best & Worst Selling Menu
+        </h3>
+        <div class="grid-2 fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--success);"></div>Top 10 Menu by Net Sales</div>
+                <canvas id="topSalesChart" height="300"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--danger);"></div>Bottom 10 Menu by Quantity</div>
+                <canvas id="bottomQtyChart" height="300"></canvas>
+            </div>
+        </div>
+        <div class="grid-2 fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--accent);"></div>Sales by Category</div>
+                <canvas id="categorySalesChart" height="300"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--info);"></div>Category Distribution (Qty)</div>
+                <canvas id="categoryPieChart" height="300"></canvas>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ─── TEMA 2: PEAK HOURS ─── -->
+        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+            <span class="tag tag-green">Tema 2</span> Peak Hours Analysis
+        </h3>
+        <div class="grid-2 fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--warning);"></div>Hourly Net Sales Distribution</div>
+                <canvas id="hourlyChart" height="300"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--success);"></div>Transaction Count by Hour</div>
+                <canvas id="hourlyTxChart" height="300"></canvas>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ─── TEMA 3: PAYMENT METHOD ─── -->
+        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+            <span class="tag tag-blue">Tema 3</span> Payment Method Analysis
+        </h3>
+        <div class="grid-2 fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--info);"></div>Net Sales by Payment Method</div>
+                <canvas id="paymentChart" height="300"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--accent);"></div>Transaction Share by Payment</div>
+                <canvas id="paymentPieChart" height="300"></canvas>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ─── TEMA 4: SALES CHANNEL ─── -->
+        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+            <span class="tag tag-orange">Tema 4</span> Sales Channel Performance
+        </h3>
+        <div class="grid-2 fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--warning);"></div>Net Sales by Channel</div>
+                <canvas id="channelChart" height="260"></canvas>
+            </div>
+            <div>
+                <div class="card mb-1">
+                    <div class="card-title mb-1">Channel Breakdown</div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-label"><span>Dine In</span><span>Rp 152.4M (92.5%)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width:92.5%;background:var(--gradient-1);"></div></div>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-label"><span>Take Away</span><span>Rp 7.9M (4.8%)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width:4.8%;background:var(--gradient-3);"></div></div>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-label"><span>GO-FOOD</span><span>Rp 3.5M (2.1%)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width:2.1%;background:var(--gradient-2);"></div></div>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-label"><span>GRAB-FOOD</span><span>Rp 1.0M (0.6%)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width:0.6%;background:linear-gradient(135deg,#a855f7,#ec4899);"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ─── TEMA 5: NET SALES TREND ─── -->
+        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+            <span class="tag tag-purple">Tema 5</span> Net Sales Trend
+        </h3>
+        <div class="fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--accent);"></div>Daily Net Sales — Oktober 2025</div>
+                <canvas id="dailySalesChart" height="200"></canvas>
+            </div>
+        </div>
+        <div class="grid-2 fade-up mb-2">
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--success);"></div>Sales by Day of Week</div>
+                <canvas id="dowChart" height="260"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title"><div class="dot" style="background:var(--warning);"></div>Discount Campaign Impact</div>
+                <canvas id="discountChart" height="260"></canvas>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ─── TEMA 6: AVG ORDER VALUE ─── -->
+        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+            <span class="tag tag-green">Tema 6</span> Average Order Value
+        </h3>
+        <div class="grid-3 fade-up mb-2">
+            <div class="kpi-card purple">
+                <div class="kpi-label">Rata-rata</div>
+                <div class="kpi-value">Rp 73.1K</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-label">Median</div>
+                <div class="kpi-value">Rp 64.5K</div>
+            </div>
+            <div class="kpi-card orange">
+                <div class="kpi-label">Maximum</div>
+                <div class="kpi-value">Rp 656.3K</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ INSIGHTS & RECOMMENDATIONS ═══════════════ -->
+<section id="insights" style="background: var(--bg-secondary);">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label">Insights & Recommendations</div>
+            <h2 class="section-title">Temuan & Rekomendasi</h2>
+            <p class="section-desc">Rangkuman insight utama dari analisis data beserta rekomendasi aplikatif untuk bisnis.</p>
+        </div>
+
+        <div class="grid-2 fade-up">
+            <div class="insight-card">
+                <h4>🏆 Best Seller: Kare Ramen Mendominasi</h4>
+                <p><strong>Kare Ramen</strong> terjual 893 qty dengan Net Sales Rp 23.7M — jauh melampaui menu lainnya. Kategori <strong>Ramen</strong> menyumbang Rp 55.2M (33.5%) dari total revenue.</p>
+                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Pertahankan stok bahan baku Ramen, khususnya Kare Ramen. Pertimbangkan varian baru berbasis Ramen untuk memanfaatkan demand tinggi.</p>
+            </div>
+            <div class="insight-card">
+                <h4>⏰ Peak Hour: Jam 17:00–19:00 Adalah Golden Hours</h4>
+                <p>Jam 18:00 mencatat Rp 27.3M (tertinggi), diikuti jam 19:00 (Rp 22.3M) dan jam 17:00 (Rp 20.9M). Periode 17–19 menyumbang <strong>~43% total revenue</strong>.</p>
+                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Tambah staff pada jam 17–19, pastikan persiapan bahan baku selesai sebelum jam 16:00. Optimalkan promosi jam sepi (12–14).</p>
+            </div>
+            <div class="insight-card">
+                <h4>💳 Cash & BCA QR Seimbang</h4>
+                <p><strong>Cash</strong> Rp 79.5M (48.2%) dan <strong>BCA QR</strong> Rp 75.2M (45.6%) mendominasi. GoFood & GrabFood hanya menyumbang <strong>2.6%</strong> total revenue.</p>
+                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Tingkatkan penetrasi online delivery melalui promo eksklusif di platform GoFood/GrabFood. Tambah opsi e-wallet lain (OVO, DANA, ShopeePay).</p>
+            </div>
+            <div class="insight-card">
+                <h4>📅 Weekend Lebih Ramai, Sabtu Terbaik</h4>
+                <p><strong>Sabtu</strong> mencatat Rp 31.6M (tertinggi), diikuti Jumat Rp 27.5M. Senin & Selasa menjadi hari terendah (~Rp 16M). Weekend menyumbang ~35% lebih tinggi dari weekday.</p>
+                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Buat promo weekday (Senin–Selasa) untuk meningkatkan traffic di hari sepi. Siapkan stok lebih banyak untuk weekend.</p>
+            </div>
+            <div class="insight-card">
+                <h4>🍱 Dine In Mendominasi 92.5%</h4>
+                <p>Dari Rp 164.8M total sales, <strong>Dine In</strong> menyumbang Rp 152.4M (92.5%). Take Away hanya 4.8%, online delivery hanya 2.7%.</p>
+                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Tingkatkan kapasitas dine-in (meja, kursi). Kembangkan menu khusus take-away/delivery yang travel-friendly. Optimalkan listing di GoFood/GrabFood.</p>
+            </div>
+            <div class="insight-card">
+                <h4>📉 Menu dengan Penjualan Rendah Perlu Evaluasi</h4>
+                <p><strong>Telur Ramen, Sauce Black Pepper, Ebi Furai</strong> tercatat hanya 1–2 pcs terjual sebulan. Beberapa item bundle juga kurang diminati.</p>
+                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Evaluasi menu low-performer — pertimbangkan untuk discontinue atau repackage sebagai combo/bundle dengan menu populer.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="container">
+        <p style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Anggit Djoko — Data Analyst</p>
+        <p>Test Offline — PT JAR Andalan Rasa | Oktober 2025</p>
+        <p style="margin-top:0.5rem;">Portfolio ini dibuat sebagai bagian dari proses seleksi Data Analyst.</p>
+    </div>
+</footer>
+
+<!-- ═══════════════ CHARTS JS ═══════════════ -->
+<script>
+Chart.defaults.color = '#9090a8';
+Chart.defaults.borderColor = 'rgba(42,42,62,0.6)';
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 11;
+
+const fmt = v => 'Rp ' + (v/1e6).toFixed(1) + 'M';
+const fmtK = v => 'Rp ' + (v/1e3).toFixed(0) + 'K';
+
+// ─── WASTE CHART ───
+new Chart(document.getElementById('wasteChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Choco Hima','Matchako','Orenji Pop','Kiwi Breez','Pistachoco','Torikara Bomb','Snow Almond','Vanilla Brulee','Tokyo Cheesecake','Donburi'],
+        datasets: [{
+            label: 'Waste Rate %',
+            data: [80, 38.9, 50, 44.4, 40, 30, 25, 26.7, 20, 30],
+            backgroundColor: 'rgba(239,68,68,0.6)',
+            borderColor: '#ef4444',
+            borderWidth: 1, borderRadius: 6,
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + '%' } } },
+        scales: { x: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(42,42,62,0.3)' } }, y: { grid: { display: false } } }
+    }
+});
+
+// ─── TOP SALES ───
+new Chart(document.getElementById('topSalesChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Kare Ramen','SUMO Spicy','Chicken Katsu Bowl','Curry Chicken Bowl','Curry Moz Bowl','Chizu Ramen','Tom Yum Ramen','Katsu Matsuri','Mineral Water','Chikin Kani Roll'],
+        datasets: [{
+            label: 'Net Sales',
+            data: [23755350, 12030740, 7922888, 6925523, 6867770, 6518293, 6437939, 6147261, 5516066, 4852130],
+            backgroundColor: ctx => {
+                const g = ctx.chart.ctx.createLinearGradient(0,0,0,300);
+                g.addColorStop(0,'rgba(108,99,255,0.8)'); g.addColorStop(1,'rgba(59,130,246,0.3)');
+                return g;
+            },
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { x: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, y: { grid: { display: false } } }
+    }
+});
+
+// ─── BOTTOM QTY ───
+new Chart(document.getElementById('bottomQtyChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Telur Ramen','Sauce Black Pepper','Best Deal 1','Crispy Chicken','Ebi Furai','Grilled Chicken','Best Deal 4','Best Deal 3','Mug','Pen'],
+        datasets: [{
+            label: 'Quantity Sold',
+            data: [1,1,2,2,2,2,3,3,3,3],
+            backgroundColor: 'rgba(239,68,68,0.6)',
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: { x: { grid: { color: 'rgba(42,42,62,0.3)' } }, y: { grid: { display: false } } }
+    }
+});
+
+// ─── CATEGORY SALES BAR ───
+new Chart(document.getElementById('categorySalesChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Ramen','Rice Bowl','Sushi','Drinks','New Menu','Side Dish','Bundle','Add On','Extra Top','Merch'],
+        datasets: [{
+            label: 'Net Sales',
+            data: [55179590, 38723010, 30535420, 26799070, 6557259, 5979442, 472719, 443938, 148433, 0],
+            backgroundColor: ['#6c63ff','#3b82f6','#06b6d4','#22c55e','#f59e0b','#ef4444','#a855f7','#ec4899','#8b5cf6','#64748b'],
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
+    }
+});
+
+// ─── CATEGORY PIE ───
+new Chart(document.getElementById('categoryPieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Drinks','Ramen','Rice Bowl','Sushi','New Menu','Side Dish','Add On','Other'],
+        datasets: [{
+            data: [2956, 2000, 1322, 1196, 344, 308, 223, 49],
+            backgroundColor: ['#22c55e','#6c63ff','#3b82f6','#06b6d4','#f59e0b','#ef4444','#a855f7','#64748b'],
+            borderWidth: 0,
+        }]
+    },
+    options: {
+        cutout: '60%',
+        plugins: { legend: { position: 'right', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } } }
+    }
+});
+
+// ─── HOURLY NET SALES ───
+new Chart(document.getElementById('hourlyChart'), {
+    type: 'bar',
+    data: {
+        labels: ['7','8','9','10','11','12','13','14','15','16','17','18','19','20'],
+        datasets: [{
+            label: 'Net Sales',
+            data: [101815, 2915367, 5342565, 10401500, 17048580, 11138310, 7570240, 7215244, 11189640, 15965890, 20878720, 27252790, 22269310, 5548911],
+            backgroundColor: ctx => {
+                const v = ctx.raw;
+                if(v > 20000000) return 'rgba(108,99,255,0.9)';
+                if(v > 15000000) return 'rgba(108,99,255,0.7)';
+                if(v > 10000000) return 'rgba(108,99,255,0.5)';
+                return 'rgba(108,99,255,0.3)';
+            },
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { title: { display: true, text: 'Jam', color: '#9090a8' }, grid: { display: false } } }
+    }
+});
+
+// ─── HOURLY TX COUNT ───
+new Chart(document.getElementById('hourlyTxChart'), {
+    type: 'line',
+    data: {
+        labels: ['7','8','9','10','11','12','13','14','15','16','17','18','19','20'],
+        datasets: [{
+            label: 'Transactions',
+            data: [5, 134, 241, 486, 750, 524, 339, 316, 501, 748, 909, 1244, 986, 254],
+            borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)',
+            fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#22c55e',
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { grid: { color: 'rgba(42,42,62,0.3)' } }, x: { title: { display: true, text: 'Jam', color: '#9090a8' }, grid: { display: false } } }
+    }
+});
+
+// ─── PAYMENT BAR ───
+new Chart(document.getElementById('paymentChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Cash','BCA QR','BCA','GoFood','GrabFood'],
+        datasets: [{
+            label: 'Net Sales',
+            data: [79525240, 75187970, 5789366, 3241772, 1094532],
+            backgroundColor: ['#f59e0b','#6c63ff','#3b82f6','#22c55e','#ef4444'],
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
+    }
+});
+
+// ─── PAYMENT PIE ───
+new Chart(document.getElementById('paymentPieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Cash','BCA QR','BCA Transfer','GoFood','GrabFood'],
+        datasets: [{
+            data: [3662, 3398, 258, 86, 33],
+            backgroundColor: ['#f59e0b','#6c63ff','#3b82f6','#22c55e','#ef4444'],
+            borderWidth: 0,
+        }]
+    },
+    options: {
+        cutout: '60%',
+        plugins: { legend: { position: 'right', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } } }
+    }
+});
+
+// ─── CHANNEL BAR ───
+new Chart(document.getElementById('channelChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Dine In','Take Away','GO-FOOD','GRAB-FOOD'],
+        datasets: [{
+            label: 'Net Sales',
+            data: [152424000, 7867622, 3521769, 1025442],
+            backgroundColor: ['#6c63ff','#3b82f6','#22c55e','#f59e0b'],
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
+    }
+});
+
+// ─── DAILY SALES LINE ───
+new Chart(document.getElementById('dailySalesChart'), {
+    type: 'line',
+    data: {
+        labels: Array.from({length:31}, (_,i) => 'Oct ' + (i+1)),
+        datasets: [{
+            label: 'Daily Net Sales',
+            data: [4624398,5104385,5087120,8317024,5682559,4517133,3164448,4943480,3504431,6267077,8482455,7500677,3100812,3928970,4492592,4339878,5682554,7188877,7013422,4405327,4129877,2511755,8851545,4515310,7657940,5951906,4023512,4813501,4095328,5000763,5939826],
+            borderColor: '#6c63ff',
+            backgroundColor: ctx => {
+                const g = ctx.chart.ctx.createLinearGradient(0,0,0,250);
+                g.addColorStop(0,'rgba(108,99,255,0.2)'); g.addColorStop(1,'rgba(108,99,255,0)');
+                return g;
+            },
+            fill: true, tension: 0.3, pointRadius: 3, pointBackgroundColor: '#6c63ff',
+            pointHoverRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
+    }
+});
+
+// ─── DAY OF WEEK ───
+new Chart(document.getElementById('dowChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'],
+        datasets: [{
+            label: 'Net Sales',
+            data: [16046780, 16036800, 20667550, 26801000, 27491890, 31646300, 26148560],
+            backgroundColor: ctx => {
+                const colors = ['#64748b','#64748b','#3b82f6','#6c63ff','#6c63ff','#22c55e','#06b6d4'];
+                return colors[ctx.dataIndex];
+            },
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
+        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
+    }
+});
+
+// ─── DISCOUNT CAMPAIGNS ───
+new Chart(document.getElementById('discountChart'), {
+    type: 'bar',
+    data: {
+        labels: ['SLURP & ROLL\n(15 Oct)','GYOZA 10K\n(2 Nov)','Pontianak Yatta\n(23 Oct)','Batik Fuku\n(3 Oct)','Voucher 50K','Voucher 10K'],
+        datasets: [{
+            label: 'Items Discounted',
+            data: [761, 464, 100, 54, 39, 5],
+            backgroundColor: ['#f59e0b','#6c63ff','#22c55e','#ef4444','#3b82f6','#a855f7'],
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
+    }
+});
+
+// ─── SCROLL ANIMATIONS ───
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ─── HAMBURGER MENU ───
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.querySelector('.hamburger').classList.toggle('open');
+}
+function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('open');
+}
+
+// ─── ACTIVE SECTION TRACKING ───
+const sections = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navAnchors.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+            });
+        }
+    });
+}, { threshold: 0.2, rootMargin: '-80px 0px -50% 0px' });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+// ─── SCROLL PROGRESS & BACK TO TOP ───
+const backToTop = document.getElementById('backToTop');
+const progressBar = document.getElementById('scrollProgress');
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+
+    // Progress bar
+    progressBar.style.width = scrollPercent + '%';
+
+    // Back to top button
+    if (scrollTop > 400) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+</script>
+
+</body>
+</html>
