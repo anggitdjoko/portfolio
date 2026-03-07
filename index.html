@@ -233,7 +233,35 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);co
 [data-theme="light"] .modal-kpi-row{background:var(--bg3)}
 
 /* RESPONSIVE */
+
+/* === MOBILE PERFORMANCE OPTIMIZATIONS === */
+*{-webkit-tap-highlight-color:transparent}
+img{content-visibility:auto}
+@media(hover:none) and (pointer:coarse){
+  .project-card:hover{transform:none}
+  .cert-card:hover{transform:none}
+  .btn:hover{transform:none}
+}
 @media(max-width:768px){
+  /* Mobile Touch Target Optimization */
+  a, button, .btn, .nav-links a, .mobile-menu a, .filter-btn, .cert-btn, .modal-close{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+  .social-links a{min-height:44px;min-width:44px}
+  /* Minimum font size for readability */
+  body{font-size:max(14px, 1rem)}
+  p, li, span, a{font-size:max(13px, inherit)}
+  .about-text p{font-size:max(14px, 0.95rem)}
+  /* Better modal spacing on mobile */
+  .project-modal{margin:0.5rem;border-radius:12px;max-height:95vh}
+  .modal-header{padding:1.2rem 1rem}
+  .modal-content{padding:1rem}
+  .modal-header h2{font-size:1.3rem}
+  .modal-kpi-row{padding:1rem;gap:0.8rem}
+  .modal-kpi-item .kpi-value{font-size:1.2rem}
+  /* Better hero stats on small screens */
+  .hero-stat{padding:0.8rem}
+  /* Smooth scrolling for mobile */
+  html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+
   .hamburger{display:flex}
   .mobile-menu{display:flex}
   .nav-links{display:none}
@@ -257,6 +285,19 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);co
   .process-arrow{transform:rotate(90deg);padding:0}
 }
 @media(max-width:480px){
+  /* Small phone optimizations */
+  .project-modal{margin:0.25rem;border-radius:8px}
+  .project-modal-overlay{padding:0.25rem}
+  .modal-header h2{font-size:1.2rem}
+  .hero-stats{gap:0.8rem}
+  .hero-stat .stat-number{font-size:1.2rem}
+  .hero-stat .stat-label{font-size:0.7rem}
+  .section-title{font-size:1.5rem}
+  .section-subtitle{font-size:0.85rem}
+  /* Prevent text overflow */
+  .project-card h3{font-size:1rem;word-break:break-word}
+  .cert-card h4{font-size:0.9rem;word-break:break-word}
+
   .hero h1{font-size:1.8rem}
   .hero-stat .stat-number{font-size:1.3rem}
   .modal-kpi-row{grid-template-columns:1fr 1fr}
