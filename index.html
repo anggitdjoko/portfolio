@@ -291,6 +291,10 @@ img{content-visibility:auto}
   .process-flow{flex-direction:column;align-items:center}
   .process-step{min-width:auto;width:100%}
   .process-arrow{transform:rotate(90deg);padding:0}
+
+.chart-container canvas[id*="jar-top"],
+.chart-container canvas[id*="kobelco-parts"],
+.chart-container canvas[id*="kobelco-topqty"]{height:280px!important}
 }
 @media(max-width:480px){
   /* Small phone optimizations */
@@ -309,7 +313,15 @@ img{content-visibility:auto}
   .hero h1{font-size:1.8rem}
   .hero-stat .stat-number{font-size:1.3rem}
   .modal-kpi-row{grid-template-columns:1fr 1fr}
+
+.chart-container canvas[id*="jar-top"],
+.chart-container canvas[id*="kobelco-parts"],
+.chart-container canvas[id*="kobelco-topqty"]{height:240px!important}
 }
+
+.chart-container canvas[id*="jar-top"],
+.chart-container canvas[id*="kobelco-parts"],
+.chart-container canvas[id*="kobelco-topqty"]{max-height:none!important;height:320px!important}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Anggit Djoko Wibowo", "url": "https://anggitdjoko.github.io/portfolio/", "jobTitle": "Data Analyst", "description": "Data Analyst experienced in analyzing 76,000+ transactions across logistics, supply chain, manufacturing, and F&B industries.", "knowsAbout": ["Python", "SQL", "Excel", "Tableau", "Power BI", "Data Analysis", "Supply Chain"], "address": {"@type": "PostalAddress", "addressLocality": "Pontianak", "addressCountry": "Indonesia"}, "alumniOf": {"@type": "EducationalOrganization", "name": "Politeknik Negeri Pontianak"}, "sameAs": ["https://github.com/anggitdjoko"]}</script>
 </head>
@@ -1176,7 +1188,7 @@ function initKobelcoCharts(){
     data:{labels:['OIL HYD 68LL (PAIL)','OIL HYD 68LL (DRUM)','TRACK LINK ASSY (46L)','TRACK LINK ASSY (HD)','OIL ENGINE DH1','LOWER ROLLER ASSY','REPAIR KIT','OIL GEAR 90','IDLER ASSEMBLY','SHOE'],
       datasets:[{label:'Sales (Rp Juta)',data:[1294.7,623.3,591.8,589.2,531.6,514.7,349.5,268.5,214.9,212.9],
         backgroundColor:[chartColors.purple,chartColors.purple,chartColors.teal,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)',chartColors.red,'rgba(255,152,0,0.8)','rgba(76,175,80,0.8)'],borderRadius:8}]},
-    options:{...defaultOptions,indexAxis:'y',plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Parts by Sales Value (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Parts by Sales Value (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
   });
   // Material Group Breakdown (Real Data)
   chartInstances['kobelco-matgroup']=new Chart(document.getElementById('chart-kobelco-matgroup'),{
@@ -1192,7 +1204,7 @@ function initKobelcoCharts(){
     data:{labels:['OIL HYD 68LL','GEAR OIL 90','ELEMENT FUEL','OIL ENGINE DH1','FILTER FUEL','SHOE','FILTER OIL','LOWER ROLLER','REPAIR KIT','ELEMENT FILTER'],
       datasets:[{label:'Quantity Sold',data:[2320,1169,809,800,786,521,511,421,400,291],
         backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)','rgba(255,152,0,0.8)','rgba(76,175,80,0.8)',chartColors.purple,chartColors.teal,chartColors.red],borderRadius:8}]},
-    options:{...defaultOptions,indexAxis:'y',plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top Parts by Quantity Sold',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top Parts by Quantity Sold',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
   });
 }
 
@@ -1202,7 +1214,7 @@ function initJarCharts(){
     data:{labels:['Kare Ramen','SUMO Spicy','Chicken Katsu Bowl','Curry Chicken Bowl','Curry Mozarella','Chizu Ramen','Tom Yum Ramen','Katsu Matsuri','Mineral Water','Chikin Kani Mentai'],
       datasets:[{label:'Net Sales (Rp Juta)',data:[23.75,12.03,7.92,6.92,6.87,6.52,6.44,6.15,5.52,4.85],
         backgroundColor:[chartColors.teal,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.yellow,chartColors.purple],borderRadius:8}]},
-    options:{...defaultOptions,indexAxis:'y',plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Menu by Net Sales (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Menu by Net Sales (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['jar-hourly']=new Chart(document.getElementById('chart-jar-hourly'),{
     type:'bar',
