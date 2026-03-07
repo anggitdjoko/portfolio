@@ -30,7 +30,11 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 /* NAVBAR */
 .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.9);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all 0.3s}
 .navbar.scrolled{padding:0.6rem 2rem;box-shadow:0 4px 30px rgba(0,0,0,0.3)}
-.nav-logo{font-size:1.3rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-logo{font-size:1.3rem;font-weight:800;display:flex;align-items:center;gap:4px}
+.nav-logo .dot{border-radius:50%;background:var(--gradient1);display:inline-block}
+.nav-logo .dot-lg{width:14px;height:14px}
+.nav-logo .dot-md{width:10px;height:10px}
+.nav-logo .dot-sm{width:7px;height:7px}
 .nav-links{display:flex;gap:0.5rem;align-items:center}
 .nav-links a{color:var(--text2);text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 0.8rem;border-radius:8px;transition:all 0.3s}
 .nav-links a:hover,.nav-links a.active{color:var(--accent);background:rgba(108,99,255,0.1)}
@@ -86,9 +90,9 @@ section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
-.about-avatar{width:100%;aspect-ratio:1;border-radius:24px;background:var(--gradient1);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
-.about-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:24px}
-.about-avatar::after{content:'';position:absolute;inset:-2px;border-radius:24px;background:var(--gradient1);z-index:-1;filter:blur(20px);opacity:0.4}
+.about-avatar{width:100%;aspect-ratio:1;border-radius:50%;background:var(--gradient1);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
+.about-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%}
+.about-avatar::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:var(--gradient1);z-index:-1;filter:blur(20px);opacity:0.4}
 .about-info h3{font-size:1.8rem;font-weight:700;margin-bottom:0.5rem}
 .about-info .role{color:var(--accent);font-weight:600;margin-bottom:1rem}
 .about-info p{color:var(--text2);margin-bottom:1.5rem;line-height:1.8}
@@ -222,7 +226,7 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);co
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
-  <div class="nav-logo">ADW</div>
+  <div class="nav-logo"><span class="dot dot-lg"></span><span class="dot dot-md"></span><span class="dot dot-sm"></span></div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
