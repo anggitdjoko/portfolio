@@ -368,14 +368,14 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);co
         <i class="fas fa-warehouse"></i>
       </div>
       <div class="project-body">
-        <h3>Warehouse & Inventory Analytics</h3>
-        <div class="project-company">PT KOBELCO (DKCMI) · 2023-2024</div>
+        <h3>Spare Parts Sales & Inventory Analytics</h3>
+        <div class="project-company">PT DKCMI (KOBELCO) · Jan–Sep 2023</div>
         <div class="project-metrics">
-          <div class="project-metric"><div class="pm-val">7.1K</div><div class="pm-label">Transactions</div></div>
-          <div class="project-metric"><div class="pm-val">-20%</div><div class="pm-label">Stock-out Risk</div></div>
-          <div class="project-metric"><div class="pm-val">Rp 1.4B</div><div class="pm-label">Peak Sales</div></div>
+          <div class="project-metric"><div class="pm-val">7,153</div><div class="pm-label">Transactions</div></div>
+          <div class="project-metric"><div class="pm-val">Rp 17.6B</div><div class="pm-label">Total Sales</div></div>
+          <div class="project-metric"><div class="pm-val">319</div><div class="pm-label">Unique Parts</div></div>
         </div>
-        <p>Spare parts inventory analysis for heavy machinery. Evaluated inventory turnover, aging stock, fast/slow-moving items, and inbound-outbound flow optimization.</p>
+        <p>Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion. Evaluated sales trends, customer concentration, fast-moving items, material group performance, and inventory optimization for KOBELCO heavy machinery.</p>
         <div class="project-tags">
           <span class="project-tag">Excel</span>
           <span class="project-tag">Tableau</span>
@@ -536,16 +536,16 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);co
   <div class="project-modal">
     <button class="modal-close" onclick="closeProject('kobelco')"><i class="fas fa-times"></i></button>
     <div class="modal-header">
-      <h2>🏭 Warehouse & Inventory Analytics</h2>
+      <h2>🏭 Spare Parts Sales & Inventory Analytics</h2>
       <div class="modal-company">PT DKCMI (KOBELCO) — Pontianak</div>
-      <div class="modal-period"><i class="fas fa-calendar"></i> August 2023 – April 2024</div>
-      <p class="modal-desc">Menganalisis 7,157 transaksi spare part untuk alat berat KOBELCO. Evaluasi inventory turnover, aging stock, ketersediaan barang, dan inbound-outbound flow. Berkontribusi dalam penurunan risiko stock-out hingga 20%.</p>
+      <div class="modal-period"><i class="fas fa-calendar"></i> January – September 2023</div>
+      <p class="modal-desc">Menganalisis 7,153 transaksi penjualan spare part alat berat KOBELCO senilai Rp 17.65 Miliar untuk 2 customer utama. Evaluasi tren penjualan bulanan, konsentrasi pelanggan, fast-moving items, dan 13 material group. Berkontribusi dalam penurunan risiko stock-out hingga 20%.</p>
     </div>
     <div class="modal-kpi-row">
-      <div class="modal-kpi"><div class="kpi-val">7,157</div><div class="kpi-label">Transactions</div></div>
-      <div class="modal-kpi"><div class="kpi-val">-20%</div><div class="kpi-label">Stock-out Risk</div></div>
-      <div class="modal-kpi"><div class="kpi-val">Rp 1.4B</div><div class="kpi-label">Peak Sales (Mar)</div></div>
-      <div class="modal-kpi"><div class="kpi-val">98.3%</div><div class="kpi-label">Top Customer Share</div></div>
+      <div class="modal-kpi"><div class="kpi-val">7,153</div><div class="kpi-label">Transactions</div></div>
+      <div class="modal-kpi"><div class="kpi-val">Rp 17.6B</div><div class="kpi-label">Total Sales</div></div>
+      <div class="modal-kpi"><div class="kpi-val">13,181</div><div class="kpi-label">Total Qty Sold</div></div>
+      <div class="modal-kpi"><div class="kpi-val">319</div><div class="kpi-label">Unique Parts</div></div>
     </div>
     <div class="modal-content">
       <div class="modal-section">
@@ -553,38 +553,53 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);co
         <div class="chart-container"><canvas id="chart-kobelco-sales"></canvas></div>
         <div class="insight-card">
           <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">📈</div>
-          <div><h4>Fluktuasi Penjualan Tinggi</h4><p>Penjualan mencapai puncak di Maret (Rp 1.4B, 1,057 transaksi) dan titik terendah di Juli (Rp 647.6M, 572 transaksi). Pola naik-turun menunjukkan kebutuhan strategi inventory adaptif.</p></div>
+          <div><h4>Puncak di Maret — Rp 1.40B (1,057 transaksi)</h4><p>Penjualan fluktuatif: puncak Maret (Rp 1.40B) dan terendah Juli (Rp 647.7M). Rata-rata bulanan Rp 980.5M. Q1 dan Q3 cenderung lebih tinggi — menunjukkan pola maintenance cycle alat berat yang bisa diprediksi.</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-users"></i> Customer Analysis</h3>
+        <h3><i class="fas fa-users"></i> Customer Concentration</h3>
         <div class="chart-container"><canvas id="chart-kobelco-customer"></canvas></div>
         <div class="insight-card">
           <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">🏢</div>
-          <div><h4>Dominasi PT Kalimantan Inti Maju</h4><p>Satu customer VVIP mendominasi 98.3% (7,033 transaksi) dari total volume. PT Putra Rimba Nusantara hanya 1.7% (117 transaksi). Tingkat ketergantungan sangat tinggi.</p></div>
+          <div><h4>PT Kalimantan Inti Maju Dominasi 95.7% Revenue</h4><p>KIM menyumbang Rp 8.44B (47.8% nominal) dengan 7,031 transaksi. PT Putra Rimba Nusantara hanya 120 transaksi (Rp 383.8M). Konsentrasi pelanggan sangat tinggi — risiko revenue jika kehilangan 1 customer utama.</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-boxes-stacked"></i> Top Spare Parts</h3>
+        <h3><i class="fas fa-boxes-stacked"></i> Top 10 Spare Parts by Sales Value</h3>
         <div class="chart-container"><canvas id="chart-kobelco-parts"></canvas></div>
         <div class="insight-card">
           <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">🔧</div>
-          <div><h4>Fast-Moving Items</h4><p>Komponen fuel system mendominasi (FILTER FUEL, ELEMENT FUEL) — menunjukkan kebutuhan perawatan rutin tinggi. OIL ENGINE DH1 dan OIL HYD 68LL juga termasuk fast-moving untuk maintenance berkala.</p></div>
+          <div><h4>OIL HYD 68LL Mendominasi — Rp 1.29B</h4><p>Hydraulic oil (PAIL) adalah top seller dengan Rp 1.29B (2,320 unit). Top 5 parts menyumbang Rp 3.63B (20.6% dari total). Komponen track link dan oil engine juga bernilai tinggi — menunjukkan kebutuhan maintenance rutin alat berat.</p></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3><i class="fas fa-layer-group"></i> Material Group & Qty Analysis</h3>
+        <div class="chart-row">
+          <div class="chart-container"><canvas id="chart-kobelco-matgroup"></canvas></div>
+          <div class="chart-container"><canvas id="chart-kobelco-topqty"></canvas></div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(224,64,251,0.15);color:#e040fb">📦</div>
+          <div><h4>13 Material Groups — 8RB & 8R6 Tertinggi</h4><p>Group 8RB (Lubricants/Oils) mendominasi Rp 2.95B (16.7%), diikuti 8R6 (Undercarriage) Rp 2.48B (14.1%), dan 8R1 (Filters) Rp 1.68B (9.5%). Berdasarkan quantity, OIL HYD 68LL (2,320), GEAR OIL 90 (1,169), dan ELEMENT FUEL (809) adalah fast-moving items.</p></div>
         </div>
       </div>
       <div class="modal-section">
         <h3><i class="fas fa-lightbulb"></i> Key Recommendations</h3>
         <div class="insight-card">
           <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">📦</div>
-          <div><h4>Inventory Optimization</h4><p>Meningkatkan buffer stock menjelang periode high demand (Q1 & Q3) untuk mencegah stockout pada fast-moving items.</p></div>
+          <div><h4>Buffer Stock untuk Fast-Moving Items</h4><p>Top 5 items by qty (HYD Oil, Gear Oil, Fuel Elements, Fuel Filters, Shoes) harus selalu memiliki safety stock minimal. Terutama menjelang Q1 dan Q3 yang cenderung high demand.</p></div>
         </div>
         <div class="insight-card">
           <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">🎯</div>
-          <div><h4>Customer Segmentation</h4><p>Mengidentifikasi pelanggan atau sektor yang berkontribusi besar pada lonjakan Maret dan Agustus untuk strategi retensi.</p></div>
+          <div><h4>Diversifikasi Customer Base</h4><p>Ketergantungan >95% pada 1 customer sangat berisiko. Perlu strategi akuisisi pelanggan baru dari mining companies lain di Kalimantan Barat untuk menyeimbangkan revenue stream.</p></div>
         </div>
         <div class="insight-card">
           <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">📊</div>
-          <div><h4>Sales Dashboard</h4><p>Mengembangkan dashboard monitoring bulanan untuk early warning terhadap potensi penurunan penjualan.</p></div>
+          <div><h4>Predictive Reorder Point</h4><p>Dengan data 9 bulan transaksi, bisa membangun model reorder point otomatis berdasarkan consumption rate per part. Target: zero stock-out untuk top 20 parts.</p></div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">💰</div>
+          <div><h4>Margin Optimization per Material Group</h4><p>Analisis margin per material group — fokus upselling pada group high-margin (8R6 Undercarriage, 8R2, 8R5) yang punya value per transaksi tinggi dibanding lubricants yang volume-driven.</p></div>
         </div>
       </div>
     </div>
@@ -907,22 +922,47 @@ function initLpg2024Charts(){
 }
 
 function initKobelcoCharts(){
+  // Monthly Sales Trend (Real Data - Rp Juta)
   chartInstances['kobelco-sales']=new Chart(document.getElementById('chart-kobelco-sales'),{
     type:'line',
     data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'],
-      datasets:[{label:'Sales (Rp Juta)',data:[753.7,833,1400,818.3,1260,986.4,647.6,1120,994.9],
-        borderColor:chartColors.purple,backgroundColor:chartColors.purpleBg,fill:true,tension:0.4,pointRadius:6,pointBackgroundColor:chartColors.purple}]},
-    options:defaultOptions
+      datasets:[
+        {label:'Sales (Rp Juta)',data:[758.8,833.0,1402.1,818.3,1263.5,986.5,647.7,1122.5,994.9],
+          borderColor:chartColors.purple,backgroundColor:chartColors.purpleBg,fill:true,tension:0.4,pointRadius:6,pointBackgroundColor:chartColors.purple},
+        {label:'Transactions',data:[661,743,1057,599,955,805,572,913,846],
+          borderColor:chartColors.teal,backgroundColor:'transparent',borderDash:[5,5],tension:0.4,pointRadius:5,pointBackgroundColor:chartColors.teal,yAxisID:'y1'}
+      ]},
+    options:{...defaultOptions,scales:{...defaultOptions.scales,y1:{position:'right',grid:{display:false},ticks:{color:'rgba(255,255,255,0.5)',callback:v=>v+'txn'}}}}
   });
+  // Customer Concentration (Real Data)
   chartInstances['kobelco-customer']=new Chart(document.getElementById('chart-kobelco-customer'),{
     type:'doughnut',
-    data:{labels:['PT Kalimantan Inti Maju (98.3%)','PT Putra Rimba Nusantara (1.7%)'],datasets:[{data:[7033,117],backgroundColor:[chartColors.purple,chartColors.teal],borderWidth:0,hoverOffset:10}]},
-    options:pieOptions
+    data:{labels:['PT Kalimantan Inti Maju — Rp 8.44B (7,031 txn)','PT Putra Rimba Nusantara — Rp 383.8M (120 txn)'],
+      datasets:[{data:[8443550879,383771089],backgroundColor:[chartColors.purple,chartColors.teal],borderWidth:0,hoverOffset:10}]},
+    options:{...pieOptions,plugins:{...pieOptions.plugins,tooltip:{callbacks:{label:function(ctx){return 'Rp '+((ctx.raw/1e9).toFixed(2))+'B ('+((ctx.raw/8827321968*100).toFixed(1))+'%)'}}}}}
   });
+  // Top 10 Parts by Sales Value (Real Data)
   chartInstances['kobelco-parts']=new Chart(document.getElementById('chart-kobelco-parts'),{
     type:'bar',
-    data:{labels:['FILTER, FUEL','ELEMENT, FUEL','OIL ENGINE DH1','OIL HYD 68LL','FILTER, OIL'],
-      datasets:[{label:'Transaction Volume',data:[890,720,650,580,520],backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)'],borderRadius:8}]},
+    data:{labels:['OIL HYD 68LL (PAIL)','OIL HYD 68LL (DRUM)','TRACK LINK ASSY (46L)','TRACK LINK ASSY (HD)','OIL ENGINE DH1','LOWER ROLLER ASSY','REPAIR KIT','OIL GEAR 90','IDLER ASSEMBLY','SHOE'],
+      datasets:[{label:'Sales (Rp Juta)',data:[1294.7,623.3,591.8,589.2,531.6,514.7,349.5,268.5,214.9,212.9],
+        backgroundColor:[chartColors.purple,chartColors.purple,chartColors.teal,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)',chartColors.red,'rgba(255,152,0,0.8)','rgba(76,175,80,0.8)'],borderRadius:8}]},
+    options:{...defaultOptions,indexAxis:'y',plugins:{...defaultOptions.plugins,legend:{display:false}}}
+  });
+  // Material Group Breakdown (Real Data)
+  chartInstances['kobelco-matgroup']=new Chart(document.getElementById('chart-kobelco-matgroup'),{
+    type:'doughnut',
+    data:{labels:['8RB Lubricants (16.7%)','8R6 Undercarriage (14.1%)','8R1 Filters (9.5%)','8R3 (2.0%)','8R2 (1.8%)','8R5 (1.8%)','Others (4.1%)'],
+      datasets:[{data:[2947.6,2483.9,1676.8,347.4,317.6,309.8,571.5],
+        backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)','rgba(255,152,0,0.8)','rgba(158,158,158,0.6)'],borderWidth:0,hoverOffset:10}]},
+    options:pieOptions
+  });
+  // Top Parts by Quantity (Real Data)
+  chartInstances['kobelco-topqty']=new Chart(document.getElementById('chart-kobelco-topqty'),{
+    type:'bar',
+    data:{labels:['OIL HYD 68LL','GEAR OIL 90','ELEMENT FUEL','OIL ENGINE DH1','FILTER FUEL','SHOE','FILTER OIL','LOWER ROLLER','REPAIR KIT','ELEMENT FILTER'],
+      datasets:[{label:'Quantity Sold',data:[2320,1169,809,800,786,521,511,421,400,291],
+        backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)','rgba(255,152,0,0.8)','rgba(76,175,80,0.8)',chartColors.purple,chartColors.teal,chartColors.red],borderRadius:8}]},
     options:{...defaultOptions,indexAxis:'y',plugins:{...defaultOptions.plugins,legend:{display:false}}}
   });
 }
