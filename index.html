@@ -251,7 +251,7 @@ img{content-visibility:auto}
   p, li, span, a{font-size:max(13px, inherit)}
   .about-text p{font-size:max(14px, 0.95rem)}
   /* Better modal spacing on mobile */
-  .project-modal{margin:0.5rem;border-radius:12px;max-height:95vh}
+  .project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .modal-header{padding:1.2rem 1rem}
   .modal-content{padding:1rem}
   .modal-header h2{font-size:1.3rem}
@@ -276,8 +276,8 @@ img{content-visibility:auto}
   .chart-row{grid-template-columns:1fr}
   .modal-header,.modal-content{padding-left:1.5rem;padding-right:1.5rem}
   .modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}
-  .project-modal{margin:1rem;border-radius:16px}
-  .project-modal-overlay{padding:0.5rem}
+  .project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .modal-header h2{font-size:1.5rem}
   .skills-grid{grid-template-columns:1fr}
   .process-flow{flex-direction:column;align-items:center}
@@ -286,8 +286,8 @@ img{content-visibility:auto}
 }
 @media(max-width:480px){
   /* Small phone optimizations */
-  .project-modal{margin:0.25rem;border-radius:8px}
-  .project-modal-overlay{padding:0.25rem}
+  .project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .modal-header h2{font-size:1.2rem}
   .hero-stats{gap:0.8rem}
   .hero-stat .stat-number{font-size:1.2rem}
@@ -1032,18 +1032,30 @@ function openProject(id){
   const modal=document.getElementById('modal-'+id);
   modal.classList.add('open');
   document.body.style.overflow='hidden';
+  document.body.style.position='fixed';
+  document.body.style.width='100%';
+  document.body.style.top='-'+window.scrollY+'px';
   initProjectCharts(id);
 }
 function closeProject(id){
+  const scrollY=document.body.style.top;
   document.getElementById('modal-'+id).classList.remove('open');
   document.body.style.overflow='';
+  document.body.style.position='';
+  document.body.style.width='';
+  document.body.style.top='';
+  window.scrollTo(0,parseInt(scrollY||'0')*-1);
 }
-// Close on overlay click
+// Close on overlay click (not on scroll/drag)
 document.querySelectorAll('.project-modal-overlay').forEach(overlay=>{
-  overlay.addEventListener('click',e=>{if(e.target===overlay){overlay.classList.remove('open');document.body.style.overflow=''}});
+  let startY=0;
+  overlay.addEventListener('touchstart',e=>{startY=e.touches[0].clientY},{passive:true});
+  overlay.addEventListener('click',e=>{
+    if(e.target===overlay){overlay.classList.remove('open');const scrollY=document.body.style.top;document.body.style.overflow='';document.body.style.position='';document.body.style.width='';document.body.style.top='';window.scrollTo(0,parseInt(scrollY||'0')*-1)}
+  });
 });
 // Close on ESC
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.project-modal-overlay.open').forEach(m=>{m.classList.remove('open')});document.body.style.overflow=''}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.project-modal-overlay.open').forEach(m=>{m.classList.remove('open')});const scrollY=document.body.style.top;document.body.style.overflow='';document.body.style.position='';document.body.style.width='';document.body.style.top='';window.scrollTo(0,parseInt(scrollY||'0')*-1)}});
 
 // ===== CHARTS =====
 const chartInstances={};
