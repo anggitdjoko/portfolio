@@ -1,1195 +1,856 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anggit Djoko — Data Analyst Portfolio</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #1f1f35;
-            --accent: #6c63ff;
-            --accent-light: #8b83ff;
-            --accent-glow: rgba(108, 99, 255, 0.15);
-            --text-primary: #e8e8f0;
-            --text-secondary: #9090a8;
-            --text-muted: #5a5a72;
-            --border: #2a2a3e;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-            --gradient-1: linear-gradient(135deg, #6c63ff, #3b82f6);
-            --gradient-2: linear-gradient(135deg, #f59e0b, #ef4444);
-            --gradient-3: linear-gradient(135deg, #22c55e, #06b6d4);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Anggit Djoko Wibowo — Data & Logistics Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a2e;--bg4:#16213e;
+  --accent:#6c63ff;--accent2:#00d4aa;--accent3:#ff6b6b;--accent4:#ffd93d;
+  --text:#e8e8f0;--text2:#a0a0b8;--text3:#6c6c80;
+  --glass:rgba(255,255,255,0.05);--glass2:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.08);
+  --gradient1:linear-gradient(135deg,#6c63ff,#00d4aa);
+  --gradient2:linear-gradient(135deg,#ff6b6b,#ffd93d);
+  --gradient3:linear-gradient(135deg,#6c63ff,#e040fb);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
 
-        html { scroll-behavior: smooth; }
+/* NAVBAR */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all 0.3s}
+.navbar.scrolled{padding:0.6rem 2rem;box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.nav-logo{font-size:1.3rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:0.5rem;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 0.8rem;border-radius:8px;transition:all 0.3s;position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:rgba(108,99,255,0.1)}
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--gradient1);z-index:1001;transition:width 0.1s}
 
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1002;padding:5px}
+.hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
-        /* ─── NAVBAR ─── */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
-            transition: all 0.3s;
-        }
-        nav .nav-inner {
-            max-width: 1200px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between;
-            height: 64px;
-        }
-        nav .logo {
-            font-weight: 800; font-size: 1.1rem;
-            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        nav .nav-links { display: flex; gap: 2rem; list-style: none; }
-        nav .nav-links a {
-            color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
-            font-weight: 500; transition: color 0.3s; letter-spacing: 0.02em;
-        }
-        nav .nav-links a:hover { color: var(--accent-light); }
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.98);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);z-index:999;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{color:var(--text);text-decoration:none;font-size:1.5rem;font-weight:600;padding:0.5rem 1rem;transition:color 0.3s}
+.mobile-menu a:hover{color:var(--accent)}
 
-        /* ─── HERO ─── */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            position: relative; padding: 6rem 2rem 4rem;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(108,99,255,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.06) 0%, transparent 50%);
-        }
-        .hero::before {
-            content: ''; position: absolute; inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236c63ff' fill-opacity='0.03'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .hero-content { text-align: center; position: relative; max-width: 800px; }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: var(--accent-glow); border: 1px solid rgba(108,99,255,0.3);
-            padding: 0.4rem 1rem; border-radius: 50px;
-            font-size: 0.8rem; color: var(--accent-light); font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-        .hero-badge::before {
-            content: ''; width: 6px; height: 6px; border-radius: 50%;
-            background: var(--success); animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900;
-            line-height: 1.1; margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #6c63ff 50%, #3b82f6 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            font-size: 1.15rem; color: var(--text-secondary);
-            max-width: 600px; margin: 0 auto 2rem;
-        }
-        .hero-stats {
-            display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-        .hero-stat {
-            text-align: center;
-            padding: 1rem 1.5rem;
-            background: rgba(26, 26, 46, 0.6);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-        }
-        .hero-stat .value {
-            font-size: 1.8rem; font-weight: 800;
-            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero-stat .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+/* BACK TO TOP */
+.back-to-top{position:fixed;bottom:2rem;right:2rem;width:48px;height:48px;border-radius:50%;background:var(--gradient1);border:none;color:#fff;font-size:1.2rem;cursor:pointer;z-index:998;opacity:0;transform:translateY(20px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(108,99,255,0.4)}
+.back-to-top.visible{opacity:1;transform:translateY(0)}
+.back-to-top:hover{transform:translateY(-3px);box-shadow:0 6px 30px rgba(108,99,255,0.6)}
 
-        /* ─── SECTION COMMON ─── */
-        section { padding: 5rem 2rem; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-label {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
-            color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;
-        }
-        .section-title {
-            font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;
-        }
-        .section-desc { color: var(--text-secondary); max-width: 600px; margin-bottom: 3rem; }
+/* SECTIONS */
+section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-label{font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
+.section-label::before{content:'';width:30px;height:2px;background:var(--accent)}
+.section-title{font-size:2.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-1px;line-height:1.2}
+.section-subtitle{color:var(--text2);font-size:1.05rem;max-width:600px;margin-bottom:3rem}
 
-        /* ─── CARDS ─── */
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 2rem; transition: all 0.3s;
-        }
-        .card:hover { background: var(--bg-card-hover); border-color: rgba(108,99,255,0.3); transform: translateY(-2px); }
-        .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .card-icon {
-            width: 48px; height: 48px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem;
-        }
-        .card-icon.purple { background: rgba(108,99,255,0.15); }
-        .card-icon.blue { background: rgba(59,130,246,0.15); }
-        .card-icon.green { background: rgba(34,197,94,0.15); }
-        .card-icon.orange { background: rgba(245,158,11,0.15); }
-        .card-title { font-size: 1.1rem; font-weight: 700; }
-        .card-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:5rem}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(108,99,255,0.15),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(0,212,170,0.1),transparent 50%);animation:heroPulse 8s ease-in-out infinite alternate}
+@keyframes heroPulse{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.1) rotate(3deg)}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(108,99,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(108,99,255,0.05) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--glass2);border:1px solid var(--border);padding:0.4rem 1rem;border-radius:50px;font-size:0.8rem;color:var(--accent2);margin-bottom:1.5rem}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-size:4rem;font-weight:900;letter-spacing:-2px;line-height:1.1;margin-bottom:1rem}
+.hero h1 .gradient-text{background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1.15rem;color:var(--text2);max-width:650px;margin:0 auto 2rem;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.hero-stat{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1rem;text-align:center;transition:all 0.3s}
+.hero-stat:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 10px 40px rgba(108,99,255,0.15)}
+.hero-stat .stat-number{font-size:1.8rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat .stat-label{font-size:0.75rem;color:var(--text3);margin-top:0.3rem;text-transform:uppercase;letter-spacing:1px}
+.hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.8rem;border-radius:12px;font-size:0.9rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s}
+.btn-primary{background:var(--gradient1);color:#fff;box-shadow:0 4px 20px rgba(108,99,255,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(108,99,255,0.5)}
+.btn-secondary{background:var(--glass2);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
 
-        /* ─── GRID ─── */
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
+.about-avatar{width:100%;aspect-ratio:1;border-radius:24px;background:var(--gradient1);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
+.about-avatar::after{content:'';position:absolute;inset:-2px;border-radius:24px;background:var(--gradient1);z-index:-1;filter:blur(20px);opacity:0.4}
+.about-info h3{font-size:1.8rem;font-weight:700;margin-bottom:0.5rem}
+.about-info .role{color:var(--accent);font-weight:600;margin-bottom:1rem}
+.about-info p{color:var(--text2);margin-bottom:1.5rem;line-height:1.8}
+.about-details{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.about-detail{display:flex;align-items:center;gap:0.8rem;padding:0.8rem;background:var(--glass);border-radius:12px;border:1px solid var(--border)}
+.about-detail i{color:var(--accent);width:20px;text-align:center}
+.about-detail .detail-label{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
+.about-detail .detail-value{font-size:0.9rem;font-weight:500}
 
-        /* ─── KPI CARDS ─── */
-        .kpi-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-            padding: 1.5rem; text-align: center; position: relative; overflow: hidden;
-        }
-        .kpi-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-        }
-        .kpi-card.purple::before { background: var(--gradient-1); }
-        .kpi-card.green::before { background: var(--gradient-3); }
-        .kpi-card.orange::before { background: var(--gradient-2); }
-        .kpi-card.blue::before { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
-        .kpi-value { font-size: 2rem; font-weight: 800; margin: 0.5rem 0 0.25rem; }
-        .kpi-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
-        .kpi-sub { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; }
+/* EXPERIENCE */
+.timeline{position:relative;padding-left:3rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--accent3))}
+.timeline-item{position:relative;margin-bottom:2.5rem;padding:1.5rem;background:var(--glass);border:1px solid var(--border);border-radius:16px;transition:all 0.3s}
+.timeline-item:hover{border-color:var(--accent);transform:translateX(5px)}
+.timeline-item::before{content:'';position:absolute;left:-3.55rem;top:1.8rem;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+.timeline-date{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;color:var(--accent2);background:rgba(0,212,170,0.1);padding:0.3rem 0.8rem;border-radius:6px;margin-bottom:0.8rem}
+.timeline-company{font-size:1.2rem;font-weight:700;margin-bottom:0.2rem}
+.timeline-role{color:var(--accent);font-weight:600;font-size:0.9rem;margin-bottom:0.8rem}
+.timeline-desc{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.timeline-desc li{color:var(--text2);font-size:0.85rem;padding-left:1.2rem;position:relative;line-height:1.6}
+.timeline-desc li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+.timeline-impact{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.8rem;padding:0.3rem 0.8rem;background:rgba(108,99,255,0.1);border-radius:6px;font-size:0.75rem;font-weight:600;color:var(--accent)}
 
-        /* ─── TABLES ─── */
-        .table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        thead { background: rgba(108,99,255,0.08); }
-        th {
-            padding: 0.8rem 1rem; text-align: left; font-weight: 600;
-            color: var(--accent-light); font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 0.06em; white-space: nowrap;
-        }
-        td { padding: 0.7rem 1rem; border-top: 1px solid var(--border); color: var(--text-secondary); }
-        tr:hover td { background: rgba(108,99,255,0.04); }
-        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.skill-category{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.3s}
+.skill-category:hover{border-color:var(--accent);transform:translateY(-3px)}
+.skill-category h3{font-size:1rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.skill-category h3 i{color:var(--accent)}
+.skill-item{margin-bottom:1rem}
+.skill-item .skill-header{display:flex;justify-content:space-between;margin-bottom:0.3rem}
+.skill-item .skill-name{font-size:0.8rem;font-weight:500}
+.skill-item .skill-pct{font-size:0.75rem;color:var(--accent);font-weight:600;font-family:'JetBrains Mono',monospace}
+.skill-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.skill-bar-fill{height:100%;border-radius:3px;background:var(--gradient1);transition:width 1.5s ease-out;width:0}
 
-        /* ─── CHART WRAPPER ─── */
-        .chart-container {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-            padding: 1.5rem;
-        }
-        .chart-title {
-            font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem;
-            display: flex; align-items: center; gap: 0.5rem;
-        }
-        .chart-title .dot { width: 8px; height: 8px; border-radius: 50%; }
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.project-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all 0.4s;position:relative}
+.project-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.project-header{padding:1.5rem;position:relative}
+.project-tag{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:6px;margin-bottom:0.8rem}
+.tag-logistics{background:rgba(0,212,170,0.15);color:var(--accent2)}
+.tag-warehouse{background:rgba(255,107,107,0.15);color:var(--accent3)}
+.tag-fnb{background:rgba(255,217,61,0.15);color:var(--accent4)}
+.project-card h3{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
+.project-card p{color:var(--text2);font-size:0.85rem;line-height:1.6}
+.project-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;padding:0 1.5rem 1rem}
+.project-metric{text-align:center;padding:0.8rem 0.5rem;background:var(--bg2);border-radius:10px}
+.project-metric .metric-val{font-size:1rem;font-weight:800;font-family:'JetBrains Mono',monospace;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.project-metric .metric-label{font-size:0.65rem;color:var(--text3);margin-top:0.2rem}
+.project-highlights{padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:0.4rem}
+.project-highlights li{font-size:0.8rem;color:var(--text2);padding-left:1rem;position:relative;list-style:none;line-height:1.5}
+.project-highlights li::before{content:'✓';position:absolute;left:0;color:var(--accent2);font-weight:700;font-size:0.75rem}
+.project-tools{display:flex;gap:0.4rem;padding:0 1.5rem 1.5rem;flex-wrap:wrap}
+.project-tools span{font-size:0.7rem;padding:0.25rem 0.6rem;background:var(--bg3);border-radius:6px;color:var(--text2);font-weight:500}
 
-        /* ─── INSIGHT CARDS ─── */
-        .insight-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-            padding: 1.5rem; border-left: 3px solid var(--accent);
-        }
-        .insight-card h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--accent-light); }
-        .insight-card p { font-size: 0.85rem; color: var(--text-secondary); }
+/* CERTIFICATES */
+.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.cert-card{display:flex;gap:1.2rem;background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.3s;align-items:center}
+.cert-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.cert-icon{width:60px;height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.cert-icon.dqlab{background:rgba(0,212,170,0.15);color:var(--accent2)}
+.cert-icon.revou{background:rgba(255,217,61,0.15);color:var(--accent4)}
+.cert-info h4{font-size:1rem;font-weight:700;margin-bottom:0.2rem}
+.cert-info .cert-org{font-size:0.8rem;color:var(--accent);font-weight:500}
+.cert-info .cert-year{font-size:0.75rem;color:var(--text3);margin-top:0.2rem}
 
-        /* ─── TAGS ─── */
-        .tag {
-            display: inline-block; padding: 0.25rem 0.7rem;
-            border-radius: 6px; font-size: 0.7rem; font-weight: 600;
-        }
-        .tag-purple { background: rgba(108,99,255,0.15); color: var(--accent-light); }
-        .tag-green { background: rgba(34,197,94,0.15); color: #4ade80; }
-        .tag-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
-        .tag-orange { background: rgba(245,158,11,0.15); color: #fbbf24; }
+/* EDUCATION */
+.edu-card{display:flex;gap:1.5rem;background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:2rem;align-items:center;max-width:600px}
+.edu-icon{width:70px;height:70px;border-radius:16px;background:rgba(108,99,255,0.15);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.edu-info h4{font-size:1.2rem;font-weight:700}
+.edu-info .edu-school{color:var(--accent);font-weight:500;font-size:0.9rem}
+.edu-info .edu-year{color:var(--text3);font-size:0.8rem;margin-top:0.3rem}
 
-        /* ─── FORMULA BOX ─── */
-        .formula-box {
-            background: rgba(108,99,255,0.06); border: 1px solid rgba(108,99,255,0.2);
-            border-radius: 12px; padding: 1.2rem 1.5rem;
-            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-            color: var(--accent-light);
-        }
+/* ANALYSIS SECTION */
+.analysis-section{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:2rem;margin-bottom:2rem}
+.analysis-section h3{font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
+.chart-container{position:relative;height:350px;margin-bottom:1rem}
+.chart-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.kpi-card{background:var(--bg2);border-radius:12px;padding:1.2rem;text-align:center;border:1px solid var(--border)}
+.kpi-card .kpi-val{font-size:1.5rem;font-weight:800;font-family:'JetBrains Mono',monospace}
+.kpi-card .kpi-label{font-size:0.7rem;color:var(--text3);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.5px}
+.kpi-card.accent1 .kpi-val{background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-card.accent2 .kpi-val{color:var(--accent2)}
+.kpi-card.accent3 .kpi-val{color:var(--accent4)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:1rem}
+table{width:100%;border-collapse:collapse;font-size:0.8rem}
+thead{background:var(--bg3)}
+th,td{padding:0.7rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
+th{font-weight:600;color:var(--text2);font-size:0.7rem;text-transform:uppercase;letter-spacing:1px}
+td{color:var(--text)}
+tr:hover td{background:var(--glass)}
 
-        /* ─── PROGRESS BAR ─── */
-        .progress-bar-wrap { margin: 0.4rem 0; }
-        .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.3rem; }
-        .progress-label span:first-child { color: var(--text-primary); }
-        .progress-label span:last-child { color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
-        .progress-track {
-            height: 8px; background: rgba(108,99,255,0.1); border-radius: 4px; overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%; border-radius: 4px; transition: width 1s ease;
-        }
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.contact-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;transition:all 0.3s}
+.contact-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.contact-card i{font-size:2rem;color:var(--accent);margin-bottom:1rem}
+.contact-card h4{font-size:0.9rem;font-weight:600;margin-bottom:0.3rem}
+.contact-card p{font-size:0.85rem;color:var(--text2)}
+.contact-card a{color:var(--accent);text-decoration:none}
 
-        /* ─── FOOTER ─── */
-        footer {
-            text-align: center; padding: 3rem 2rem;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted); font-size: 0.8rem;
-        }
+/* FOOTER */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text3);font-size:0.8rem}
+footer .footer-brand{font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.2rem;margin-bottom:0.5rem}
 
-        /* ─── DIVIDER ─── */
-        .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-        /* ─── ABOUT SECTION ─── */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-        .about-text h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
-        .about-text p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.92rem; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .skill-tag {
-            padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.78rem; font-weight: 500;
-            background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
-        }
-
-        /* ─── SCROLL ANIMATIONS ─── */
-        .fade-up {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-        /* ─── ACTIVE NAV LINK ─── */
-        nav .nav-links a.active {
-            color: var(--accent-light);
-            position: relative;
-        }
-        nav .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 0; right: 0;
-            height: 2px;
-            background: var(--gradient-1);
-            border-radius: 2px;
-        }
-
-        /* ─── HAMBURGER BUTTON ─── */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 6px;
-            border: none;
-            background: none;
-            z-index: 1100;
-        }
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--text-primary);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        .hamburger.open span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.open span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-
-        /* ─── BACK TO TOP ─── */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--gradient-1);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(108,99,255,0.4);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            z-index: 999;
-            pointer-events: none;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .back-to-top:hover {
-            box-shadow: 0 6px 28px rgba(108,99,255,0.6);
-            transform: translateY(-3px);
-        }
-
-        /* ─── PROGRESS BAR ─── */
-        .scroll-progress {
-            position: fixed;
-            top: 64px;
-            left: 0;
-            height: 3px;
-            background: var(--gradient-1);
-            z-index: 1001;
-            transition: width 0.1s linear;
-            width: 0%;
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .hamburger { display: flex; }
-            nav .nav-links {
-                position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(10, 10, 15, 0.97);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s;
-                z-index: 1050;
-            }
-            nav .nav-links.open {
-                opacity: 1;
-                pointer-events: auto;
-            }
-            nav .nav-links a {
-                font-size: 1.3rem !important;
-                color: var(--text-primary);
-            }
-            nav .nav-links a.active::after {
-                bottom: -6px;
-                height: 3px;
-            }
-            .hero h1 { font-size: 2.2rem; }
-            .hero-stats { gap: 1rem; }
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-        }
-
-        .highlight-row td { background: rgba(108,99,255,0.08) !important; }
-        .text-right { text-align: right; }
-        .text-green { color: #4ade80; }
-        .text-red { color: #f87171; }
-        .text-accent { color: var(--accent-light); }
-        .mb-1 { margin-bottom: 1rem; }
-        .mb-2 { margin-bottom: 2rem; }
-        .mt-2 { margin-top: 2rem; }
-    </style>
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero h1{font-size:3rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .skills-grid,.projects-grid,.chart-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-links{display:none}
+  .hero h1{font-size:2.2rem}
+  .hero-desc{font-size:0.95rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:0.8rem}
+  .hero-stat{padding:1rem 0.5rem}
+  .hero-stat .stat-number{font-size:1.3rem}
+  section{padding:3rem 1rem}
+  .section-title{font-size:1.8rem}
+  .about-grid{grid-template-columns:1fr}
+  .about-avatar{max-width:200px;margin:0 auto}
+  .about-details{grid-template-columns:1fr}
+  .skills-grid,.projects-grid,.cert-grid,.contact-grid,.chart-grid{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:repeat(3,1fr);gap:0.5rem}
+  .kpi-card{padding:0.8rem 0.5rem}
+  .kpi-card .kpi-val{font-size:1.1rem}
+  .timeline{padding-left:2rem}
+  .timeline-item::before{left:-2.55rem;width:10px;height:10px}
+  .chart-container{height:280px}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.8rem}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hero-cta{flex-direction:column;align-items:center}
+  .kpi-row{grid-template-columns:1fr 1fr 1fr}
+  .kpi-card .kpi-val{font-size:0.95rem}
+  .project-metrics{grid-template-columns:repeat(3,1fr)}
+}
+</style>
 </head>
 <body>
 
-<!-- ─── NAVBAR ─── -->
-<nav>
-    <div class="nav-inner">
-        <div class="logo">AD</div>
-        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" onclick="closeMenu()">Home</a></li>
-            <li><a href="#about" onclick="closeMenu()">About</a></li>
-            <li><a href="#test1" onclick="closeMenu()">Recipe Conversion</a></li>
-            <li><a href="#test2" onclick="closeMenu()">Data Entry</a></li>
-            <li><a href="#test3" onclick="closeMenu()">Data Analysis</a></li>
-            <li><a href="#insights" onclick="closeMenu()">Insights</a></li>
-        </ul>
-    </div>
-</nav>
+<!-- SCROLL PROGRESS -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- ─── BACK TO TOP ─── -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">ADW.</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#analysis">Analysis</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-<!-- ─── HERO ─── -->
-<section class="hero" id="home">
-    <div class="hero-content fade-up">
-        <div class="hero-badge">Available for Opportunities</div>
-        <h1>Anggit Djoko</h1>
-        <p>Data Analyst yang berdedikasi dalam mengubah data mentah menjadi insight yang actionable. Test Offline — PT JAR Andalan Rasa.</p>
-        <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="value">7,437</div>
-                <div class="label">Data Records</div>
-            </div>
-            <div class="hero-stat">
-                <div class="value">Rp 164.8M</div>
-                <div class="label">Net Sales Analyzed</div>
-            </div>
-            <div class="hero-stat">
-                <div class="value">2,254</div>
-                <div class="label">Transactions</div>
-            </div>
-            <div class="hero-stat">
-                <div class="value">3</div>
-                <div class="label">Test Completed</div>
-            </div>
-        </div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#analysis">Analysis</a>
+  <a href="#certificates">Certificates</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"><div class="hero-grid"></div></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Open to Work — Data & Logistics Analyst</div>
+    <h1>Hi, I'm <span class="gradient-text">Anggit Djoko</span> Wibowo</h1>
+    <p class="hero-desc">Logistics Analyst dengan fokus pada analisis inventory, alur distribusi, dan kinerja supply chain berbasis data. Berpengalaman dengan WMS/IMS, FIFO-FEFO, dan Tableau dashboards.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary"><i class="fas fa-folder-open"></i> View Projects</a>
+      <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Me</a>
     </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Work Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">45K+</div>
+        <div class="stat-label">Records Analyzed</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">19.9%</div>
+        <div class="stat-label">Profit Increase</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Major Projects</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ─── ABOUT ─── -->
-<section id="about" style="background: var(--bg-secondary);">
-    <div class="container">
-        <div class="about-grid fade-up">
-            <div class="about-text">
-                <div class="section-label">About Me</div>
-                <h3>Turning Raw Data Into Business Decisions</h3>
-                <p>Saya Anggit Djoko, seorang Data Analyst dengan kemampuan analisis yang kuat, termasuk Exploratory Data Analysis (EDA), recipe conversion, serta pengolahan data mentah menjadi insight bisnis yang actionable.</p>
-                <p>Portfolio ini menampilkan hasil Test Offline sebagai Data Analyst untuk PT JAR Andalan Rasa, mencakup 3 kompetensi utama: Recipe Conversion, Data Entry & Cleansing, dan Exploratory Data Analysis.</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">📊 Data Analysis</span>
-                    <span class="skill-tag">📈 EDA</span>
-                    <span class="skill-tag">🧮 Excel</span>
-                    <span class="skill-tag">🐍 Python</span>
-                    <span class="skill-tag">📉 Data Visualization</span>
-                    <span class="skill-tag">🔍 Business Intelligence</span>
-                    <span class="skill-tag">🧹 Data Cleaning</span>
-                    <span class="skill-tag">📋 Reporting</span>
-                </div>
-            </div>
-            <div>
-                <div class="grid-2" style="gap:1rem;">
-                    <div class="kpi-card purple">
-                        <div class="kpi-label">Test 1</div>
-                        <div class="kpi-value" style="font-size:1.3rem;">Recipe Conversion</div>
-                        <div class="kpi-sub">Konversi resep proporsional</div>
-                    </div>
-                    <div class="kpi-card green">
-                        <div class="kpi-label">Test 2</div>
-                        <div class="kpi-value" style="font-size:1.3rem;">Data Entry</div>
-                        <div class="kpi-sub">Input & pembersihan data</div>
-                    </div>
-                    <div class="kpi-card orange">
-                        <div class="kpi-label">Test 3</div>
-                        <div class="kpi-value" style="font-size:1.3rem;">Data Analysis</div>
-                        <div class="kpi-sub">EDA & insight bisnis</div>
-                    </div>
-                    <div class="kpi-card blue">
-                        <div class="kpi-label">Tools</div>
-                        <div class="kpi-value" style="font-size:1.3rem;">Multi-Skill</div>
-                        <div class="kpi-sub">Excel, Charts, SQL</div>
-                    </div>
-                </div>
-            </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Introduction</div>
+  <div class="section-title reveal">About Me</div>
+  <div class="section-subtitle reveal">Logistics Analyst based in Pontianak, Indonesia</div>
+  <div class="about-grid">
+    <div class="about-avatar reveal">👨‍💻</div>
+    <div class="about-info reveal">
+      <h3>Anggit Djoko Wibowo</h3>
+      <div class="role">Data & Logistics Analyst</div>
+      <p>Berpengalaman dalam pengendalian persediaan menggunakan WMS/IMS, penerapan FIFO–FEFO, stock opname, serta rekonsiliasi stok fisik dan sistem. Terbiasa menganalisis inbound–outbound flow, aging stock, inventory turnover, dan service level untuk meningkatkan efisiensi operasional dan menurunkan risiko loss.</p>
+      <p>Memiliki kemampuan analisis data menggunakan Excel (Pivot Table, Power Query), SQL, dan Tableau untuk menghasilkan insight logistik yang actionable dan mendukung pengambilan keputusan manajemen.</p>
+      <div class="about-details">
+        <div class="about-detail">
+          <i class="fas fa-map-marker-alt"></i>
+          <div><div class="detail-label">Location</div><div class="detail-value">Pontianak, Indonesia</div></div>
         </div>
+        <div class="about-detail">
+          <i class="fas fa-graduation-cap"></i>
+          <div><div class="detail-label">Education</div><div class="detail-value">Politeknik Negeri Pontianak</div></div>
+        </div>
+        <div class="about-detail">
+          <i class="fas fa-envelope"></i>
+          <div><div class="detail-label">Email</div><div class="detail-value">anggitdjokow00@gmail.com</div></div>
+        </div>
+        <div class="about-detail">
+          <i class="fas fa-phone"></i>
+          <div><div class="detail-label">Phone</div><div class="detail-value">+628 1350 3386 18</div></div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- ═══════════════ TEST 1 : RECIPE CONVERSION ═══════════════ -->
-<section id="test1">
-    <div class="container">
-        <div class="fade-up">
-            <div class="section-label">Test 1</div>
-            <h2 class="section-title">Recipe Conversion</h2>
-            <p class="section-desc">Menghitung Qty setiap bahan baku secara teoritis dengan konsep perbandingan untuk Adonan Ice Cream Yogurt sebanyak 7.563 gram.</p>
-        </div>
-
-        <div class="grid-2 fade-up">
-            <!-- ORIGINAL RECIPE -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon purple">📝</div>
-                    <div>
-                        <div class="card-title">Resep Awal</div>
-                        <div class="card-subtitle">Total: 5.442 gram</div>
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr><th>Bahan</th><th class="text-right">Qty</th><th>Satuan</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Susu</td><td class="text-right mono">1.150</td><td>gr</td></tr>
-                            <tr><td>Powder Ice Cream Yogurt</td><td class="text-right mono">2.215</td><td>gr</td></tr>
-                            <tr><td>Powder Yogurt</td><td class="text-right mono">457</td><td>gr</td></tr>
-                            <tr><td>Air</td><td class="text-right mono">900</td><td>ml</td></tr>
-                            <tr><td>Gula Pasir</td><td class="text-right mono">720</td><td>gr</td></tr>
-                            <tr class="highlight-row"><td><strong>TOTAL</strong></td><td class="text-right mono"><strong>5.442</strong></td><td><strong>gr</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- CONVERTED RECIPE -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon green">✅</div>
-                    <div>
-                        <div class="card-title">Resep Baru (Jawaban)</div>
-                        <div class="card-subtitle">Total: 7.563 gram — Rasio: ×1.3897</div>
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr><th>Bahan</th><th class="text-right">Qty Baru</th><th>Satuan</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Susu</td><td class="text-right mono">1.598,21</td><td>gr</td></tr>
-                            <tr><td>Powder Ice Cream Yogurt</td><td class="text-right mono">3.078,29</td><td>gr</td></tr>
-                            <tr><td>Powder Yogurt</td><td class="text-right mono">635,11</td><td>gr</td></tr>
-                            <tr><td>Air</td><td class="text-right mono">1.250,77</td><td>ml</td></tr>
-                            <tr><td>Gula Pasir</td><td class="text-right mono">1.000,62</td><td>gr</td></tr>
-                            <tr class="highlight-row"><td><strong>TOTAL</strong></td><td class="text-right mono"><strong>7.563,00</strong></td><td><strong>gr</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="formula-box fade-up mt-2">
-            <strong>Formula:</strong> Qty Baru = Qty Awal × (Total Resep Baru / Total Resep Awal) = Qty Awal × (7.563 / 5.442) = Qty Awal × <strong>1,3897</strong>
-        </div>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <div class="section-title reveal">Work Experience</div>
+  <div class="section-subtitle reveal">Building expertise across logistics, warehouse, and data analytics</div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date"><i class="far fa-calendar"></i> Mar 2023 — Aug 2025</div>
+      <div class="timeline-company">Standford University — Pontianak</div>
+      <div class="timeline-role">Surveyor Assistant (Freelance)</div>
+      <ul class="timeline-desc">
+        <li>Mengumpulkan, membersihkan, dan memvalidasi data lapangan untuk proyek penelitian internasional</li>
+        <li>Menyusun dataset terstruktur untuk kebutuhan analisis lanjutan</li>
+        <li>Menjaga kualitas dan konsistensi data melalui proses validasi dan dokumentasi</li>
+        <li>Berkoordinasi dengan tim lintas budaya dalam pelaporan dan sinkronisasi data</li>
+      </ul>
     </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date"><i class="far fa-calendar"></i> Aug 2023 — Jan 2025</div>
+      <div class="timeline-company">Pangkalan Gas Joeherman — Pontianak</div>
+      <div class="timeline-role">Assistant Store Manager (Freelance)</div>
+      <ul class="timeline-desc">
+        <li>Menganalisis 31,000+ data transaksi LPG 3kg untuk demand analysis dan perencanaan distribusi</li>
+        <li>Mengevaluasi akurasi stok, penerapan FIFO, dan potensi shrinkage dalam operasional harian</li>
+        <li>Mengembangkan dashboard Tableau untuk memantau distribusi, profitabilitas, dan permintaan</li>
+        <li>Menggunakan SQL untuk ekstraksi, transformasi, dan validasi data transaksi</li>
+      </ul>
+      <div class="timeline-impact"><i class="fas fa-chart-line"></i> Meningkatkan efisiensi stok dan profit bulanan hingga 19.9% by 2024</div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date"><i class="far fa-calendar"></i> Aug 2023 — Apr 2024</div>
+      <div class="timeline-company">PT Daya Kobelco (KOBELCO) — Pontianak</div>
+      <div class="timeline-role">Warehouse Administration (VVIP Customer Handling)</div>
+      <ul class="timeline-desc">
+        <li>Menganalisis 7,000+ transaksi spare part untuk evaluasi inventory turnover dan aging stock</li>
+        <li>Melakukan analisis inbound–outbound flow untuk menjaga keseimbangan stok</li>
+        <li>Menyusun laporan inventory, stock aging, dan KPI warehouse menggunakan Excel dan Tableau</li>
+        <li>Mengidentifikasi fast-moving dan slow-moving items untuk optimalisasi perencanaan stok</li>
+      </ul>
+      <div class="timeline-impact"><i class="fas fa-chart-line"></i> Berkontribusi menurunkan risiko stock-out hingga 20%</div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date"><i class="far fa-calendar"></i> May 2023 — Jun 2023</div>
+      <div class="timeline-company">PT Permata Sawit Mandiri — Pontianak</div>
+      <div class="timeline-role">Assistant Surveyor (Freelance)</div>
+      <ul class="timeline-desc">
+        <li>Menyusun laporan survei kuantitatif dan kualitatif sebagai dasar pengambilan keputusan manajemen</li>
+        <li>Mengolah dan merangkum data lapangan menjadi insight operasional</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-<!-- ═══════════════ TEST 2 : DATA ENTRY ═══════════════ -->
-<section id="test2" style="background: var(--bg-secondary);">
-    <div class="container">
-        <div class="fade-up">
-            <div class="section-label">Test 2</div>
-            <h2 class="section-title">Data Entry & Cleansing</h2>
-            <p class="section-desc">Menginput data produk, menghitung waste, dan menentukan jumlah bersih yang terjual (Jumlah - Waste).</p>
-        </div>
-
-        <div class="grid-2 fade-up">
-            <!-- ICE CREAM PRODUCTS -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon orange">🍦</div>
-                    <div>
-                        <div class="card-title">Ice Cream & Dessert Products</div>
-                        <div class="card-subtitle">24 item — Total Bersih: 285 pcs</div>
-                    </div>
-                </div>
-                <div class="table-wrapper" style="max-height:500px;overflow-y:auto;">
-                    <table>
-                        <thead><tr><th>No</th><th>Nama Item</th><th class="text-right">Jumlah</th><th class="text-right">Waste</th><th class="text-right">Bersih</th></tr></thead>
-                        <tbody>
-                            <tr><td>1</td><td>Tokyo Cheesecake Berry</td><td class="text-right mono">20</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">16</td></tr>
-                            <tr><td>2</td><td>Orenji Pop</td><td class="text-right mono">10</td><td class="text-right mono text-red">5</td><td class="text-right mono text-green">5</td></tr>
-                            <tr><td>3</td><td>Kiwi Breez</td><td class="text-right mono">9</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">5</td></tr>
-                            <tr><td>4</td><td>Kuroku</td><td class="text-right mono">10</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">7</td></tr>
-                            <tr><td>5</td><td>Nuteru</td><td class="text-right mono">34</td><td class="text-right mono text-red">6</td><td class="text-right mono text-green">28</td></tr>
-                            <tr><td>6</td><td>Yoru Mitsu</td><td class="text-right mono">16</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">15</td></tr>
-                            <tr><td>7</td><td>Cherry Moon</td><td class="text-right mono">22</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">18</td></tr>
-                            <tr><td>8</td><td>Milk Dust</td><td class="text-right mono">44</td><td class="text-right mono text-red">7</td><td class="text-right mono text-green">37</td></tr>
-                            <tr><td>9</td><td>Choco Hima</td><td class="text-right mono">5</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">1</td></tr>
-                            <tr><td>10</td><td>Choco Ame</td><td class="text-right mono">20</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">19</td></tr>
-                            <tr><td>11</td><td>Dorayaki</td><td class="text-right mono">6</td><td class="text-right mono text-red">2</td><td class="text-right mono text-green">4</td></tr>
-                            <tr><td>12</td><td>Snow Almond</td><td class="text-right mono">20</td><td class="text-right mono text-red">5</td><td class="text-right mono text-green">15</td></tr>
-                            <tr><td>13</td><td>Pistachoco</td><td class="text-right mono">15</td><td class="text-right mono text-red">6</td><td class="text-right mono text-green">9</td></tr>
-                            <tr><td>14</td><td>White Pistachio</td><td class="text-right mono">5</td><td class="text-right mono text-red">2</td><td class="text-right mono text-green">3</td></tr>
-                            <tr><td>15</td><td>Vanilla Brulee</td><td class="text-right mono">15</td><td class="text-right mono text-red">4</td><td class="text-right mono text-green">11</td></tr>
-                            <tr><td>16</td><td>Matchako</td><td class="text-right mono">18</td><td class="text-right mono text-red">7</td><td class="text-right mono text-green">11</td></tr>
-                            <tr><td>17</td><td>Wagashi Bom</td><td class="text-right mono">5</td><td class="text-right mono text-red">0</td><td class="text-right mono text-green">5</td></tr>
-                            <tr><td>18</td><td>Kyoto Mist</td><td class="text-right mono">10</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">9</td></tr>
-                            <tr><td>19</td><td>Ichigo Matcha</td><td class="text-right mono">18</td><td class="text-right mono text-red">0</td><td class="text-right mono text-green">18</td></tr>
-                            <tr><td>20</td><td>Matcha Yume</td><td class="text-right mono">18</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">15</td></tr>
-                            <tr><td>21</td><td>Donburi</td><td class="text-right mono">10</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">7</td></tr>
-                            <tr><td>22</td><td>Shirokuma</td><td class="text-right mono">20</td><td class="text-right mono text-red">3</td><td class="text-right mono text-green">17</td></tr>
-                            <tr><td>23</td><td>Torikara Bomb</td><td class="text-right mono">20</td><td class="text-right mono text-red">6</td><td class="text-right mono text-green">14</td></tr>
-                            <tr><td>24</td><td>Pista Kuro</td><td class="text-right mono">23</td><td class="text-right mono text-red">1</td><td class="text-right mono text-green">22</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- DONUT PRODUCTS -->
-            <div>
-                <div class="card mb-1">
-                    <div class="card-header">
-                        <div class="card-icon blue">🍩</div>
-                        <div>
-                            <div class="card-title">Donat & Bomboloni Polos</div>
-                            <div class="card-subtitle">4 item — Total Bersih: 382 pcs</div>
-                        </div>
-                    </div>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead><tr><th>No</th><th>Nama Item</th><th class="text-right">Jumlah</th><th class="text-right">Waste</th><th class="text-right">Bersih</th></tr></thead>
-                            <tbody>
-                                <tr><td>1</td><td>Ring Polos</td><td class="text-right mono">156</td><td class="text-right mono text-red">18</td><td class="text-right mono text-green">138</td></tr>
-                                <tr><td>2</td><td>Bomboloni Polos</td><td class="text-right mono">228</td><td class="text-right mono text-red">34</td><td class="text-right mono text-green">194</td></tr>
-                                <tr><td>3</td><td>Ring Matcha Polos</td><td class="text-right mono">12</td><td class="text-right mono text-red">5</td><td class="text-right mono text-green">7</td></tr>
-                                <tr><td>4</td><td>Bomboloni Matcha Polos</td><td class="text-right mono">60</td><td class="text-right mono text-red">17</td><td class="text-right mono text-green">43</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="chart-title"><div class="dot" style="background:var(--danger);"></div>Waste Rate per Produk Ice Cream (Top 10)</div>
-                    <canvas id="wasteChart" height="280"></canvas>
-                </div>
-            </div>
-        </div>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Expertise</div>
+  <div class="section-title reveal">Technical Skills</div>
+  <div class="section-subtitle reveal">Tools and technologies I work with</div>
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <h3><i class="fas fa-database"></i> Data & Analytics</h3>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">SQL</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Excel (Pivot, Power Query)</span><span class="skill-pct">95%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Data Analytics</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Python</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Data Warehouse</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div></div>
     </div>
+    <div class="skill-category reveal">
+      <h3><i class="fas fa-chart-bar"></i> Visualization & BI</h3>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Tableau</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Data Visualization</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Market Analysis</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Market Insight</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div></div>
+    </div>
+    <div class="skill-category reveal">
+      <h3><i class="fas fa-boxes-stacked"></i> Logistics & Operations</h3>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Inventory Management</span><span class="skill-pct">92%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">WMS / IMS / ERP</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Logistics Management</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Risk Management</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="78"></div></div></div>
+      <div class="skill-item"><div class="skill-header"><span class="skill-name">Team Management</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
+    </div>
+  </div>
 </section>
 
-<!-- ═══════════════ TEST 3 : DATA ANALYSIS (EDA) ═══════════════ -->
-<section id="test3">
-    <div class="container">
-        <div class="fade-up">
-            <div class="section-label">Test 3</div>
-            <h2 class="section-title">Exploratory Data Analysis</h2>
-            <p class="section-desc">Analisis mendalam terhadap 7.437 records transaksi penjualan Oktober 2025 di PT JAR Andalan Rasa, meliputi 6 tema analisis utama.</p>
-        </div>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <div class="section-title reveal">Featured Projects</div>
+  <div class="section-subtitle reveal">Real-world data analysis and business impact</div>
+  <div class="projects-grid">
 
-        <!-- KPI ROW -->
-        <div class="grid-4 fade-up mb-2">
-            <div class="kpi-card purple">
-                <div class="kpi-label">Net Sales</div>
-                <div class="kpi-value">Rp 164.8M</div>
-                <div class="kpi-sub">Oktober 2025</div>
-            </div>
-            <div class="kpi-card green">
-                <div class="kpi-label">Total Transaksi</div>
-                <div class="kpi-value">2,254</div>
-                <div class="kpi-sub">Unique Receipts</div>
-            </div>
-            <div class="kpi-card orange">
-                <div class="kpi-label">Avg Order Value</div>
-                <div class="kpi-value">Rp 73.1K</div>
-                <div class="kpi-sub">Per transaksi</div>
-            </div>
-            <div class="kpi-card blue">
-                <div class="kpi-label">Total Items Sold</div>
-                <div class="kpi-value">8,398</div>
-                <div class="kpi-sub">Qty terjual</div>
-            </div>
-        </div>
-
-        <!-- ─── TEMA 1: BEST & WORST SELLING ─── -->
-        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-            <span class="tag tag-purple">Tema 1</span> Best & Worst Selling Menu
-        </h3>
-        <div class="grid-2 fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--success);"></div>Top 10 Menu by Net Sales</div>
-                <canvas id="topSalesChart" height="300"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--danger);"></div>Bottom 10 Menu by Quantity</div>
-                <canvas id="bottomQtyChart" height="300"></canvas>
-            </div>
-        </div>
-        <div class="grid-2 fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--accent);"></div>Sales by Category</div>
-                <canvas id="categorySalesChart" height="300"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--info);"></div>Category Distribution (Qty)</div>
-                <canvas id="categoryPieChart" height="300"></canvas>
-            </div>
-        </div>
-
-        <hr class="divider">
-
-        <!-- ─── TEMA 2: PEAK HOURS ─── -->
-        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-            <span class="tag tag-green">Tema 2</span> Peak Hours Analysis
-        </h3>
-        <div class="grid-2 fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--warning);"></div>Hourly Net Sales Distribution</div>
-                <canvas id="hourlyChart" height="300"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--success);"></div>Transaction Count by Hour</div>
-                <canvas id="hourlyTxChart" height="300"></canvas>
-            </div>
-        </div>
-
-        <hr class="divider">
-
-        <!-- ─── TEMA 3: PAYMENT METHOD ─── -->
-        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-            <span class="tag tag-blue">Tema 3</span> Payment Method Analysis
-        </h3>
-        <div class="grid-2 fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--info);"></div>Net Sales by Payment Method</div>
-                <canvas id="paymentChart" height="300"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--accent);"></div>Transaction Share by Payment</div>
-                <canvas id="paymentPieChart" height="300"></canvas>
-            </div>
-        </div>
-
-        <hr class="divider">
-
-        <!-- ─── TEMA 4: SALES CHANNEL ─── -->
-        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-            <span class="tag tag-orange">Tema 4</span> Sales Channel Performance
-        </h3>
-        <div class="grid-2 fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--warning);"></div>Net Sales by Channel</div>
-                <canvas id="channelChart" height="260"></canvas>
-            </div>
-            <div>
-                <div class="card mb-1">
-                    <div class="card-title mb-1">Channel Breakdown</div>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-label"><span>Dine In</span><span>Rp 152.4M (92.5%)</span></div>
-                        <div class="progress-track"><div class="progress-fill" style="width:92.5%;background:var(--gradient-1);"></div></div>
-                    </div>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-label"><span>Take Away</span><span>Rp 7.9M (4.8%)</span></div>
-                        <div class="progress-track"><div class="progress-fill" style="width:4.8%;background:var(--gradient-3);"></div></div>
-                    </div>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-label"><span>GO-FOOD</span><span>Rp 3.5M (2.1%)</span></div>
-                        <div class="progress-track"><div class="progress-fill" style="width:2.1%;background:var(--gradient-2);"></div></div>
-                    </div>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-label"><span>GRAB-FOOD</span><span>Rp 1.0M (0.6%)</span></div>
-                        <div class="progress-track"><div class="progress-fill" style="width:0.6%;background:linear-gradient(135deg,#a855f7,#ec4899);"></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr class="divider">
-
-        <!-- ─── TEMA 5: NET SALES TREND ─── -->
-        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-            <span class="tag tag-purple">Tema 5</span> Net Sales Trend
-        </h3>
-        <div class="fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--accent);"></div>Daily Net Sales — Oktober 2025</div>
-                <canvas id="dailySalesChart" height="200"></canvas>
-            </div>
-        </div>
-        <div class="grid-2 fade-up mb-2">
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--success);"></div>Sales by Day of Week</div>
-                <canvas id="dowChart" height="260"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title"><div class="dot" style="background:var(--warning);"></div>Discount Campaign Impact</div>
-                <canvas id="discountChart" height="260"></canvas>
-            </div>
-        </div>
-
-        <hr class="divider">
-
-        <!-- ─── TEMA 6: AVG ORDER VALUE ─── -->
-        <h3 class="fade-up" style="margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-            <span class="tag tag-green">Tema 6</span> Average Order Value
-        </h3>
-        <div class="grid-3 fade-up mb-2">
-            <div class="kpi-card purple">
-                <div class="kpi-label">Rata-rata</div>
-                <div class="kpi-value">Rp 73.1K</div>
-            </div>
-            <div class="kpi-card green">
-                <div class="kpi-label">Median</div>
-                <div class="kpi-value">Rp 64.5K</div>
-            </div>
-            <div class="kpi-card orange">
-                <div class="kpi-label">Maximum</div>
-                <div class="kpi-value">Rp 656.3K</div>
-            </div>
-        </div>
+    <!-- Project 1: LPG 2023 -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-tag tag-logistics"><i class="fas fa-fire-flame-curved"></i> Logistics</div>
+        <h3>LPG 3Kg Transaction Report 2023</h3>
+        <p>Analisis transaksi tahunan Pangkalan Gas Joeherman dengan perbandingan Rumah Tangga vs UMKM dan analisis profitabilitas.</p>
+      </div>
+      <div class="project-metrics">
+        <div class="project-metric"><div class="metric-val">31,459</div><div class="metric-label">Transactions</div></div>
+        <div class="project-metric"><div class="metric-val">Rp 94.3M</div><div class="metric-label">Total Profit</div></div>
+        <div class="project-metric"><div class="metric-val">82.1%</div><div class="metric-label">Rumah Tangga</div></div>
+      </div>
+      <ul class="project-highlights">
+        <li>Segmentasi pelanggan Rumah Tangga (82.1%) vs UMKM (17.9%)</li>
+        <li>Monthly trend analysis dengan growth tracking</li>
+        <li>Profit analysis: Tertinggi Sep (Rp 10.38M), Rata-rata Rp 7.86M</li>
+      </ul>
+      <div class="project-tools"><span>SQL</span><span>Tableau</span><span>Excel</span><span>FIFO Analysis</span></div>
     </div>
+
+    <!-- Project 2: LPG 2024 -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-tag tag-logistics"><i class="fas fa-fire-flame-curved"></i> Logistics</div>
+        <h3>LPG 3Kg Transaction Report 2024</h3>
+        <p>Lanjutan analisis tahunan menunjukkan pertumbuhan 19.9% transaksi dengan Rumah Tangga semakin dominan.</p>
+      </div>
+      <div class="project-metrics">
+        <div class="project-metric"><div class="metric-val">37,723</div><div class="metric-label">Transactions</div></div>
+        <div class="project-metric"><div class="metric-val">Rp 113M</div><div class="metric-label">Total Profit</div></div>
+        <div class="project-metric"><div class="metric-val">+19.9%</div><div class="metric-label">YoY Growth</div></div>
+      </div>
+      <ul class="project-highlights">
+        <li>Pertumbuhan transaksi 19.9% dari 31,459 ke 37,723</li>
+        <li>Rumah Tangga dominasi naik: 82.1% → 83.4%</li>
+        <li>Profit naik: Rp 94.3M → Rp 113.1M (+19.9%)</li>
+        <li>Analisis faktor kebijakan pemerintah terhadap distribusi</li>
+      </ul>
+      <div class="project-tools"><span>SQL</span><span>Tableau</span><span>Excel</span><span>YoY Comparison</span></div>
+    </div>
+
+    <!-- Project 3: KOBELCO -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-tag tag-warehouse"><i class="fas fa-warehouse"></i> Warehouse</div>
+        <h3>PT DKMCI (KOBELCO) Report</h3>
+        <p>Analisis warehouse dan transaksi VVIP customer Jan-Sep 2023 dengan evaluasi penjualan dan inventory.</p>
+      </div>
+      <div class="project-metrics">
+        <div class="project-metric"><div class="metric-val">7,157</div><div class="metric-label">Transactions</div></div>
+        <div class="project-metric"><div class="metric-val">Rp 1.4B</div><div class="metric-label">Peak Sales (Mar)</div></div>
+        <div class="project-metric"><div class="metric-val">-20%</div><div class="metric-label">Stock-out Risk</div></div>
+      </div>
+      <ul class="project-highlights">
+        <li>VVIP Customer: PT Kalimantan Inti Maju (98.3%) vs PT Putra Rimba Nusantara (1.7%)</li>
+        <li>Sales performance tracking dengan fluktuasi analysis</li>
+        <li>Top 5 fast-moving spare parts identification</li>
+        <li>Inventory optimization & buffer stock recommendations</li>
+      </ul>
+      <div class="project-tools"><span>Excel</span><span>Tableau</span><span>SQL</span><span>Inventory KPI</span></div>
+    </div>
+
+    <!-- Project 4: JAR Andalan Rasa -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-tag tag-fnb"><i class="fas fa-utensils"></i> F&B Analytics</div>
+        <h3>PT JAR Andalan Rasa — EDA</h3>
+        <p>Evaluasi penjualan, tren menu, dan perilaku transaksi pelanggan untuk outlet F&B.</p>
+      </div>
+      <div class="project-metrics">
+        <div class="project-metric"><div class="metric-val">Rp 164.8M</div><div class="metric-label">Net Sales</div></div>
+        <div class="project-metric"><div class="metric-val">7,437</div><div class="metric-label">Transactions</div></div>
+        <div class="project-metric"><div class="metric-val">Rp 22.1K</div><div class="metric-label">Avg Order Value</div></div>
+      </div>
+      <ul class="project-highlights">
+        <li>Kare Ramen sebagai hero product (Rp 23M+ revenue)</li>
+        <li>Payment analysis: Cash (48.2%) vs BCA QR (45.6%)</li>
+        <li>Peak hours identification: 17-19 (~43% revenue)</li>
+        <li>Strategic roadmap: bundling, upselling, digital expansion</li>
+      </ul>
+      <div class="project-tools"><span>Excel</span><span>Data Cleaning</span><span>EDA</span><span>Business Strategy</span></div>
+    </div>
+
+  </div>
 </section>
 
-<!-- ═══════════════ INSIGHTS & RECOMMENDATIONS ═══════════════ -->
-<section id="insights" style="background: var(--bg-secondary);">
-    <div class="container">
-        <div class="fade-up">
-            <div class="section-label">Insights & Recommendations</div>
-            <h2 class="section-title">Temuan & Rekomendasi</h2>
-            <p class="section-desc">Rangkuman insight utama dari analisis data beserta rekomendasi aplikatif untuk bisnis.</p>
-        </div>
+<!-- DETAILED ANALYSIS — JAR -->
+<section id="analysis">
+  <div class="section-label">Deep Dive</div>
+  <div class="section-title reveal">JAR Andalan Rasa — Detailed Analysis</div>
+  <div class="section-subtitle reveal">Exploratory data analysis dari 7,437 transaksi penjualan</div>
 
-        <div class="grid-2 fade-up">
-            <div class="insight-card">
-                <h4>🏆 Best Seller: Kare Ramen Mendominasi</h4>
-                <p><strong>Kare Ramen</strong> terjual 893 qty dengan Net Sales Rp 23.7M — jauh melampaui menu lainnya. Kategori <strong>Ramen</strong> menyumbang Rp 55.2M (33.5%) dari total revenue.</p>
-                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Pertahankan stok bahan baku Ramen, khususnya Kare Ramen. Pertimbangkan varian baru berbasis Ramen untuk memanfaatkan demand tinggi.</p>
-            </div>
-            <div class="insight-card">
-                <h4>⏰ Peak Hour: Jam 17:00–19:00 Adalah Golden Hours</h4>
-                <p>Jam 18:00 mencatat Rp 27.3M (tertinggi), diikuti jam 19:00 (Rp 22.3M) dan jam 17:00 (Rp 20.9M). Periode 17–19 menyumbang <strong>~43% total revenue</strong>.</p>
-                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Tambah staff pada jam 17–19, pastikan persiapan bahan baku selesai sebelum jam 16:00. Optimalkan promosi jam sepi (12–14).</p>
-            </div>
-            <div class="insight-card">
-                <h4>💳 Cash & BCA QR Seimbang</h4>
-                <p><strong>Cash</strong> Rp 79.5M (48.2%) dan <strong>BCA QR</strong> Rp 75.2M (45.6%) mendominasi. GoFood & GrabFood hanya menyumbang <strong>2.6%</strong> total revenue.</p>
-                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Tingkatkan penetrasi online delivery melalui promo eksklusif di platform GoFood/GrabFood. Tambah opsi e-wallet lain (OVO, DANA, ShopeePay).</p>
-            </div>
-            <div class="insight-card">
-                <h4>📅 Weekend Lebih Ramai, Sabtu Terbaik</h4>
-                <p><strong>Sabtu</strong> mencatat Rp 31.6M (tertinggi), diikuti Jumat Rp 27.5M. Senin & Selasa menjadi hari terendah (~Rp 16M). Weekend menyumbang ~35% lebih tinggi dari weekday.</p>
-                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Buat promo weekday (Senin–Selasa) untuk meningkatkan traffic di hari sepi. Siapkan stok lebih banyak untuk weekend.</p>
-            </div>
-            <div class="insight-card">
-                <h4>🍱 Dine In Mendominasi 92.5%</h4>
-                <p>Dari Rp 164.8M total sales, <strong>Dine In</strong> menyumbang Rp 152.4M (92.5%). Take Away hanya 4.8%, online delivery hanya 2.7%.</p>
-                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Tingkatkan kapasitas dine-in (meja, kursi). Kembangkan menu khusus take-away/delivery yang travel-friendly. Optimalkan listing di GoFood/GrabFood.</p>
-            </div>
-            <div class="insight-card">
-                <h4>📉 Menu dengan Penjualan Rendah Perlu Evaluasi</h4>
-                <p><strong>Telur Ramen, Sauce Black Pepper, Ebi Furai</strong> tercatat hanya 1–2 pcs terjual sebulan. Beberapa item bundle juga kurang diminati.</p>
-                <p style="margin-top:0.5rem;"><strong>Rekomendasi:</strong> Evaluasi menu low-performer — pertimbangkan untuk discontinue atau repackage sebagai combo/bundle dengan menu populer.</p>
-            </div>
-        </div>
+  <!-- KPIs -->
+  <div class="kpi-row reveal">
+    <div class="kpi-card accent1"><div class="kpi-val">Rp 164.8M</div><div class="kpi-label">Total Net Sales</div></div>
+    <div class="kpi-card accent2"><div class="kpi-val">2,254</div><div class="kpi-label">Total Receipts</div></div>
+    <div class="kpi-card accent3"><div class="kpi-val">Rp 73.1K</div><div class="kpi-label">Avg per Receipt</div></div>
+  </div>
+
+  <!-- Charts Grid -->
+  <div class="chart-grid">
+    <div class="analysis-section reveal">
+      <h3><i class="fas fa-trophy" style="color:var(--accent4)"></i> Top 10 Menu by Revenue</h3>
+      <div class="chart-container"><canvas id="chartTopMenu"></canvas></div>
     </div>
+    <div class="analysis-section reveal">
+      <h3><i class="fas fa-clock" style="color:var(--accent2)"></i> Sales by Hour</h3>
+      <div class="chart-container"><canvas id="chartHourly"></canvas></div>
+    </div>
+    <div class="analysis-section reveal">
+      <h3><i class="fas fa-credit-card" style="color:var(--accent)"></i> Payment Methods</h3>
+      <div class="chart-container"><canvas id="chartPayment"></canvas></div>
+    </div>
+    <div class="analysis-section reveal">
+      <h3><i class="fas fa-store" style="color:var(--accent3)"></i> Sales Channel</h3>
+      <div class="chart-container"><canvas id="chartChannel"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Recipe Table -->
+  <div class="analysis-section reveal" style="margin-top:2rem">
+    <h3><i class="fas fa-flask" style="color:var(--accent)"></i> Recipe Conversion — Proporsional (Rasio ×1.3897)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Bahan</th><th>Resep Awal</th><th>Resep Baru</th><th>Satuan</th></tr></thead>
+        <tbody>
+          <tr><td>Tepung Terigu</td><td>2,260</td><td>3,140.7</td><td>g</td></tr>
+          <tr><td>Gula Pasir</td><td>560</td><td>778.2</td><td>g</td></tr>
+          <tr><td>Susu Bubuk</td><td>50</td><td>69.5</td><td>g</td></tr>
+          <tr><td>Telur</td><td>300</td><td>417</td><td>g</td></tr>
+          <tr><td>Kuning Telur</td><td>300</td><td>417</td><td>g</td></tr>
+          <tr><td>Air Es</td><td>450</td><td>625.4</td><td>ml</td></tr>
+          <tr><td>Garam</td><td>30</td><td>41.7</td><td>g</td></tr>
+          <tr><td>Bread Improver</td><td>12</td><td>16.7</td><td>g</td></tr>
+          <tr><td>Butter</td><td>450</td><td>625.4</td><td>g</td></tr>
+          <tr><td>Ragi</td><td>45</td><td>62.5</td><td>g</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="section-label">Credentials</div>
+  <div class="section-title reveal">Certificates</div>
+  <div class="section-subtitle reveal">Professional development and continuous learning</div>
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon dqlab"><i class="fas fa-code"></i></div>
+      <div class="cert-info">
+        <h4>Bootcamp Data Analyst with SQL & Python</h4>
+        <div class="cert-org">DQLab × UMN × Xeratic</div>
+        <div class="cert-year">Using Google Platform</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon revou"><i class="fas fa-chart-pie"></i></div>
+      <div class="cert-info">
+        <h4>Intro to Data Analytics</h4>
+        <div class="cert-org">RevoU — Mini Course</div>
+        <div class="cert-year">June 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education</div>
+  <div class="section-title reveal">Academic Background</div>
+  <div class="edu-card reveal">
+    <div class="edu-icon">🎓</div>
+    <div class="edu-info">
+      <h4>Electrical Engineering</h4>
+      <div class="edu-school">Politeknik Negeri Pontianak</div>
+      <div class="edu-year"><i class="far fa-calendar-alt"></i> Graduated September 2022 — Pontianak</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <div class="section-title reveal">Contact Me</div>
+  <div class="section-subtitle reveal">Let's discuss opportunities and collaborate</div>
+  <div class="contact-grid">
+    <div class="contact-card reveal">
+      <i class="fas fa-envelope"></i>
+      <h4>Email</h4>
+      <p><a href="mailto:anggitdjokow00@gmail.com">anggitdjokow00@gmail.com</a></p>
+    </div>
+    <div class="contact-card reveal">
+      <i class="fas fa-phone"></i>
+      <h4>Phone</h4>
+      <p><a href="tel:+6281350338618">+628 1350 3386 18</a></p>
+    </div>
+    <div class="contact-card reveal">
+      <i class="fas fa-map-marker-alt"></i>
+      <h4>Location</h4>
+      <p>Pontianak, Kalimantan Barat, Indonesia</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-    <div class="container">
-        <p style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Anggit Djoko — Data Analyst</p>
-        <p>Test Offline — PT JAR Andalan Rasa | Oktober 2025</p>
-        <p style="margin-top:0.5rem;">Portfolio ini dibuat sebagai bagian dari proses seleksi Data Analyst.</p>
-    </div>
+  <div class="footer-brand">Anggit Djoko Wibowo</div>
+  <p>&copy; 2025 — Built with data, driven by insight ✨</p>
 </footer>
 
-<!-- ═══════════════ CHARTS JS ═══════════════ -->
 <script>
-Chart.defaults.color = '#9090a8';
-Chart.defaults.borderColor = 'rgba(42,42,62,0.6)';
-Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.font.size = 11;
-
-const fmt = v => 'Rp ' + (v/1e6).toFixed(1) + 'M';
-const fmtK = v => 'Rp ' + (v/1e3).toFixed(0) + 'K';
-
-// ─── WASTE CHART ───
-new Chart(document.getElementById('wasteChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Choco Hima','Matchako','Orenji Pop','Kiwi Breez','Pistachoco','Torikara Bomb','Snow Almond','Vanilla Brulee','Tokyo Cheesecake','Donburi'],
-        datasets: [{
-            label: 'Waste Rate %',
-            data: [80, 38.9, 50, 44.4, 40, 30, 25, 26.7, 20, 30],
-            backgroundColor: 'rgba(239,68,68,0.6)',
-            borderColor: '#ef4444',
-            borderWidth: 1, borderRadius: 6,
-        }]
-    },
-    options: {
-        indexAxis: 'y',
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + '%' } } },
-        scales: { x: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(42,42,62,0.3)' } }, y: { grid: { display: false } } }
-    }
-});
-
-// ─── TOP SALES ───
-new Chart(document.getElementById('topSalesChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Kare Ramen','SUMO Spicy','Chicken Katsu Bowl','Curry Chicken Bowl','Curry Moz Bowl','Chizu Ramen','Tom Yum Ramen','Katsu Matsuri','Mineral Water','Chikin Kani Roll'],
-        datasets: [{
-            label: 'Net Sales',
-            data: [23755350, 12030740, 7922888, 6925523, 6867770, 6518293, 6437939, 6147261, 5516066, 4852130],
-            backgroundColor: ctx => {
-                const g = ctx.chart.ctx.createLinearGradient(0,0,0,300);
-                g.addColorStop(0,'rgba(108,99,255,0.8)'); g.addColorStop(1,'rgba(59,130,246,0.3)');
-                return g;
-            },
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        indexAxis: 'y',
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { x: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, y: { grid: { display: false } } }
-    }
-});
-
-// ─── BOTTOM QTY ───
-new Chart(document.getElementById('bottomQtyChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Telur Ramen','Sauce Black Pepper','Best Deal 1','Crispy Chicken','Ebi Furai','Grilled Chicken','Best Deal 4','Best Deal 3','Mug','Pen'],
-        datasets: [{
-            label: 'Quantity Sold',
-            data: [1,1,2,2,2,2,3,3,3,3],
-            backgroundColor: 'rgba(239,68,68,0.6)',
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: { x: { grid: { color: 'rgba(42,42,62,0.3)' } }, y: { grid: { display: false } } }
-    }
-});
-
-// ─── CATEGORY SALES BAR ───
-new Chart(document.getElementById('categorySalesChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Ramen','Rice Bowl','Sushi','Drinks','New Menu','Side Dish','Bundle','Add On','Extra Top','Merch'],
-        datasets: [{
-            label: 'Net Sales',
-            data: [55179590, 38723010, 30535420, 26799070, 6557259, 5979442, 472719, 443938, 148433, 0],
-            backgroundColor: ['#6c63ff','#3b82f6','#06b6d4','#22c55e','#f59e0b','#ef4444','#a855f7','#ec4899','#8b5cf6','#64748b'],
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
-    }
-});
-
-// ─── CATEGORY PIE ───
-new Chart(document.getElementById('categoryPieChart'), {
-    type: 'doughnut',
-    data: {
-        labels: ['Drinks','Ramen','Rice Bowl','Sushi','New Menu','Side Dish','Add On','Other'],
-        datasets: [{
-            data: [2956, 2000, 1322, 1196, 344, 308, 223, 49],
-            backgroundColor: ['#22c55e','#6c63ff','#3b82f6','#06b6d4','#f59e0b','#ef4444','#a855f7','#64748b'],
-            borderWidth: 0,
-        }]
-    },
-    options: {
-        cutout: '60%',
-        plugins: { legend: { position: 'right', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } } }
-    }
-});
-
-// ─── HOURLY NET SALES ───
-new Chart(document.getElementById('hourlyChart'), {
-    type: 'bar',
-    data: {
-        labels: ['7','8','9','10','11','12','13','14','15','16','17','18','19','20'],
-        datasets: [{
-            label: 'Net Sales',
-            data: [101815, 2915367, 5342565, 10401500, 17048580, 11138310, 7570240, 7215244, 11189640, 15965890, 20878720, 27252790, 22269310, 5548911],
-            backgroundColor: ctx => {
-                const v = ctx.raw;
-                if(v > 20000000) return 'rgba(108,99,255,0.9)';
-                if(v > 15000000) return 'rgba(108,99,255,0.7)';
-                if(v > 10000000) return 'rgba(108,99,255,0.5)';
-                return 'rgba(108,99,255,0.3)';
-            },
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { title: { display: true, text: 'Jam', color: '#9090a8' }, grid: { display: false } } }
-    }
-});
-
-// ─── HOURLY TX COUNT ───
-new Chart(document.getElementById('hourlyTxChart'), {
-    type: 'line',
-    data: {
-        labels: ['7','8','9','10','11','12','13','14','15','16','17','18','19','20'],
-        datasets: [{
-            label: 'Transactions',
-            data: [5, 134, 241, 486, 750, 524, 339, 316, 501, 748, 909, 1244, 986, 254],
-            borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)',
-            fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#22c55e',
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false } },
-        scales: { y: { grid: { color: 'rgba(42,42,62,0.3)' } }, x: { title: { display: true, text: 'Jam', color: '#9090a8' }, grid: { display: false } } }
-    }
-});
-
-// ─── PAYMENT BAR ───
-new Chart(document.getElementById('paymentChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Cash','BCA QR','BCA','GoFood','GrabFood'],
-        datasets: [{
-            label: 'Net Sales',
-            data: [79525240, 75187970, 5789366, 3241772, 1094532],
-            backgroundColor: ['#f59e0b','#6c63ff','#3b82f6','#22c55e','#ef4444'],
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
-    }
-});
-
-// ─── PAYMENT PIE ───
-new Chart(document.getElementById('paymentPieChart'), {
-    type: 'doughnut',
-    data: {
-        labels: ['Cash','BCA QR','BCA Transfer','GoFood','GrabFood'],
-        datasets: [{
-            data: [3662, 3398, 258, 86, 33],
-            backgroundColor: ['#f59e0b','#6c63ff','#3b82f6','#22c55e','#ef4444'],
-            borderWidth: 0,
-        }]
-    },
-    options: {
-        cutout: '60%',
-        plugins: { legend: { position: 'right', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } } }
-    }
-});
-
-// ─── CHANNEL BAR ───
-new Chart(document.getElementById('channelChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Dine In','Take Away','GO-FOOD','GRAB-FOOD'],
-        datasets: [{
-            label: 'Net Sales',
-            data: [152424000, 7867622, 3521769, 1025442],
-            backgroundColor: ['#6c63ff','#3b82f6','#22c55e','#f59e0b'],
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
-    }
-});
-
-// ─── DAILY SALES LINE ───
-new Chart(document.getElementById('dailySalesChart'), {
-    type: 'line',
-    data: {
-        labels: Array.from({length:31}, (_,i) => 'Oct ' + (i+1)),
-        datasets: [{
-            label: 'Daily Net Sales',
-            data: [4624398,5104385,5087120,8317024,5682559,4517133,3164448,4943480,3504431,6267077,8482455,7500677,3100812,3928970,4492592,4339878,5682554,7188877,7013422,4405327,4129877,2511755,8851545,4515310,7657940,5951906,4023512,4813501,4095328,5000763,5939826],
-            borderColor: '#6c63ff',
-            backgroundColor: ctx => {
-                const g = ctx.chart.ctx.createLinearGradient(0,0,0,250);
-                g.addColorStop(0,'rgba(108,99,255,0.2)'); g.addColorStop(1,'rgba(108,99,255,0)');
-                return g;
-            },
-            fill: true, tension: 0.3, pointRadius: 3, pointBackgroundColor: '#6c63ff',
-            pointHoverRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
-    }
-});
-
-// ─── DAY OF WEEK ───
-new Chart(document.getElementById('dowChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'],
-        datasets: [{
-            label: 'Net Sales',
-            data: [16046780, 16036800, 20667550, 26801000, 27491890, 31646300, 26148560],
-            backgroundColor: ctx => {
-                const colors = ['#64748b','#64748b','#3b82f6','#6c63ff','#6c63ff','#22c55e','#06b6d4'];
-                return colors[ctx.dataIndex];
-            },
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmt(ctx.raw) } } },
-        scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
-    }
-});
-
-// ─── DISCOUNT CAMPAIGNS ───
-new Chart(document.getElementById('discountChart'), {
-    type: 'bar',
-    data: {
-        labels: ['SLURP & ROLL\n(15 Oct)','GYOZA 10K\n(2 Nov)','Pontianak Yatta\n(23 Oct)','Batik Fuku\n(3 Oct)','Voucher 50K','Voucher 10K'],
-        datasets: [{
-            label: 'Items Discounted',
-            data: [761, 464, 100, 54, 39, 5],
-            backgroundColor: ['#f59e0b','#6c63ff','#22c55e','#ef4444','#3b82f6','#a855f7'],
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        plugins: { legend: { display: false } },
-        scales: { y: { grid: { color: 'rgba(42,42,62,0.3)' } }, x: { grid: { display: false } } }
-    }
-});
-
-// ─── SCROLL ANIMATIONS ───
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-// ─── HAMBURGER MENU ───
-function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-    document.querySelector('.hamburger').classList.toggle('open');
-}
-function closeMenu() {
-    document.getElementById('navLinks').classList.remove('open');
-    document.querySelector('.hamburger').classList.remove('open');
-}
-
-// ─── ACTIVE SECTION TRACKING ───
-const sections = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-links a');
-
-const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('id');
-            navAnchors.forEach(a => {
-                a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-            });
-        }
-    });
-}, { threshold: 0.2, rootMargin: '-80px 0px -50% 0px' });
-
-sections.forEach(s => sectionObserver.observe(s));
-
-// ─── SCROLL PROGRESS & BACK TO TOP ───
+// NAVBAR SCROLL
+const navbar = document.getElementById('navbar');
+const scrollProgress = document.getElementById('scrollProgress');
 const backToTop = document.getElementById('backToTop');
-const progressBar = document.getElementById('scrollProgress');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 
-window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
+window.addEventListener('scroll', function() {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (scrollTop / docHeight) * 100;
 
-    // Progress bar
-    progressBar.style.width = scrollPercent + '%';
+  scrollProgress.style.width = pct + '%';
+  navbar.classList.toggle('scrolled', scrollTop > 50);
+  backToTop.classList.toggle('visible', scrollTop > 500);
 
-    // Back to top button
-    if (scrollTop > 400) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
+  // Active nav link
+  var sections = document.querySelectorAll('section[id]');
+  sections.forEach(function(sec) {
+    var top = sec.offsetTop - 100;
+    var bottom = top + sec.offsetHeight;
+    var id = sec.getAttribute('id');
+    var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+    if (link) {
+      if (scrollTop >= top && scrollTop < bottom) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
     }
+  });
+}, {passive: true});
+
+// BACK TO TOP
+backToTop.addEventListener('click', function() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
+// HAMBURGER
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// REVEAL ON SCROLL
+var reveals = document.querySelectorAll('.reveal');
+function checkReveal() {
+  reveals.forEach(function(el) {
+    var top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 80) {
+      el.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', checkReveal, {passive: true});
+checkReveal();
+
+// SKILL BARS ANIMATION
+var skillBars = document.querySelectorAll('.skill-bar-fill');
+var skillObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.style.width = entry.target.getAttribute('data-width') + '%';
+    }
+  });
+}, {threshold: 0.3});
+skillBars.forEach(function(bar) { skillObserver.observe(bar); });
+
+// CHART DEFAULTS
+Chart.defaults.color = '#a0a0b8';
+Chart.defaults.font.family = "'Inter',system-ui,sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.legend.display = false;
+Chart.defaults.scale = Chart.defaults.scale || {};
+
+// TOP MENU CHART
+new Chart(document.getElementById('chartTopMenu'), {
+  type: 'bar',
+  data: {
+    labels: ['Kare\nRamen','SUMO Spicy\nRamen','Chicken\nKatsu Bowl','Curry Chicken\nBowl Set','Curry Mozz\nRice Bowl','Chizu\nRamen','Tom Yum\nRamen','Katsu\nMatsuri Roru','Mineral\nWater','Chikin Kani\nMentai Roll'],
+    datasets: [{
+      data: [23700000,12100000,9800000,8900000,8200000,7800000,7500000,7200000,6900000,6500000],
+      backgroundColor: function(ctx) {
+        var g = ctx.chart.ctx.createLinearGradient(0,0,0,350);
+        g.addColorStop(0,'rgba(108,99,255,0.8)');
+        g.addColorStop(1,'rgba(0,212,170,0.4)');
+        return g;
+      },
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(ctx) { return 'Rp ' + (ctx.raw/1000000).toFixed(1) + 'M'; }
+        }
+      }
+    },
+    scales: {
+      x: { grid: {color:'rgba(255,255,255,0.05)'}, ticks: { callback: function(v) { return 'Rp ' + (v/1000000) + 'M'; } } },
+      y: { grid: {display:false} }
+    }
+  }
+});
+
+// HOURLY CHART
+new Chart(document.getElementById('chartHourly'), {
+  type: 'line',
+  data: {
+    labels: ['10','11','12','13','14','15','16','17','18','19','20','21'],
+    datasets: [{
+      data: [4200000,8100000,12500000,10800000,6200000,5800000,9500000,22300000,25600000,18900000,14200000,7800000],
+      borderColor: '#00d4aa',
+      backgroundColor: 'rgba(0,212,170,0.1)',
+      fill: true,
+      tension: 0.4,
+      pointRadius: 4,
+      pointBackgroundColor: '#00d4aa',
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(ctx) { return 'Rp ' + (ctx.raw/1000000).toFixed(1) + 'M'; }
+        }
+      }
+    },
+    scales: {
+      x: { grid: {color:'rgba(255,255,255,0.05)'}, title: {display:true, text:'Hour', color:'#6c6c80'} },
+      y: { grid: {color:'rgba(255,255,255,0.05)'}, ticks: { callback: function(v) { return 'Rp ' + (v/1000000) + 'M'; } } }
+    }
+  }
+});
+
+// PAYMENT CHART
+new Chart(document.getElementById('chartPayment'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Cash','BCA QR','BCA','GoFood','GrabFood'],
+    datasets: [{
+      data: [48.2,45.6,3.5,1.8,0.9],
+      backgroundColor: ['#6c63ff','#00d4aa','#e040fb','#ff6b6b','#ffd93d'],
+      borderWidth: 0,
+      spacing: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {display:true, position:'bottom', labels:{padding:12,usePointStyle:true,pointStyle:'circle'}},
+      tooltip: {
+        callbacks: { label: function(ctx) { return ctx.label + ': ' + ctx.raw + '%'; } }
+      }
+    }
+  }
+});
+
+// SALES CHANNEL CHART
+new Chart(document.getElementById('chartChannel'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Dine In','Take Away','GoFood','GrabFood'],
+    datasets: [{
+      data: [92.5,4.8,1.8,0.9],
+      backgroundColor: ['#6c63ff','#00d4aa','#ff6b6b','#ffd93d'],
+      borderWidth: 0,
+      spacing: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {display:true, position:'bottom', labels:{padding:12,usePointStyle:true,pointStyle:'circle'}},
+      tooltip: {
+        callbacks: { label: function(ctx) { return ctx.label + ': ' + ctx.raw + '%'; } }
+      }
+    }
+  }
 });
 </script>
-
 </body>
 </html>
