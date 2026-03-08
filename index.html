@@ -7,7 +7,8 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Anggit Djoko Wibowo — Data Analyst Portfolio</title>
-<meta name="description" content="Anggit Djoko Wibowo — Data Analyst Portfolio. Experienced in analyzing 76,000+ transactions across logistics, supply chain, manufacturing, and F&B industries. Skilled in Python, SQL, Excel, Tableau, and Power BI.">
+<meta name="robots" content="index, follow">
+    <meta name="description" content="Anggit Djoko Wibowo — Data Analyst Portfolio. Experienced in analyzing 76,000+ transactions across logistics, supply chain, manufacturing, and F&B industries. Skilled in Python, SQL, Excel, Tableau, and Power BI.">
 <meta name="keywords" content="Data Analyst, Portfolio, Python, SQL, Tableau, Power BI, Supply Chain, Logistics, Indonesia, Pontianak">
 <meta name="author" content="Anggit Djoko Wibowo">
 <meta property="og:title" content="Anggit Djoko Wibowo — Data Analyst Portfolio">
@@ -26,7 +27,7 @@
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -79,7 +80,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
 .section-label{font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
 .section-label::before{content:'';width:30px;height:2px;background:var(--accent)}
-.section-title{font-size:2.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-1px;line-height:1.2}
+h2.section-title{margin-top:0}
+    .section-title{font-size:2.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-1px;line-height:1.2}
 .section-subtitle{color:var(--text2);font-size:1.05rem;max-width:600px;margin-bottom:3rem}
 
 /* HERO */
@@ -322,7 +324,72 @@ img{content-visibility:auto}
 .chart-container canvas[id*="jar-top"],
 .chart-container canvas[id*="kobelco-parts"],
 .chart-container canvas[id*="kobelco-topqty"]{max-height:none!important;height:320px!important}
-</style>
+
+    
+    /* Typing Effect */
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 0.8s infinite;
+      vertical-align: baseline;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Print Stylesheet */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 12pt !important;
+      }
+      .navbar, .hamburger, .back-to-top, .skip-nav,
+      .project-modal, .modal-overlay, .hero-particles,
+      .floating-shapes, .scroll-indicator {
+        display: none !important;
+      }
+      section {
+        page-break-inside: avoid;
+        padding: 10px 0 !important;
+        margin: 0 !important;
+      }
+      .hero-section {
+        min-height: auto !important;
+        padding: 20px 0 !important;
+      }
+      a {
+        color: #000 !important;
+        text-decoration: underline !important;
+      }
+      a[href^="http"]::after {
+        content: " (" attr(href) ")" !important;
+        font-size: 9pt !important;
+        color: #555 !important;
+      }
+      .project-card, .cert-card, .skill-category {
+        break-inside: avoid !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+      }
+      canvas {
+        max-height: 200px !important;
+      }
+      * {
+        background: transparent !important;
+        color: #000 !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+      }
+      img {
+        max-width: 100% !important;
+        filter: none !important;
+      }
+    }
+  </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Anggit Djoko Wibowo", "url": "https://anggitdjoko.github.io/portfolio/", "jobTitle": "Data Analyst", "description": "Data Analyst experienced in analyzing 76,000+ transactions across logistics, supply chain, manufacturing, and F&B industries.", "knowsAbout": ["Python", "SQL", "Excel", "Tableau", "Power BI", "Data Analysis", "Supply Chain"], "address": {"@type": "PostalAddress", "addressLocality": "Pontianak", "addressCountry": "Indonesia"}, "alumniOf": {"@type": "EducationalOrganization", "name": "Politeknik Negeri Pontianak"}, "sameAs": ["https://github.com/anggitdjoko"]}</script>
 </head>
 <body>
@@ -332,7 +399,7 @@ img{content-visibility:auto}
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- NAVBAR -->
-<nav class="navbar" id="navbar">
+<nav class="navbar" role="navigation" aria-label="Main navigation" id="navbar">
   <div class="nav-logo"><span class="dot dot-lg"></span><span class="dot dot-md"></span><span class="dot dot-sm"></span></div>
   <div class="nav-links">
     <a href="#about">About</a>
@@ -344,7 +411,7 @@ img{content-visibility:auto}
     <a href="#contact">Contact</a>
   </div>
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-  <div class="hamburger" id="hamburger">
+  <div class="hamburger" id="hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </div>
 </nav>
@@ -361,16 +428,17 @@ img{content-visibility:auto}
 </div>
 
 <!-- BACK TO TOP -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
   <i class="fas fa-arrow-up"></i>
 </button>
 
 <!-- HERO -->
-<section class="hero" id="hero">
+  <main role="main">
+<section class="hero" id="hero" aria-label="Introduction">
   <div class="hero-bg"><div class="hero-grid"></div></div>
   <div class="hero-content">
     <div class="hero-badge"><span class="dot"></span> Open to Work</div>
-    <h1>Anggit Djoko<br><span class="gradient-text">Data Analyst</span></h1>
+    <h1>Anggit Djoko<br><span class="gradient-text" id="typed-text">Data Analyst</span><span class="typing-cursor" id="typing-cursor">|</span></h1>
     <p class="hero-desc">Turning raw data into actionable insights. Experienced in analyzing 76,000+ transactions across industries — from logistics &amp; supply chain to F&amp;B and heavy machinery.</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="stat-number">76K+</div><div class="stat-label">Records Analyzed</div></div>
@@ -387,9 +455,9 @@ img{content-visibility:auto}
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-label="About Me">
   <div class="section-label">About Me</div>
-  <div class="section-title">Who I Am</div>
+  <h2 class="section-title">Who I Am</h2>
   <div class="about-grid">
     <div class="about-avatar"><img src="https://raw.githubusercontent.com/anggitdjoko/portfolio/main/assets/profile.jpg" alt="Anggit Djoko Wibowo" loading="lazy"></div>
     <div class="about-info">
@@ -399,17 +467,17 @@ img{content-visibility:auto}
       <div class="about-details">
         <a href="https://www.google.com/maps/place/Pontianak" target="_blank" rel="noopener noreferrer" class="about-detail" style="text-decoration:none;color:inherit;cursor:pointer"><i class="fas fa-map-marker-alt"></i><span>Pontianak, Indonesia</span></a>
         <a href="https://polnep.ac.id" target="_blank" rel="noopener noreferrer" class="about-detail" style="text-decoration:none;color:inherit;cursor:pointer"><i class="fas fa-graduation-cap"></i><span>Politeknik Negeri Pontianak</span></a>
-        <a href="mailto:anggitdjokow00@gmail.com" target="_blank" rel="noopener noreferrer" class="about-detail" style="text-decoration:none;color:inherit"><i class="fas fa-envelope"></i><span>anggitdjokow00@gmail.com</span></a>
-        <a href="https://wa.me/6281350338618" target="_blank" rel="noopener noreferrer" class="about-detail" style="text-decoration:none;color:inherit;cursor:pointer"><i class="fas fa-phone"></i><span>+62 813 5033 8618</span></a>
+        <a href="mailto:anggitdjokow00@gmail.com" target="_blank" rel="noopener noreferrer" class="about-detail" style="text-decoration:none;color:inherit" aria-label="Send Email"><i class="fas fa-envelope"></i><span>anggitdjokow00@gmail.com</span></a>
+        <a href="https://wa.me/6281350338618" target="_blank" rel="noopener noreferrer" class="about-detail" style="text-decoration:none;color:inherit;cursor:pointer" aria-label="WhatsApp Contact"><i class="fas fa-phone"></i><span>+62 813 5033 8618</span></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
+<section id="skills" aria-label="Skills">
   <div class="section-label">Technical Skills</div>
-  <div class="section-title">Tools & Expertise</div>
+  <h2 class="section-title">Tools & Expertise</h2>
   <div class="section-subtitle">Combining analytical tools and domain expertise to deliver data-driven insights</div>
   <div class="skills-grid">
     <div class="skill-card"><div class="skill-header"><span class="skill-name"><i class="fas fa-file-excel" style="color:#217346;margin-right:6px"></i>Excel (Pivot, Power Query)</span><span class="skill-pct">95%</span></div><div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="95%"></div></div></div>
@@ -424,9 +492,9 @@ img{content-visibility:auto}
 </section>
 
 <!-- MY PROCESS -->
-<section id="process">
+<section id="process" aria-label="Work Process">
   <div class="section-label">Methodology</div>
-  <div class="section-title">How I Work</div>
+  <h2 class="section-title">How I Work</h2>
   <div class="section-subtitle">A systematic approach to turning raw data into business impact</div>
   <div class="process-flow">
     <div class="process-step">
@@ -468,9 +536,9 @@ img{content-visibility:auto}
 </section>
 
 <!-- FEATURED PROJECTS -->
-<section id="projects">
+<section id="projects" aria-label="Projects">
   <div class="section-label">Featured Projects</div>
-  <div class="section-title">Real-World Data Analysis</div>
+  <h2 class="section-title">Real-World Data Analysis</h2>
   <div class="section-subtitle">Click each project to explore detailed findings, charts, and recommendations</div>
   <div class="project-filters">
     <button class="filter-btn active" data-filter="all">All Projects</button>
@@ -847,9 +915,9 @@ img{content-visibility:auto}
 </div>
 
 <!-- EXPERIENCE -->
-<section id="experience">
+<section id="experience" aria-label="Experience">
   <div class="section-label">Experience</div>
-  <div class="section-title">Work History</div>
+  <h2 class="section-title">Work History</h2>
   <div class="section-subtitle">Building expertise across multiple industries through hands-on data work</div>
   <div class="timeline">
     <div class="timeline-item">
@@ -896,9 +964,9 @@ img{content-visibility:auto}
 </section>
 
 <!-- CERTIFICATES -->
-<section id="certificates">
+<section id="certificates" aria-label="Certificates">
   <div class="section-label">Certifications</div>
-  <div class="section-title">Professional Development</div>
+  <h2 class="section-title">Professional Development</h2>
   <div class="cert-grid">
     <div class="cert-card">
       <div class="cert-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)"><i class="fas fa-certificate"></i></div>
@@ -920,22 +988,22 @@ img{content-visibility:auto}
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-label="Contact">
   <div class="section-label">Get in Touch</div>
-  <div class="section-title">Let's Connect</div>
+  <h2 class="section-title">Let's Connect</h2>
   <div class="section-subtitle">Interested in data-driven insights? Feel free to reach out!</div>
   <div class="contact-grid">
-    <a href="mailto:anggitdjokow00@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-card">
+    <a href="mailto:anggitdjokow00@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="Send Email">
       <i class="fas fa-envelope"></i>
       <h4>Email</h4>
       <p>anggitdjokow00@gmail.com</p>
     </a>
-    <a href="https://wa.me/6281350338618" class="contact-card" target="_blank" rel="noopener noreferrer">
+    <a href="https://wa.me/6281350338618" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact">
       <i class="fab fa-whatsapp"></i>
       <h4>WhatsApp</h4>
       <p>+62 813 5033 8618</p>
     </a>
-    <a href="https://github.com/anggitdjoko" class="contact-card" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/anggitdjoko" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
       <i class="fab fa-github"></i>
       <h4>GitHub</h4>
       <p>anggitdjoko</p>
@@ -949,6 +1017,7 @@ img{content-visibility:auto}
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <p>© 2026 Anggit Djoko Wibowo. Built with data, passion, and a lot of coffee ☕</p>
 </footer>
@@ -1256,6 +1325,48 @@ const fadeObserver=new IntersectionObserver(entries=>{
 },{threshold:0.1});
 document.querySelectorAll('section').forEach(sec=>{sec.style.opacity='0';sec.style.transform='translateY(30px)';sec.style.transition='opacity 0.6s ease, transform 0.6s ease';fadeObserver.observe(sec)});
 document.querySelector('.hero').style.opacity='1';document.querySelector('.hero').style.transform='translateY(0)';
+
+  // Typing Effect
+  (function() {
+    const texts = ['Data Analyst', 'Python Enthusiast', 'SQL Expert', 'Power BI Developer'];
+    const typedEl = document.getElementById('typed-text');
+    const cursorEl = document.getElementById('typing-cursor');
+    if (!typedEl || !cursorEl) return;
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function type() {
+      const currentText = texts[textIndex];
+
+      if (isDeleting) {
+        typedEl.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        typedEl.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      if (!isDeleting && charIndex === currentText.length) {
+        typingSpeed = 2000; // Pause at end
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typingSpeed = 500; // Pause before new word
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    // Start after a small delay
+    setTimeout(type, 1500);
+  })();
+
 </script>
 </body>
 </html>
