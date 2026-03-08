@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Anggit Djoko Wibowo — Data Analyst Portfolio</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'">
 <meta name="robots" content="index, follow">
     <meta name="description" content="Anggit Djoko Wibowo — Data Analyst Portfolio. Experienced in analyzing 76,000+ transactions across logistics, supply chain, manufacturing, and F&B industries. Skilled in Python, SQL, Excel, Tableau, and Power BI.">
 <meta name="keywords" content="Data Analyst, Portfolio, Python, SQL, Tableau, Power BI, Supply Chain, Logistics, Indonesia, Pontianak">
@@ -24,6 +25,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='30' cy='50' r='25' fill='%236c63ff'/><circle cx='60' cy='50' r='18' fill='%2300d4aa'/><circle cx='83' cy='50' r='12' fill='%23ff6b6b'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="assets/profile.jpg" as="image">
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -325,6 +327,21 @@ img{content-visibility:auto}
 .chart-container canvas[id*="kobelco-parts"],
 .chart-container canvas[id*="kobelco-topqty"]{max-height:none!important;height:320px!important}
 
+    
+    /* Typing Effect */
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 0.8s infinite;
+      vertical-align: baseline;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
     /* Print Stylesheet */
     @media print {
       body {
@@ -378,6 +395,15 @@ img{content-visibility:auto}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Anggit Djoko Wibowo", "url": "https://anggitdjoko.github.io/portfolio/", "jobTitle": "Data Analyst", "description": "Data Analyst experienced in analyzing 76,000+ transactions across logistics, supply chain, manufacturing, and F&B industries.", "knowsAbout": ["Python", "SQL", "Excel", "Tableau", "Power BI", "Data Analysis", "Supply Chain"], "address": {"@type": "PostalAddress", "addressLocality": "Pontianak", "addressCountry": "Indonesia"}, "alumniOf": {"@type": "EducationalOrganization", "name": "Politeknik Negeri Pontianak"}, "sameAs": ["https://github.com/anggitdjoko", "https://www.linkedin.com/in/anggitdjoko/"]}</script>
 </head>
 <body>
+<noscript>
+<style>
+.project-card,.skill-card,.about-grid,.contact-grid{opacity:1!important;transform:none!important}
+.chart-container{display:none}
+</style>
+<div style="text-align:center;padding:2rem;background:#1a1a2e;color:#e0e0e0;font-family:sans-serif">
+<p>⚠️ Website ini membutuhkan JavaScript untuk menampilkan chart dan animasi. Silakan aktifkan JavaScript di browser kamu.</p>
+</div>
+</noscript>
 <a href="#projects" class="skip-nav">Skip to Projects</a>
 
 <!-- SCROLL PROGRESS -->
@@ -423,7 +449,7 @@ img{content-visibility:auto}
   <div class="hero-bg"><div class="hero-grid"></div></div>
   <div class="hero-content">
     <div class="hero-badge"><span class="dot"></span> Open to Work</div>
-    <h1>Anggit Djoko<br><span class="gradient-text">Data Analyst</span></h1>
+    <h1>Anggit Djoko<br><span class="gradient-text" id="typed-text">Data Analyst</span><span class="typing-cursor" id="typing-cursor">|</span></h1>
     <p class="hero-desc">Turning raw data into actionable insights. Experienced in analyzing 76,000+ transactions across industries — from logistics &amp; supply chain to F&amp;B and heavy machinery.</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="stat-number">76K+</div><div class="stat-label">Records Analyzed</div></div>
@@ -444,7 +470,7 @@ img{content-visibility:auto}
   <div class="section-label">About Me</div>
   <h2 class="section-title">Who I Am</h2>
   <div class="about-grid">
-    <div class="about-avatar"><img src="https://raw.githubusercontent.com/anggitdjoko/portfolio/main/assets/profile.jpg" alt="Anggit Djoko Wibowo" loading="lazy"></div>
+    <div class="about-avatar"><img src="assets/profile.jpg" alt="Anggit Djoko Wibowo" loading="lazy"></div>
     <div class="about-info">
       <h3>Anggit Djoko Wibowo</h3>
       <div class="role">Data Analyst · Logistics Analyst</div>
@@ -1317,6 +1343,59 @@ const fadeObserver=new IntersectionObserver(entries=>{
 document.querySelectorAll('section').forEach(sec=>{sec.style.opacity='0';sec.style.transform='translateY(30px)';sec.style.transition='opacity 0.6s ease, transform 0.6s ease';fadeObserver.observe(sec)});
 document.querySelector('.hero').style.opacity='1';document.querySelector('.hero').style.transform='translateY(0)';
 
+  // Typing Effect
+  (function() {
+    const texts = ['Data Analyst', 'Python Enthusiast', 'SQL Expert', 'Power BI Developer'];
+    const typedEl = document.getElementById('typed-text');
+    const cursorEl = document.getElementById('typing-cursor');
+    if (!typedEl || !cursorEl) return;
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function type() {
+      const currentText = texts[textIndex];
+
+      if (isDeleting) {
+        typedEl.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        typedEl.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      if (!isDeleting && charIndex === currentText.length) {
+        typingSpeed = 2000; // Pause at end
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typingSpeed = 500; // Pause before new word
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    // Start after a small delay
+    setTimeout(type, 1500);
+  })();
+
+</script>
+<script>
+// Global Error Handler
+window.addEventListener('error', function(e) {
+  if (e.target && e.target.tagName === 'IMG') {
+    e.target.style.display = 'none';
+  }
+});
+window.onerror = function(msg, url, line) {
+  console.warn('Error caught:', msg);
+  return true;
+};
 </script>
 </body>
 </html>
