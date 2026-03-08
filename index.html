@@ -399,11 +399,46 @@ img{content-visibility:auto}
 <style>
 .project-card,.skill-card,.about-grid,.contact-grid{opacity:1!important;transform:none!important}
 .chart-container{display:none}
+
+/* Loading Skeleton */
+.skeleton-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0f;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s ease,visibility 0.5s ease}
+.skeleton-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.skeleton-container{width:90%;max-width:700px;padding:2rem}
+.skeleton-line{height:16px;border-radius:8px;background:linear-gradient(90deg,#1a1a2e 25%,#2a2a4e 50%,#1a1a2e 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;margin-bottom:12px}
+.skeleton-line.title{height:28px;width:60%;margin:0 auto 16px}
+.skeleton-line.subtitle{height:18px;width:40%;margin:0 auto 24px}
+.skeleton-line.avatar{height:100px;width:100px;border-radius:50%;margin:0 auto 20px}
+.skeleton-line.short{width:50%}
+.skeleton-line.medium{width:75%}
+.skeleton-line.long{width:90%}
+.skeleton-cards{display:flex;gap:16px;margin-top:24px}
+.skeleton-card{flex:1;height:120px;border-radius:12px;background:linear-gradient(90deg,#1a1a2e 25%,#2a2a4e 50%,#1a1a2e 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.skeleton-card:nth-child(2){animation-delay:0.2s}
+.skeleton-card:nth-child(3){animation-delay:0.4s}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@media(max-width:480px){.skeleton-cards{flex-direction:column}.skeleton-card{height:80px}}
+
 </style>
 <div style="text-align:center;padding:2rem;background:#1a1a2e;color:#e0e0e0;font-family:sans-serif">
 <p>⚠️ Website ini membutuhkan JavaScript untuk menampilkan chart dan animasi. Silakan aktifkan JavaScript di browser kamu.</p>
 </div>
 </noscript>
+<div class="skeleton-overlay" id="skeleton-loader">
+<div class="skeleton-container">
+<div class="skeleton-line avatar"></div>
+<div class="skeleton-line title"></div>
+<div class="skeleton-line subtitle"></div>
+<div class="skeleton-line long"></div>
+<div class="skeleton-line medium"></div>
+<div class="skeleton-line short"></div>
+<div class="skeleton-cards">
+<div class="skeleton-card"></div>
+<div class="skeleton-card"></div>
+<div class="skeleton-card"></div>
+</div>
+</div>
+</div>
+
 <a href="#projects" class="skip-nav">Skip to Projects</a>
 
 <!-- SCROLL PROGRESS -->
@@ -1396,6 +1431,20 @@ window.onerror = function(msg, url, line) {
   console.warn('Error caught:', msg);
   return true;
 };
+</script>
+<script>
+// Loading Skeleton
+window.addEventListener('load', function() {
+  var skeleton = document.getElementById('skeleton-loader');
+  if (skeleton) {
+    setTimeout(function() {
+      skeleton.classList.add('hidden');
+      setTimeout(function() {
+        skeleton.remove();
+      }, 500);
+    }, 300);
+  }
+});
 </script>
 </body>
 </html>
