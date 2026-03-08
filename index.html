@@ -330,14 +330,22 @@ img{content-visibility:auto}
     
     
 
-    /* Print Stylesheet */
+    
+/* Hire Me Button */
+.hire-me-float{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;align-items:center;gap:8px;padding:14px 24px;background:var(--gradient1);color:#fff;font-weight:700;font-size:1rem;border:none;border-radius:50px;cursor:pointer;box-shadow:0 4px 20px rgba(99,102,241,0.4);text-decoration:none;transition:all 0.3s ease;animation:hirePulse 2s infinite}
+.hire-me-float:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(99,102,241,0.6)}
+.hire-me-float svg{width:20px;height:20px;fill:currentColor}
+@keyframes hirePulse{0%,100%{box-shadow:0 4px 20px rgba(99,102,241,0.4)}50%{box-shadow:0 4px 30px rgba(99,102,241,0.7)}}
+@media(max-width:480px){.hire-me-float{bottom:16px;right:16px;padding:12px 18px;font-size:0.9rem}}
+
+/* Print Stylesheet */
     @media print {
       body {
         background: #fff !important;
         color: #000 !important;
         font-size: 12pt !important;
       }
-      .navbar, .hamburger, .back-to-top, .skip-nav,
+      .navbar, .hamburger, .back-to-top, .skip-nav, .hire-me-float,
       .project-modal, .modal-overlay, .hero-particles,
       .floating-shapes, .scroll-indicator {
         display: none !important;
@@ -387,6 +395,9 @@ img{content-visibility:auto}
 <style>
 .project-card,.skill-card,.about-grid,.contact-grid{opacity:1!important;transform:none!important}
 .chart-container{display:none}
+
+
+
 </style>
 <div style="text-align:center;padding:2rem;background:#1a1a2e;color:#e0e0e0;font-family:sans-serif">
 <p>⚠️ Website ini membutuhkan JavaScript untuk menampilkan chart dan animasi. Silakan aktifkan JavaScript di browser kamu.</p>
@@ -448,6 +459,7 @@ img{content-visibility:auto}
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary"><i class="fas fa-folder-open"></i> View Projects</a>
       <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Me</a>
+<a href="https://wa.me/6285752853365?text=Halo%20Anggit,%20saya%20tertarik%20dengan%20jasa%20data%20analyst%20Anda.%20Bisa%20diskusi%20lebih%20lanjut?" class="btn btn-primary" style="background:linear-gradient(135deg,#10b981,#059669)" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Hire Me</a>
       <a href="assets/AnggitDjokoWibowo-CV.pdf" download class="btn btn-secondary"><i class="fas fa-download"></i> Download CV</a>
     </div>
   </div>
@@ -1344,5 +1356,11 @@ window.onerror = function(msg, url, line) {
   return true;
 };
 </script>
+
+<a href="https://wa.me/6285752853365?text=Halo%20Anggit,%20saya%20tertarik%20dengan%20jasa%20data%20analyst%20Anda.%20Bisa%20diskusi%20lebih%20lanjut?" class="hire-me-float" target="_blank" rel="noopener" aria-label="Hire me for data analyst freelance work">
+<svg viewBox="0 0 24 24"><path d="M20 6H4V4h16v2zm-4 6H8v-2h8v2zm2 6H6v-2h12v2z"/></svg>
+Hire Me
+</a>
+
 </body>
 </html>
