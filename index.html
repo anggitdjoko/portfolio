@@ -88,7 +88,11 @@
   <div class="section-label">About Me</div>
   <div class="section-title">Who I Am</div>
   <div class="about-grid">
-    <div class="about-avatar"><img src="assets/profile.webp" alt="Anggit Djoko Wibowo" loading="lazy"></div>
+    <div class="about-avatar"><picture>
+              <source srcset="assets/profile.webp" type="image/webp">
+              <source srcset="assets/profile.jpg" type="image/jpeg">
+              <img src="assets/profile.jpg" alt="Anggit Djoko Wibowo" loading="eager" decoding="async" fetchpriority="high" style="image-rendering:high-quality;width:100%;height:100%;object-fit:cover;">
+            </picture></div>
     <div class="about-info">
       <h3>Anggit Djoko Wibowo</h3>
       <div class="role">Data Analyst · Logistics Analyst</div>
