@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics — Replace GA_MEASUREMENT_ID with your ID from https://analytics.google.com -->
+<!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
+-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anggit Djoko Wibowo — Data Analyst Portfolio</title>
 <meta name="description" content="Portfolio of Anggit Djoko Wibowo — Data Analyst specializing in logistics, supply chain, and business analytics.">
+<meta property="og:title" content="Anggit Djoko Wibowo — Data Analyst Portfolio">
+<meta property="og:description" content="Data Analyst specializing in logistics, supply chain, and business analytics. 73K+ records analyzed across 4 industry projects.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anggitdjoko.github.io/portfolio/">
+<meta property="og:image" content="https://anggitdjoko.github.io/portfolio/assets/profile.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anggit Djoko Wibowo — Data Analyst Portfolio">
+<meta name="twitter:description" content="Data Analyst specializing in logistics, supply chain, and business analytics.">
+<meta name="twitter:image" content="https://anggitdjoko.github.io/portfolio/assets/profile.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 <style>
 /* ===== CSS RESET & VARIABLES ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -72,8 +93,8 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
 
 /* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:var(--nav-height);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;right:-30%;width:800px;height:800px;background:radial-gradient(circle,rgba(14,165,233,0.08) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-30%;left:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,0.06) 0%,transparent 70%);pointer-events:none}
+/* Original hero::before replaced by animated orbs */
+/* Original hero::after replaced by animated orbs */
 .hero .container{position:relative;z-index:1}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:50px;font-size:0.85rem;font-weight:500;color:var(--success);margin-bottom:24px;animation:fadeInDown 0.8s ease}
 .hero-badge .pulse{width:8px;height:8px;background:var(--success);border-radius:50%;animation:pulse 2s infinite}
@@ -291,7 +312,105 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
   .form-row{grid-template-columns:1fr}
   section{padding:70px 0}
 }
+
+/* Theme Toggle */
+.theme-toggle{background:none;border:2px solid var(--border-light);border-radius:50%;width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:var(--transition);position:relative;overflow:hidden}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent);transform:rotate(180deg)}
+.theme-toggle .fa-sun{position:absolute;opacity:0;transform:scale(0);transition:all 0.3s}
+.theme-toggle .fa-moon{position:absolute;opacity:1;transform:scale(1);transition:all 0.3s}
+
+/* Light Mode */
+[data-theme="light"]{
+  --bg-primary:#f8fafc;
+  --bg-secondary:#ffffff;
+  --bg-card:#ffffff;
+  --bg-card-hover:#f1f5f9;
+  --text-primary:#0f172a;
+  --text-secondary:#475569;
+  --text-muted:#94a3b8;
+  --border:#e2e8f0;
+  --border-light:#cbd5e1;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg:0 10px 40px rgba(0,0,0,0.1);
+  --shadow-glow:0 0 30px rgba(14,165,233,0.1);
+}
+[data-theme="light"] .theme-toggle .fa-sun{opacity:1;transform:scale(1)}
+[data-theme="light"] .theme-toggle .fa-moon{opacity:0;transform:scale(0)}
+[data-theme="light"] .nav{background:rgba(248,250,252,0.9)}
+[data-theme="light"] code,[data-theme="light"] pre{background:#1e293b!important;color:#e2e8f0!important}
+[data-theme="light"] .hero{background:var(--bg-primary)}
+[data-theme="light"] .skill-bar{background:var(--border)}
+[data-theme="light"] .project-card{box-shadow:var(--shadow-sm)}
+
+/* Animated Background Orbs */
+.hero{position:relative;overflow:hidden}
+.hero::before,.hero::after{content:'';position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15;animation:float 15s ease-in-out infinite;z-index:0}
+.hero::before{width:500px;height:500px;background:var(--accent);top:-100px;left:-100px}
+.hero::after{width:400px;height:400px;background:#8b5cf6;bottom:-100px;right:-100px;animation-delay:-7s;animation-direction:reverse}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(50px,30px) scale(1.1)}50%{transform:translate(-30px,60px) scale(0.95)}75%{transform:translate(40px,-20px) scale(1.05)}}
+
+/* Subtle grid pattern */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(circle at 1px 1px, rgba(14,165,233,0.03) 1px, transparent 0);background-size:40px 40px;pointer-events:none;z-index:0}
+section{position:relative;z-index:1}
+.nav{position:fixed;z-index:1000}
+
+/* Blog Section */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition)}
+.blog-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:var(--shadow-glow)}
+.blog-card-image{height:160px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.blog-card-category{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);padding:4px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;color:#fff;letter-spacing:0.5px;text-transform:uppercase}
+.blog-card-content{padding:24px}
+.blog-card-meta{font-size:0.8rem;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.blog-card-content h3{font-size:1.1rem;margin-bottom:10px;line-height:1.4}
+.blog-card-content p{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;margin-bottom:16px}
+.blog-card-footer{display:flex;gap:8px;flex-wrap:wrap}
+.blog-tag{background:var(--accent-glow);color:var(--accent-light);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:500}
+@media(max-width:768px){.blog-grid{grid-template-columns:1fr}}
+
+/* Contact Form Enhanced */
+.contact-form{display:flex;flex-direction:column;gap:20px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group label{font-size:0.9rem;font-weight:600;color:var(--text-secondary)}
+.form-group input,.form-group textarea{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;color:var(--text-primary);font-family:'Inter',sans-serif;font-size:0.95rem;transition:var(--transition);outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-muted)}
+
+/* CV Modal */
+.cv-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;display:none;align-items:center;justify-content:center}
+.cv-modal.active{display:flex}
+.cv-modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px)}
+.cv-modal-content{position:relative;width:90%;max-width:900px;height:85vh;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-lg)}
+.cv-modal-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--bg-secondary)}
+.cv-modal-header h3{font-size:1rem;display:flex;align-items:center;gap:10px}
+.cv-modal-actions{display:flex;align-items:center;gap:12px}
+.cv-modal-close{background:none;border:none;color:var(--text-secondary);font-size:1.2rem;cursor:pointer;padding:8px;border-radius:8px;transition:var(--transition)}
+.cv-modal-close:hover{background:rgba(255,255,255,0.1);color:var(--text-primary)}
+.cv-modal-body{flex:1;overflow:hidden}
+.cv-modal-body iframe{border:none}
+.btn-sm{padding:8px 16px;font-size:0.85rem}
+
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Anggit Djoko Wibowo",
+  "url": "https://anggitdjoko.github.io/portfolio/",
+  "image": "https://anggitdjoko.github.io/portfolio/assets/profile.jpg",
+  "jobTitle": "Data Analyst",
+  "worksFor": {"@type": "Organization", "name": "Open to Work"},
+  "alumniOf": {"@type": "CollegeOrUniversity", "name": "Politeknik Negeri Pontianak"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Pontianak", "addressCountry": "ID"},
+  "email": "anggitdjokow00@gmail.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/anggitdjoko/",
+    "https://github.com/anggitdjoko"
+  ],
+  "knowsAbout": ["Data Analysis", "SQL", "Python", "Tableau", "Power BI", "Supply Chain Analytics", "Inventory Management"]
+}
+</script>
 </head>
 <body>
 
@@ -307,6 +426,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
     <a href="#sql-showcase">SQL</a>
     <a href="#python-showcase">Python</a>
     <a href="#experience">Experience</a>
+    <a href="#blog">Blog</a>
     <a href="#testimonials">Testimonials</a>
     <a href="#certificates">Certificates</a>
     <a href="#contact">Contact</a>
@@ -316,6 +436,10 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
       <a href="https://mail.google.com/mail/?view=cm&to=anggitdjokow00@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
     </div>
   </div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon"></i>
+  </button>
   <div class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
   </div>
@@ -491,7 +615,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
           <div class="project-stat"><div class="value">+19.9%</div><div class="label">YoY Growth</div></div>
           <div class="project-stat"><div class="value">Rp 113.2M</div><div class="label">Total Profit</div></div>
         </div>
-        <p class="project-desc">Year-over-Year growth analysis revealing a +19.9% increase from 2023. Analyzed the impact of government policy on RT vs UMKM segmentation, profitability trends, and adaptive distribution strategies.</p>
+        <p class="project-desc">Year-over-Year growth analysis revealing a +19.9% increase from 2023. Analyzed the impact of government policy on Household vs SME segmentation, profitability trends, and adaptive distribution strategies.</p>
         <div class="project-tags"><span>Excel</span><span>SQL</span><span>Tableau</span><span>YoY Analysis</span></div>
         <div class="project-actions">
           <button class="btn btn-primary btn-sm" onclick="openDetail('lpg2024')"><i class="fas fa-eye"></i> View Details</button>
@@ -608,7 +732,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
   </div>
   <div class="detail-section">
     <h3><i class="fas fa-crosshairs"></i> Objective</h3>
-    <p style="color:var(--text-secondary);font-size:0.95rem">Perform a Year-over-Year comparison of LPG 3Kg distribution data between 2023 and 2024, analyzing volume growth, profitability trends, and the impact of government policy changes on subsidized LPG segmentation (Household vs UMKM).</p>
+    <p style="color:var(--text-secondary);font-size:0.95rem">Perform a Year-over-Year comparison of LPG 3Kg distribution data between 2023 and 2024, analyzing volume growth, profitability trends, and the impact of government policy changes on subsidized LPG segmentation (Household vs SME).</p>
   </div>
   <div class="detail-section">
     <h3><i class="fas fa-chart-line"></i> Key Findings</h3>
@@ -618,7 +742,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
     </div>
     <div class="detail-card">
       <h4>Policy Impact on Segmentation</h4>
-      <p>Analyzed the impact of government regulation changes on RT (Household) vs UMKM (Small Business) segmentation, revealing shifting demand patterns and the need for adaptive distribution strategies.</p>
+      <p>Analyzed the impact of government regulation changes on Household vs SME (UMKM) segmentation, revealing shifting demand patterns and the need for adaptive distribution strategies.</p>
     </div>
     <div class="detail-card">
       <h4>Seasonal & Monthly Trends</h4>
@@ -1124,6 +1248,56 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
 </div>
 </section>
 
+
+<!-- ===== BLOG & ARTICLES ===== -->
+<section id="blog">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><i class="fas fa-pen-fancy"></i> Knowledge Sharing</div>
+      <h2 class="section-title">Blog & Articles</h2>
+      <p class="section-subtitle">Insights, tutorials, and lessons learned from real data projects</p>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-card-image" style="background:linear-gradient(135deg,#0ea5e9,#8b5cf6)">
+          <div class="blog-card-category">Tutorial</div>
+          <i class="fas fa-database" style="font-size:3rem;color:rgba(255,255,255,0.2);position:absolute;bottom:20px;right:20px"></i>
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-meta"><i class="far fa-calendar"></i> Coming Soon</div>
+          <h3>SQL Window Functions for Inventory Analysis</h3>
+          <p>How I used ROW_NUMBER, LAG, and LEAD to identify stock movement patterns and predict reorder points.</p>
+          <div class="blog-card-footer"><span class="blog-tag">SQL</span><span class="blog-tag">Inventory</span></div>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">
+          <div class="blog-card-category">Case Study</div>
+          <i class="fas fa-chart-line" style="font-size:3rem;color:rgba(255,255,255,0.2);position:absolute;bottom:20px;right:20px"></i>
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-meta"><i class="far fa-calendar"></i> Coming Soon</div>
+          <h3>From Raw Data to 18.9% Profit Increase</h3>
+          <p>A deep dive into how data analysis of 37K+ LPG transactions led to actionable strategies that boosted profitability.</p>
+          <div class="blog-card-footer"><span class="blog-tag">Analytics</span><span class="blog-tag">Business</span></div>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
+          <div class="blog-card-category">Guide</div>
+          <i class="fab fa-python" style="font-size:3rem;color:rgba(255,255,255,0.2);position:absolute;bottom:20px;right:20px"></i>
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-meta"><i class="far fa-calendar"></i> Coming Soon</div>
+          <h3>Building a Restaurant Sales Dashboard with Python</h3>
+          <p>Step-by-step guide to creating an interactive sales analysis dashboard using Pandas, Matplotlib, and Seaborn.</p>
+          <div class="blog-card-footer"><span class="blog-tag">Python</span><span class="blog-tag">Dashboard</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ===== TESTIMONIALS ===== -->
 <!-- Replace these placeholder testimonials with real ones -->
 <section id="testimonials">
@@ -1305,17 +1479,14 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
       </div>
     </div>
     <div class="reveal">
-      <!-- Contact form — connect to a backend service (e.g., Formspree, EmailJS) to enable submissions -->
-      <form class="contact-form" onsubmit="event.preventDefault();alert('Thank you for your message! This form will be connected to a backend service soon.');">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-          </div>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
           <label for="subject">Subject</label>
@@ -1323,9 +1494,12 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell me about your project or data analysis needs..." required></textarea>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:12px;text-align:center">
+          <i class="fas fa-info-circle"></i> Powered by Formspree — Setup your free form at <a href="https://formspree.io" target="_blank" style="color:var(--accent)">formspree.io</a>
+        </p>
       </form>
     </div>
   </div>
@@ -1503,7 +1677,49 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     document.getElementById('navLinks').classList.remove('open');
   });
 });
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+// CV Modal
+function openCvModal(){document.getElementById('cvModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeCvModal(){document.getElementById('cvModal').classList.remove('active');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCvModal()});
+
+// Override Download CV link to open modal
+document.querySelectorAll('a[href*="CV"]').forEach(link => {
+  if(link.textContent.includes('CV') || link.textContent.includes('Resume')){
+    link.addEventListener('click', e => { e.preventDefault(); openCvModal(); });
+  }
+});
 </script>
+
+
+<!-- CV Modal -->
+<div class="cv-modal" id="cvModal">
+  <div class="cv-modal-overlay" onclick="closeCvModal()"></div>
+  <div class="cv-modal-content">
+    <div class="cv-modal-header">
+      <h3><i class="fas fa-file-pdf"></i> Curriculum Vitae</h3>
+      <div class="cv-modal-actions">
+        <a href="assets/AnggitDjokoWibowo-CV.pdf" download class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+        <button class="cv-modal-close" onclick="closeCvModal()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="cv-modal-body">
+      <iframe src="assets/AnggitDjokoWibowo-CV.pdf" width="100%" height="100%"></iframe>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
