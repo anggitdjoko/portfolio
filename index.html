@@ -577,9 +577,9 @@ section{position:relative;z-index:1}
   </div>
   <div class="project-filters">
     <button class="filter-btn active" data-filter="all">All Projects</button>
-    <button class="filter-btn" data-filter="logistics">Logistics</button>
-    <button class="filter-btn" data-filter="fnb">F&amp;B</button>
-    <button class="filter-btn" data-filter="machinery">Heavy Machinery</button>
+    <button class="filter-btn" data-filter="energy">⛽ Energy</button>
+    <button class="filter-btn" data-filter="machinery">🔧 Manufacturing</button>
+    <button class="filter-btn" data-filter="fnb">🍽️ F&amp;B</button>
   </div>
   <div class="projects-grid">
 
@@ -606,7 +606,7 @@ section{position:relative;z-index:1}
     </div>
 
     <!-- Project 2: LPG YoY 2024 -->
-    <div class="project-card reveal" data-category="logistics">
+    <div class="project-card reveal" data-category="energy">
       <div class="project-content">
         <div class="project-company"><i class="fas fa-building"></i> Pangkalan Gas Joeherman · 2024</div>
         <h3 class="project-title">LPG 3Kg YoY Growth Analysis 2024</h3>
@@ -628,7 +628,7 @@ section{position:relative;z-index:1}
     </div>
 
     <!-- Project 3: LPG 2023 -->
-    <div class="project-card reveal" data-category="logistics">
+    <div class="project-card reveal" data-category="energy">
       <div class="project-content">
         <div class="project-company"><i class="fas fa-building"></i> Pangkalan Gas Joeherman · 2023</div>
         <h3 class="project-title">LPG 3Kg Distribution Analysis 2023</h3>
@@ -676,42 +676,43 @@ section{position:relative;z-index:1}
 
 <!-- ===== PROJECT DETAIL OVERLAYS ===== -->
 
-<!-- Restaurant Detail -->
-<div class="project-detail" id="detail-restaurant">
+<!-- LPG 2023 Detail -->
+<div class="project-detail" id="detail-lpg2023">
 <div class="detail-content">
-  <div class="detail-close" onclick="closeDetail('restaurant')"><i class="fas fa-times"></i></div>
-  <div class="detail-badge"><i class="fas fa-utensils"></i> Food & Beverage</div>
-  <h2 class="detail-title">Restaurant Sales & Menu Analytics</h2>
-  <p class="detail-subtitle">PT JAR Andalan Rasa · 2025</p>
+  <div class="detail-close" onclick="closeDetail('lpg2023')"><i class="fas fa-times"></i></div>
+  <div class="detail-badge"><i class="fas fa-fire-flame-simple"></i> 📊 LPG 3Kg Distribution Analysis 2023</div>
+  <h2 class="detail-title">LPG 3Kg Distribution Analysis 2023</h2>
+  <p class="detail-subtitle">Pangkalan Gas Joeherman — Pontianak<br>August 2023 – January 2025</p>
+  <p style="color:var(--text-secondary);margin-bottom:24px;font-size:0.95rem">Menganalisis 31.459 transaksi distribusi LPG 3kg bersubsidi sepanjang tahun 2023. Fokus pada demand analysis, segmentasi pelanggan (Rumah Tangga vs UMKM), tren profitabilitas bulanan, dan strategi distribusi.</p>
   <div class="detail-stats">
-    <div class="detail-stat"><div class="value">7.4K</div><div class="label">Records</div></div>
-    <div class="detail-stat"><div class="value">Rp 164.8M</div><div class="label">Net Sales</div></div>
-    <div class="detail-stat"><div class="value">2,254</div><div class="label">Transactions</div></div>
-    <div class="detail-stat"><div class="value">70+</div><div class="label">Menu Items</div></div>
+    <div class="detail-stat"><div class="value">31,459</div><div class="label">Total Transactions</div></div>
+    <div class="detail-stat"><div class="value">Rp 94.3M</div><div class="label">Annual Profit</div></div>
+    <div class="detail-stat"><div class="value">82.1%</div><div class="label">Household Share</div></div>
+    <div class="detail-stat"><div class="value">Rp 7.86M</div><div class="label">Avg Monthly Profit</div></div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-crosshairs"></i> Objective</h3>
-    <p style="color:var(--text-secondary);font-size:0.95rem">Conduct a comprehensive exploratory data analysis (EDA) on restaurant sales data to identify top and bottom performing menu items, peak revenue hours, customer payment preferences, and sales channel performance to drive menu optimization and operational efficiency.</p>
-  </div>
-  <div class="detail-section">
-    <h3><i class="fas fa-chart-line"></i> Key Findings</h3>
+    <h3><i class="fas fa-users"></i> Customer Segmentation</h3>
     <div class="detail-card">
-      <h4>Menu Performance Analysis</h4>
-      <p>Identified the top 10 best-selling menu items and bottom 10 underperformers. Analyzed contribution margins and recommended menu optimization strategies to maximize revenue per transaction.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Peak Hours & Daily Trends</h4>
-      <p>Mapped revenue distribution across operating hours, identifying 11:00–13:00 and 18:00–20:00 as peak periods. Recommended staffing and inventory adjustments aligned with demand patterns.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Payment & Channel Analysis</h4>
-      <p>Analyzed payment method preferences (cash vs. digital) and sales channel performance (dine-in, takeaway, delivery apps), providing insights for partnership and promotion strategies.</p>
+      <h4>🏠 Dominasi Rumah Tangga</h4>
+      <p>Mayoritas transaksi (82.1% = 25,825 transaksi) berasal dari pelanggan rumah tangga, menjadikan segmen ini kontributor utama. UMKM menyumbang 17.9% (5,634 transaksi).</p>
     </div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-tools"></i> Tools & Techniques</h3>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="project-tags"><span>Python</span></span><span class="project-tags"><span>Pandas</span></span><span class="project-tags"><span>Matplotlib</span></span><span class="project-tags"><span>Seaborn</span></span><span class="project-tags"><span>Excel</span></span><span class="project-tags"><span>EDA</span></span>
+    <h3><i class="fas fa-chart-line"></i> Profit Bulanan</h3>
+    <div class="detail-card">
+      <h4>📈 Profit Tertinggi: September</h4>
+      <p>Profit tertinggi dicapai bulan September dengan Rp 10.38M dari 3,460 transaksi. Profit terendah di Desember hanya Rp 2.79M (932 transaksi).</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-chart-bar"></i> Tren Pertumbuhan</h3>
+    <div class="detail-card">
+      <h4>📊 Fluktuasi Rumah Tangga</h4>
+      <p>Kenaikan +21.09% (Jan–Mar), penurunan -24.79% (Mar–Sep), kemudian lonjakan +38.17% sebelum merosot -78.56% di akhir tahun.</p>
+    </div>
+    <div class="detail-card">
+      <h4>🚀 UMKM Growth Explosion</h4>
+      <p>Sektor UMKM menunjukkan pertumbuhan luar biasa +504.90% dari Juli hingga September. Momentum ini menunjukkan potensi besar untuk strategi targeting UMKM.</p>
     </div>
   </div>
 </div>
@@ -721,79 +722,57 @@ section{position:relative;z-index:1}
 <div class="project-detail" id="detail-lpg2024">
 <div class="detail-content">
   <div class="detail-close" onclick="closeDetail('lpg2024')"><i class="fas fa-times"></i></div>
-  <div class="detail-badge"><i class="fas fa-fire-flame-simple"></i> Logistics & Distribution</div>
+  <div class="detail-badge"><i class="fas fa-fire-flame-simple"></i> 📈 LPG 3Kg YoY Growth Analysis 2024</div>
   <h2 class="detail-title">LPG 3Kg YoY Growth Analysis 2024</h2>
-  <p class="detail-subtitle">Pangkalan Gas Joeherman · 2024</p>
+  <p class="detail-subtitle">Pangkalan Gas Joeherman — Pontianak<br>Januari – Desember 2024 (Full Year)</p>
+  <p style="color:var(--text-secondary);margin-bottom:24px;font-size:0.95rem">Analisis Year-over-Year menunjukkan pertumbuhan signifikan +19.9% dari 31,459 transaksi (2023) menjadi 37,723 transaksi (2024). Fokus pada dampak kebijakan pemerintah yang memprioritaskan rumah tangga dalam distribusi LPG 3 kg bersubsidi, pergeseran segmentasi pelanggan, dan tren profitabilitas.</p>
   <div class="detail-stats">
-    <div class="detail-stat"><div class="value">37.7K</div><div class="label">Transactions</div></div>
+    <div class="detail-stat"><div class="value">37,723</div><div class="label">Total Transaksi 2024</div></div>
     <div class="detail-stat"><div class="value">+19.9%</div><div class="label">YoY Growth</div></div>
-    <div class="detail-stat"><div class="value">Rp 113.2M</div><div class="label">Total Profit</div></div>
-    <div class="detail-stat"><div class="value">2 Years</div><div class="label">Data Span</div></div>
+    <div class="detail-stat"><div class="value">83.4%</div><div class="label">Rumah Tangga</div></div>
+    <div class="detail-stat"><div class="value">Rp 9.43M</div><div class="label">Avg Monthly Profit</div></div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-crosshairs"></i> Objective</h3>
-    <p style="color:var(--text-secondary);font-size:0.95rem">Perform a Year-over-Year comparison of LPG 3Kg distribution data between 2023 and 2024, analyzing volume growth, profitability trends, and the impact of government policy changes on subsidized LPG segmentation (Household vs SME).</p>
-  </div>
-  <div class="detail-section">
-    <h3><i class="fas fa-chart-line"></i> Key Findings</h3>
+    <h3><i class="fas fa-chart-line"></i> Perbandingan YoY: 2023 vs 2024</h3>
     <div class="detail-card">
-      <h4>Year-over-Year Growth: +19.9%</h4>
-      <p>Distribution volume increased by 19.9% from 2023 to 2024, driven by expanded customer base and consistent demand from household consumers. Total profit rose to Rp 113.2 Million.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Policy Impact on Segmentation</h4>
-      <p>Analyzed the impact of government regulation changes on Household vs SME (UMKM) segmentation, revealing shifting demand patterns and the need for adaptive distribution strategies.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Seasonal & Monthly Trends</h4>
-      <p>Identified seasonal demand peaks around national holidays and Ramadan. Recommended pre-stocking and allocation strategies to prevent stock-outs during high-demand periods.</p>
+      <h4>📊 Pertumbuhan +19.9% Year-over-Year</h4>
+      <p>Total transaksi meningkat dari 31,459 (2023) menjadi 37,723 (2024), pertambahan 6,264 transaksi. Profit tahunan naik dari Rp 94.4M menjadi Rp 113.2M (+Rp 18.8M). Rata-rata profit bulanan meningkat dari Rp 7.86M ke Rp 9.43M.</p>
     </div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-tools"></i> Tools & Techniques</h3>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="project-tags"><span>Excel</span></span><span class="project-tags"><span>SQL</span></span><span class="project-tags"><span>Tableau</span></span><span class="project-tags"><span>YoY Analysis</span></span><span class="project-tags"><span>Trend Analysis</span></span>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- LPG 2023 Detail -->
-<div class="project-detail" id="detail-lpg2023">
-<div class="detail-content">
-  <div class="detail-close" onclick="closeDetail('lpg2023')"><i class="fas fa-times"></i></div>
-  <div class="detail-badge"><i class="fas fa-fire-flame-simple"></i> Logistics & Distribution</div>
-  <h2 class="detail-title">LPG 3Kg Distribution Analysis 2023</h2>
-  <p class="detail-subtitle">Pangkalan Gas Joeherman · 2023</p>
-  <div class="detail-stats">
-    <div class="detail-stat"><div class="value">31.4K</div><div class="label">Transactions</div></div>
-    <div class="detail-stat"><div class="value">Rp 94.3M</div><div class="label">Total Profit</div></div>
-    <div class="detail-stat"><div class="value">82.1%</div><div class="label">Household</div></div>
-    <div class="detail-stat"><div class="value">365</div><div class="label">Days Tracked</div></div>
-  </div>
-  <div class="detail-section">
-    <h3><i class="fas fa-crosshairs"></i> Objective</h3>
-    <p style="color:var(--text-secondary);font-size:0.95rem">Analyze the full year of LPG 3Kg distribution data for 2023 — covering demand patterns, customer segmentation (Household vs SME), and profitability — to establish a baseline for future growth and optimize distribution efficiency.</p>
-  </div>
-  <div class="detail-section">
-    <h3><i class="fas fa-chart-line"></i> Key Findings</h3>
+    <h3><i class="fas fa-users"></i> Segmentasi Pelanggan 2024</h3>
     <div class="detail-card">
-      <h4>Customer Segmentation</h4>
-      <p>Household consumers accounted for 82.1% of total distribution volume, confirming the dominant demand segment for subsidized LPG. SME customers showed higher per-transaction volumes but lower frequency.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Demand Pattern Analysis</h4>
-      <p>Mapped daily and monthly demand fluctuations, identifying consistent weekday patterns and monthly peaks. Established baseline metrics for inventory planning.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Profit Optimization</h4>
-      <p>Identified opportunities to reduce operational costs through optimized delivery schedules and inventory management, contributing to the baseline for the 18.9% profit improvement achieved in 2024.</p>
+      <h4>🏠 Rumah Tangga Semakin Dominan</h4>
+      <p>Rumah Tangga: 83.4% (31,455 txn) — naik dari 82.1% di 2023. UMKM: 16.6% (6,265 txn) — turun dari 17.9% secara persentase, namun secara angka absolut naik dari 5,634 ke 6,265 (+11.2%). Kebijakan pemerintah yang memprioritaskan rumah tangga mendorong peningkatan share RT.</p>
     </div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-tools"></i> Tools & Techniques</h3>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="project-tags"><span>Excel</span></span><span class="project-tags"><span>SQL</span></span><span class="project-tags"><span>Tableau</span></span><span class="project-tags"><span>Demand Analysis</span></span><span class="project-tags"><span>Segmentation</span></span>
+    <h3><i class="fas fa-money-bill-trend-up"></i> Profit Bulanan 2024</h3>
+    <div class="detail-card">
+      <h4>💰 Profit Tertinggi: September Rp 14.83M</h4>
+      <p>September kembali menjadi bulan tertinggi dengan 4,942 transaksi (Rp 14.83M) — naik dari 3,460 di 2023 (+42.8%). Profit terendah tetap Desember: 1,278 transaksi (Rp 3.83M). Total profit 2024: Rp 113.17M dengan profit per transaksi Rp 3,000.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-exchange-alt"></i> Pergeseran Segmentasi RT vs UMKM</h3>
+    <div class="detail-card">
+      <h4>📋 Dampak Kebijakan Pemerintah</h4>
+      <p>Kebijakan pemerintah yang memprioritaskan rumah tangga dalam mendapatkan LPG 3 kg bersubsidi menyebabkan share RT naik dari 82.1% → 83.4%, sementara UMKM turun dari 17.9% → 16.6%. Namun, secara absolut UMKM tetap bertumbuh (+631 transaksi), menunjukkan pasar yang membesar secara keseluruhan.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-lightbulb"></i> Key Recommendations</h3>
+    <div class="detail-card">
+      <h4>📈 Strategi Adaptif Kebijakan Pemerintah</h4>
+      <p>Dengan kebijakan yang semakin memprioritaskan rumah tangga, perlu strategi distribusi yang adaptif untuk menjaga keseimbangan layanan antara RT dan UMKM.</p>
+    </div>
+    <div class="detail-card">
+      <h4>🚀 UMKM Tetap Bertumbuh — Peluang Besar</h4>
+      <p>Meski share menurun, angka absolut UMKM naik +11.2%. Ini menunjukkan potensi pertumbuhan yang bisa dioptimalkan dengan program khusus UMKM.</p>
+    </div>
+    <div class="detail-card">
+      <h4>🎯 Antisipasi Pola Musiman</h4>
+      <p>September konsisten sebagai bulan peak (2023: 3,460, 2024: 4,942). Desember konsisten terendah (2023: 932, 2024: 1,278). Perlu buffer stock menjelang Q3 dan strategi demand smoothing di Q4.</p>
     </div>
   </div>
 </div>
@@ -803,38 +782,121 @@ section{position:relative;z-index:1}
 <div class="project-detail" id="detail-kobelco">
 <div class="detail-content">
   <div class="detail-close" onclick="closeDetail('kobelco')"><i class="fas fa-times"></i></div>
-  <div class="detail-badge"><i class="fas fa-gears"></i> Heavy Machinery</div>
+  <div class="detail-badge"><i class="fas fa-gears"></i> 🏭 Spare Parts Sales & Inventory Analytics</div>
   <h2 class="detail-title">Spare Parts Sales & Inventory Analytics</h2>
-  <p class="detail-subtitle">PT DKCMI (KOBELCO) · Jan–Sep 2023</p>
+  <p class="detail-subtitle">PT DKCMI (KOBELCO) — Pontianak<br>January – September 2023</p>
+  <p style="color:var(--text-secondary);margin-bottom:24px;font-size:0.95rem">Menganalisis 7,153 transaksi penjualan spare part alat berat KOBELCO senilai Rp 17.65 Miliar untuk 2 customer utama. Evaluasi tren penjualan bulanan, konsentrasi pelanggan, fast-moving items, dan 13 material group. Berkontribusi dalam penurunan risiko stock-out hingga 20%.</p>
   <div class="detail-stats">
     <div class="detail-stat"><div class="value">7,153</div><div class="label">Transactions</div></div>
     <div class="detail-stat"><div class="value">Rp 17.6B</div><div class="label">Total Sales</div></div>
+    <div class="detail-stat"><div class="value">13,181</div><div class="label">Total Qty Sold</div></div>
     <div class="detail-stat"><div class="value">319</div><div class="label">Unique Parts</div></div>
-    <div class="detail-stat"><div class="value">20%</div><div class="label">Stock-out Reduced</div></div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-crosshairs"></i> Objective</h3>
-    <p style="color:var(--text-secondary);font-size:0.95rem">Analyze spare parts sales data (7,153 transactions, Rp 17.6 Billion) for KOBELCO heavy machinery to optimize inventory levels, identify fast-moving parts, evaluate customer concentration risks, and improve the warehouse management system efficiency.</p>
-  </div>
-  <div class="detail-section">
-    <h3><i class="fas fa-chart-line"></i> Key Findings</h3>
+    <h3><i class="fas fa-chart-line"></i> Monthly Sales Performance</h3>
     <div class="detail-card">
-      <h4>Fast-Moving Parts Identification</h4>
-      <p>Identified the top 20 fast-moving spare parts using ABC analysis, which accounted for 65% of total sales value. Recommended reorder point adjustments to reduce stock-outs by 20%.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Customer Concentration Analysis</h4>
-      <p>Discovered that the top 5 customers contributed over 40% of revenue, revealing concentration risk. Proposed diversification strategies and key account management improvements.</p>
-    </div>
-    <div class="detail-card">
-      <h4>Material Group Performance</h4>
-      <p>Evaluated performance across 15+ material groups, identifying underperforming categories and recommending inventory rebalancing to optimize working capital by an estimated 12%.</p>
+      <h4>📈 Puncak di Maret — Rp 1.40B (1,057 transaksi)</h4>
+      <p>Penjualan fluktuatif: puncak Maret (Rp 1.40B) dan terendah Juli (Rp 647.7M). Rata-rata bulanan Rp 980.5M. Q1 dan Q3 cenderung lebih tinggi — menunjukkan pola maintenance cycle alat berat yang bisa diprediksi.</p>
     </div>
   </div>
   <div class="detail-section">
-    <h3><i class="fas fa-tools"></i> Tools & Techniques</h3>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="project-tags"><span>Excel</span></span><span class="project-tags"><span>Tableau</span></span><span class="project-tags"><span>WMS</span></span><span class="project-tags"><span>ABC Analysis</span></span><span class="project-tags"><span>Inventory Optimization</span></span>
+    <h3><i class="fas fa-building"></i> Customer Concentration</h3>
+    <div class="detail-card">
+      <h4>🏢 PT Kalimantan Inti Maju Dominasi 95.7% Revenue</h4>
+      <p>KIM menyumbang Rp 8.44B (47.8% nominal) dengan 7,031 transaksi. PT Putra Rimba Nusantara hanya 120 transaksi (Rp 383.8M). Konsentrasi pelanggan sangat tinggi — risiko revenue jika kehilangan 1 customer utama.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-wrench"></i> Top 10 Spare Parts by Sales Value</h3>
+    <div class="detail-card">
+      <h4>🔧 OIL HYD 68LL Mendominasi — Rp 1.29B</h4>
+      <p>Hydraulic oil (PAIL) adalah top seller dengan Rp 1.29B (2,320 unit). Top 5 parts menyumbang Rp 3.63B (20.6% dari total). Komponen track link dan oil engine juga bernilai tinggi — menunjukkan kebutuhan maintenance rutin alat berat.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-boxes-stacked"></i> Material Group & Qty Analysis</h3>
+    <div class="detail-card">
+      <h4>📦 13 Material Groups — 8RB & 8R6 Tertinggi</h4>
+      <p>Group 8RB (Lubricants/Oils) mendominasi Rp 2.95B (16.7%), diikuti 8R6 (Undercarriage) Rp 2.48B (14.1%), dan 8R1 (Filters) Rp 1.68B (9.5%). Berdasarkan quantity, OIL HYD 68LL (2,320), GEAR OIL 90 (1,169), dan ELEMENT FUEL (809) adalah fast-moving items.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-lightbulb"></i> Key Recommendations</h3>
+    <div class="detail-card">
+      <h4>📦 Buffer Stock untuk Fast-Moving Items</h4>
+      <p>Top 5 items by qty (HYD Oil, Gear Oil, Fuel Elements, Fuel Filters, Shoes) harus selalu memiliki safety stock minimal. Terutama menjelang Q1 dan Q3 yang cenderung high demand.</p>
+    </div>
+    <div class="detail-card">
+      <h4>🎯 Diversifikasi Customer Base</h4>
+      <p>Ketergantungan >95% pada 1 customer sangat berisiko. Perlu strategi akuisisi pelanggan baru dari mining companies lain di Kalimantan Barat untuk menyeimbangkan revenue stream.</p>
+    </div>
+    <div class="detail-card">
+      <h4>📊 Predictive Reorder Point</h4>
+      <p>Dengan data 9 bulan transaksi, bisa membangun model reorder point otomatis berdasarkan consumption rate per part. Target: zero stock-out untuk top 20 parts.</p>
+    </div>
+    <div class="detail-card">
+      <h4>💰 Margin Optimization per Material Group</h4>
+      <p>Analisis margin per material group — fokus upselling pada group high-margin (8R6 Undercarriage, 8R2, 8R5) yang punya value per transaksi tinggi dibanding lubricants yang volume-driven.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Restaurant Detail -->
+<div class="project-detail" id="detail-restaurant">
+<div class="detail-content">
+  <div class="detail-close" onclick="closeDetail('restaurant')"><i class="fas fa-times"></i></div>
+  <div class="detail-badge"><i class="fas fa-utensils"></i> 🍜 Restaurant Sales & Menu Analytics</div>
+  <h2 class="detail-title">Restaurant Sales & Menu Analytics</h2>
+  <p class="detail-subtitle">PT JAR Andalan Rasa — Pontianak<br>October 2025 (Test Assessment)</p>
+  <p style="color:var(--text-secondary);margin-bottom:24px;font-size:0.95rem">Exploratory Data Analysis menyeluruh terhadap 7,437 record transaksi restoran Jepang. Menganalisis performa menu, peak hours, payment method, sales channel, daily trend, dan customer behavior.</p>
+  <div class="detail-stats">
+    <div class="detail-stat"><div class="value">7,437</div><div class="label">Records</div></div>
+    <div class="detail-stat"><div class="value">Rp 164.8M</div><div class="label">Net Sales</div></div>
+    <div class="detail-stat"><div class="value">2,254</div><div class="label">Transactions</div></div>
+    <div class="detail-stat"><div class="value">Rp 73.1K</div><div class="label">Avg Order Value</div></div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-trophy"></i> Best & Worst Sellers</h3>
+    <div class="detail-card">
+      <h4>🏆 Hero Product: Kare Ramen</h4>
+      <p>Kare Ramen mendominasi dengan Rp 23.7M (893 qty). Gap sangat besar dengan #2 SUMO Spicy Ramen (Rp 12M). Ketergantungan tinggi pada satu menu — perlu diversifikasi.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-clock"></i> Peak Hours Analysis</h3>
+    <div class="detail-card">
+      <h4>⏰ Golden Hours: 17:00 – 19:00</h4>
+      <p>Tiga jam ini menyumbang ~43% total revenue (Rp 70.4M). Jam 18:00 adalah puncak tertinggi (Rp 27.2M). Staff optimization dan inventory harus difokuskan di periode ini.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-layer-group"></i> Category Performance</h3>
+    <div class="detail-card">
+      <h4>🍜 Ramen Dominates Revenue</h4>
+      <p>Ramen: Rp 55.2M (33.5%), Rice Bowl: Rp 38.7M (23.5%), Sushi: Rp 30.5M (18.5%). Dine In mendominasi 92.5% — online channels (GoFood/GrabFood) masih underutilized.</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-credit-card"></i> Payment & Daily Trend</h3>
+    <div class="detail-card">
+      <h4>💳 Cash vs Digital Hampir Seimbang</h4>
+      <p>Cash 48.2% vs BCA QR 45.6%. Meskipun offline, hampir separuh pelanggan sudah menggunakan metode non-tunai. Saturday adalah hari puncak (Rp 31.6M).</p>
+    </div>
+  </div>
+  <div class="detail-section">
+    <h3><i class="fas fa-lightbulb"></i> Strategic Recommendations</h3>
+    <div class="detail-card">
+      <h4>🎯 Diversifikasi Menu</h4>
+      <p>Kurangi ketergantungan pada Kare Ramen. Promosikan menu tier-2 (SUMO Spicy Ramen, Rice Bowls) sebagai alternatif.</p>
+    </div>
+    <div class="detail-card">
+      <h4>📱 Maximize Online Channels</h4>
+      <p>GoFood+GrabFood hanya 2.8% revenue — ada potensi besar yang belum tergarap. Implementasi promo delivery di jam non-peak.</p>
+    </div>
+    <div class="detail-card">
+      <h4>⚡ Peak Hour Optimization</h4>
+      <p>Tambah staff di golden hours (17-19). Siapkan pre-prep ingredients untuk menu populer agar mengurangi waiting time.</p>
     </div>
   </div>
 </div>
