@@ -177,7 +177,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
 .project-actions .btn-sm{font-size:0.8rem;padding:8px 16px}
 /* project detail overlay */
 .project-detail{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:2000;overflow-y:auto;padding:40px 20px}
-.project-detail.active,.project-detail.open{display:block}
+.project-detail.active{display:block}
 .detail-content{max-width:900px;margin:0 auto;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;position:relative}
 .detail-close{position:absolute;top:20px;right:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;cursor:pointer;color:var(--text-secondary);font-size:1.2rem;transition:var(--transition)}
 .detail-close:hover{color:var(--accent);border-color:var(--accent)}
@@ -392,60 +392,137 @@ section{position:relative;z-index:1}
 .btn-sm{padding:8px 16px;font-size:0.85rem}
 
 
+:root{
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a2e;--bg4:#16213e;
+  --accent:#6c63ff;--accent2:#00d4aa;--accent3:#ff6b6b;--accent4:#ffd93d;
+  --text:#e8e8f0;--text2:#a0a0b8;--text3:#6c6c80;
+  --glass:rgba(255,255,255,0.05);--glass2:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.08);
+  --gradient1:linear-gradient(135deg,#6c63ff,#00d4aa);
+  --gradient2:linear-gradient(135deg,#ff6b6b,#ffd93d);
+  --gradient3:linear-gradient(135deg,#6c63ff,#e040fb);
+}
 
-/* ===== PROJECT MODAL (from March 7) ===== */
-/* PROJECT DETAIL MODAL */
-.project-modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity 0.3s;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem}
+
+/* March 7 Modal Styles */
+.modal-header h2{font-size:1.3rem}
+.modal-header .modal-desc{color:var(--text2);margin-top:1rem;line-height:1.8;font-size:0.95rem}
 .project-modal-overlay.open{opacity:1;pointer-events:all}
-.project-modal{background:var(--bg2);border:1px solid var(--border);border-radius:24px;width:100%;max-width:1000px;margin:2rem auto;position:relative;transform:translateY(30px);transition:transform 0.4s;overflow:hidden}
-.project-modal-overlay.open .project-modal{transform:translateY(0)}
-.modal-close{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--glass2);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.3s}
-.modal-close:hover{background:var(--accent3);border-color:var(--accent3);color:#fff}
+.modal-kpi .kpi-label{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:0.2rem}
 .modal-header{padding:3rem 3rem 2rem;border-bottom:1px solid var(--border)}
+.project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.kpi-val{font-size:1.5rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-close:hover{background:var(--accent3);border-color:var(--accent3);color:#fff}
+.modal-content{padding:1rem}
+.insight-card{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:1.2rem;margin-bottom:1rem;display:flex;gap:1rem;align-items:flex-start}
+.modal-kpi{text-align:center;padding:1rem;background:var(--glass);border-radius:16px;border:1px solid var(--border)}
+.project-modal-overlay.open .project-modal{transform:translateY(0)}
+.modal-section{margin-bottom:2.5rem}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--glass2);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.3s}
+.chart-row{grid-template-columns:1fr}
+.modal-section{margin-bottom:1rem}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.modal-header{padding:1.2rem 1rem}
 .modal-header h2{font-size:2rem;font-weight:800;margin-bottom:0.3rem}
+.modal-close{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.project-modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity 0.3s;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem}
 .modal-header .modal-company{color:var(--accent);font-weight:600;font-size:1rem;margin-bottom:0.5rem}
 .modal-header .modal-period{color:var(--text3);font-size:0.85rem}
-.modal-header .modal-desc{color:var(--text2);margin-top:1rem;line-height:1.8;font-size:0.95rem}
-.modal-kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;padding:2rem 3rem;background:var(--bg)}
-.modal-kpi{text-align:center;padding:1rem;background:var(--glass);border-radius:16px;border:1px solid var(--border)}
-.modal-kpi .kpi-val{font-size:1.5rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.modal-kpi .kpi-label{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:0.2rem}
-.modal-content{padding:2rem 3rem 3rem}
-.modal-section{margin-bottom:2.5rem}
-.modal-section h3{font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.modal-section h3{font-size:1.1rem;margin-bottom:0.8rem}
+.modal-kpi-row{grid-template-columns:1fr 1fr}
 .modal-section h3 i{color:var(--accent);font-size:1rem}
-.chart-container{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem}
-.chart-container canvas{max-height:350px}.chart-container{position:relative}
-.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.insight-card{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:1.2rem;margin-bottom:1rem;display:flex;gap:1rem;align-items:flex-start}
+.modal-kpi-row{padding:1rem;gap:0.8rem}
+.project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal-content{padding:2rem 3rem 3rem}
+.modal-section h3{font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
+.modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}
+.modal-kpi-item .kpi-value{font-size:1.2rem}
+.kpi-label{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:0.2rem}
+.modal-header h2{font-size:1.5rem}
+.project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal{background:var(--bg2)}
+.modal-header,.modal-content{padding-left:1.5rem;padding-right:1.5rem}
 .insight-icon{width:40px;height:40px;min-width:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.modal-kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;padding:2rem 3rem;background:var(--bg)}
+.kpi-value{font-size:1.2rem}
 .insight-card h4{font-size:0.95rem;font-weight:700;margin-bottom:0.3rem}
+.project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal{background:var(--bg2);border:1px solid var(--border);border-radius:24px;width:100%;max-width:1000px;margin:2rem auto;position:relative;transform:translateY(30px);transition:transform 0.4s;overflow:hidden}
+.modal-section{margin-bottom:1.5rem}
+.modal-header h2{font-size:1.2rem}
 .insight-card p{font-size:0.85rem;color:var(--text2);line-height:1.6}
+.modal-kpi-row{background:var(--bg3)}
+.modal-kpi .kpi-val{font-size:1.5rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* March 7 Modal Media Queries */
 @media(max-width:768px){
+  /* Mobile Touch Target Optimization */
+  a, button, .btn, .nav-links a, .mobile-menu a, .filter-btn, .cert-btn, .modal-close{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+  .social-links a{min-height:44px;min-width:44px}
+  /* Minimum font size for readability */
+  body{font-size:max(14px, 1rem)}
+  p, li, span, a{font-size:max(13px, inherit)}
+  .about-text p{font-size:max(14px, 0.95rem)}
   /* Better modal spacing on mobile */
-  .project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}  .modal-kpi-row{padding:1rem;gap:0.8rem}  .modal-kpi-item .kpi-value{font-size:1.2rem}  .chart-container{padding:0.75rem;margin-bottom:0.75rem;border-radius:10px}  .chart-container canvas{max-height:250px}  .modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}  .project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}  .project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}  .chart-container canvas[id*="jar-top"],
+  .project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .modal-header{padding:1.2rem 1rem}
+  .modal-content{padding:1rem}
+  .modal-header h2{font-size:1.3rem}
+  .modal-kpi-row{padding:1rem;gap:0.8rem}
+  .modal-kpi-item .kpi-value{font-size:1.2rem}
+  /* Better hero stats on small screens */
+  .hero-stat{padding:0.8rem}
+  /* Smooth scrolling for mobile */
+  html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-links{display:none}
+  .hero h1{font-size:2.2rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:1rem}
+  section{padding:3rem 1.2rem}
+  .section-title{font-size:1.8rem}
+  .about-grid{grid-template-columns:1fr}
+  .about-avatar{max-width:200px;margin:0 auto}
+  .about-details{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .chart-row{grid-template-columns:1fr}.chart-container{padding:0.75rem;margin-bottom:0.75rem;border-radius:10px}.chart-container canvas{max-height:250px}.modal-section{margin-bottom:1.5rem}
+  .modal-header,.modal-content{padding-left:1.5rem;padding-right:1.5rem}
+  .modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}
+  .project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .modal-header h2{font-size:1.5rem}
+  .skills-grid{grid-template-columns:1fr}
+  .process-flow{flex-direction:column;align-items:center}
+  .process-step{min-width:auto;width:100%}
+  .process-arrow{transform:rotate(90deg);padding:0}
+
+.chart-container canvas[id*="jar-top"],
 .chart-container canvas[id*="kobelco-parts"],
 .chart-container canvas[id*="kobelco-topqty"]{height:280px!important}
 }
 @media(max-width:480px){
   /* Small phone optimizations */
-  .project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}  .chart-container{padding:0.5rem;margin-bottom:0.5rem;border-radius:8px}  .chart-container canvas{max-height:200px}  .project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}  .modal-kpi-row{grid-template-columns:1fr 1fr}  .chart-container canvas[id*="jar-top"],
+  .project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}.chart-container{padding:0.5rem;margin-bottom:0.5rem;border-radius:8px}.chart-container canvas{max-height:200px}.modal-section{margin-bottom:1rem}.modal-section h3{font-size:1.1rem;margin-bottom:0.8rem}
+  .project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .modal-header h2{font-size:1.2rem}
+  .hero-stats{gap:0.8rem}
+  .hero-stat .stat-number{font-size:1.2rem}
+  .hero-stat .stat-label{font-size:0.7rem}
+  .section-title{font-size:1.5rem}
+  .section-subtitle{font-size:0.85rem}
+  /* Prevent text overflow */
+  .project-card h3{font-size:1rem;word-break:break-word}
+  .cert-card h4{font-size:0.9rem;word-break:break-word}
+
+  .hero h1{font-size:1.8rem}
+  .hero-stat .stat-number{font-size:1.3rem}
+  .modal-kpi-row{grid-template-columns:1fr 1fr}
+
+.chart-container canvas[id*="jar-top"],
 .chart-container canvas[id*="kobelco-parts"],
 .chart-container canvas[id*="kobelco-topqty"]{height:240px!important}
-}
-
-/* Fix project detail modal full-width on mobile */
-@media(max-width:768px){
-  .project-detail{width:100vw!important;left:0!important;right:0!important;padding:15px!important;box-sizing:border-box!important}
-  .project-detail .detail-content{width:100%!important;max-width:100%!important;padding:10px!important}
-  .detail-header h2{font-size:1.4rem!important}
-  .kpi-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
-  .chart-container canvas{max-height:250px!important}
-}
-@media(max-width:480px){
-  .project-detail{padding:10px!important}
-  .kpi-grid{grid-template-columns:1fr!important}
-  .chart-container canvas{max-height:200px!important}
 }
 </style>
 <script type="application/ld+json">
@@ -467,7 +544,7 @@ section{position:relative;z-index:1}
   "knowsAbout": ["Data Analysis", "SQL", "Python", "Tableau", "Power BI", "Supply Chain Analytics", "Inventory Management"]
 }
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -653,7 +730,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Full exploratory data analysis on restaurant transactions: best and worst selling menu items, peak hours, payment methods, sales channels, daily trends, and customer behavior analysis.</p>
         <div class="project-tags"><span>Python</span><span>Excel</span><span>EDA</span><span>Data Visualization</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openDetail('restaurant')"><i class="fas fa-eye"></i> View Details</button>
+          <button class="btn btn-primary btn-sm" onclick="openProject('jar')"><i class="fas fa-eye"></i> View Details</button>
           <!-- Create these repositories on GitHub and update links -->
           <a href="https://github.com/anggitdjoko/restaurant-sales-analytics" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
           <!-- Publish dashboards to Tableau Public and update these links -->
@@ -675,7 +752,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Year-over-Year growth analysis revealing a +19.9% increase from 2023. Analyzed the impact of government policy on Household vs SME segmentation, profitability trends, and adaptive distribution strategies.</p>
         <div class="project-tags"><span>Excel</span><span>SQL</span><span>Tableau</span><span>YoY Analysis</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openDetail('lpg2024')"><i class="fas fa-eye"></i> View Details</button>
+          <button class="btn btn-primary btn-sm" onclick="openProject('lpg2024')"><i class="fas fa-eye"></i> View Details</button>
           <!-- Create these repositories on GitHub and update links -->
           <a href="https://github.com/anggitdjoko/lpg-distribution-2024" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
           <!-- Publish dashboards to Tableau Public and update these links -->
@@ -697,7 +774,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Comprehensive annual demand analysis, customer segmentation (Household vs SME), and profit optimization strategies for subsidized LPG distribution.</p>
         <div class="project-tags"><span>Excel</span><span>SQL</span><span>Tableau</span><span>Demand Analysis</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openDetail('lpg2023')"><i class="fas fa-eye"></i> View Details</button>
+          <button class="btn btn-primary btn-sm" onclick="openProject('lpg2023')"><i class="fas fa-eye"></i> View Details</button>
           <!-- Create these repositories on GitHub and update links -->
           <a href="https://github.com/anggitdjoko/lpg-distribution-2023" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
           <!-- Publish dashboards to Tableau Public and update these links -->
@@ -719,7 +796,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion. Evaluated sales trends, customer concentration, fast-moving items, material group performance, and inventory optimization for KOBELCO heavy machinery.</p>
         <div class="project-tags"><span>Excel</span><span>Tableau</span><span>WMS</span><span>Inventory Analysis</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openDetail('kobelco')"><i class="fas fa-eye"></i> View Details</button>
+          <button class="btn btn-primary btn-sm" onclick="openProject('kobelco')"><i class="fas fa-eye"></i> View Details</button>
           <!-- Create these repositories on GitHub and update links -->
           <a href="https://github.com/anggitdjoko/spare-parts-analytics" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
           <!-- Publish dashboards to Tableau Public and update these links -->
@@ -734,16 +811,16 @@ section{position:relative;z-index:1}
 <!-- ===== PROJECT DETAIL OVERLAYS ===== -->
 
 <!-- LPG 2023 Detail -->
-
+<!-- removed detail-lpg2023 -->
 
 <!-- LPG 2024 Detail -->
-
+<!-- removed detail-lpg2024 -->
 
 <!-- KOBELCO Detail -->
-
+<!-- removed detail-kobelco -->
 
 <!-- Restaurant Detail -->
-
+<!-- removed detail-restaurant -->
 
 <!-- ===== SQL SHOWCASE ===== -->
 <section id="sql-showcase">
@@ -1414,96 +1491,133 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
 <!-- ===== FOOTER ===== -->
 
 
-<!-- ===== PROJECT DETAIL MODALS (March 7 version with charts) ===== -->
-<div class="project-modal-overlay" id="detail-restaurant">
+<div class="project-modal-overlay" id="modal-lpg2023">
   <div class="project-modal">
-    <button class="modal-close" onclick="closeDetail('restaurant')"><i class="fas fa-times"></i></button>
+    <button class="modal-close" onclick="closeProject('lpg2023')"><i class="fas fa-times"></i></button>
     <div class="modal-header">
-      <h2>🍜 Restaurant Sales & Menu Analytics</h2>
-      <div class="modal-company">PT JAR Andalan Rasa — Pontianak</div>
-      <div class="modal-period"><i class="fas fa-calendar"></i> October 2025 (Test Assessment)</div>
-      <p class="modal-desc">Exploratory Data Analysis menyeluruh terhadap 7,437 record transaksi restoran Jepang. Menganalisis performa menu, peak hours, payment method, sales channel, daily trend, dan customer behavior.</p>
+      <h2>📊 LPG 3Kg Distribution Analysis 2023</h2>
+      <div class="modal-company">Pangkalan Gas Joeherman — Pontianak</div>
+      <div class="modal-period"><i class="fas fa-calendar"></i> August 2023 – January 2025</div>
+      <p class="modal-desc">Menganalisis 31.459 transaksi distribusi LPG 3kg bersubsidi sepanjang tahun 2023. Fokus pada demand analysis, segmentasi pelanggan (Rumah Tangga vs UMKM), tren profitabilitas bulanan, dan strategi distribusi.</p>
     </div>
-    <div style="display:flex;gap:0.5rem;padding:0 2rem 1rem;flex-wrap:wrap">
-    <a href="https://github.com/anggitdjoko/restaurant-sales-analytics" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-    <a href="https://public.tableau.com/app/profile/anggitdjoko/viz/RestaurantSalesAnalytics" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-chart-bar"></i> Live Dashboard</a>
-</div>
-<div class="modal-kpi-row">
-      <div class="modal-kpi"><div class="kpi-val">7,437</div><div class="kpi-label">Records</div></div>
-      <div class="modal-kpi"><div class="kpi-val">Rp 164.8M</div><div class="kpi-label">Net Sales</div></div>
-      <div class="modal-kpi"><div class="kpi-val">2,254</div><div class="kpi-label">Transactions</div></div>
-      <div class="modal-kpi"><div class="kpi-val">Rp 73.1K</div><div class="kpi-label">Avg Order Value</div></div>
+    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/lpg-distribution-2023" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
+    <div class="modal-kpi-row">
+      <div class="modal-kpi"><div class="kpi-val">31,459</div><div class="kpi-label">Total Transactions</div></div>
+      <div class="modal-kpi"><div class="kpi-val">Rp 94.3M</div><div class="kpi-label">Annual Profit</div></div>
+      <div class="modal-kpi"><div class="kpi-val">82.1%</div><div class="kpi-label">Household Share</div></div>
+      <div class="modal-kpi"><div class="kpi-val">Rp 7.86M</div><div class="kpi-label">Avg Monthly Profit</div></div>
     </div>
     <div class="modal-content">
       <div class="modal-section">
-        <h3><i class="fas fa-trophy"></i> Best & Worst Sellers</h3>
-        <div class="chart-container"><canvas id="chart-jar-top"></canvas></div>
+        <h3><i class="fas fa-users"></i> Customer Segmentation</h3>
+        <div class="chart-container"><canvas id="chart-lpg2023-seg"></canvas></div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">🏆</div>
-          <div><h4>Hero Product: Kare Ramen</h4><p>Kare Ramen mendominasi dengan Rp 23.7M (893 qty). Gap sangat besar dengan #2 SUMO Spicy Ramen (Rp 12M). Ketergantungan tinggi pada satu menu — perlu diversifikasi.</p></div>
+          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">🏠</div>
+          <div><h4>Dominasi Rumah Tangga</h4><p>Mayoritas transaksi (82.1% = 25,825 transaksi) berasal dari pelanggan rumah tangga, menjadikan segmen ini kontributor utama. UMKM menyumbang 17.9% (5,634 transaksi).</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-clock"></i> Peak Hours Analysis</h3>
-        <div class="chart-container"><canvas id="chart-jar-hourly"></canvas></div>
+        <h3><i class="fas fa-money-bill-trend-up"></i> Profit Bulanan</h3>
+        <div class="chart-container"><canvas id="chart-lpg2023-profit"></canvas></div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">⏰</div>
-          <div><h4>Golden Hours: 17:00 – 19:00</h4><p>Tiga jam ini menyumbang ~43% total revenue (Rp 70.4M). Jam 18:00 adalah puncak tertinggi (Rp 27.2M). Staff optimization dan inventory harus difokuskan di periode ini.</p></div>
+          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">📈</div>
+          <div><h4>Profit Tertinggi: September</h4><p>Profit tertinggi dicapai bulan September dengan Rp 10.38M dari 3,460 transaksi. Profit terendah di Desember hanya Rp 2.79M (932 transaksi).</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-layer-group"></i> Category Performance</h3>
-        <div class="chart-row">
-          <div class="chart-container"><canvas id="chart-jar-category"></canvas></div>
-          <div class="chart-container"><canvas id="chart-jar-channel"></canvas></div>
+        <h3><i class="fas fa-arrow-trend-up"></i> Tren Pertumbuhan</h3>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">📊</div>
+          <div><h4>Fluktuasi Rumah Tangga</h4><p>Kenaikan +21.09% (Jan–Mar), penurunan -24.79% (Mar–Sep), kemudian lonjakan +38.17% sebelum merosot -78.56% di akhir tahun.</p></div>
         </div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">🍜</div>
-          <div><h4>Ramen Dominates Revenue</h4><p>Ramen: Rp 55.2M (33.5%), Rice Bowl: Rp 38.7M (23.5%), Sushi: Rp 30.5M (18.5%). Dine In mendominasi 92.5% — online channels (GoFood/GrabFood) masih underutilized.</p></div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <h3><i class="fas fa-credit-card"></i> Payment & Daily Trend</h3>
-        <div class="chart-row">
-          <div class="chart-container"><canvas id="chart-jar-payment"></canvas></div>
-          <div class="chart-container"><canvas id="chart-jar-daily"></canvas></div>
-        </div>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">💳</div>
-          <div><h4>Cash vs Digital Hampir Seimbang</h4><p>Cash 48.2% vs BCA QR 45.6%. Meskipun offline, hampir separuh pelanggan sudah menggunakan metode non-tunai. Saturday adalah hari puncak (Rp 31.6M).</p></div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <h3><i class="fas fa-lightbulb"></i> Strategic Recommendations</h3>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">🎯</div>
-          <div><h4>Diversifikasi Menu</h4><p>Kurangi ketergantungan pada Kare Ramen. Promosikan menu tier-2 (SUMO Spicy Ramen, Rice Bowls) sebagai alternatif.</p></div>
-        </div>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">📱</div>
-          <div><h4>Maximize Online Channels</h4><p>GoFood+GrabFood hanya 2.8% revenue — ada potensi besar yang belum tergarap. Implementasi promo delivery di jam non-peak.</p></div>
-        </div>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">⚡</div>
-          <div><h4>Peak Hour Optimization</h4><p>Tambah staff di golden hours (17-19). Siapkan pre-prep ingredients untuk menu populer agar mengurangi waiting time.</p></div>
+          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">🚀</div>
+          <div><h4>UMKM Growth Explosion</h4><p>Sektor UMKM menunjukkan pertumbuhan luar biasa +504.90% dari Juli hingga September. Momentum ini menunjukkan potensi besar untuk strategi targeting UMKM.</p></div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="project-modal-overlay" id="detail-kobelco">
+
+<div class="project-modal-overlay" id="modal-lpg2024">
   <div class="project-modal">
-    <button class="modal-close" onclick="closeDetail('kobelco')"><i class="fas fa-times"></i></button>
+    <button class="modal-close" onclick="closeProject('lpg2024')"><i class="fas fa-times"></i></button>
+    <div class="modal-header">
+      <h2>📈 LPG 3Kg YoY Growth Analysis 2024</h2>
+      <div class="modal-company">Pangkalan Gas Joeherman — Pontianak</div>
+      <div class="modal-period"><i class="fas fa-calendar"></i> Januari – Desember 2024 (Full Year)</div>
+      <p class="modal-desc">Analisis Year-over-Year menunjukkan pertumbuhan signifikan +19.9% dari 31,459 transaksi (2023) menjadi 37,723 transaksi (2024). Fokus pada dampak kebijakan pemerintah yang memprioritaskan rumah tangga dalam distribusi LPG 3 kg bersubsidi, pergeseran segmentasi pelanggan, dan tren profitabilitas.</p>
+    </div>
+    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/lpg-distribution-2024" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
+    <div class="modal-kpi-row">
+      <div class="modal-kpi"><div class="kpi-val">37,723</div><div class="kpi-label">Total Transaksi 2024</div></div>
+      <div class="modal-kpi"><div class="kpi-val">+19.9%</div><div class="kpi-label">YoY Growth</div></div>
+      <div class="modal-kpi"><div class="kpi-val">83.4%</div><div class="kpi-label">Rumah Tangga</div></div>
+      <div class="modal-kpi"><div class="kpi-val">Rp 9.43M</div><div class="kpi-label">Avg Monthly Profit</div></div>
+    </div>
+    <div class="modal-content">
+      <div class="modal-section">
+        <h3><i class="fas fa-chart-bar"></i> Perbandingan YoY: 2023 vs 2024</h3>
+        <div class="chart-container"><canvas id="chart-lpg2024-yoy"></canvas></div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">📊</div>
+          <div><h4>Pertumbuhan +19.9% Year-over-Year</h4><p>Total transaksi meningkat dari 31,459 (2023) menjadi 37,723 (2024), pertambahan 6,264 transaksi. Profit tahunan naik dari Rp 94.4M menjadi Rp 113.2M (+Rp 18.8M). Rata-rata profit bulanan meningkat dari Rp 7.86M ke Rp 9.43M.</p></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3><i class="fas fa-users"></i> Segmentasi Pelanggan 2024</h3>
+        <div class="chart-container"><canvas id="chart-lpg2024-seg"></canvas></div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">🏠</div>
+          <div><h4>Rumah Tangga Semakin Dominan</h4><p>Rumah Tangga: 83.4% (31,455 txn) — naik dari 82.1% di 2023. UMKM: 16.6% (6,265 txn) — turun dari 17.9% secara persentase, namun secara angka absolut naik dari 5,634 ke 6,265 (+11.2%). Kebijakan pemerintah yang memprioritaskan rumah tangga mendorong peningkatan share RT.</p></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3><i class="fas fa-money-bill-trend-up"></i> Profit Bulanan 2024</h3>
+        <div class="chart-container"><canvas id="chart-lpg2024-profit"></canvas></div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">💰</div>
+          <div><h4>Profit Tertinggi: September Rp 14.83M</h4><p>September kembali menjadi bulan tertinggi dengan 4,942 transaksi (Rp 14.83M) — naik dari 3,460 di 2023 (+42.8%). Profit terendah tetap Desember: 1,278 transaksi (Rp 3.83M). Total profit 2024: Rp 113.17M dengan profit per transaksi Rp 3,000.</p></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3><i class="fas fa-scale-balanced"></i> Pergeseran Segmentasi RT vs UMKM</h3>
+        <div class="chart-container"><canvas id="chart-lpg2024-shift"></canvas></div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">📋</div>
+          <div><h4>Dampak Kebijakan Pemerintah</h4><p>Kebijakan pemerintah yang memprioritaskan rumah tangga dalam mendapatkan LPG 3 kg bersubsidi menyebabkan share RT naik dari 82.1% → 83.4%, sementara UMKM turun dari 17.9% → 16.6%. Namun, secara absolut UMKM tetap bertumbuh (+631 transaksi), menunjukkan pasar yang membesar secara keseluruhan.</p></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3><i class="fas fa-lightbulb"></i> Key Recommendations</h3>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">📈</div>
+          <div><h4>Strategi Adaptif Kebijakan Pemerintah</h4><p>Dengan kebijakan yang semakin memprioritaskan rumah tangga, perlu strategi distribusi yang adaptif untuk menjaga keseimbangan layanan antara RT dan UMKM.</p></div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">🚀</div>
+          <div><h4>UMKM Tetap Bertumbuh — Peluang Besar</h4><p>Meski share menurun, angka absolut UMKM naik +11.2%. Ini menunjukkan potensi pertumbuhan yang bisa dioptimalkan dengan program khusus UMKM.</p></div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">🎯</div>
+          <div><h4>Antisipasi Pola Musiman</h4><p>September konsisten sebagai bulan peak (2023: 3,460, 2024: 4,942). Desember konsisten terendah (2023: 932, 2024: 1,278). Perlu buffer stock menjelang Q3 dan strategi demand smoothing di Q4.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="project-modal-overlay" id="modal-kobelco">
+  <div class="project-modal">
+    <button class="modal-close" onclick="closeProject('kobelco')"><i class="fas fa-times"></i></button>
     <div class="modal-header">
       <h2>🏭 Spare Parts Sales & Inventory Analytics</h2>
       <div class="modal-company">PT DKCMI (KOBELCO) — Pontianak</div>
       <div class="modal-period"><i class="fas fa-calendar"></i> January – September 2023</div>
       <p class="modal-desc">Menganalisis 7,153 transaksi penjualan spare part alat berat KOBELCO senilai Rp 17.65 Miliar untuk 2 customer utama. Evaluasi tren penjualan bulanan, konsentrasi pelanggan, fast-moving items, dan 13 material group. Berkontribusi dalam penurunan risiko stock-out hingga 20%.</p>
     </div>
-    <div style="display:flex;gap:0.5rem;padding:0 2rem 1rem;flex-wrap:wrap">
-    <a href="https://github.com/anggitdjoko/spare-parts-analytics" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-</div>
-<div class="modal-kpi-row">
+    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/spare-parts-analytics" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
+    <div class="modal-kpi-row">
       <div class="modal-kpi"><div class="kpi-val">7,153</div><div class="kpi-label">Transactions</div></div>
       <div class="modal-kpi"><div class="kpi-val">Rp 17.6B</div><div class="kpi-label">Total Sales</div></div>
       <div class="modal-kpi"><div class="kpi-val">13,181</div><div class="kpi-label">Total Qty Sold</div></div>
@@ -1567,119 +1681,75 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
     </div>
   </div>
 </div>
-<div class="project-modal-overlay" id="detail-lpg2024">
+
+<div class="project-modal-overlay" id="modal-jar">
   <div class="project-modal">
-    <button class="modal-close" onclick="closeDetail('lpg2024')"><i class="fas fa-times"></i></button>
+    <button class="modal-close" onclick="closeProject('jar')"><i class="fas fa-times"></i></button>
     <div class="modal-header">
-      <h2>📈 LPG 3Kg YoY Growth Analysis 2024</h2>
-      <div class="modal-company">Pangkalan Gas Joeherman — Pontianak</div>
-      <div class="modal-period"><i class="fas fa-calendar"></i> Januari – Desember 2024 (Full Year)</div>
-      <p class="modal-desc">Analisis Year-over-Year menunjukkan pertumbuhan signifikan +19.9% dari 31,459 transaksi (2023) menjadi 37,723 transaksi (2024). Fokus pada dampak kebijakan pemerintah yang memprioritaskan rumah tangga dalam distribusi LPG 3 kg bersubsidi, pergeseran segmentasi pelanggan, dan tren profitabilitas.</p>
+      <h2>🍜 Restaurant Sales & Menu Analytics</h2>
+      <div class="modal-company">PT JAR Andalan Rasa — Pontianak</div>
+      <div class="modal-period"><i class="fas fa-calendar"></i> October 2025 (Test Assessment)</div>
+      <p class="modal-desc">Exploratory Data Analysis menyeluruh terhadap 7,437 record transaksi restoran Jepang. Menganalisis performa menu, peak hours, payment method, sales channel, daily trend, dan customer behavior.</p>
     </div>
-    <div style="display:flex;gap:0.5rem;padding:0 2rem 1rem;flex-wrap:wrap">
-    <a href="https://github.com/anggitdjoko/lpg-distribution-2024" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-</div>
-<div class="modal-kpi-row">
-      <div class="modal-kpi"><div class="kpi-val">37,723</div><div class="kpi-label">Total Transaksi 2024</div></div>
-      <div class="modal-kpi"><div class="kpi-val">+19.9%</div><div class="kpi-label">YoY Growth</div></div>
-      <div class="modal-kpi"><div class="kpi-val">83.4%</div><div class="kpi-label">Rumah Tangga</div></div>
-      <div class="modal-kpi"><div class="kpi-val">Rp 9.43M</div><div class="kpi-label">Avg Monthly Profit</div></div>
+    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/restaurant-sales-analytics" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
+    <div class="modal-kpi-row">
+      <div class="modal-kpi"><div class="kpi-val">7,437</div><div class="kpi-label">Records</div></div>
+      <div class="modal-kpi"><div class="kpi-val">Rp 164.8M</div><div class="kpi-label">Net Sales</div></div>
+      <div class="modal-kpi"><div class="kpi-val">2,254</div><div class="kpi-label">Transactions</div></div>
+      <div class="modal-kpi"><div class="kpi-val">Rp 73.1K</div><div class="kpi-label">Avg Order Value</div></div>
     </div>
     <div class="modal-content">
       <div class="modal-section">
-        <h3><i class="fas fa-chart-bar"></i> Perbandingan YoY: 2023 vs 2024</h3>
-        <div class="chart-container"><canvas id="chart-lpg2024-yoy"></canvas></div>
+        <h3><i class="fas fa-trophy"></i> Best & Worst Sellers</h3>
+        <div class="chart-container"><canvas id="chart-jar-top"></canvas></div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">📊</div>
-          <div><h4>Pertumbuhan +19.9% Year-over-Year</h4><p>Total transaksi meningkat dari 31,459 (2023) menjadi 37,723 (2024), pertambahan 6,264 transaksi. Profit tahunan naik dari Rp 94.4M menjadi Rp 113.2M (+Rp 18.8M). Rata-rata profit bulanan meningkat dari Rp 7.86M ke Rp 9.43M.</p></div>
+          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">🏆</div>
+          <div><h4>Hero Product: Kare Ramen</h4><p>Kare Ramen mendominasi dengan Rp 23.7M (893 qty). Gap sangat besar dengan #2 SUMO Spicy Ramen (Rp 12M). Ketergantungan tinggi pada satu menu — perlu diversifikasi.</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-users"></i> Segmentasi Pelanggan 2024</h3>
-        <div class="chart-container"><canvas id="chart-lpg2024-seg"></canvas></div>
+        <h3><i class="fas fa-clock"></i> Peak Hours Analysis</h3>
+        <div class="chart-container"><canvas id="chart-jar-hourly"></canvas></div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">🏠</div>
-          <div><h4>Rumah Tangga Semakin Dominan</h4><p>Rumah Tangga: 83.4% (31,455 txn) — naik dari 82.1% di 2023. UMKM: 16.6% (6,265 txn) — turun dari 17.9% secara persentase, namun secara angka absolut naik dari 5,634 ke 6,265 (+11.2%). Kebijakan pemerintah yang memprioritaskan rumah tangga mendorong peningkatan share RT.</p></div>
+          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">⏰</div>
+          <div><h4>Golden Hours: 17:00 – 19:00</h4><p>Tiga jam ini menyumbang ~43% total revenue (Rp 70.4M). Jam 18:00 adalah puncak tertinggi (Rp 27.2M). Staff optimization dan inventory harus difokuskan di periode ini.</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-money-bill-trend-up"></i> Profit Bulanan 2024</h3>
-        <div class="chart-container"><canvas id="chart-lpg2024-profit"></canvas></div>
+        <h3><i class="fas fa-layer-group"></i> Category Performance</h3>
+        <div class="chart-row">
+          <div class="chart-container"><canvas id="chart-jar-category"></canvas></div>
+          <div class="chart-container"><canvas id="chart-jar-channel"></canvas></div>
+        </div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">💰</div>
-          <div><h4>Profit Tertinggi: September Rp 14.83M</h4><p>September kembali menjadi bulan tertinggi dengan 4,942 transaksi (Rp 14.83M) — naik dari 3,460 di 2023 (+42.8%). Profit terendah tetap Desember: 1,278 transaksi (Rp 3.83M). Total profit 2024: Rp 113.17M dengan profit per transaksi Rp 3,000.</p></div>
+          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">🍜</div>
+          <div><h4>Ramen Dominates Revenue</h4><p>Ramen: Rp 55.2M (33.5%), Rice Bowl: Rp 38.7M (23.5%), Sushi: Rp 30.5M (18.5%). Dine In mendominasi 92.5% — online channels (GoFood/GrabFood) masih underutilized.</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-scale-balanced"></i> Pergeseran Segmentasi RT vs UMKM</h3>
-        <div class="chart-container"><canvas id="chart-lpg2024-shift"></canvas></div>
+        <h3><i class="fas fa-credit-card"></i> Payment & Daily Trend</h3>
+        <div class="chart-row">
+          <div class="chart-container"><canvas id="chart-jar-payment"></canvas></div>
+          <div class="chart-container"><canvas id="chart-jar-daily"></canvas></div>
+        </div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">📋</div>
-          <div><h4>Dampak Kebijakan Pemerintah</h4><p>Kebijakan pemerintah yang memprioritaskan rumah tangga dalam mendapatkan LPG 3 kg bersubsidi menyebabkan share RT naik dari 82.1% → 83.4%, sementara UMKM turun dari 17.9% → 16.6%. Namun, secara absolut UMKM tetap bertumbuh (+631 transaksi), menunjukkan pasar yang membesar secara keseluruhan.</p></div>
+          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">💳</div>
+          <div><h4>Cash vs Digital Hampir Seimbang</h4><p>Cash 48.2% vs BCA QR 45.6%. Meskipun offline, hampir separuh pelanggan sudah menggunakan metode non-tunai. Saturday adalah hari puncak (Rp 31.6M).</p></div>
         </div>
       </div>
       <div class="modal-section">
-        <h3><i class="fas fa-lightbulb"></i> Key Recommendations</h3>
+        <h3><i class="fas fa-lightbulb"></i> Strategic Recommendations</h3>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">📈</div>
-          <div><h4>Strategi Adaptif Kebijakan Pemerintah</h4><p>Dengan kebijakan yang semakin memprioritaskan rumah tangga, perlu strategi distribusi yang adaptif untuk menjaga keseimbangan layanan antara RT dan UMKM.</p></div>
+          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">🎯</div>
+          <div><h4>Diversifikasi Menu</h4><p>Kurangi ketergantungan pada Kare Ramen. Promosikan menu tier-2 (SUMO Spicy Ramen, Rice Bowls) sebagai alternatif.</p></div>
         </div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">🚀</div>
-          <div><h4>UMKM Tetap Bertumbuh — Peluang Besar</h4><p>Meski share menurun, angka absolut UMKM naik +11.2%. Ini menunjukkan potensi pertumbuhan yang bisa dioptimalkan dengan program khusus UMKM.</p></div>
+          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">📱</div>
+          <div><h4>Maximize Online Channels</h4><p>GoFood+GrabFood hanya 2.8% revenue — ada potensi besar yang belum tergarap. Implementasi promo delivery di jam non-peak.</p></div>
         </div>
         <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">🎯</div>
-          <div><h4>Antisipasi Pola Musiman</h4><p>September konsisten sebagai bulan peak (2023: 3,460, 2024: 4,942). Desember konsisten terendah (2023: 932, 2024: 1,278). Perlu buffer stock menjelang Q3 dan strategi demand smoothing di Q4.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="project-modal-overlay" id="detail-lpg2023">
-  <div class="project-modal">
-    <button class="modal-close" onclick="closeDetail('lpg2023')"><i class="fas fa-times"></i></button>
-    <div class="modal-header">
-      <h2>📊 LPG 3Kg Distribution Analysis 2023</h2>
-      <div class="modal-company">Pangkalan Gas Joeherman — Pontianak</div>
-      <div class="modal-period"><i class="fas fa-calendar"></i> August 2023 – January 2025</div>
-      <p class="modal-desc">Menganalisis 31.459 transaksi distribusi LPG 3kg bersubsidi sepanjang tahun 2023. Fokus pada demand analysis, segmentasi pelanggan (Rumah Tangga vs UMKM), tren profitabilitas bulanan, dan strategi distribusi.</p>
-    </div>
-    <div style="display:flex;gap:0.5rem;padding:0 2rem 1rem;flex-wrap:wrap">
-    <a href="https://github.com/anggitdjoko/lpg-distribution-2023" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-</div>
-<div class="modal-kpi-row">
-      <div class="modal-kpi"><div class="kpi-val">31,459</div><div class="kpi-label">Total Transactions</div></div>
-      <div class="modal-kpi"><div class="kpi-val">Rp 94.3M</div><div class="kpi-label">Annual Profit</div></div>
-      <div class="modal-kpi"><div class="kpi-val">82.1%</div><div class="kpi-label">Household Share</div></div>
-      <div class="modal-kpi"><div class="kpi-val">Rp 7.86M</div><div class="kpi-label">Avg Monthly Profit</div></div>
-    </div>
-    <div class="modal-content">
-      <div class="modal-section">
-        <h3><i class="fas fa-users"></i> Customer Segmentation</h3>
-        <div class="chart-container"><canvas id="chart-lpg2023-seg"></canvas></div>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(108,99,255,0.15);color:var(--accent)">🏠</div>
-          <div><h4>Dominasi Rumah Tangga</h4><p>Mayoritas transaksi (82.1% = 25,825 transaksi) berasal dari pelanggan rumah tangga, menjadikan segmen ini kontributor utama. UMKM menyumbang 17.9% (5,634 transaksi).</p></div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <h3><i class="fas fa-money-bill-trend-up"></i> Profit Bulanan</h3>
-        <div class="chart-container"><canvas id="chart-lpg2023-profit"></canvas></div>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(0,212,170,0.15);color:var(--accent2)">📈</div>
-          <div><h4>Profit Tertinggi: September</h4><p>Profit tertinggi dicapai bulan September dengan Rp 10.38M dari 3,460 transaksi. Profit terendah di Desember hanya Rp 2.79M (932 transaksi).</p></div>
-        </div>
-      </div>
-      <div class="modal-section">
-        <h3><i class="fas fa-arrow-trend-up"></i> Tren Pertumbuhan</h3>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">📊</div>
-          <div><h4>Fluktuasi Rumah Tangga</h4><p>Kenaikan +21.09% (Jan–Mar), penurunan -24.79% (Mar–Sep), kemudian lonjakan +38.17% sebelum merosot -78.56% di akhir tahun.</p></div>
-        </div>
-        <div class="insight-card">
-          <div class="insight-icon" style="background:rgba(255,217,61,0.15);color:var(--accent4)">🚀</div>
-          <div><h4>UMKM Growth Explosion</h4><p>Sektor UMKM menunjukkan pertumbuhan luar biasa +504.90% dari Juli hingga September. Momentum ini menunjukkan potensi besar untuk strategi targeting UMKM.</p></div>
+          <div class="insight-icon" style="background:rgba(255,107,107,0.15);color:var(--accent3)">⚡</div>
+          <div><h4>Peak Hour Optimization</h4><p>Tambah staff di golden hours (17-19). Siapkan pre-prep ingredients untuk menu populer agar mengurangi waiting time.</p></div>
         </div>
       </div>
     </div>
@@ -1794,7 +1864,13 @@ if (skillsGrid) {
 }
 
 // ===== PROJECT DETAIL OVERLAY =====
-/* old openDetail removed - using enhanced version */
+function openDetail(id) {
+  const overlay = document.getElementById('detail-' + id);
+  if (overlay) {
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
 
 function closeDetail(id) {
   const overlay = document.getElementById('detail-' + id);
@@ -1874,13 +1950,31 @@ document.querySelectorAll('a[href*="CV"]').forEach(link => {
     link.addEventListener('click', e => { e.preventDefault(); openCvModal(); });
   }
 });
+</script>
 
-// ===== PROJECT MODAL FUNCTIONS =====
-const chartsInitialized={};
 
-function openDetail(id){
-  const modal=document.getElementById('detail-'+id);
-  if(!modal) return;
+<!-- CV Modal -->
+<div class="cv-modal" id="cvModal">
+  <div class="cv-modal-overlay" onclick="closeCvModal()"></div>
+  <div class="cv-modal-content">
+    <div class="cv-modal-header">
+      <h3><i class="fas fa-file-pdf"></i> Curriculum Vitae</h3>
+      <div class="cv-modal-actions">
+        <a href="assets/AnggitDjokoWibowo-CV.pdf" download class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
+        <button class="cv-modal-close" onclick="closeCvModal()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="cv-modal-body">
+      <iframe src="assets/AnggitDjokoWibowo-CV.pdf" width="100%" height="100%"></iframe>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+function openProject(id){
+  const modal=document.getElementById('modal-'+id);
   modal.classList.add('open');
   document.body.style.overflow='hidden';
   document.body.style.position='fixed';
@@ -1889,16 +1983,17 @@ function openDetail(id){
   initProjectCharts(id);
 }
 
-function closeDetail(id){
+function closeProject(id){
   const scrollY=document.body.style.top;
-  const modal=document.getElementById('detail-'+id);
-  if(modal) modal.classList.remove('open');
+  document.getElementById('modal-'+id).classList.remove('open');
   document.body.style.overflow='';
   document.body.style.position='';
   document.body.style.width='';
   document.body.style.top='';
   window.scrollTo(0,parseInt(scrollY||'0')*-1);
 }
+
+function destroyChart(id){if(chartInstances[id]){chartInstances[id].destroy();delete chartInstances[id]}}
 
 function initProjectCharts(id){
   if(chartsInitialized[id]) return;
@@ -1907,10 +2002,9 @@ function initProjectCharts(id){
     if(id==='lpg2023') initLpg2023Charts();
     if(id==='lpg2024') initLpg2024Charts();
     if(id==='kobelco') initKobelcoCharts();
-    if(id==='restaurant') initJarCharts();
+    if(id==='jar') initJarCharts();
   },100);
 }
-
 
 function initLpg2023Charts(){
   chartInstances['lpg2023-seg']=new Chart(document.getElementById('chart-lpg2023-seg'),{
@@ -2060,26 +2154,6 @@ function initJarCharts(){
     options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Revenue by Day of Week',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
   });
 }
-
 </script>
-
-
-<!-- CV Modal -->
-<div class="cv-modal" id="cvModal">
-  <div class="cv-modal-overlay" onclick="closeCvModal()"></div>
-  <div class="cv-modal-content">
-    <div class="cv-modal-header">
-      <h3><i class="fas fa-file-pdf"></i> Curriculum Vitae</h3>
-      <div class="cv-modal-actions">
-        <a href="assets/AnggitDjokoWibowo-CV.pdf" download class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</a>
-        <button class="cv-modal-close" onclick="closeCvModal()"><i class="fas fa-times"></i></button>
-      </div>
-    </div>
-    <div class="cv-modal-body">
-      <iframe src="assets/AnggitDjokoWibowo-CV.pdf" width="100%" height="100%"></iframe>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
