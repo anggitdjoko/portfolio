@@ -483,6 +483,82 @@ section{position:relative;z-index:1}
 .chart-container canvas[id*="jar-top"],
 .chart-container canvas[id*="kobelco-parts"],
 .chart-container canvas[id*="kobelco-topqty"]{max-height:none!important;height:320px!important}
+
+
+/* === Mobile Layout Fix (from March 7 version) === */
+@media(hover:none) and (pointer:coarse){
+  .project-card:hover{transform:none}
+  .cert-card:hover{transform:none}
+  .btn:hover{transform:none}
+}
+
+@media(max-width:768px){
+  /* Touch Target Optimization */
+  a, button, .btn, .nav-links a, .filter-btn, .cert-btn, .modal-close{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+  .social-links a{min-height:44px;min-width:44px}
+  /* Font size readability */
+  body{font-size:max(14px, 1rem)}
+  p, li, span, a{font-size:max(13px, inherit)}
+  .about-text p{font-size:max(14px, 0.95rem)}
+  /* Hero centered on mobile */
+  .hero{justify-content:center}
+  .hero .container{text-align:center;max-width:900px}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .hero-buttons{flex-direction:column;align-items:center}
+  .hero h1{font-size:2.2rem}
+  /* Section spacing */
+  section{padding:3rem 1.2rem}
+  .section-title{font-size:1.8rem}
+  /* Grid fixes */
+  .about-grid{grid-template-columns:1fr}
+  .about-image-wrapper{max-width:200px;margin:0 auto}
+  .about-details{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .process-flow{flex-direction:column;align-items:center}
+  .process-step{min-width:auto;width:100%}
+  .process-arrow{transform:rotate(90deg);padding:0}
+  /* Chart fixes on mobile */
+  .chart-row{grid-template-columns:1fr}
+  .chart-container{padding:0.75rem;margin-bottom:0.75rem;border-radius:10px}
+  .chart-container canvas{max-height:250px}
+  .chart-container canvas[id*="jar-top"],
+  .chart-container canvas[id*="kobelco-parts"],
+  .chart-container canvas[id*="kobelco-topqty"]{height:280px!important}
+  /* Modal on mobile */
+  .project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .modal-header{padding:1.2rem 1rem}
+  .modal-content{padding:1rem}
+  .modal-header h2{font-size:1.5rem}
+  .modal-header,.modal-content{padding-left:1.5rem;padding-right:1.5rem}
+  .modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}
+  /* Smooth scrolling */
+  html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+}
+
+@media(max-width:480px){
+  .project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .chart-container{padding:0.5rem;margin-bottom:0.5rem;border-radius:8px}
+  .chart-container canvas{max-height:200px}
+  .modal-section{margin-bottom:1rem}
+  .modal-section h3{font-size:1.1rem;margin-bottom:0.8rem}
+  .project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .modal-header h2{font-size:1.2rem}
+  .hero-stats{gap:0.8rem}
+  .hero h1{font-size:1.8rem}
+  .stat-number{font-size:1.3rem}
+  .stat-label{font-size:0.7rem}
+  .section-title{font-size:1.5rem}
+  .section-subtitle{font-size:0.85rem}
+  .project-card h3{font-size:1rem;word-break:break-word}
+  .cert-card h4{font-size:0.9rem;word-break:break-word}
+  .modal-kpi-row{grid-template-columns:1fr 1fr}
+  .chart-container canvas[id*="jar-top"],
+  .chart-container canvas[id*="kobelco-parts"],
+  .chart-container canvas[id*="kobelco-topqty"]{height:240px!important}
+}
+
 </style>
 <script type="application/ld+json">
 {
