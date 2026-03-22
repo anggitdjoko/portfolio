@@ -84,7 +84,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
 /* ===== NAVBAR ===== */
 .navbar{position:fixed;top:0;left:0;width:100%;height:var(--nav-height);background:rgba(10,14,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid transparent;z-index:1000;transition:var(--transition)}
 .navbar.scrolled{border-bottom-color:var(--border);box-shadow:var(--shadow-md)}
-.navbar .container{display:flex;align-items:center;justify-content:space-between;height:100%}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;height:100%;position:relative}
 .nav-logo{font-size:1.25rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-links{display:flex;align-items:center;gap:8px}
 .nav-links a{padding:8px 16px;font-size:0.875rem;font-weight:500;color:var(--text-secondary);border-radius:8px;transition:var(--transition);position:relative}
@@ -93,8 +93,12 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
 .nav-social{display:flex;align-items:center;gap:12px;margin-left:16px;padding-left:16px;border-left:1px solid var(--border)}
 .nav-social a{color:var(--text-muted);font-size:1.1rem;transition:var(--transition)}
 .nav-social a:hover{color:var(--accent);transform:translateY(-2px)}
-.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.nav-toggle span{width:24px;height:2px;background:var(--text-primary);border-radius:1px;transition:var(--transition)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;border-radius:8px;transition:var(--transition);-webkit-tap-highlight-color:transparent}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.nav-toggle:hover span{background:var(--accent)}
+.nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-toggle.active span:nth-child(2){opacity:0;transform:translateX(-10px)}
+.nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
 /* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:var(--nav-height);position:relative;overflow:hidden}
@@ -305,8 +309,8 @@ h1,h2,h3,h4{font-weight:700;line-height:1.3}
   .detail-stats{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-  .nav-links{position:fixed;top:var(--nav-height);left:0;width:100%;background:var(--bg-secondary);border-bottom:1px solid var(--border);flex-direction:column;padding:20px;transform:translateY(-100%);opacity:0;visibility:hidden;transition:var(--transition)}
-  .nav-links.open{transform:translateY(0);opacity:1;visibility:visible}
+  .nav-links{position:absolute;top:100%;left:0;width:100%;background:var(--bg-secondary);border-bottom:1px solid var(--border);flex-direction:column;padding:20px;gap:4px;transform:translateY(-20px);opacity:0;visibility:hidden;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+  .nav-links.open{transform:translateY(0);opacity:1;visibility:visible;z-index:999}
   .nav-social{display:none}
   .nav-toggle{display:flex}
   .hero-stats{grid-template-columns:repeat(2,1fr)}
@@ -586,7 +590,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
     <i class="fas fa-sun"></i>
     <i class="fas fa-moon"></i>
   </button>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" onclick="var nl=document.getElementById('navLinks');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </div>
@@ -1737,6 +1741,65 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
 <script>
+// ===== HAMBURGER MENU TOGGLE =====
+(function() {
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  if (!navToggle || !navLinks) return;
+  
+  navToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  
+  // Close when clicking a nav link
+  var links = navLinks.querySelectorAll('a');
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function() {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  }
+  
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (navLinks.classList.contains('open') && 
+        !navLinks.contains(e.target) && 
+        !navToggle.contains(e.target)) {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Close on ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Close on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768 && navLinks.classList.contains('open')) {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+
 // ===== NAVBAR SCROLL =====
 const navbar = document.getElementById('navbar');
 const backToTop = document.getElementById('backToTop');
@@ -1879,11 +1942,7 @@ filterBtns.forEach(btn => {
 });
 
 // ===== CLOSE MOBILE NAV ON LINK CLICK =====
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.remove('open');
-  });
-});
+// Nav link close logic moved to hamburger menu IIFE above
 
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
