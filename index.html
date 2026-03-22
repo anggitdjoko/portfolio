@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Anggit Djoko Wibowo — Data Analyst Portfolio</title>
 <meta name="description" content="Hire Anggit Djoko Wibowo — Data Analyst available for freelance. Specializing in logistics, supply chain, and business analytics. 73K+ records analyzed. $7-10/hr.">
 <meta property="og:title" content="Anggit Djoko Wibowo — Data Analyst Portfolio">
@@ -22,7 +22,10 @@
 <link rel="apple-touch-icon" href="assets/profile.jpg">
 <link rel="manifest" href="manifest.json">
 <meta name="twitter:image" content="https://anggitdjoko.github.io/portfolio/assets/profile.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -709,6 +712,88 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
 .year-divider{display:flex;align-items:center;gap:1rem;margin:2rem 0 1.5rem;padding:0}
 .year-divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
 .year-divider-label{font-size:0.85rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;white-space:nowrap;padding:0.4rem 1.2rem;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.2);border-radius:50px}
+
+/* Safe Area Insets - iPhone Notch Support */
+body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+.nav-container, .hero-section, .footer {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+}
+.project-modal-content {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+
+/* Touch Optimization */
+.project-card, .btn, .nav-link, .cta-button, a, button {
+    touch-action: manipulation;
+}
+
+/* Prevent iOS zoom on input focus */
+input, select, textarea {
+    font-size: 16px !important;
+}
+
+/* GPU Acceleration for Animations */
+.project-card, .reveal, .project-modal-overlay, .project-modal-content, .nav {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Will-change hints for frequently animated elements */
+.project-card:hover {
+    will-change: transform, box-shadow;
+}
+.project-modal-overlay {
+    will-change: opacity;
+}
+.project-modal-content {
+    will-change: transform, opacity;
+}
+.nav {
+    will-change: background-color, backdrop-filter;
+}
+
+/* iOS Form Element Fix */
+input, button, select, textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+button, .btn, .cta-button {
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+/* Responsive max-width safety net */
+.container, .project-modal-content, .hero-content, .about-content, .contact-content {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+img, video, iframe, canvas {
+    max-width: 100%;
+    height: auto;
+}
+/* Prevent horizontal scroll */
+html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Reduced motion & data saver support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
 </style>
 
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -750,6 +835,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
   }
 }
 </script>
+    <link rel="canonical" href="https://anggitdjoko.github.io/portfolio/">
 </head>
 <body>
 
@@ -818,7 +904,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
   </div>
   <div class="about-grid">
     <div class="about-image-wrapper reveal-left">
-      <img src="https://anggitdjoko.github.io/portfolio/assets/profile.jpg" alt="Anggit Djoko Wibowo" class="about-image">
+      <img loading="eager" fetchpriority="high" src="https://anggitdjoko.github.io/portfolio/assets/profile.jpg" alt="Anggit Djoko Wibowo" class="about-image">
     </div>
     <div class="reveal-right">
       <h3 class="about-name">Anggit Djoko Wibowo</h3>
@@ -2373,5 +2459,50 @@ document.querySelectorAll('.case-study-header').forEach(function(header) {
   });
 });
 </script>
+
+<script>
+// Performance: Passive scroll listener with debounce
+(function() {
+    let ticking = false;
+    const nav = document.querySelector('.nav');
+    
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                // Nav scroll effect
+                if (nav) {
+                    if (window.scrollY > 50) {
+                        nav.classList.add('scrolled');
+                    } else {
+                        nav.classList.remove('scrolled');
+                    }
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Performance: Lazy load chart.js instances only when modal opens
+    // Charts are already initialized on modal open via initCharts functions
+    
+    // Debounced resize handler
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            // Trigger chart resize if any are active
+            if (window.Chart) {
+                Chart.helpers.each(Chart.instances, function(instance) {
+                    instance.resize();
+                });
+            }
+        }, 250);
+    }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
