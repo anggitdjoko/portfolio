@@ -3,12 +3,12 @@
 <head>
 <!-- Google Analytics — Replace GA_MEASUREMENT_ID with your ID from https://analytics.google.com -->
 <!-- 
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<!-- DISABLED: <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID');
+  // gtag('config', 'GA_MEASUREMENT_ID'); // DISABLED - replace with real ID
 </script>
 -->
 <meta charset="UTF-8">
@@ -16,7 +16,7 @@
 <title>Anggit Djoko Wibowo — Data Analyst Portfolio</title>
 <meta name="description" content="Portfolio of Anggit Djoko Wibowo — Data Analyst specializing in logistics, supply chain, and business analytics.">
 <meta property="og:title" content="Anggit Djoko Wibowo — Data Analyst Portfolio">
-<meta property="og:description" content="Data Analyst specializing in logistics, supply chain, and business analytics. 73K+ records analyzed across 4 industry projects.">
+<meta property="og:description" content="Portfolio of Anggit Djoko Wibowo — Data Analyst specializing in logistics, supply chain, and business analytics. 73K+ records analyzed across 4 industry projects.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://anggitdjoko.github.io/portfolio/">
 <meta property="og:image" content="https://anggitdjoko.github.io/portfolio/assets/profile.jpg">
@@ -24,6 +24,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Anggit Djoko Wibowo — Data Analyst Portfolio">
 <meta name="twitter:description" content="Data Analyst specializing in logistics, supply chain, and business analytics.">
+<meta name="theme-color" content="#0a0e17">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="assets/profile.jpg">
 <meta name="twitter:image" content="https://anggitdjoko.github.io/portfolio/assets/profile.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -392,12 +397,13 @@ section{position:relative;z-index:1}
 .btn-sm{padding:8px 16px;font-size:0.85rem}
 
 
-:root{
+/* Modal Design Tokens — scoped to modal overlays to avoid conflicts with main :root */
+.project-modal-overlay{
   --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a2e;--bg4:#16213e;
   --accent:#6c63ff;--accent2:#00d4aa;--accent3:#ff6b6b;--accent4:#ffd93d;
   --text:#e8e8f0;--text2:#a0a0b8;--text3:#6c6c80;
   --glass:rgba(255,255,255,0.05);--glass2:rgba(255,255,255,0.08);
-  --border:rgba(255,255,255,0.08);
+  --modal-border:rgba(255,255,255,0.08);
   --gradient1:linear-gradient(135deg,#6c63ff,#00d4aa);
   --gradient2:linear-gradient(135deg,#ff6b6b,#ffd93d);
   --gradient3:linear-gradient(135deg,#6c63ff,#e040fb);
@@ -410,7 +416,7 @@ section{position:relative;z-index:1}
 .project-modal-overlay.open{opacity:1;pointer-events:all}
 .modal-kpi .kpi-label{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:0.2rem}
 .modal-header{padding:3rem 3rem 2rem;border-bottom:1px solid var(--border)}
-.project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal-overlay{padding:0.25rem;overflow-y:auto}
 .kpi-val{font-size:1.5rem;font-weight:800;background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .modal-close:hover{background:var(--accent3);border-color:var(--accent3);color:#fff}
 .modal-content{padding:1rem}
@@ -432,22 +438,22 @@ section{position:relative;z-index:1}
 .modal-kpi-row{grid-template-columns:1fr 1fr}
 .modal-section h3 i{color:var(--accent);font-size:1rem}
 .modal-kpi-row{padding:1rem;gap:0.8rem}
-.project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal-overlay{padding:0.5rem;overflow-y:auto}
 .modal-content{padding:2rem 3rem 3rem}
 .modal-section h3{font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
 .modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}
 .modal-kpi-item .kpi-value{font-size:1.2rem}
 .kpi-label{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:0.2rem}
 .modal-header h2{font-size:1.5rem}
-.project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto}
 .project-modal{background:var(--bg2)}
 .modal-header,.modal-content{padding-left:1.5rem;padding-right:1.5rem}
 .insight-icon{width:40px;height:40px;min-width:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem}
 .modal-kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;padding:2rem 3rem;background:var(--bg)}
 .kpi-value{font-size:1.2rem}
 .insight-card h4{font-size:0.95rem;font-weight:700;margin-bottom:0.3rem}
-.project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto}
+.project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto}
 .project-modal{background:var(--bg2);border:1px solid var(--border);border-radius:24px;width:100%;max-width:1000px;margin:2rem auto;position:relative;transform:translateY(30px);transition:transform 0.4s;overflow:hidden}
 .modal-section{margin-bottom:1.5rem}
 .modal-header h2{font-size:1.2rem}
@@ -465,7 +471,7 @@ section{position:relative;z-index:1}
   p, li, span, a{font-size:max(13px, inherit)}
   .about-text p{font-size:max(14px, 0.95rem)}
   /* Better modal spacing on mobile */
-  .project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal{margin:0.5rem;border-radius:12px;max-height:92vh;overflow-y:auto}
   .modal-header{padding:1.2rem 1rem}
   .modal-content{padding:1rem}
   .modal-header h2{font-size:1.3rem}
@@ -474,11 +480,9 @@ section{position:relative;z-index:1}
   /* Better hero stats on small screens */
   .hero-stat{padding:0.8rem}
   /* Smooth scrolling for mobile */
-  html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+  html{scroll-behavior:smooth;overflow-y:auto /* -webkit-overflow-scrolling:touch removed (deprecated) */}
 
-  .hamburger{display:flex}
-  .mobile-menu{display:flex}
-  .nav-links{display:none}
+  /* FIXED: Removed .nav-links{display:none} that was overriding hamburger menu */
   .hero h1{font-size:2.2rem}
   .hero-stats{grid-template-columns:repeat(2,1fr);gap:1rem}
   section{padding:3rem 1.2rem}
@@ -487,11 +491,11 @@ section{position:relative;z-index:1}
   .about-avatar{max-width:200px;margin:0 auto}
   .about-details{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr}
-  .chart-row{grid-template-columns:1fr}.chart-container{padding:0.75rem;margin-bottom:0.75rem;border-radius:10px}.chart-container canvas{max-height:250px}.modal-section{margin-bottom:1.5rem}
+  .chart-row{grid-template-columns:1fr}.chart-container{padding:0.75rem;margin-bottom:0.75rem;border-radius:10px}.chart-container canvas{max-height:250px;min-height:180px}.modal-section{margin-bottom:1.5rem}
   .modal-header,.modal-content{padding-left:1.5rem;padding-right:1.5rem}
   .modal-kpi-row{padding:1.5rem;grid-template-columns:repeat(2,1fr)}
-  .project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
-  .project-modal-overlay{padding:0.5rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal{margin:0.5rem;border-radius:16px;max-height:93vh;overflow-y:auto}
+  .project-modal-overlay{padding:0.5rem;overflow-y:auto}
   .modal-header h2{font-size:1.5rem}
   .skills-grid{grid-template-columns:1fr}
   .process-flow{flex-direction:column;align-items:center}
@@ -504,8 +508,8 @@ section{position:relative;z-index:1}
 }
 @media(max-width:480px){
   /* Small phone optimizations */
-  .project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto;-webkit-overflow-scrolling:touch}.chart-container{padding:0.5rem;margin-bottom:0.5rem;border-radius:8px}.chart-container canvas{max-height:200px}.modal-section{margin-bottom:1rem}.modal-section h3{font-size:1.1rem;margin-bottom:0.8rem}
-  .project-modal-overlay{padding:0.25rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .project-modal{margin:0.25rem;border-radius:8px;max-height:95vh;overflow-y:auto}.chart-container{padding:0.5rem;margin-bottom:0.5rem;border-radius:8px}.chart-container canvas{max-height:200px;min-height:150px}.modal-section{margin-bottom:1rem}.modal-section h3{font-size:1.1rem;margin-bottom:0.8rem}
+  .project-modal-overlay{padding:0.25rem;overflow-y:auto}
   .modal-header h2{font-size:1.2rem}
   .hero-stats{gap:0.8rem}
   .hero-stat .stat-number{font-size:1.2rem}
@@ -524,6 +528,13 @@ section{position:relative;z-index:1}
 .chart-container canvas[id*="kobelco-parts"],
 .chart-container canvas[id*="kobelco-topqty"]{height:240px!important}
 }
+
+/* Accessibility: Focus styles for keyboard navigation */
+*:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
+/* Skip to content link for screen readers */
+.skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:12px 24px;border-radius:0 0 8px 8px;z-index:9999;font-weight:600;transition:top 0.3s}
+.skip-link:focus{top:0}
 </style>
 <script type="application/ld+json">
 {
@@ -549,7 +560,8 @@ section{position:relative;z-index:1}
 <body>
 
 <!-- ===== NAVBAR ===== -->
-<nav class="navbar" id="navbar">
+<a href="#hero" class="skip-link">Skip to Content</a>
+<nav class="navbar" role="navigation" aria-label="Main navigation" id="navbar">
 <div class="container">
   <a href="#hero" class="nav-logo">AD</a>
   <div class="nav-links" id="navLinks">
@@ -574,9 +586,9 @@ section{position:relative;z-index:1}
     <i class="fas fa-sun"></i>
     <i class="fas fa-moon"></i>
   </button>
-  <div class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" onclick="var nl=document.getElementById('navLinks');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </div>
 </nav>
 
@@ -585,7 +597,7 @@ section{position:relative;z-index:1}
 <div class="container">
   <div class="hero-badge"><span class="pulse"></span> Open to Work</div>
   <h1>Anggit Djoko<br><span class="gradient">Data Analyst</span></h1>
-  <p class="hero-subtitle">Turning raw data into actionable insights. Experienced in analyzing 76,000+ transactions across industries — from logistics &amp; supply chain to F&amp;B and heavy machinery.</p>
+  <p class="hero-subtitle">Turning raw data into actionable insights. Experienced in analyzing 73,000+ records across industries — from logistics &amp; supply chain to F&amp;B and heavy machinery.</p>
   <div class="hero-stats">
     <div class="stat-card"><div class="stat-number">73K+</div><div class="stat-label">Records Analyzed</div></div>
     <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">Industry Projects</div></div>
@@ -730,11 +742,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Full exploratory data analysis on restaurant transactions: best and worst selling menu items, peak hours, payment methods, sales channels, daily trends, and customer behavior analysis.</p>
         <div class="project-tags"><span>Python</span><span>Excel</span><span>EDA</span><span>Data Visualization</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openProject('jar')"><i class="fas fa-eye"></i> View Details</button>
-          <!-- Create these repositories on GitHub and update links -->
-          <a href="https://github.com/anggitdjoko/restaurant-sales-analytics" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-          <!-- Publish dashboards to Tableau Public and update these links -->
-          <a href="https://public.tableau.com/app/profile/anggitdjoko/viz/RestaurantSalesAnalytics" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-chart-bar"></i> Live Dashboard</a>
+          <button class="btn btn-primary btn-sm" onclick="openProject('jar')"><i class="fas fa-chart-line"></i> View Full Analysis</button>
         </div>
       </div>
     </div>
@@ -752,11 +760,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Year-over-Year growth analysis revealing a +19.9% increase from 2023. Analyzed the impact of government policy on Household vs SME segmentation, profitability trends, and adaptive distribution strategies.</p>
         <div class="project-tags"><span>Excel</span><span>SQL</span><span>Tableau</span><span>YoY Analysis</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openProject('lpg2024')"><i class="fas fa-eye"></i> View Details</button>
-          <!-- Create these repositories on GitHub and update links -->
-          <a href="https://github.com/anggitdjoko/lpg-distribution-2024" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-          <!-- Publish dashboards to Tableau Public and update these links -->
-          <a href="https://public.tableau.com/app/profile/anggitdjoko/viz/LPGDistribution2024" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-chart-bar"></i> Live Dashboard</a>
+          <button class="btn btn-primary btn-sm" onclick="openProject('lpg2024')"><i class="fas fa-chart-line"></i> View Full Analysis</button>
         </div>
       </div>
     </div>
@@ -774,11 +778,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Comprehensive annual demand analysis, customer segmentation (Household vs SME), and profit optimization strategies for subsidized LPG distribution.</p>
         <div class="project-tags"><span>Excel</span><span>SQL</span><span>Tableau</span><span>Demand Analysis</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openProject('lpg2023')"><i class="fas fa-eye"></i> View Details</button>
-          <!-- Create these repositories on GitHub and update links -->
-          <a href="https://github.com/anggitdjoko/lpg-distribution-2023" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-          <!-- Publish dashboards to Tableau Public and update these links -->
-          <a href="https://public.tableau.com/app/profile/anggitdjoko/viz/LPGDistribution2023" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-chart-bar"></i> Live Dashboard</a>
+          <button class="btn btn-primary btn-sm" onclick="openProject('lpg2023')"><i class="fas fa-chart-line"></i> View Full Analysis</button>
         </div>
       </div>
     </div>
@@ -796,11 +796,7 @@ section{position:relative;z-index:1}
         <p class="project-desc">Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion. Evaluated sales trends, customer concentration, fast-moving items, material group performance, and inventory optimization for KOBELCO heavy machinery.</p>
         <div class="project-tags"><span>Excel</span><span>Tableau</span><span>WMS</span><span>Inventory Analysis</span></div>
         <div class="project-actions">
-          <button class="btn btn-primary btn-sm" onclick="openProject('kobelco')"><i class="fas fa-eye"></i> View Details</button>
-          <!-- Create these repositories on GitHub and update links -->
-          <a href="https://github.com/anggitdjoko/spare-parts-analytics" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
-          <!-- Publish dashboards to Tableau Public and update these links -->
-          <a href="https://public.tableau.com/app/profile/anggitdjoko/viz/SparePartsAnalytics" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-chart-bar"></i> Live Dashboard</a>
+          <button class="btn btn-primary btn-sm" onclick="openProject('kobelco')"><i class="fas fa-chart-line"></i> View Full Analysis</button>
         </div>
       </div>
     </div>
@@ -1290,46 +1286,12 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
     <p class="section-subtitle">Feedback from colleagues, supervisors, and project collaborators</p>
   </div>
   <div class="testimonials-grid">
-    <div class="testimonial-card reveal">
-      <div class="testimonial-quote">&ldquo;</div>
-      <div class="testimonial-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-      <p class="testimonial-text">&ldquo;[Your testimonial text here]&rdquo;</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">A</div>
-        <div>
-          <div class="testimonial-name">[Client/Supervisor Name]</div>
-          <div class="testimonial-role">[Position], [Company]</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-quote">&ldquo;</div>
-      <div class="testimonial-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-      <p class="testimonial-text">&ldquo;[Your testimonial text here]&rdquo;</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">B</div>
-        <div>
-          <div class="testimonial-name">[Client/Supervisor Name]</div>
-          <div class="testimonial-role">[Position], [Company]</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-quote">&ldquo;</div>
-      <div class="testimonial-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-      <p class="testimonial-text">&ldquo;[Your testimonial text here]&rdquo;</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">C</div>
-        <div>
-          <div class="testimonial-name">[Client/Supervisor Name]</div>
-          <div class="testimonial-role">[Position], [Company]</div>
-        </div>
+    <div class="testimonial-card reveal" style="grid-column:1/-1;text-align:center;padding:3rem 2rem">
+      <div style="font-size:3rem;margin-bottom:1rem;opacity:0.3"><i class="fas fa-quote-left"></i></div>
+      <h3 style="font-size:1.3rem;margin-bottom:0.8rem;color:var(--text-primary)">Testimonials Coming Soon</h3>
+      <p style="color:var(--text-secondary);max-width:500px;margin:0 auto;line-height:1.7">I&rsquo;m currently collecting feedback from colleagues and project collaborators. Check back soon for real testimonials!</p>
+      <div style="margin-top:1.5rem">
+        <a href="#contact" class="btn btn-primary" style="font-size:0.85rem;padding:10px 24px"><i class="fas fa-envelope"></i> Work With Me</a>
       </div>
     </div>
   </div>
@@ -1451,7 +1413,7 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
           </div>
         </div>
         <!-- Schedule a Meeting placeholder -->
-        <a href="#" class="contact-card reveal" style="text-decoration:none" onclick="alert('Meeting scheduling will be available soon. Please contact via email or WhatsApp.');return false;">
+        <a href="mailto:anggitdjokow00@gmail.com?subject=Meeting%20Request%20-%20Data%20Analysis%20Consultation&body=Hi%20Anggit,%0A%0AI'd%20like%20to%20schedule%20a%2030-minute%20consultation%20to%20discuss%20a%20potential%20project.%0A%0APreferred%20date/time:%20%0ATopic:%20%0A%0AThank%20you!" class="contact-card reveal" style="text-decoration:none" target="_blank">
           <div class="contact-card-icon" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.2);color:#8b5cf6"><i class="fas fa-calendar-check"></i></div>
           <div class="contact-card-info">
             <h4>Schedule a Meeting</h4>
@@ -1461,7 +1423,7 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
       </div>
     </div>
     <div class="reveal">
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form" id="contactForm">
+      <form action="#" method="POST" onsubmit="event.preventDefault();var m=document.createElement('div');m.innerHTML='<div style=&quot;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;padding:1rem&quot; onclick=&quot;this.remove()&quot;><div style=&quot;background:var(--bg-card,#1a2236);border:1px solid var(--border,#1e293b);border-radius:16px;padding:2rem;max-width:400px;text-align:center&quot;><div style=&quot;font-size:2rem;margin-bottom:1rem&quot;>📬</div><h3 style=&quot;margin-bottom:0.5rem;color:var(--text-primary,#f1f5f9)&quot;>Form Coming Soon!</h3><p style=&quot;color:var(--text-secondary,#94a3b8);margin-bottom:1rem;line-height:1.6&quot;>Contact form is being set up. Please reach me via email or WhatsApp!</p><div style=&quot;display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap&quot;><a href=&quot;mailto:anggitdjokow00@gmail.com&quot; style=&quot;padding:8px 16px;background:var(--accent,#0ea5e9);color:#fff;border-radius:8px;text-decoration:none;font-size:0.85rem&quot;>📧 Email</a><a href=&quot;https://wa.me/6285752323&quot; target=&quot;_blank&quot; style=&quot;padding:8px 16px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;font-size:0.85rem&quot;>💬 WhatsApp</a></div></div></div>';document.body.appendChild(m.firstChild);return false;" class="contact-form" id="contactForm">
         <div class="form-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -1480,7 +1442,7 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> Send Message</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:12px;text-align:center">
-          <i class="fas fa-info-circle"></i> Powered by Formspree — Setup your free form at <a href="https://formspree.io" target="_blank" style="color:var(--accent)">formspree.io</a>
+          <i class="fas fa-info-circle"></i> Form is being set up. In the meantime, reach me via <a href="mailto:anggitdjokow00@gmail.com" style="color:var(--accent)">email</a> or <a href="https://wa.me/6285752323"; target="_blank" style="color:var(--accent)">WhatsApp</a>
         </p>
       </form>
     </div>
@@ -1500,7 +1462,6 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
       <div class="modal-period"><i class="fas fa-calendar"></i> August 2023 – January 2025</div>
       <p class="modal-desc">Menganalisis 31.459 transaksi distribusi LPG 3kg bersubsidi sepanjang tahun 2023. Fokus pada demand analysis, segmentasi pelanggan (Rumah Tangga vs UMKM), tren profitabilitas bulanan, dan strategi distribusi.</p>
     </div>
-    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/lpg-distribution-2023" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
     <div class="modal-kpi-row">
       <div class="modal-kpi"><div class="kpi-val">31,459</div><div class="kpi-label">Total Transactions</div></div>
       <div class="modal-kpi"><div class="kpi-val">Rp 94.3M</div><div class="kpi-label">Annual Profit</div></div>
@@ -1548,7 +1509,6 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
       <div class="modal-period"><i class="fas fa-calendar"></i> Januari – Desember 2024 (Full Year)</div>
       <p class="modal-desc">Analisis Year-over-Year menunjukkan pertumbuhan signifikan +19.9% dari 31,459 transaksi (2023) menjadi 37,723 transaksi (2024). Fokus pada dampak kebijakan pemerintah yang memprioritaskan rumah tangga dalam distribusi LPG 3 kg bersubsidi, pergeseran segmentasi pelanggan, dan tren profitabilitas.</p>
     </div>
-    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/lpg-distribution-2024" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
     <div class="modal-kpi-row">
       <div class="modal-kpi"><div class="kpi-val">37,723</div><div class="kpi-label">Total Transaksi 2024</div></div>
       <div class="modal-kpi"><div class="kpi-val">+19.9%</div><div class="kpi-label">YoY Growth</div></div>
@@ -1616,7 +1576,6 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
       <div class="modal-period"><i class="fas fa-calendar"></i> January – September 2023</div>
       <p class="modal-desc">Menganalisis 7,153 transaksi penjualan spare part alat berat KOBELCO senilai Rp 17.65 Miliar untuk 2 customer utama. Evaluasi tren penjualan bulanan, konsentrasi pelanggan, fast-moving items, dan 13 material group. Berkontribusi dalam penurunan risiko stock-out hingga 20%.</p>
     </div>
-    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/spare-parts-analytics" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
     <div class="modal-kpi-row">
       <div class="modal-kpi"><div class="kpi-val">7,153</div><div class="kpi-label">Transactions</div></div>
       <div class="modal-kpi"><div class="kpi-val">Rp 17.6B</div><div class="kpi-label">Total Sales</div></div>
@@ -1691,7 +1650,6 @@ print(top10[[&#x27;avg_monthly_demand&#x27;, &#x27;cv&#x27;, &#x27;safety_stock&
       <div class="modal-period"><i class="fas fa-calendar"></i> October 2025 (Test Assessment)</div>
       <p class="modal-desc">Exploratory Data Analysis menyeluruh terhadap 7,437 record transaksi restoran Jepang. Menganalisis performa menu, peak hours, payment method, sales channel, daily trend, dan customer behavior.</p>
     </div>
-    <div style="text-align:center;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center"><a href="https://github.com/anggitdjoko/restaurant-sales-analytics" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent3,#333);color:#fff;border-radius:8px;text-decoration:none;font-size:0.9rem"><i class="fab fa-github"></i> GitHub Repository</a></div>
     <div class="modal-kpi-row">
       <div class="modal-kpi"><div class="kpi-val">7,437</div><div class="kpi-label">Records</div></div>
       <div class="modal-kpi"><div class="kpi-val">Rp 164.8M</div><div class="kpi-label">Net Sales</div></div>
@@ -1973,6 +1931,42 @@ document.querySelectorAll('a[href*="CV"]').forEach(link => {
 
 
 <script>
+
+// ===== CHART CONFIG (Bug Fix: Missing Variable Declarations) =====
+const chartColors = {
+  purple: 'rgba(108,99,255,1)',
+  purpleBg: 'rgba(108,99,255,0.15)',
+  teal: 'rgba(0,212,170,1)',
+  tealBg: 'rgba(0,212,170,0.15)',
+  red: 'rgba(255,107,107,1)',
+  yellow: 'rgba(255,217,61,1)'
+};
+const chartInstances = {};
+const chartsInitialized = {};
+const defaultOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Inter', size: 12 } }
+    }
+  },
+  scales: {
+    x: { ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.06)' } },
+    y: { ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.08)' } }
+  }
+};
+const pieOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Inter', size: 11 }, padding: 16, usePointStyle: true, pointStyleWidth: 10 }
+    }
+  }
+};
+
 function openProject(id){
   const modal=document.getElementById('modal-'+id);
   modal.classList.add('open');
@@ -2154,6 +2148,29 @@ function initJarCharts(){
     options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Revenue by Day of Week',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
   });
 }
+
+// ===== ESC KEY & CLICK-OUTSIDE TO CLOSE PROJECT MODALS =====
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.project-modal-overlay.open').forEach(function(overlay) {
+      var id = overlay.id.replace('modal-', '');
+      closeProject(id);
+    });
+    // Also close CV modal
+    closeCvModal();
+  }
+});
+
+// Click outside modal content to close
+document.querySelectorAll('.project-modal-overlay').forEach(function(overlay) {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      var id = overlay.id.replace('modal-', '');
+      closeProject(id);
+    }
+  });
+});
+
 </script>
 </body>
 </html>
