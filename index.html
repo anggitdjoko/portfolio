@@ -2369,12 +2369,12 @@ document.querySelectorAll('a[href*="CV"]').forEach(link => {
 
 // ===== CHART CONFIG (Bug Fix: Missing Variable Declarations) =====
 const chartColors = {
-  purple: 'rgba(108,99,255,1)',
-  purpleBg: 'rgba(108,99,255,0.15)',
-  teal: 'rgba(0,212,170,1)',
-  tealBg: 'rgba(0,212,170,0.15)',
-  red: 'rgba(255,107,107,1)',
-  yellow: 'rgba(255,217,61,1)'
+  purple: 'rgba(5,150,105,1)',
+  purpleBg: 'rgba(5,150,105,0.15)',
+  teal: 'rgba(217,119,6,1)',
+  tealBg: 'rgba(217,119,6,0.15)',
+  red: 'rgba(220,38,38,1)',
+  yellow: 'rgba(202,138,4,1)'
 };
 const chartInstances = {};
 const chartsInitialized = {};
@@ -2383,12 +2383,12 @@ const defaultOptions = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Inter', size: 12 } }
+      labels: { color: 'rgba(26,26,26,0.8)', font: { family: 'Inter', size: 12 } }
     }
   },
   scales: {
-    x: { ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.06)' } },
-    y: { ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.08)' } }
+    x: { ticks: { color: 'rgba(26,26,26,0.6)', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' } },
+    y: { ticks: { color: 'rgba(26,26,26,0.6)', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.08)' } }
   }
 };
 const pieOptions = {
@@ -2397,7 +2397,7 @@ const pieOptions = {
   plugins: {
     legend: {
       position: 'bottom',
-      labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Inter', size: 11 }, padding: 16, usePointStyle: true, pointStyleWidth: 10 }
+      labels: { color: 'rgba(26,26,26,0.8)', font: { family: 'Inter', size: 11 }, padding: 16, usePointStyle: true, pointStyleWidth: 10 }
     }
   }
 };
@@ -2447,13 +2447,13 @@ function initLpg2023Charts(){
   chartInstances['lpg2023-seg']=new Chart(document.getElementById('chart-lpg2023-seg'),{
     type:'doughnut',
     data:{labels:['Household (82.1%)','SME (17.9%)'],datasets:[{data:[25825,5634],backgroundColor:[chartColors.purple,chartColors.teal],borderWidth:0,hoverOffset:10}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Customer Segmentation 2023',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Customer Segmentation 2023',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['lpg2023-profit']=new Chart(document.getElementById('chart-lpg2023-profit'),{
     type:'bar',
     data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
       datasets:[{label:'Profit (Rp Juta)',data:[6.8,7.2,8.4,7.0,7.5,7.8,8.5,9.2,10.38,8.8,9.6,2.79],backgroundColor:function(ctx){return ctx.raw===10.38?chartColors.teal:ctx.raw===2.79?chartColors.red:chartColors.purple},borderRadius:8}]},
-    options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Monthly Profit 2023 (Rp Million)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Monthly Profit 2023 (Rp Million)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
 }
 
@@ -2470,7 +2470,7 @@ function initLpg2024Charts(){
       {label:'2024 (37,723)',data:txn2024,backgroundColor:'rgba(0,212,170,0.5)',borderColor:chartColors.teal,borderWidth:1,borderRadius:6}
     ]},
     options:{...defaultOptions,scales:{...defaultOptions.scales,y:{...defaultOptions.scales.y,
-      title:{display:true,text:'Number of Transactions',color:'rgba(255,255,255,0.6)',font:{size:11}}}}}
+      title:{display:true,text:'Number of Transactions',color:'rgba(26,26,26,0.6)',font:{size:11}}}}}
   });
 
   // Chart 2: Customer Segmentation 2024 - Doughnut
@@ -2478,7 +2478,7 @@ function initLpg2024Charts(){
     type:'doughnut',
     data:{labels:['Household 83.4% (31,455)','SME 16.6% (6,265)'],
       datasets:[{data:[31455,6265],backgroundColor:[chartColors.purple,chartColors.teal],borderWidth:0,hoverOffset:10}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Customer Segmentation 2024',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Customer Segmentation 2024',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
 
   // Chart 3: Monthly Profit 2024 - Bar
@@ -2489,7 +2489,7 @@ function initLpg2024Charts(){
       backgroundColor:function(ctx){return ctx.raw>=14?chartColors.teal:ctx.raw<=4?chartColors.red:chartColors.purple},borderRadius:8}]},
     options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false}},
       scales:{...defaultOptions.scales,y:{...defaultOptions.scales.y,
-        title:{display:true,text:'Profit (Rp Juta)',color:'rgba(255,255,255,0.6)',font:{size:11}}}}}
+        title:{display:true,text:'Profit (Rp Juta)',color:'rgba(26,26,26,0.6)',font:{size:11}}}}}
   });
 
   // Chart 4: Segmentation Shift 2023 vs 2024 - Grouped Bar
@@ -2500,7 +2500,7 @@ function initLpg2024Charts(){
       {label:'2024',data:[31455,6265],backgroundColor:'rgba(0,212,170,0.6)',borderRadius:8}
     ]},
     options:{...defaultOptions,scales:{...defaultOptions.scales,y:{...defaultOptions.scales.y,
-      title:{display:true,text:'Number of Transactions',color:'rgba(255,255,255,0.6)',font:{size:11}}}}}
+      title:{display:true,text:'Number of Transactions',color:'rgba(26,26,26,0.6)',font:{size:11}}}}}
   });
 }
 
@@ -2515,14 +2515,14 @@ function initKobelcoCharts(){
         {label:'Transactions',data:[661,743,1057,599,955,805,572,913,846],
           borderColor:chartColors.teal,backgroundColor:'transparent',borderDash:[5,5],tension:0.4,pointRadius:5,pointBackgroundColor:chartColors.teal,yAxisID:'y1'}
       ]},
-    options:{...defaultOptions,plugins:{...defaultOptions.plugins,title:{display:true,text:'Monthly Sales Trend (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}},scales:{...defaultOptions.scales,y1:{position:'right',grid:{display:false},ticks:{color:'rgba(255,255,255,0.5)',callback:v=>v+'txn'}}}}
+    options:{...defaultOptions,plugins:{...defaultOptions.plugins,title:{display:true,text:'Monthly Sales Trend (Rp Juta)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}},scales:{...defaultOptions.scales,y1:{position:'right',grid:{display:false},ticks:{color:'rgba(26,26,26,0.5)',callback:v=>v+'txn'}}}}
   });
   // Customer Concentration (Real Data)
   chartInstances['kobelco-customer']=new Chart(document.getElementById('chart-kobelco-customer'),{
     type:'doughnut',
     data:{labels:['PT Kalimantan Inti Maju — Rp 8.44B (7,031 txn)','PT Putra Rimba Nusantara — Rp 383.8M (120 txn)'],
       datasets:[{data:[8443550879,383771089],backgroundColor:[chartColors.purple,chartColors.teal],borderWidth:0,hoverOffset:10}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Customer Concentration',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}},tooltip:{callbacks:{label:function(ctx){return 'Rp '+((ctx.raw/1e9).toFixed(2))+'B ('+((ctx.raw/8827321968*100).toFixed(1))+'%)'}}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Customer Concentration',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}},tooltip:{callbacks:{label:function(ctx){return 'Rp '+((ctx.raw/1e9).toFixed(2))+'B ('+((ctx.raw/8827321968*100).toFixed(1))+'%)'}}}}}
   });
   // Top 10 Parts by Sales Value (Real Data)
   chartInstances['kobelco-parts']=new Chart(document.getElementById('chart-kobelco-parts'),{
@@ -2530,7 +2530,7 @@ function initKobelcoCharts(){
     data:{labels:['OIL HYD 68LL (PAIL)','OIL HYD 68LL (DRUM)','TRACK LINK ASSY (46L)','TRACK LINK ASSY (HD)','OIL ENGINE DH1','LOWER ROLLER ASSY','REPAIR KIT','OIL GEAR 90','IDLER ASSEMBLY','SHOE'],
       datasets:[{label:'Sales (Rp Juta)',data:[1294.7,623.3,591.8,589.2,531.6,514.7,349.5,268.5,214.9,212.9],
         backgroundColor:[chartColors.purple,chartColors.purple,chartColors.teal,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)',chartColors.red,'rgba(255,152,0,0.8)','rgba(76,175,80,0.8)'],borderRadius:8}]},
-    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Parts by Sales Value (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Parts by Sales Value (Rp Juta)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   // Material Group Breakdown (Real Data)
   chartInstances['kobelco-matgroup']=new Chart(document.getElementById('chart-kobelco-matgroup'),{
@@ -2538,7 +2538,7 @@ function initKobelcoCharts(){
     data:{labels:['8RB Lubricants (16.7%)','8R6 Undercarriage (14.1%)','8R1 Filters (9.5%)','8R3 (2.0%)','8R2 (1.8%)','8R5 (1.8%)','Others (4.1%)'],
       datasets:[{data:[2947.6,2483.9,1676.8,347.4,317.6,309.8,571.5],
         backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)','rgba(255,152,0,0.8)','rgba(158,158,158,0.6)'],borderWidth:0,hoverOffset:10}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Material Group Distribution',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Material Group Distribution',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   // Top Parts by Quantity (Real Data)
   chartInstances['kobelco-topqty']=new Chart(document.getElementById('chart-kobelco-topqty'),{
@@ -2546,7 +2546,7 @@ function initKobelcoCharts(){
     data:{labels:['OIL HYD 68LL','GEAR OIL 90','ELEMENT FUEL','OIL ENGINE DH1','FILTER FUEL','SHOE','FILTER OIL','LOWER ROLLER','REPAIR KIT','ELEMENT FILTER'],
       datasets:[{label:'Quantity Sold',data:[2320,1169,809,800,786,521,511,421,400,291],
         backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)','rgba(255,152,0,0.8)','rgba(76,175,80,0.8)',chartColors.purple,chartColors.teal,chartColors.red],borderRadius:8}]},
-    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top Parts by Quantity Sold',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top Parts by Quantity Sold',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
 
   // ABC Classification Chart
@@ -2563,8 +2563,8 @@ function initKobelcoCharts(){
           borderColor:['rgba(108,99,255,0.8)','rgba(0,212,170,0.8)','rgba(255,217,61,0.8)'],
           borderWidth:1,borderRadius:8}
       ]},
-    options:{...defaultOptions,plugins:{...defaultOptions.plugins,title:{display:true,text:'ABC Classification — Revenue Distribution',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}},
-      scales:{...defaultOptions.scales,y:{...defaultOptions.scales.y,title:{display:true,text:'Percentage / Value',color:'rgba(255,255,255,0.6)',font:{size:11}}}}}
+    options:{...defaultOptions,plugins:{...defaultOptions.plugins,title:{display:true,text:'ABC Classification — Revenue Distribution',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}},
+      scales:{...defaultOptions.scales,y:{...defaultOptions.scales.y,title:{display:true,text:'Percentage / Value',color:'rgba(26,26,26,0.6)',font:{size:11}}}}}
   });
 }
 
@@ -2574,39 +2574,39 @@ function initJarCharts(){
     data:{labels:['Kare Ramen','SUMO Spicy','Chicken Katsu Bowl','Curry Chicken Bowl','Curry Mozarella','Chizu Ramen','Tom Yum Ramen','Katsu Matsuri','Mineral Water','Chikin Kani Mentai'],
       datasets:[{label:'Net Sales (Rp Juta)',data:[23.75,12.03,7.92,6.92,6.87,6.52,6.44,6.15,5.52,4.85],
         backgroundColor:[chartColors.teal,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.purple,chartColors.yellow,chartColors.purple],borderRadius:8}]},
-    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Menu by Net Sales (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,indexAxis:'y',categoryPercentage:0.85,barPercentage:0.9,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Top 10 Menu by Net Sales (Rp Juta)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['jar-hourly']=new Chart(document.getElementById('chart-jar-hourly'),{
     type:'bar',
     data:{labels:['7AM','8','9','10','11','12','13','14','15','16','17','18','19','20'],
       datasets:[{label:'Net Sales (Rp Juta)',data:[0.1,2.92,5.34,10.4,17.05,11.14,7.57,7.22,11.19,15.97,20.88,27.25,22.27,5.55],
         backgroundColor:function(ctx){const i=ctx.dataIndex;return(i>=10&&i<=12)?chartColors.teal:chartColors.purple},borderRadius:6}]},
-    options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Hourly Net Sales Distribution (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Hourly Net Sales Distribution (Rp Juta)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['jar-category']=new Chart(document.getElementById('chart-jar-category'),{
     type:'doughnut',
     data:{labels:['Ramen','Rice Bowl','Sushi','Drinks','New Menu','Side Dish','Others'],
       datasets:[{data:[55.18,38.72,30.54,26.80,6.56,5.98,1.06],backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow,'rgba(224,64,251,0.8)','rgba(100,200,255,0.8)','rgba(180,180,180,0.5)'],borderWidth:0}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Category Breakdown (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Category Breakdown (Rp Juta)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['jar-channel']=new Chart(document.getElementById('chart-jar-channel'),{
     type:'doughnut',
     data:{labels:['Dine In (92.5%)','Take Away (4.8%)','GoFood (2.1%)','GrabFood (0.6%)'],
       datasets:[{data:[152.42,7.87,3.52,1.03],backgroundColor:[chartColors.purple,chartColors.teal,chartColors.red,chartColors.yellow],borderWidth:0}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Sales Channel (Rp Juta)',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Sales Channel (Rp Juta)',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['jar-payment']=new Chart(document.getElementById('chart-jar-payment'),{
     type:'doughnut',
     data:{labels:['Cash (48.2%)','BCA QR (45.6%)','BCA Transfer (3.5%)','GoFood (2.0%)','GrabFood (0.7%)'],
       datasets:[{data:[79.52,75.19,5.79,3.24,1.09],backgroundColor:[chartColors.purple,chartColors.teal,chartColors.yellow,chartColors.red,'rgba(224,64,251,0.8)'],borderWidth:0}]},
-    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Payment Methods',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...pieOptions,plugins:{...pieOptions.plugins,title:{display:true,text:'Payment Methods',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
   chartInstances['jar-daily']=new Chart(document.getElementById('chart-jar-daily'),{
     type:'bar',
     data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
       datasets:[{label:'Revenue (Rp Juta)',data:[16.05,16.04,20.67,26.80,27.49,31.65,26.15],
         backgroundColor:function(ctx){return ctx.dataIndex===5?chartColors.teal:chartColors.purple},borderRadius:8}]},
-    options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Revenue by Day of Week',color:'#e8e8f0',font:{family:'Inter',size:14,weight:600}}}}
+    options:{...defaultOptions,plugins:{...defaultOptions.plugins,legend:{display:false},title:{display:true,text:'Revenue by Day of Week',color:'#1a1a1a',font:{family:'Inter',size:14,weight:600}}}}
   });
 }
 
