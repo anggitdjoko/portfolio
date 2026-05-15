@@ -1,2 +1,2 @@
 # portfolio
-Data Analyst Portfolio — Anggit Djoko
+Full-Stack Developer Portfolio — Anggit Djoko

@@ -1,7 +1,7 @@
 {
-  "name": "Anggit Djoko Wibowo — Data Analyst Portfolio",
+  "name": "Anggit Djoko Wibowo — Full-Stack Developer Portfolio",
   "short_name": "Anggit Portfolio",
-  "description": "Data Analyst specializing in logistics, supply chain, and business analytics. 73K+ records analyzed across 4 industry projects.",
+  "description": "Full-Stack Developer building web apps with Next.js, React, and TypeScript. Currently shipping Servgo — a SaaS POS platform. Background in data analytics.",
   "start_url": "/portfolio/",
   "display": "standalone",
   "background_color": "#0a0e17",
