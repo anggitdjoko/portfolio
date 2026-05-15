@@ -860,10 +860,6 @@ html {
       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=anggitdjokow00@gmail.com" target="_blank" rel="noopener noreferrer" title="Email"><i class="fas fa-envelope"></i></a>
     </div>
   </div>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-    <i class="fas fa-sun"></i>
-    <i class="fas fa-moon"></i>
-  </button>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -2229,16 +2225,8 @@ filterBtns.forEach(btn => {
 // Nav link close logic moved to hamburger menu IIFE above
 
 // Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-document.documentElement.setAttribute('data-theme', savedTheme);
-
-themeToggle.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-});
+// Theme - always light (cream)
+document.documentElement.setAttribute('data-theme', 'light');
 
 
 // ===== CONTACT FORM AJAX SUBMISSION =====
