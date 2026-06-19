@@ -1,0 +1,33 @@
+﻿node.exe : ΓÜá Attempted to load @next/swc-win32-x64-msvc, but an error occurred: 
+\\?\E:\PROJECT\Portofolio\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 
+application.
+At C:\Program Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ΓÜá Attempted t...32 application.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+\\?\E:\PROJECT\Portofolio\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+  Skipping creating a lockfile at E:\PROJECT\Portofolio\.next\lock because we're using WASM bindings
+Γû▓ Next.js 16.2.9 (webpack)
+
+  Creating an optimized production build ...
+
+[1m[33mwarn[39m[22m - The class `duration-[250ms]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `duration-&lsqb;250ms&rsqb;` to silence 
+this warning.
+
+[1m[33mwarn[39m[22m - The class `ease-[0.23,1,0.32,1]` is ambiguous and matches multiple utilities.
+[1m[33mwarn[39m[22m - If this is content and not a class, replace it with `ease-&lsqb;0.23,1,0.32,1&rsqb;` to 
+silence this warning.
+Γ£ô Compiled successfully in 2.0min
+  Skipping validation of types
+  Finished TypeScript config validation in 992ms ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/18) ...
+ΓÜá Attempted to load @next/swc-win32-x64-msvc, but an error occurred: 
+\\?\E:\PROJECT\Portofolio\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 
+application.
+\\?\E:\PROJECT\Portofolio\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+  Generating static pages using 3 workers (4/18) 
+  Generating static pages using 3 workers (8/18) 
