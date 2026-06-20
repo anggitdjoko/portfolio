@@ -31,12 +31,14 @@ export function BlogPostContent({ post }: { post: any }) {
                 <div className="flex items-center gap-4 text-sm text-gray-400 mb-8 pb-8 border-b border-white/10">
                     <span>{post.author?.name}</span>
                     <span>{post.date}</span>
-                    <span className="flex items-center gap-1"><Clock size={14} /> {post.readTime}</span>
+                    <span className="flex items-center gap-1"><Clock size={14} /> {post.readTime} min read</span>
                     <button onClick={handleCopy} className={cn("flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-medium", copied ? "bg-indigo-500 text-white" : "bg-white/5 text-gray-400 hover:text-white")}>
                         {copied ? <><Check size={14} /> Copied!</> : <><Copy size={14} /> Share</>}
                     </button>
                 </div>
-                <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="prose prose-invert max-w-none">
+                    <p>{post.content}</p>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-8">
                     {post.tags?.map((tag: string) => (
                         <span key={tag} className="px-3 py-1 rounded-full bg-white/5 text-gray-400 text-sm">{tag}</span>
