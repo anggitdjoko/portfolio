@@ -152,7 +152,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-[10px] md:text-xs text-muted-foreground text-start md:text-right leading-relaxed max-w-[200px] md:max-w-[220px] font-medium uppercase tracking-[0.2em]"
             >
-               Hi, I'm {personal.name}. I build modern web applications with clean code.
+              Hi, I'm {personal.name}. I build scalable systems powered by intelligence.
             </motion.p>
             <div className="relative">
               <div ref={githubRef} className="absolute -top-4 right-0 md:right-2 text-primary/60 hover:text-primary z-20 opacity-0">
@@ -170,7 +170,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 className="text-[clamp(3rem,11vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
               >
-                DATA ANALYST &
+                AI & DATA
               </motion.h1>
             </div>
           </div>
@@ -298,8 +298,8 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               >
                 <ProfileCard
                   name={personal.name}
-                  title="Data Analyst & Full-Stack Developer"
-                  description={`${personal.name} is a Data Analyst & Full-Stack Developer specializing in Next.js, React, and TypeScript. Currently building Servgo, a SaaS POS platform for cafés and restaurants.`}
+                  title="AI Engineer & Software Engineer"
+                  description={`${personal.name} is a dedicated AI & Software Engineer focused on building scalable, intelligent systems and robust software architectures. He specializes in bridging technical innovation with high-performance execution to deliver meaningful and impactful digital solutions.`}
                   imageUrl={personal.avatar}
                   githubUrl={personal.socialLinks.find(s => s.platform === 'GitHub')?.url}
                   linkedinUrl={personal.socialLinks.find(s => s.platform === 'LinkedIn')?.url}

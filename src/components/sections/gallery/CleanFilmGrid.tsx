@@ -6,12 +6,7 @@ import Image from "next/image";
 // import { portfolioData } from "@/data/portfolio";
 import { X, Play, Maximize2, ChevronLeft, ChevronRight, Minimize2, ListFilter, ArrowDownUp, ImageIcon, Video, ArrowRight, LayoutGrid, StretchHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-interface GalleryImage {
-    src: string;
-    title: string;
-    type: 'image' | 'video';
-}
+import { getAllGalleryImages, GalleryImage } from "@/app/actions/getGalleryImages";
 
 type FilterType = 'all' | 'image' | 'video';
 // type SortType = 'newest' | 'oldest';
@@ -29,8 +24,25 @@ export default function CleanFilmGrid({ isLowPowerMode }: { isLowPowerMode?: boo
     const [galleryItems, setGalleryItems] = useState<any[]>([]);
 
     useEffect(() => {
-        // Static export - no dynamic images
-        setGalleryItems([]);
+        const fetchImages = async () => {
+            try {
+                const images = await getAllGalleryImages();
+                const formattedItems = images.map((img, index) => ({
+                    id: `gallery-${index}`,
+                    title: img.filename.split('.')[0].replace(/-/g, ' '),
+                    type: 'image',
+                    category: 'Gallery',
+                    date: '2024',
+                    thumbnail: img.src,
+                    url: img.src,
+                    description: 'Gallery Image'
+                }));
+                setGalleryItems(formattedItems);
+            } catch (error) {
+                console.error("Failed to load gallery images", error);
+            }
+        };
+        fetchImages();
     }, []);
 
     // Use dynamic items instead of portfolioData

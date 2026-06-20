@@ -11,6 +11,7 @@ import type { Project } from '@/types';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
+import { getAllGalleryImages } from '@/app/actions/getGalleryImages';
 
 export const BentoHero = ({ isLowPowerMode }: { isLowPowerMode?: boolean }) => {
     const t = useTranslations('blog');
@@ -54,8 +55,15 @@ export const BentoHero = ({ isLowPowerMode }: { isLowPowerMode?: boolean }) => {
     const [randomGalleryImages, setRandomGalleryImages] = useState<string[]>([]);
 
     useEffect(() => {
-        // Static export - no dynamic images
-        setRandomGalleryImages([]);
+        const fetchImages = async () => {
+            const images = await getAllGalleryImages();
+            if (images && images.length > 0) {
+                // Shuffle and pick 5
+                const shuffled = [...images].sort(() => 0.5 - Math.random());
+                setRandomGalleryImages(shuffled.slice(0, 5).map(img => img.src));
+            }
+        };
+        fetchImages();
     }, []);
 
     useEffect(() => {

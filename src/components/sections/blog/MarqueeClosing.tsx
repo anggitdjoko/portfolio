@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, ArrowUpRight, Code, Heart, Sparkles, Mail } from 'lucide-react';
+import { LiquidOcean } from '@/components/ui/liquid-ocean';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
