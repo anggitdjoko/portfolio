@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono, Playfair_Display, Alex_Brush } from 'next/font/google';
+import { getMessages, getLocale } from 'next-intl/server';
 import { ThemeProvider, I18nProvider, SmoothScrollProvider } from '@/providers';
 
 import '@/styles/globals.css';
@@ -31,25 +32,44 @@ const signature = Alex_Brush({
 
 export const metadata: Metadata = {
     title: {
-        default: 'Anggit Djoko Wibowo | Full-Stack Developer',
-        template: '%s | Anggit Portfolio',
+        default: 'Arfazrll | AI & Software Engineer',
+        template: '%s | Portfolio',
     },
-    description: 'Full-Stack Developer building web apps with Next.js, React, and TypeScript. Currently Building Servgo, a SaaS POS platform.',
-    keywords: ['developer', 'portfolio', 'full-stack', 'nextjs', 'react', 'typescript'],
-    authors: [{ name: 'Anggit Djoko Wibowo' }],
-    creator: 'Anggit Djoko Wibowo',
+    description: 'A passionate developer building digital experiences that inspire. Explore my projects, skills, and professional journey.',
+    keywords: ['developer', 'portfolio', 'web development', 'full stack', 'react', 'nextjs'],
+    authors: [{ name: 'Your Name' }],
+    creator: 'Your Name',
+    metadataBase: new URL('https://your-domain.com'),
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        title: 'Anggit Djoko Wibowo | Full-Stack Developer',
-        description: 'Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
-        siteName: 'Anggit Portfolio',
+        url: 'https://your-domain.com',
+        title: 'Arfazrll | AI & Software Engineer',
+        description: 'A passionate developer building digital experiences that inspire.',
+        siteName: 'Portfolio',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Anggit Djoko Wibowo | Full-Stack Developer',
-        description: 'Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
-        creator: '@anggitdjoko',
+        title: 'Arfazrll | AI & Software Engineer',
+        description: 'A passionate developer building digital experiences that inspire.',
+        creator: '@yourusername',
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
+    icons: {
+        icon: [
+            { url: '/Arfazrll_light.svg', media: '(prefers-color-scheme: light)' },
+            { url: '/Arfazrll_dark.svg', media: '(prefers-color-scheme: dark)' },
+        ],
     },
 };
 
@@ -60,20 +80,33 @@ export const viewport: Viewport = {
     ],
     width: 'device-width',
     initialScale: 1,
+    minimumScale: 1,
 };
 
-export default function RootLayout({
+import { ThemeAwareClickSpark } from '@/components/ui/ThemeAwareClickSpark';
+import { ConditionalNavigation } from '@/components/layout/ConditionalNavigation';
+import { ChatBot } from '@/components/layout/ChatBot';
+
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const locale = await getLocale();
+    const messages = await getMessages();
+
     return (
-        <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+        <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
             <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} ${signature.variable} font-sans relative`}>
                 <ThemeProvider>
-                    <I18nProvider>
+                    <I18nProvider locale={locale} messages={messages}>
                         <SmoothScrollProvider>
-                            {children}
+                            <ThemeAwareClickSpark>
+                                <ConditionalNavigation>
+                                    {children}
+                                </ConditionalNavigation>
+                                <ChatBot headless />
+                            </ThemeAwareClickSpark>
                         </SmoothScrollProvider>
                     </I18nProvider>
                 </ThemeProvider>
