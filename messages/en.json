@@ -351,23 +351,23 @@
         "faqData": [
             {
                 "q": "What is your main area of expertise?",
-                "a": "As an Information Technology student at Telkom University and a Research Assistant at the Cyber Physical System Laboratory, I specialize in the intersection of Artificial Intelligence (Computer Vision & Deep Learning), Full-stack Development (Next.js & Node.js), and emerging Blockchain/Web3 technologies."
+                "a": "I'm a Full-Stack Developer and Data Analyst. I build web apps with Next.js, React, TypeScript, and Supabase, and conduct data analysis projects with SQL, Python, Tableau, and Excel."
             },
             {
-                "q": "Are you available for research or freelance collaborations?",
-                "a": "Absolutely. I am currently active in AI research at the CPS Lab and HUMIC Research Center, but I'm always open to innovative freelance projects, internships, or technical collaborations that bridge innovation with strategic execution."
+                "q": "Are you available for freelance projects?",
+                "a": "Yes! I'm open to web app development, SaaS projects, data analysis, and automation work. Feel free to reach out via email or WhatsApp."
             },
             {
-                "q": "What is your typical tech stack for production?",
-                "a": "For AI projects, I primarily use Python with TensorFlow, PyTorch, and YOLO. For web applications, my go-to is the T3-style stack: Next.js, TypeScript, and Tailwind CSS, often integrated with AI Agents or Smart Contracts where appropriate."
+                "q": "What is your typical tech stack?",
+                "a": "For web apps: Next.js, React, TypeScript, Supabase, PostgreSQL, Tailwind CSS, Vercel. For data analysis: Python (Pandas, NumPy), SQL, Tableau, Excel."
             },
             {
-                "q": "Do you have experience with enterprise or lab projects?",
-                "a": "Yes, I've served as a System Analyst and AI Developer in various research-driven environments. I've architected everything from AIoT platforms and attack detection systems to student practicum modules for global audiences."
+                "q": "Do you have production experience?",
+                "a": "Yes, I built Servgo, a SaaS platform for cafés and restaurants that's live serving 2 outlets with POS, digital storefront, and analytics dashboard."
             },
             {
-                "q": "How can we start a partnership or project?",
-                "a": "The most efficient way is to use the contact form above or reach out directly via email at azril4974@gmail.com. I'm usually able to respond within 24 hours to discuss how my technical skill set can add value to your initiatives."
+                "q": "How can we start a project?",
+                "a": "The most efficient way is to use the contact form above or reach out directly via email at anggitdjokow00@gmail.com. I usually respond within 24 hours."
             }
         ]
     },
@@ -377,11 +377,11 @@
         "more": "More",
         "marquee": [
             "Open to Opportunities",
-            "Frontend Development",
-            "Backend Architecture",
-            "UI/UX Design",
-            "Creative Coding",
-            "System Optimization"
+            "Full-Stack Development",
+            "Data Analytics",
+            "SaaS Products",
+            "Web Applications",
+            "Dashboard & Visualization"
         ],
         "cta": {
             "title": "Let's Work",
@@ -471,7 +471,7 @@
     },
     "blog": {
         "title": "Thoughts & Explorations",
-        "subtitle": "Bridging the gap between technical complexity and practical implementation. A collection of insights on AI, Web3, and Software Engineering.",
+        "subtitle": "Web development, data analytics, and building products that matter. A collection of insights on full-stack development and data-driven decisions.",
         "sectionBadge": "The Digital Archive",
         "search": "Search articles...",
         "readTime": "min read",
@@ -495,9 +495,9 @@
         },
         "viewMedia": "View Media"
     },
-    "chatbot": {
-        "title": "AI Assistant",
-        "subtitle": "Ask me about Azril",
+      "chatbot": {
+          "title": "Assistant",
+          "subtitle": "Ask me about Anggit",
         "placeholder": "Type a message...",
         "greeting": "Hi! I'm an AI assistant for **{name}**. 👋\n\nI can answer questions about:\n- Skills & technical expertise\n- Projects and work\n- Experience\n- Education\n- And more!\n\nAnything you'd like to ask?",
         "suggestions": [

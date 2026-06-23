@@ -36,7 +36,7 @@
     },
     "hero": {
         "greeting": "Selamat datang di ruang digital saya",
-        "subtitle": "Full Stack Developer • AI Engineer • Data Scientist",
+        "subtitle": "Full-Stack Developer · Data Analyst",
         "cta": {
             "primary": "Jelajahi Proyek",
             "secondary": "Hubungi Saya",
@@ -44,13 +44,13 @@
         },
         "badge": "Terbuka untuk peluang",
         "scroll": "Gulir ke Bawah",
-        "role": "Software Engineer",
-        "description": "Membangun sistem cerdas di persimpangan <span class='text-primary font-semibold'>AI</span>, <span class='text-secondary font-semibold'>Rekayasa</span>, dan <span class='text-accent font-semibold'>Arsitektur Skalabel</span>."
+        "role": "Full-Stack Developer",
+        "description": "Saya membangun aplikasi web yang menyelesaikan masalah nyata. Saat ini mengembangkan <span class='text-primary font-semibold'>Servgo</span>, platform SaaS POS & etalase digital untuk kafe dan restoran. Latar belakang <span class='text-secondary font-semibold'>analisis data</span>, sekarang fokus pada <span class='text-accent font-semibold'>Next.js, React, dan TypeScript</span>."
     },
     "about": {
         "title": "Tentang Saya",
-        "subtitle": "Tech Explorer & Problem Solver",
-        "description": "Seorang tech explorer yang bersemangat dengan spesialisasi dalam Full Stack Development, Artificial Intelligence, dan Data Science. Saat ini sedang mendalami AI Agents dan teknologi Blockchain.",
+        "subtitle": "Full-Stack Developer · Data Analyst",
+        "description": "Saya memulai dari analisis data, menghabiskan berminggu-minggu mengubah spreadsheet yang berantakan menjadi keputusan bisnis untuk perusahaan di bidang logistik, F&B, dan alat berat. Sekarang saya bekerja full-stack dengan Next.js, React, TypeScript, dan Supabase. Proyek saat ini adalah Servgo, platform SaaS yang menggabungkan POS, etalase digital, dan analitik untuk kafe dan restoran.",
         "stats": {
             "experience": "Tahun Belajar",
             "projects": "Proyek Selesai",
@@ -62,16 +62,16 @@
         "digitalReality": "Realitas Digital",
         "leadIn": {
             "label": "APA YANG SAYA LAKUKAN",
-            "applied": "Terapan",
-            "intelligence": "kecerdasan.",
-            "production": "Produksi",
-            "engineering": "rekayasa.",
-            "thesis": "Saya membangun sistem cerdas dan <span class='text-primary italic font-serif-elegant font-normal'>infrastruktur data</span> yang membuatnya handal dalam skala besar.",
-            "scope": "Berfokus pada model prediktif, pemrosesan data yang dioptimalkan, dan pipeline RAG yang dirancang untuk lingkungan produksi dan performa terukur.",
-            "bridging": "Menghubungkan lab dan sistem langsung.",
-            "integration": "Selain model, saya merancang ekosistem full-stack: backend yang aman, arsitektur data yang kuat, dan pipeline yang skalabel.",
-            "signature": "Azril",
-            "role": "AI, Data & Software Engineer",
+            "applied": "Full-Stack",
+            "intelligence": "Developer.",
+            "production": "Data",
+            "engineering": "Analyst.",
+            "thesis": "Saya membangun aplikasi web yang menyelesaikan masalah nyata. Saat ini mengembangkan <span class='text-primary italic font-serif-elegant font-normal'>Servgo</span>, platform SaaS POS & etalase digital untuk kafe dan restoran.",
+            "scope": "Membangun aplikasi web produksi dengan Next.js, React, TypeScript, dan Supabase. Latar belakang analisis data dengan SQL, Python, Tableau, dan Excel.",
+            "bridging": "Dari analisis data ke pengembangan full-stack.",
+            "integration": "Pengembangan produk end-to-end: desain database, autentikasi, pembayaran, dashboard real-time, arsitektur multi-tenant.",
+            "signature": "Anggit",
+            "role": "Full-Stack Developer · Data Analyst",
             "aboutMe": "Tentang Saya",
             "scroll": "Scroll untuk Jelajah",
             "shortStory": "Cerita Singkat Saya"
@@ -79,46 +79,46 @@
         "coreEngineering": {
             "label": "Rekayasa Inti",
             "title": "<span class='text-primary italic font-serif font-light lowercase'>stack</span> yang Terbukti. <br /> <span class='italic font-serif font-light text-foreground'>hasil</span> yang Terukur.",
-            "p1": "Saya mengembangkan sistem AI terapan menggunakan TensorFlow, Scikit-learn, dan LangChain, menyusun alur kerja dan mengekspos model sebagai layanan melalui Flask dan FastAPI.",
-            "p2": "Diintegrasikan ke dalam aplikasi full-stack dengan Next.js, Express.js, dan Spring Boot, didukung oleh PostgreSQL dan Prisma ORM.",
-            "p3": "Semua proyek menggunakan kontrol versi yang disiplin, kontainerisasi Docker, dan dibangun untuk penerapan produksi yang stabil.",
-            "gpa": "IPK Akademik",
-            "projects": "Proyek yang Dibangun",
-            "years": "Tahun Pengalaman"
+            "p1": "Saya membangun aplikasi web produksi dengan Next.js, React, TypeScript, dan Supabase, fokus pada arsitektur yang skalabel dan kode yang bersih.",
+            "p2": "Latar belakang analisis data saya mendasari pengambilan keputusan: SQL, Python, Tableau, dan Excel untuk wawasan yang dapat ditindaklanjuti.",
+            "p3": "Saat ini mengembangkan Servgo, platform SaaS dengan 31 tabel database, melayani 2 lokasi live dengan dashboard real-time.",
+            "gpa": "Proyek yang Dikirim",
+            "projects": "Tabel DB Dibangun",
+            "years": "Record Dianalisis"
         },
         "emergingResearch": {
-            "label": "Fase Eksplorasi",
-            "title": "RISET YANG MUNCUL <span class='italic font-serif font-light text-primary lowercase'>&</span> EKSPANSI",
-            "agentic": {
-                "title": "SISTEM AI AGENTIK",
-                "desc": "Menjelajahi agen otonom, orkestrasi multi-agen, dan kerangka kerja penalaran — memperluas fondasi AI terapan saya ke dalam sistem pengambilan keputusan mandiri."
+            "label": "Fokus Saat Ini",
+            "title": "PENGEMBANGAN WEB <span class='italic font-serif font-light text-primary lowercase'>&</span> ANALISIS DATA",
+            "webDev": {
+                "title": "PENGEMBANGAN WEB FULL-STACK",
+                "desc": "Membangun aplikasi web dan platform SaaS dengan Next.js, React, TypeScript, dan Supabase. Fokus pada arsitektur yang skalabel dan pengalaman pengguna."
             },
-            "web3": {
-                "title": "WEB3 & BLOCKCHAIN",
-                "desc": "Membangun aplikasi terdesentralisasi dengan Solidity dan Hardhat. Saat ini sedang mengerjakan pengembangan smart contract melalui proyek-proyek seperti Web3 Guestbook DApp di Ethereum."
+            "dataAnalytics": {
+                "title": "ANALISIS DATA",
+                "desc": "Melakukan proyek analisis data end-to-end untuk klien di bidang F&B, logistik, dan distribusi. Membangun dashboard interaktif dengan Tableau dan Python."
             }
         },
         "profile": {
-            "title": "Membangun <br class='hidden lg:block' /> Sistem Skalabel <br /> Tempat <span class='text-primary italic font-serif font-light lowercase'>Kecerdasan</span> <br /> Bertemu Rekayasa.",
+            "title": "Membangun Aplikasi Web <br /> Yang Menyelesaikan Masalah Nyata.",
             "narrativeLabel": "Narasi Inti",
-            "narrative": "Sebagai mahasiswa Teknologi Informasi yang berfokus pada Kecerdasan Buatan dan Rekayasa Perangkat Lunak, saya membangun sistem yang menjembatani fondasi riset dengan implementasi siap produksi.",
-            "narrative2": "Pekerjaan saya memadukan pemikiran algoritmik, rekayasa backend, dan arsitektur yang skalabel untuk menghadirkan solusi yang cerdas, andal, dan siap digunakan di dunia nyata.",
+            "narrative": "Saya memulai dari analisis data, menghabiskan berminggu-minggu mengubah spreadsheet yang berantakan menjadi keputusan bisnis untuk perusahaan di bidang logistik, F&B, dan alat berat. Di suatu titik saya ketagihan programming dan memutuskan untuk berhenti menganalisis produk orang lain dan membangun sendiri.",
+            "narrative2": "Sekarang saya bekerja full-stack dengan Next.js, React, TypeScript, dan Supabase. Proyek saat ini adalah Servgo, platform SaaS yang menggabungkan POS, etalase digital, dan analitik untuk kafe dan restoran. Sudah live, melayani rantai kopi dengan 2 lokasi.",
             "pillars": {
                 "reliable": {
-                    "title": "Robust by Design",
-                    "desc": "Direkayasa untuk keandalan di bawah skala dan tekanan operasional."
+                    "title": "Siap Produksi",
+                    "desc": "Produk live yang melayani pengguna nyata, bukan hanya demo portfolio."
                 },
                 "optimized": {
-                    "title": "Siap Produksi",
-                    "desc": "Dari prototipe hingga deployment dengan disiplin rekayasa."
+                    "title": "Berbasis Data",
+                    "desc": "Latar belakang analitik mendorong keputusan produk yang lebih baik."
                 },
                 "maintainable": {
-                    "title": "Dirancang untuk Evolusi",
-                    "desc": "Didesain untuk tumbuh, beradaptasi, dan mempertahankan pengembangan sistem jangka panjang."
+                    "title": "Arsitektur Skalabel",
+                    "desc": "SaaS multi-tenant dengan 31 tabel database dan dashboard real-time."
                 },
                 "evolvable": {
-                    "title": "Kecerdasan Berbasis Data",
-                    "desc": "Keputusan didukung oleh model, metrik, dan performa yang terukur."
+                    "title": "Kepemilikan Full-Stack",
+                    "desc": "Dari desain database hingga deployment, end-to-end."
                 }
             }
         },
@@ -336,23 +336,23 @@
         "faqData": [
             {
                 "q": "Apa bidang keahlian utama Anda?",
-                "a": "Sebagai mahasiswa Teknologi Informasi di Telkom University dan Asisten Peneliti di Laboratorium Cyber Physical System, saya berspesialisasi dalam persimpangan Kecerdasan Buatan (Computer Vision & Deep Learning), Full-stack Development (Next.js & Node.js), dan teknologi Blockchain/Web3 yang sedang berkembang."
+                "a": "Saya seorang Full-Stack Developer dan Data Analyst. Saya membangun aplikasi web dengan Next.js, React, TypeScript, dan Supabase, serta melakukan proyek analisis data dengan SQL, Python, Tableau, dan Excel."
             },
             {
-                "q": "Apakah Anda tersedia untuk kolaborasi riset atau freelance?",
-                "a": "Tentu saja. Saat ini saya aktif dalam riset AI di CPS Lab dan Pusat Riset HUMIC, tetapi saya selalu terbuka untuk proyek freelance inovatif, magang, atau kolaborasi teknis yang menjembatani inovasi dengan eksekusi strategis."
+                "q": "Apakah Anda tersedia untuk proyek freelance?",
+                "a": "Ya! Saya terbuka untuk pengembangan aplikasi web, proyek SaaS, analisis data, dan pekerjaan otomasi. Silakan hubungi melalui email atau WhatsApp."
             },
             {
-                "q": "Apa tech stack tipikal Anda untuk produksi?",
-                "a": "Untuk proyek AI, saya menggunakan Python dengan TensorFlow, PyTorch, dan YOLO. Untuk aplikasi web, andalan saya adalah stack T3: Next.js, TypeScript, dan Tailwind CSS, sering kali diintegrasikan dengan Agen AI atau Smart Contracts jika sesuai."
+                "q": "Apa tech stack tipikal Anda?",
+                "a": "Untuk aplikasi web: Next.js, React, TypeScript, Supabase, PostgreSQL, Tailwind CSS, Vercel. Untuk analisis data: Python (Pandas, NumPy), SQL, Tableau, Excel."
             },
             {
-                "q": "Apakah Anda memiliki pengalaman dengan proyek enterprise atau lab?",
-                "a": "Ya, saya pernah menjabat sebagai System Analyst dan Pengembang AI di berbagai lingkungan berbasis riset. Saya telah merancang mulai dari platform AIoT dan sistem deteksi serangan hingga modul praktikum siswa untuk audiens global."
+                "q": "Apakah Anda memiliki pengalaman produksi?",
+                "a": "Ya, saya membangun Servgo, platform SaaS untuk kafe dan restoran yang live melayani 2 outlet dengan dashboard POS, etalase digital, dan analitik."
             },
             {
-                "q": "Bagaimana cara memulai kemitraan atau proyek?",
-                "a": "Cara paling efisien adalah menggunakan formulir kontak di atas atau menghubungi langsung melalui email di azril4974@gmail.com. Saya biasanya dapat merespons dalam waktu 24 jam untuk mendiskusikan bagaimana keterampilan teknis saya dapat memberikan nilai tambah bagi inisiatif Anda."
+                "q": "Bagaimana cara memulai proyek?",
+                "a": "Cara paling efisien adalah menggunakan formulir kontak di atas atau menghubungi langsung melalui email di anggitdjokow00@gmail.com. Saya biasanya merespons dalam waktu 24 jam."
             }
         ]
     },
@@ -378,7 +378,7 @@
     },
     "projectHeader": {
         "title": "Merancang Realitas Digital",
-        "subtitle": "Pameran kurasi inovasi teknis dan rekayasa kreatif. Menjelajahi batas-batas <span class='font-bold text-white'>Kecerdasan Buatan</span>, Blockchain, dan pengalaman Web Imersif."
+        "subtitle": "Pameran kurasi inovasi teknis dan rekayasa kreatif. Menjelajahi pengembangan web full-stack dan analisis data.",
     },
     "footer": {
         "copyright": "Hak cipta dilindungi.",
@@ -386,11 +386,11 @@
         "more": "Lainnya",
         "marquee": [
             "Terbuka untuk Peluang",
-            "Pengembangan Frontend",
-            "Arsitektur Backend",
-            "Desain UI/UX",
-            "Coding Kreatif",
-            "Optimasi Sistem"
+            "Pengembangan Full-Stack",
+            "Analisis Data",
+            "Produk SaaS",
+            "Aplikasi Web",
+            "Dashboard & Visualisasi"
         ],
         "cta": {
             "title": "Mari Bekerja",
@@ -406,7 +406,7 @@
     "ctaSection": {
         "title": "Mari Membangun Sesuatu yang",
         "together": "Bersama",
-        "subtitle": "Terbuka untuk kolaborasi strategis dalam pengembangan sistem berbasis AI dan rekayasa full stack yang skalabel. Mari kita transformasikan ide ambisius menjadi solusi siap produksi.",
+        "subtitle": "Terbuka untuk kolaborasi dalam pengembangan web, proyek SaaS, dan analisis data. Mari kita wujudkan ide Anda.",
         "start": "Hire Me",
         "work": "View My Resume",
         "words": {
@@ -456,7 +456,7 @@
     },
     "blog": {
         "title": "Pemikiran & Eksplorasi",
-        "subtitle": "Menjembatani kesenjangan antara kompleksitas teknis dan implementasi praktis. Kumpulan wawasan tentang AI, Web3, dan Software Engineering.",
+        "subtitle": "Pengembangan web, analisis data, dan membangun produk yang bermakna. Kumpulan wawasan tentang pengembangan full-stack dan keputusan berbasis data.",
         "sectionBadge": "Digital Archive",
         "search": "Cari artikel...",
         "readTime": "menit baca",
@@ -480,9 +480,9 @@
         },
         "viewMedia": "Lihat Media"
     },
-    "chatbot": {
-        "title": "Asisten AI",
-        "subtitle": "Tanya saya tentang Azril",
+      "chatbot": {
+          "title": "Asisten",
+          "subtitle": "Tanya tentang Anggit",
         "placeholder": "Ketik pesan...",
         "greeting": "Halo! Saya asisten AI untuk **{name}**. 👋\n\nSaya bisa menjawab pertanyaan seputar:\n- Skill & keahlian teknis\n- Project dan karya\n- Pengalaman kerja\n- Pendidikan\n- Dan info lainnya!\n\nAda yang ingin kamu tanyakan?",
         "suggestions": [
