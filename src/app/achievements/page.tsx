@@ -9,6 +9,7 @@ import { cn, formatDate } from '@/lib/utils';
 import { portfolioData } from '@/data/portfolio';
 import { Achievement } from '@/types';
 import dynamic from 'next/dynamic';
+import { ClientOnly } from '@/components/ui/ClientOnly';
 
 const FallingText = dynamic(() => import('@/components/effects/FallingText'), {
     ssr: false,
@@ -623,6 +624,7 @@ export default function AchievementsPage() {
     };
 
     return (
+        <ClientOnly fallback={<div className="min-h-screen bg-[#0a0a0f]" />}>
 
         <div className="min-h-screen bg-background text-foreground overflow-y-auto overflow-x-hidden">
             {/* Hero Scroll Section */}
@@ -927,5 +929,6 @@ export default function AchievementsPage() {
                 )}
             </AnimatePresence>
         </div>
+        </ClientOnly>
     );
 }
