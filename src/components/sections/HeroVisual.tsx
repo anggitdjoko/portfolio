@@ -1,14 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
-import {
-  Instagram,
-  Github,
-  Linkedin,
-  ArrowDownRight,
-  Zap,
-  Bot
-} from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 import Link from 'next/link';
@@ -19,106 +12,6 @@ import { Spotlight } from "@/components/ui/spotlight-new";
 export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
   const { personal } = portfolioData;
   const [showProfile, setShowProfile] = useState(false);
-  const githubRef = useRef(null);
-  const linkedinRef = useRef(null);
-  const instagramRef = useRef(null);
-  const zapRef = useRef(null);
-  const zapSmallRef = useRef(null);
-  const botRef = useRef(null);
-
-  useEffect(() => {
-    if (!isExiting) return;
-
-    const ctx = gsap.context(() => {
-      // Reveal + Loop for GitHub
-      gsap.fromTo(githubRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          onComplete: () => {
-            gsap.to(githubRef.current, {
-              y: -10,
-              duration: 2,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-              force3D: true
-            });
-          }
-        }
-      );
-
-      // Reveal + Loop for LinkedIn
-      gsap.fromTo(linkedinRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.1,
-          ease: "power3.out",
-          onComplete: () => {
-            gsap.to(linkedinRef.current, {
-              y: 10,
-              duration: 2.5,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-              force3D: true
-            });
-          }
-        }
-      );
-
-      // Reveal + Loop for Instagram
-      gsap.fromTo(instagramRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.2,
-          ease: "power3.out",
-          onComplete: () => {
-            gsap.to(instagramRef.current, {
-              x: 10,
-              duration: 3,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-              force3D: true
-            });
-          }
-        }
-      );
-
-      // Zap pulsing - Energetic heartbeat effect
-      gsap.to([zapRef.current, zapSmallRef.current], {
-        scale: 1.2,
-        duration: 0.6,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-        force3D: true
-      });
-
-      // Bot floating - Responsive and smooth
-      gsap.to(botRef.current, {
-        rotation: 8,
-        y: -10,
-        duration: 1.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        force3D: true
-      });
-    });
-
-    return () => ctx.revert();
-  }, [isExiting]);
 
   return (
     <motion.div
@@ -154,79 +47,37 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
             >
               Hi, I'm {personal.name}. I build scalable systems powered by intelligence.
             </motion.p>
-            <div className="relative">
-              <div ref={githubRef} className="absolute -top-4 right-0 md:right-2 text-primary/60 hover:text-primary z-20 opacity-0">
-                <a
-                  href={personal.socialLinks.find(s => s.platform === 'GitHub')?.url}
-                  target="_blank"
-                  className="block"
-                >
-                  <Github size={32} />
-                </a>
-              </div>
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
-              >
-                AI & DATA
-              </motion.h1>
-            </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+            >
+              AI & DATA
+            </motion.h1>
           </div>
 
-          {/* Line 2: SOFT [ICON] WARE */}
+          {/* Line 2: SOFTWARE */}
           <div className="md:flex gap-8 items-center relative">
-            <div className="relative">
-              <div ref={linkedinRef} className="absolute -top-8 left-4 text-primary/60 hover:text-primary z-20 opacity-0">
-                <a
-                  href={personal.socialLinks.find(s => s.platform === 'LinkedIn')?.url}
-                  target="_blank"
-                  className="block"
-                >
-                  <Linkedin size={32} />
-                </a>
-              </div>
-              <div ref={instagramRef} className="absolute -bottom-12 right-24 md:right-36 text-primary/60 hover:text-primary z-20 opacity-0">
-                <a
-                  href={personal.socialLinks.find(s => s.platform === 'Instagram')?.url}
-                  target="_blank"
-                  className="block"
-                >
-                  <Instagram size={32} />
-                </a>
-              </div>
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[clamp(2rem,8vw,13rem)] md:flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
-              >
-                <span className="">SOFT</span>
-                <div ref={zapRef} className="hidden lg:block mx-[0.05em]">
-                  <Zap className="w-[0.8em] h-[0.8em] text-sky-400" strokeWidth={1.5} />
-                </div>
-                <div ref={zapSmallRef} className="block lg:hidden mx-[0.02em]">
-                  <Zap className="w-[0.8em] h-[0.8em] text-sky-400" strokeWidth={2} />
-                </div>
-                <span className="">WARE</span>
-              </motion.h1>
-            </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+            >
+              SOFTWARE
+            </motion.h1>
           </div>
 
-          {/* Line 3: EN [ICON] GINEER */}
+          {/* Line 3: ENGINEER */}
           <div className="md:flex gap-8 items-center relative">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2rem,8vw,13rem)] md:flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
+              className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
             >
-              <span className="">EN</span>
-              <div ref={botRef} className="mx-[0.05em] relative">
-                <Bot className="w-[0.85em] h-[0.85em] text-yellow-500 fill-yellow-500/10" />
-              </div>
-              <span className="">GINEER</span>
+              ENGINEER
             </motion.h1>
 
             <motion.p
