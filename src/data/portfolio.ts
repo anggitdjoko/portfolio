@@ -4,14 +4,15 @@ export const portfolioData: PortfolioData = {
     personal: {
         name: 'Anggit Djoko Wibowo',
         title: 'Full-Stack Developer',
-        subtitle: 'Full-Stack Developer • Building Digital Experiences That Matter',
-        bio: 'Full-Stack Developer specializing in Next.js, React, and TypeScript. Currently building Servgo, a SaaS POS platform for cafés and restaurants. Background in data analytics.',
+        subtitle: 'Full-Stack Developer · Data Analyst',
+        bio: 'I build web apps that solve real problems. Currently shipping Servgo, a SaaS POS & storefront platform for cafés and restaurants. Background in data analytics, now full-time on Next.js, React, and TypeScript.',
         avatar: '/portfolio/about/anggit.jpg',
-        location: 'Indonesia',
-        email: 'anggitdjoko@gmail.com',
-        phone: '+628xxxxxxxxxx',
+        location: 'Pontianak, Indonesia',
+        email: 'anggitdjokow00@gmail.com',
+        phone: '+62 813 5033 8618',
         resumeUrl: '/resume',
         website: 'https://anggitdjoko.github.io/portfolio',
+        education: 'Politeknik Negeri Pontianak',
         languages: [
             { name: 'Indonesian', level: 'Native' },
             { name: 'English', level: 'Professional' },
@@ -31,9 +32,15 @@ export const portfolioData: PortfolioData = {
             },
             {
                 platform: 'Email',
-                url: 'mailto:anggitdjoko@gmail.com',
+                url: 'mailto:anggitdjokow00@gmail.com',
                 icon: 'email',
-                username: 'anggitdjoko@gmail.com',
+                username: 'anggitdjokow00@gmail.com',
+            },
+            {
+                platform: 'WhatsApp',
+                url: 'https://wa.me/6281350338618',
+                icon: 'whatsapp',
+                username: '+62 813 5033 8618',
             },
         ],
     },
@@ -1836,10 +1843,200 @@ WAKATIME_API_KEY=your_wakatime_key`
                     solution: "Implemented hierarchical filtering (Category -> Sub-category) to keep visualizations focused and easy to interpret for non-technical stakeholders."
                 }
             ]
+        },
+        {
+            id: 'project-23',
+            slug: 'restaurant-sales-analytics',
+            title: 'Restaurant Sales & Menu Analytics',
+            description: 'Full exploratory data analysis on restaurant transactions: best/worst selling menu items, peak hours, payment methods, sales channels, daily trends.',
+            longDescription: 'Full exploratory data analysis on restaurant transactions: best and worst selling menu items, peak hours, payment methods, sales channels, daily trends, and customer behavior analysis for PT Jar Andalan Rasa.',
+
+            techStack: ['Python', 'Excel', 'EDA', 'Data Visualization'],
+            tools: ['Excel', 'Python', 'Jupyter Notebook'],
+            status: 'completed',
+            repoUrl: null,
+            demoUrl: '#',
+            startDate: '2025-01-01',
+            role: 'Data Analyst',
+            customTimeline: '2025',
+            team: 'Freelance',
+
+            highlights: ['7.4K Records', 'Rp 164.8M Net Sales', '2,254 Transactions'],
+            category: 'Data Analytics',
+            features: [
+                {
+                    title: 'Analysis Scope',
+                    items: [
+                        '**Menu Performance**: Best and worst selling menu items with revenue contribution analysis.',
+                        '**Peak Hours Analysis**: Transaction volume patterns throughout the day and week.',
+                        '**Payment Methods**: Distribution of cash, QRIS, and digital wallet transactions.',
+                        '**Sales Channels**: Dine-in vs delivery platform comparison (GoFood, GrabFood).',
+                    ]
+                },
+                {
+                    title: 'Key Impact',
+                    items: [
+                        '**Revenue Opportunity**: Quantified Rp 30-50M annual revenue opportunity from underutilized GoFood/GrabFood channels (only 2.8% of current sales).',
+                        '**Customer Behavior**: Identified ordering patterns and preferences for menu optimization.',
+                    ]
+                },
+            ],
+            challengesAndSolutions: [
+                {
+                    problem: "Underutilized Delivery Channels",
+                    solution: "Quantified Rp 30-50M annual revenue opportunity from GoFood/GrabFood channels contributing only 2.8% of current sales."
+                }
+            ]
+        },
+        {
+            id: 'project-24',
+            slug: 'lpg-distribution-analysis',
+            title: 'LPG 3Kg Distribution Analysis 2023-2024',
+            description: 'Comprehensive 2-year analysis of LPG distribution: baseline establishment, YoY growth tracking, government policy impact analysis.',
+            longDescription: 'Comprehensive 2-year analysis: from establishing the 2023 baseline (31,459 txn) to tracking +19.9% YoY growth in 2024 (37,723 txn). Analyzed government policy impact on Household vs SME segmentation and adaptive distribution strategies for Pangkalan Gas Joeherman.',
+
+            techStack: ['Excel', 'SQL', 'Tableau', 'YoY Analysis', 'Demand Analysis'],
+            tools: ['Excel', 'Tableau', 'SQL'],
+            status: 'completed',
+            repoUrl: null,
+            demoUrl: '#',
+            startDate: '2023-01-01',
+            role: 'Data Analyst',
+            customTimeline: '2023 - 2024',
+            team: 'Freelance',
+
+            highlights: ['69.2K Transactions', '+19.9% YoY Growth', 'Rp 207.5M Combined Profit'],
+            category: 'Data Analytics',
+            features: [
+                {
+                    title: 'Analysis Scope',
+                    items: [
+                        '**2-Year Trend Analysis**: Baseline 2023 (31,459 txn) to 2024 (37,723 txn) with +19.9% YoY growth.',
+                        '**Segmentation**: Household vs SME distribution patterns and government policy impact.',
+                        '**Profit Tracking**: Documented +18.9% profit increase YoY (Rp 94.3M to Rp 113.2M).',
+                    ]
+                },
+                {
+                    title: 'Key Impact',
+                    items: [
+                        '**Growth Documentation**: 69,182 transactions analyzed over 2 years.',
+                        '**Policy Analysis**: Government policy impact on distribution strategies.',
+                    ]
+                },
+            ],
+            challengesAndSolutions: [
+                {
+                    problem: "Government Policy Impact",
+                    solution: "Analyzed policy changes affecting Household vs SME segmentation and developed adaptive distribution strategies."
+                }
+            ]
+        },
+        {
+            id: 'project-25',
+            slug: 'kobelco-spare-parts-analytics',
+            title: 'Spare Parts Sales & Inventory Analytics',
+            description: 'Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion for KOBELCO heavy machinery.',
+            longDescription: 'Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion. Evaluated sales trends, customer concentration, fast-moving items, material group performance, and inventory optimization for KOBELCO heavy machinery at PT DKCMI.',
+
+            techStack: ['Excel', 'Tableau', 'WMS', 'Inventory Analysis'],
+            tools: ['Excel', 'Tableau', 'WMS'],
+            status: 'completed',
+            repoUrl: null,
+            demoUrl: '#',
+            startDate: '2023-01-01',
+            role: 'Logistics Analyst',
+            customTimeline: 'Jan - Sep 2023',
+            team: 'PT DKCMI (KOBELCO)',
+
+            highlights: ['7,153 Transactions', 'Rp 17.6B Total Sales', '319 Unique Parts'],
+            category: 'Data Analytics',
+            features: [
+                {
+                    title: 'Analysis Scope',
+                    items: [
+                        '**Transaction Analysis**: 7,153 spare parts transactions worth Rp 17.6 Billion.',
+                        '**Inventory Optimization**: ABC analysis to classify fast-moving items for 319 unique parts.',
+                        '**Sales Trends**: Customer concentration and material group performance evaluation.',
+                    ]
+                },
+                {
+                    title: 'Key Impact',
+                    items: [
+                        '**Stock-out Reduction**: Contributed to 20% stock-out reduction through predictive reorder analysis.',
+                        '**Management Reporting**: Weekly performance reports and dashboards for decision-making.',
+                    ]
+                },
+            ],
+            challengesAndSolutions: [
+                {
+                    problem: "Inventory Stock-outs",
+                    solution: "Implemented ABC analysis to classify fast-moving items, reducing stock-outs by 20% through predictive reorder analysis on Rp 17.6B inventory."
+                }
+            ]
         }
     ],
     experiences: [
-        // 1. PROFESSIONAL EXPERIENCE
+        // 1. CURRENT ROLES (from CV)
+        {
+            id: 'prof-0a',
+            company: 'Independent',
+            position: 'Full-Stack Developer',
+            description: 'Building web applications and SaaS platforms with modern tech stack.',
+            responsibilities: [
+                'Building Servgo, a SaaS platform combining POS, digital storefront, and analytics for cafés & restaurants. Live, serving 2 outlets.',
+                'End-to-end product development: database design (31 tables), authentication, payments, real-time dashboards, multi-tenant architecture.',
+                'Stack: Next.js 14, React, TypeScript, Supabase, PostgreSQL, Tailwind CSS, Vercel.',
+                'Open to new web app, SaaS, and automation projects.',
+            ],
+            skills: ['Next.js', 'React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
+            startDate: '2024-01-01',
+            endDate: null,
+            isOngoing: true,
+            location: 'Remote',
+            type: 'freelance',
+            logo: null,
+            externalLink: 'https://github.com/anggitdjoko',
+        },
+        {
+            id: 'prof-0b',
+            company: 'Independent',
+            position: 'Freelance Data Analyst',
+            description: 'End-to-end data analysis projects for clients across F&B, logistics, and distribution industries.',
+            responsibilities: [
+                'Conduct end-to-end data analysis projects for clients across F&B, logistics, and distribution industries.',
+                'Build interactive dashboards and visualizations using Tableau and Python to present actionable insights.',
+                'Deliver comprehensive analytical reports covering sales trends, customer segmentation, and operational optimization.',
+            ],
+            skills: ['Python', 'SQL', 'Tableau', 'Excel', 'Data Visualization', 'Pandas'],
+            startDate: '2024-01-01',
+            endDate: null,
+            isOngoing: true,
+            location: 'Remote',
+            type: 'freelance',
+            logo: null,
+            externalLink: null,
+        },
+        {
+            id: 'prof-0c',
+            company: 'PT DKCMI (KOBELCO)',
+            position: 'Logistics Analyst',
+            description: 'Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion using Excel, SQL, and Tableau.',
+            responsibilities: [
+                'Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion using Excel, SQL, and Tableau.',
+                'Managed Warehouse Management System (WMS) and optimized inventory levels for 319 unique parts.',
+                'Implemented ABC analysis to classify fast-moving items, reducing stock-outs by 20%.',
+                'Created weekly performance reports and dashboards for management decision-making.',
+            ],
+            skills: ['Excel', 'SQL', 'Tableau', 'WMS', 'Inventory Analysis', 'ABC Analysis'],
+            startDate: '2023-01-01',
+            endDate: '2023-09-01',
+            isOngoing: false,
+            location: 'Pontianak',
+            type: 'contract',
+            logo: null,
+            externalLink: null,
+        },
+        // 2. PROFESSIONAL EXPERIENCE
         {
             id: 'prof-1',
             company: 'Dicoding Academy',
@@ -2279,32 +2476,15 @@ WAKATIME_API_KEY=your_wakatime_key`
     education: [
         {
             id: 'edu-1',
-            institution: 'Telkom University',
-            degree: 'Bachelor of Technology',
+            institution: 'Politeknik Negeri Pontianak',
+            degree: 'Diploma',
             major: 'Information Technology',
-            startDate: '2023-08-01',
-            isOngoing: true,
-            gpa: '3.8/4.0',
-            activities: ['GDSC ML Path', 'CPS Lab Researcher', 'HMIT Academic', 'Data Science Competitions'],
-            achievements: [
-                'ML Project Final Score: 92/100',
-                'Active in national data science competitions',
-                'Research Assistant at multiple laboratories',
-            ],
-        },
-        {
-            id: 'edu-2',
-            institution: 'SMAN 88 Jakarta',
-            degree: 'High School Diploma',
-            major: 'Science (IPA)',
-            startDate: '2020-06-01',
-            endDate: '2023-06-30',
+            startDate: '2021-08-01',
             isOngoing: false,
-            activities: ['Science Studies'],
-            achievements: [
-                'Strong foundation in mathematics and physics',
-                'Analytical thinking development',
-            ],
+            endDate: '2024-06-30',
+            gpa: null,
+            activities: [],
+            achievements: [],
         },
     ],
     achievements: [
@@ -2626,6 +2806,42 @@ WAKATIME_API_KEY=your_wakatime_key`
             category: 'certification',
             image: '/certificate/Dasar Artificial Intelligence.pdf',
         },
+        {
+            id: 'cert-31',
+            title: 'Data Analytics with Spreadsheet',
+            issuer: 'RevoU',
+            date: '2024-01-01',
+            category: 'certification',
+            tags: ['Data Analytics', 'Spreadsheet', 'Excel'],
+            image: null,
+        },
+        {
+            id: 'cert-32',
+            title: 'SQL for Data Analysis',
+            issuer: 'RevoU',
+            date: '2024-01-01',
+            category: 'certification',
+            tags: ['SQL', 'Data Analysis'],
+            image: null,
+        },
+        {
+            id: 'cert-33',
+            title: 'Data Analysis with Python',
+            issuer: 'RevoU',
+            date: '2024-01-01',
+            category: 'certification',
+            tags: ['Python', 'Data Analysis', 'Pandas'],
+            image: null,
+        },
+        {
+            id: 'cert-34',
+            title: 'Data Visualization with Tableau',
+            issuer: 'RevoU',
+            date: '2024-01-01',
+            category: 'certification',
+            tags: ['Tableau', 'Data Visualization', 'BI'],
+            image: null,
+        },
     ],
     techStack: [
         { name: 'Python', icon: 'https://cdn.simpleicons.org/python', category: 'language' },
@@ -2654,33 +2870,23 @@ WAKATIME_API_KEY=your_wakatime_key`
         { name: 'Flask', icon: 'https://cdn.simpleicons.org/flask', category: 'framework' },
     ],
     hardSkills: [
-        { name: 'System Architecture', level: 'intermediate', category: 'software', description: 'Designing robust, scalable, and high-performance system architectures for complex applications.' },
+        // Full-Stack Development
+        { name: 'Next.js / React', level: 'expert', category: 'software', description: 'Building modern web applications with server-side rendering and React ecosystem.' },
+        { name: 'TypeScript / JavaScript', level: 'expert', category: 'software', description: 'Type-safe development with modern JavaScript and TypeScript.' },
+        { name: 'Node.js', level: 'advanced', category: 'software', description: 'Server-side JavaScript for APIs and backend services.' },
+        { name: 'Supabase / PostgreSQL', level: 'advanced', category: 'data', description: 'Database design, queries, and real-time subscriptions with Supabase and PostgreSQL.' },
+        { name: 'Tailwind CSS', level: 'expert', category: 'software', description: 'Utility-first CSS framework for rapid UI development.' },
+        { name: 'Vercel / Deployment', level: 'advanced', category: 'devops', description: 'Modern deployment platforms for Next.js applications.' },
+        { name: 'Git / GitHub', level: 'expert', category: 'devops', description: 'Version control, collaboration, and CI/CD workflows.' },
+        { name: 'REST APIs / Auth', level: 'advanced', category: 'software', description: 'Designing and implementing RESTful APIs with authentication.' },
 
-        { name: 'AI Agents & Autonomy', level: 'beginner', category: 'ai', description: 'Designing autonomous systems with recursive reasoning and decision-making capabilities.' },
-        { name: 'Large Language Models (LLM)', level: 'intermediate', category: 'ai', description: 'Expertise in fine-tuning open-source models, RAG architectures, and complex prompt engineering.' },
-        { name: 'Data Science', level: 'expert', category: 'ai', description: 'Advanced statistical analysis and predictive modeling to extract actionable insights from big data.' },
-        { name: 'Deep Learning (CV/NLP)', level: 'advanced', category: 'ai', description: 'Architecting deep neural networks for complex computer vision and natural language tasks.' },
-        { name: 'Computer Vision', level: 'intermediate', category: 'ai', description: 'Developing real-time object detection, pattern recognition, and spatial analysis systems.' },
-        { name: 'Machine Learning Ops', level: 'advanced', category: 'ai', description: 'Implementing robust pipelines for model training, deployment, and performance monitoring.' },
-        { name: 'DevOps', level: 'advanced', category: 'devops', description: 'Streamlining development workflows and infrastructure management through automation.' },
-        { name: 'Full Stack Development', level: 'expert', category: 'software', description: 'Engineering scalable web architectures from pixel-perfect frontends to robust databases.' },
-        { name: 'System Analysis', level: 'advanced', category: 'software', description: 'Translating complex stakeholder requirements into efficient and scalable technical blueprints.' },
-        { name: 'SDLC', level: 'intermediate', category: 'software', description: 'Governing the entire life cycle of software development with a focus on quality and agility.' },
-        { name: 'Software Design', level: 'advanced', category: 'software', description: 'Applying architectural patterns and principles to build maintainable and modular systems.' },
-        { name: 'Requirement Specifications', level: 'advanced', category: 'software', description: 'Defining clear, precise, and actionable technical documentation for engineering teams.' },
-        { name: 'Data Analytics', level: 'advanced', category: 'data', description: 'Transforming raw data into meaningful visualizations and strategic intelligence.' },
-        { name: 'Data Visualization', level: 'expert', category: 'data', description: 'Crafting intuitive and interactive dashboards to communicate complex data findings.' },
-        { name: 'SQL & DBMS', level: 'expert', category: 'data', description: 'Architecting and optimizing relational database schemas for high-performance applications.' },
-        { name: 'Docker & Kubernetes', level: 'intermediate', category: 'devops', description: 'Containerizing applications for consistent deployment and orchestrating cloud resources.' },
-
-        // Other Technical Skills
-        { name: 'Wazuh', level: 'beginner', category: 'other', description: 'Exploring open-source security monitoring for threat detection and compliance.' },
-        { name: 'Network Traffic Analysis', level: 'beginner', category: 'other', description: 'Analyzing packet captures to identify anomalies and optimize network performance.' },
-        { name: 'Socket Programming', level: 'expert', category: 'other', description: 'Implementing low-level network communication protocols for real-time data transfer.' },
-        { name: 'Google Cloud Platform', level: 'beginner', category: 'other', description: 'Utilizing cloud infrastructure and services for scalable application hosting.' },
-        { name: 'Solidity', level: 'beginner', category: 'other', description: 'Writing secure smart contracts for decentralized applications on Ethereum.' },
-        { name: 'Decentralized Applications (DApps)', level: 'beginner', category: 'other', description: 'Developing web applications that interact with blockchain smart contracts.' },
-        { name: 'Blockchain Architecture', level: 'beginner', category: 'other', description: 'Understanding the fundamental principles of distributed ledger technologies.' },
+        // Data & Analytics
+        { name: 'SQL', level: 'expert', category: 'data', description: 'Complex queries, joins, aggregations, and database optimization.' },
+        { name: 'Python (Pandas, NumPy)', level: 'advanced', category: 'data', description: 'Data manipulation, analysis, and numerical computing with Python.' },
+        { name: 'Tableau', level: 'advanced', category: 'data', description: 'Interactive data visualization and business intelligence dashboards.' },
+        { name: 'Power BI', level: 'intermediate', category: 'data', description: 'Business analytics and data visualization with Microsoft Power BI.' },
+        { name: 'Excel (Pivot, Power Query)', level: 'expert', category: 'data', description: 'Advanced spreadsheet analysis, pivot tables, and data transformation.' },
+        { name: 'Data Visualization', level: 'expert', category: 'data', description: 'Crafting intuitive dashboards to communicate complex data findings.' },
     ],
     softSkills: [
         { name: 'Problem Solving', description: 'Innovative debugging and algorithmic optimization' },
