@@ -29,60 +29,62 @@
 
 @layer base {
   :root {
-    /* Light Mode - White dominant with black/gray accents */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
-    --border: 0 0% 90%;
-    --ring: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    /* Light Mode - Soft Cream with Sage Green accents */
+    --background: 48 100% 97%;
+    --foreground: 150 15% 15%;
+    --card: 48 50% 95%;
+    --card-foreground: 150 15% 15%;
+    --primary: 150 30% 35%;
+    --primary-foreground: 48 100% 97%;
+    --secondary: 150 20% 90%;
+    --secondary-foreground: 150 15% 15%;
+    --muted: 48 30% 92%;
+    --muted-foreground: 150 10% 45%;
+    --accent: 150 25% 85%;
+    --accent-foreground: 150 15% 15%;
+    --border: 150 15% 82%;
+    --ring: 150 30% 35%;
+    --popover: 48 50% 95%;
+    --popover-foreground: 150 15% 15%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --input: 0 0% 90%;
-    --chart-1: 0 0% 20%;
-    --chart-2: 0 0% 35%;
-    --chart-3: 0 0% 50%;
-    --chart-4: 0 0% 65%;
-    --chart-5: 0 0% 80%;
-    --radius: 0.5rem;
+    --input: 150 15% 82%;
+    --chart-1: 150 30% 35%;
+    --chart-2: 150 25% 45%;
+    --chart-3: 150 20% 55%;
+    --chart-4: 150 15% 65%;
+    --chart-5: 150 10% 75%;
+    --radius: 0.75rem;
+    --primary-rgb: 55, 120, 80;
   }
 
   .dark {
-    /* Dark Mode - Pure black with gray accents, white text */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --ring: 0 0% 85%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
+    /* Dark Mode - Deep Forest Green with cream accents */
+    --background: 150 20% 8%;
+    --foreground: 48 60% 95%;
+    --card: 150 15% 12%;
+    --card-foreground: 48 60% 95%;
+    --primary: 150 35% 55%;
+    --primary-foreground: 150 20% 8%;
+    --secondary: 150 15% 18%;
+    --secondary-foreground: 48 60% 95%;
+    --muted: 150 12% 18%;
+    --muted-foreground: 48 30% 60%;
+    --accent: 150 15% 22%;
+    --accent-foreground: 48 60% 95%;
+    --border: 150 12% 25%;
+    --ring: 150 35% 55%;
+    --popover: 150 15% 12%;
+    --popover-foreground: 48 60% 95%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --input: 0 0% 15%;
-    --chart-1: 0 0% 80%;
-    --chart-2: 0 0% 65%;
-    --chart-3: 0 0% 50%;
-    --chart-4: 0 0% 35%;
-    --chart-5: 0 0% 20%;
+    --input: 150 12% 20%;
+    --chart-1: 150 35% 55%;
+    --chart-2: 150 30% 65%;
+    --chart-3: 150 25% 75%;
+    --chart-4: 150 20% 85%;
+    --chart-5: 150 15% 95%;
+    --primary-rgb: 100, 190, 140;
   }
   .theme {
     --animate-marquee-left: marquee-left var(--duration, 30s) linear infinite;
@@ -170,9 +172,9 @@
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
       120deg,
-      #171717 30%,
-      #888 50%,
-      #171717 70%
+      hsl(150, 30%, 35%) 30%,
+      hsl(150, 40%, 50%) 50%,
+      hsl(150, 30%, 35%) 70%
     );
     background-size: 200% auto;
     animation: text-shiny 4s linear infinite;
@@ -183,9 +185,9 @@
   .dark .text-shiny {
     background-image: linear-gradient(
       120deg,
-      #ffffff 30%,
-      #666 50%,
-      #ffffff 70%
+      hsl(150, 35%, 55%) 30%,
+      hsl(150, 45%, 70%) 50%,
+      hsl(150, 35%, 55%) 70%
     );
   }
 

@@ -57,26 +57,26 @@ const config: Config = {
 				},
 				bento: {
 					highlight: {
-						light: '#DADBF8',
-						DEFAULT: '#454ADE',
+						light: '#D8E8D0',
+						DEFAULT: '#4A7C59',
 					},
 					accent: {
-						light: '#D9EAE3',
-						DEFAULT: '#439775',
+						light: '#E8F0E0',
+						DEFAULT: '#6B8F71',
 					},
 					primary: {
-						light: '#FFCFE1',
-						DEFAULT: '#FF0F67',
+						light: '#D4E8D0',
+						DEFAULT: '#376B4D',
 					},
 					secondary: {
-						light: '#FFFCE5',
-						DEFAULT: '#FFF07C',
+						light: '#F5F0E0',
+						DEFAULT: '#C4B98A',
 					},
 					base: {
-						100: '#f0f0f0',
-						200: '#ffffff',
-						300: '#F2F2F2',
-						content: '#0A0A0A',
+						100: '#F5F0E8',
+						200: '#FFFBF0',
+						300: '#F0EBE0',
+						content: '#1A2E1A',
 					}
 				}
 			},
