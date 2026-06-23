@@ -7,7 +7,7 @@ import { ChevronDown } from 'lucide-react';
 
 const pages = [
     {
-        leftBgImage: '/feature/feature1.jpg',
+        leftBgImage: '/portfolio/feature/feature1.jpg',
         rightBgImage: null,
         leftContent: null,
         rightContent: {
@@ -19,7 +19,7 @@ const pages = [
     },
     {
         leftBgImage: null,
-        rightBgImage: '/feature/feature2.jpg',
+        rightBgImage: '/portfolio/feature/feature2.jpg',
         leftContent: {
             heading: 'Scalable Systems',
             description: 'Building the foundation for resilient digital ecosystems. I engineer full-stack solutions with a focus on system architecture, modular design, and high-performance backends using Go, Next.js, and Python.',
@@ -29,7 +29,7 @@ const pages = [
         rightContent: null,
     },
     {
-        leftBgImage: '/feature/feature3.jpg',
+        leftBgImage: '/portfolio/feature/feature3.jpg',
         rightBgImage: null,
         leftContent: null,
         rightContent: {

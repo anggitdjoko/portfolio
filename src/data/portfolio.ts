@@ -6,7 +6,7 @@ export const portfolioData: PortfolioData = {
         title: 'Full-Stack Developer',
         subtitle: 'Full-Stack Developer • Building Digital Experiences That Matter',
         bio: 'Full-Stack Developer specializing in Next.js, React, and TypeScript. Currently building Servgo, a SaaS POS platform for cafés and restaurants. Background in data analytics.',
-        avatar: '/about/anggit.jpg',
+        avatar: '/portfolio/about/anggit.jpg',
         location: 'Indonesia',
         email: 'anggitdjoko@gmail.com',
         phone: '+628xxxxxxxxxx',

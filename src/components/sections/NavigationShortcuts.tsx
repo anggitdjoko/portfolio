@@ -11,21 +11,21 @@ import { useTranslations } from '@/lib/useTranslations';
 
 // Gallery assets for background randomization
 const GALLERY_IMAGES = [
-    '/gallery/Foto Utama.jpeg',
-    '/gallery/FotoSC1.jpeg',
-    '/gallery/FotoSC2.jpeg',
-    '/gallery/FotoSC3.jpeg',
-    '/gallery/FotoSC4.jpeg',
-    '/gallery/FotoSC5.jpeg',
-    '/gallery/academicaffairsdivision1.jpg',
-    '/gallery/computernetworkpracticumassistant2.jpg',
-    '/gallery/dataentryassistant1.jpg',
-    '/gallery/delegateaiesecfutureleaders20241.jpg',
-    '/gallery/environmentalhygieneteam1.jpg',
-    '/gallery/environmentalhygieneteam2.jpg',
-    '/gallery/logisticsoperatorcampusexpo20242.jpg',
-    '/gallery/researchassistant1.jpg',
-    '/gallery/researchassistant2.jpg',
+    '/portfolio/gallery/Foto Utama.jpeg',
+    '/portfolio/gallery/FotoSC1.jpeg',
+    '/portfolio/gallery/FotoSC2.jpeg',
+    '/portfolio/gallery/FotoSC3.jpeg',
+    '/portfolio/gallery/FotoSC4.jpeg',
+    '/portfolio/gallery/FotoSC5.jpeg',
+    '/portfolio/gallery/academicaffairsdivision1.jpg',
+    '/portfolio/gallery/computernetworkpracticumassistant2.jpg',
+    '/portfolio/gallery/dataentryassistant1.jpg',
+    '/portfolio/gallery/delegateaiesecfutureleaders20241.jpg',
+    '/portfolio/gallery/environmentalhygieneteam1.jpg',
+    '/portfolio/gallery/environmentalhygieneteam2.jpg',
+    '/portfolio/gallery/logisticsoperatorcampusexpo20242.jpg',
+    '/portfolio/gallery/researchassistant1.jpg',
+    '/portfolio/gallery/researchassistant2.jpg',
 ];
 
 export const NavigationShortcuts = () => {

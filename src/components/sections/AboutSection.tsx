@@ -38,7 +38,7 @@ const showcaseMembers = [
         role: exp.position.replace(' (Contract-Based)', ''),
         description: exp.description,
         period: "August 2025 - Present",
-        image: "/journey/researchassistant2.jpg",
+        image: "/portfolio/journey/researchassistant2.jpg",
         social: exp.externalLink ? { website: exp.externalLink } : undefined
     })),
     // 2. HUMIC Engineering
@@ -48,7 +48,7 @@ const showcaseMembers = [
         role: exp.position,
         description: exp.description,
         period: "September 2025 - December 2025",
-        image: "/journey/aideveloperintern1.jpg",
+        image: "/portfolio/journey/aideveloperintern1.jpg",
         social: exp.externalLink ? { website: exp.externalLink } : undefined
     })),
     // 3. Informatics Laboratory, Telkom University
@@ -58,7 +58,7 @@ const showcaseMembers = [
         role: exp.position.replace(' (Contract-Based)', ''),
         description: exp.description,
         period: "September 2025 - January 2026",
-        image: "/journey/computernetworkpracticumassistant2.jpg",
+        image: "/portfolio/journey/computernetworkpracticumassistant2.jpg",
         social: exp.externalLink ? { website: exp.externalLink } : undefined
     })),
     // 4. Digistar Club by Telkom Indonesia
@@ -68,7 +68,7 @@ const showcaseMembers = [
         role: exp.position,
         description: exp.description,
         period: "October 2025 - December 2025",
-        image: "/journey/chiefcommittee1.jpg",
+        image: "/portfolio/journey/chiefcommittee1.jpg",
         social: exp.externalLink ? { website: exp.externalLink } : undefined
     })),
     // 5. Food and Agriculture Office of Bandung City
@@ -78,7 +78,7 @@ const showcaseMembers = [
         role: exp.position,
         description: exp.description,
         period: "July - September 2025",
-        image: "/journey/dataentryassistant1.jpg",
+        image: "/portfolio/journey/dataentryassistant1.jpg",
         social: exp.externalLink ? { website: exp.externalLink } : undefined
     })),
     // 6. View more
@@ -92,21 +92,21 @@ const showcaseMembers = [
 ];
 
 const GALLERY_IMAGES = [
-    "/gallery/Foto Utama.jpeg",
-    "/gallery/FotoSC1.jpeg",
-    "/gallery/FotoSC2.jpeg",
-    "/gallery/FotoSC3.jpeg",
-    "/gallery/FotoSC4.jpeg",
-    "/gallery/FotoSC5.jpeg",
-    "/gallery/academicaffairsdivision1.jpg",
-    "/gallery/computernetworkpracticumassistant2.jpg",
-    "/gallery/dataentryassistant1.jpg",
-    "/gallery/delegateaiesecfutureleaders20241.jpg",
-    "/gallery/environmentalhygieneteam1.jpg",
-    "/gallery/environmentalhygieneteam2.jpg",
-    "/gallery/logisticsoperatorcampusexpo20242.jpg",
-    "/gallery/researchassistant1.jpg",
-    "/gallery/researchassistant2.jpg"
+    "/portfolio/gallery/Foto Utama.jpeg",
+    "/portfolio/gallery/FotoSC1.jpeg",
+    "/portfolio/gallery/FotoSC2.jpeg",
+    "/portfolio/gallery/FotoSC3.jpeg",
+    "/portfolio/gallery/FotoSC4.jpeg",
+    "/portfolio/gallery/FotoSC5.jpeg",
+    "/portfolio/gallery/academicaffairsdivision1.jpg",
+    "/portfolio/gallery/computernetworkpracticumassistant2.jpg",
+    "/portfolio/gallery/dataentryassistant1.jpg",
+    "/portfolio/gallery/delegateaiesecfutureleaders20241.jpg",
+    "/portfolio/gallery/environmentalhygieneteam1.jpg",
+    "/portfolio/gallery/environmentalhygieneteam2.jpg",
+    "/portfolio/gallery/logisticsoperatorcampusexpo20242.jpg",
+    "/portfolio/gallery/researchassistant1.jpg",
+    "/portfolio/gallery/researchassistant2.jpg"
 ];
 
 const AboutLeadInImageStack = () => {
@@ -408,21 +408,21 @@ const AuditFunnel = () => {
 
     useEffect(() => {
         const galleryItems = [
-            "/gallery/Foto Utama.jpeg",
-            "/gallery/FotoSC1.jpeg",
-            "/gallery/FotoSC2.jpeg",
-            "/gallery/FotoSC3.jpeg",
-            "/gallery/FotoSC4.jpeg",
-            "/gallery/FotoSC5.jpeg",
-            "/gallery/academicaffairsdivision1.jpg",
-            "/gallery/computernetworkpracticumassistant2.jpg",
-            "/gallery/dataentryassistant1.jpg",
-            "/gallery/delegateaiesecfutureleaders20241.jpg",
-            "/gallery/environmentalhygieneteam1.jpg",
-            "/gallery/environmentalhygieneteam2.jpg",
-            "/gallery/logisticsoperatorcampusexpo20242.jpg",
-            "/gallery/researchassistant1.jpg",
-            "/gallery/researchassistant2.jpg"
+            "/portfolio/gallery/Foto Utama.jpeg",
+            "/portfolio/gallery/FotoSC1.jpeg",
+            "/portfolio/gallery/FotoSC2.jpeg",
+            "/portfolio/gallery/FotoSC3.jpeg",
+            "/portfolio/gallery/FotoSC4.jpeg",
+            "/portfolio/gallery/FotoSC5.jpeg",
+            "/portfolio/gallery/academicaffairsdivision1.jpg",
+            "/portfolio/gallery/computernetworkpracticumassistant2.jpg",
+            "/portfolio/gallery/dataentryassistant1.jpg",
+            "/portfolio/gallery/delegateaiesecfutureleaders20241.jpg",
+            "/portfolio/gallery/environmentalhygieneteam1.jpg",
+            "/portfolio/gallery/environmentalhygieneteam2.jpg",
+            "/portfolio/gallery/logisticsoperatorcampusexpo20242.jpg",
+            "/portfolio/gallery/researchassistant1.jpg",
+            "/portfolio/gallery/researchassistant2.jpg"
         ];
         // Shuffle and pick 8 random images for the trail to avoid overwhelming the DOM
         const shuffled = [...galleryItems].sort(() => 0.5 - Math.random());
