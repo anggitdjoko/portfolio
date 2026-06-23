@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
     output: 'export',
-    basePath: '/portfolio',
+    // basePath: '/portfolio', // TEMPORARILY DISABLED FOR DEBUGGING
     images: {
         unoptimized: true,
     },
