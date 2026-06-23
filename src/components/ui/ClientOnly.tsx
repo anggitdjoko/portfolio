@@ -10,7 +10,7 @@ export function ClientOnly({ children, fallback }: { children: ReactNode; fallba
     }, []);
 
     if (!mounted) {
-        return fallback || <div className="min-h-screen bg-[#0a0a0f]" />;
+        return fallback || <div className="min-h-screen bg-background" />;
     }
 
     return <>{children}</>;

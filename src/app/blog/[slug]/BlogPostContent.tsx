@@ -17,7 +17,7 @@ export function BlogPostContent({ post }: { post: any }) {
     };
 
     return (
-        <main className="min-h-screen bg-[#0a0a0f] pb-24 pt-32">
+        <main className="min-h-screen bg-background pb-24 pt-32">
             <div className="container max-w-7xl mx-auto px-6 mb-12">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <Link href="/blog" className="flex items-center gap-2 text-sm text-gray-400 hover:text-indigo-400 mb-6">

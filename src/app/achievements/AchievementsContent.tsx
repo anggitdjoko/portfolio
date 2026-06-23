@@ -70,7 +70,7 @@ export default function AchievementsContent() {
     }, [searchQuery, sortOrder, activeCategory]);
 
     return (
-        <main className="min-h-screen bg-[#0a0a0f] pt-24 pb-16">
+        <main className="min-h-screen bg-background pt-24 pb-16">
             <div className="max-w-7xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
