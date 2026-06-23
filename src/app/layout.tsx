@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     keywords: ['developer', 'portfolio', 'full-stack', 'nextjs', 'react', 'typescript'],
     authors: [{ name: 'Anggit Djoko Wibowo' }],
     creator: 'Anggit Djoko Wibowo',
+    icons: {
+        icon: '/portfolio/favicon.svg',
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
