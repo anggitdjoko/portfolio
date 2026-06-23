@@ -183,22 +183,22 @@ const AboutLeadIn = () => {
     return (
         <div className="w-full max-w-[1650px] mx-auto px-6 py-6 flex justify-center items-center">
             {/* The Reference Card Container (Gambar 1 Style with Dark/Light Support) */}
-            <div className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-12 lg:p-16 overflow-hidden group shadow-xl dark:shadow-2xl transition-colors duration-500">
+            <div className="relative w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 p-6 md:p-12 lg:p-16 overflow-hidden group shadow-xl dark:shadow-2xl transition-colors duration-500">
 
                 {/* 1. Grid Background Overlay (Dynamic Colors) */}
                 <div className="absolute inset-0 z-0 bg-[radial-gradient(circle,_#00000008_1px,_transparent_1px)] dark:bg-[radial-gradient(circle,_#ffffff08_1px,_transparent_1px)] bg-[size:20px_20px] pointer-events-none transition-opacity" />
 
-                {/* 2. Red Corner Tabs */}
-                <div className="absolute top-0 left-0 w-2.5 h-2.5 bg-red-600 -translate-x-1 translate-y-[-50%] z-10" />
-                <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-600 translate-x-1 translate-y-[-50%] z-10" />
-                <div className="absolute bottom-0 left-0 w-2.5 h-2.5 bg-red-600 -translate-x-1 translate-y-[50%] z-10" />
-                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-red-600 translate-x-1 translate-y-[50%] z-10" />
+                {/* 2. Corner Tabs */}
+                <div className="absolute top-0 left-0 w-2.5 h-2.5 bg-zinc-900 dark:bg-white -translate-x-1 translate-y-[-50%] z-10" />
+                <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-zinc-900 dark:bg-white translate-x-1 translate-y-[-50%] z-10" />
+                <div className="absolute bottom-0 left-0 w-2.5 h-2.5 bg-zinc-900 dark:bg-white -translate-x-1 translate-y-[50%] z-10" />
+                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-zinc-900 dark:bg-white translate-x-1 translate-y-[50%] z-10" />
 
                 {/* 3. Content Layer */}
                 <div className="relative z-10">
                     {/* Top Tagline */}
                     <div className="flex justify-between items-start mb-6 md:mb-10">
-                        <span className="text-red-600 dark:text-red-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">I BELIEVE</span>
+                        <span className="text-zinc-900 dark:text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">I BELIEVE</span>
                         <span className="text-zinc-400 dark:text-zinc-600 text-[9px] font-mono tracking-widest uppercase hidden md:block">{t('leadIn.role')}</span>
                     </div>
 
@@ -234,7 +234,7 @@ const AboutLeadIn = () => {
                                 <p className="text-zinc-500 leading-relaxed">
                                     {t('leadIn.scope')}
                                 </p>
-                                <p className="text-red-600/80 dark:text-red-500/70 font-medium italic">
+                                <p className="text-zinc-900 dark:text-white font-medium italic">
                                     {t('leadIn.bridging')}
                                 </p>
                             </div>
