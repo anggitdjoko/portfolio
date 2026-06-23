@@ -36,23 +36,6 @@ export const portfolioData: PortfolioData = {
                 username: 'anggitdjoko@gmail.com',
             },
         ],
-                url: 'https://twitter.com/arfazrll',
-                icon: 'twitter',
-                username: 'arfazrll',
-            },
-            {
-                platform: 'Discord',
-                url: 'https://discord.com/users/arfazrll',
-                icon: 'discord',
-                username: 'arfazrll',
-            },
-            {
-                platform: 'Spotify',
-                url: 'https://open.spotify.com/user/arfazrll',
-                icon: 'spotify',
-                username: 'Azrll',
-            },
-        ],
     },
     projects: [
         {
