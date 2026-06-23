@@ -10,6 +10,21 @@
   .text-primary { color: hsl(var(--primary)); }
   .bg-muted { background-color: hsl(var(--muted)); }
   .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+  .bg-primary\/20 { background-color: hsl(var(--primary) / 0.2); }
+  .bg-primary\/10 { background-color: hsl(var(--primary) / 0.1); }
+  .bg-primary\/5 { background-color: hsl(var(--primary) / 0.05); }
+  .bg-secondary { background-color: hsl(var(--secondary)); }
+  .bg-secondary\/10 { background-color: hsl(var(--secondary) / 0.1); }
+  .text-secondary { color: hsl(var(--secondary)); }
+  .bg-accent { background-color: hsl(var(--accent)); }
+  .text-accent { color: hsl(var(--accent)); }
+  .bg-card { background-color: hsl(var(--card)); }
+  .text-card-foreground { color: hsl(var(--card-foreground)); }
+  .border-primary { border-color: hsl(var(--primary)); }
+  .border-muted { border-color: hsl(var(--muted)); }
+  .ring-primary { --tw-ring-color: hsl(var(--primary)); }
+  .bg-destructive { background-color: hsl(var(--destructive, 0 84.2% 60.2%)); }
+  .text-destructive-foreground { color: hsl(var(--destructive-foreground, 0 0% 98%)); }
 }
 
 @layer base {
