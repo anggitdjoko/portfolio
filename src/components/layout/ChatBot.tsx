@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { portfolioData } from "@/data/portfolio";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from "@/lib/useTranslations";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Message {

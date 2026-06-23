@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useTransform, useSpring, easeOut, easeInOut, circOut } from "framer-motion";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/useTranslations";
 import { useTheme } from "next-themes";
 import { portfolioData } from "@/data/portfolio";
 import { InfiniteMarquee } from "@/components/ui/InfiniteMarquee";

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Clock, Calendar, TrendingUp, Trophy, Activity, Target } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 
 export function WakaTimeDashboard({ data }: { data: any }) {
     const t = useTranslations('technical.wakatime');

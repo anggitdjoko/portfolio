@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { GalleryButton } from '@/components/ui/GalleryStack';
 import type { Project } from '@/types';
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { useTheme } from 'next-themes';
 import { getAllGalleryImages } from '@/app/actions/getGalleryImages';
 

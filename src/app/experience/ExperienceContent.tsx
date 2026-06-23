@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from "next/image";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import Link from 'next/link';
 import { Transition } from "@headlessui/react";
 import {

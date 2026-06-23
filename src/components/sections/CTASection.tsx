@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { Mail, Layers } from "lucide-react";
 import { InfiniteRibbon } from "@/components/ui/infinite-ribbon";
 

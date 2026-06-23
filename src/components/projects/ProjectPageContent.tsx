@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { X, Calendar, Code, Box, Award, Share2, ExternalLink, Github, Terminal, ChevronRight, ChevronLeft, CheckCircle2, Copy, Check, Maximize2, ArrowUpRight, Zap, Sparkles, ArrowLeft, Clock, Users, Layers, LayoutGrid, ArrowRight } from 'lucide-react';
 import { cn, formatDate } from '@/lib/utils';
 import { Project } from '@/types';

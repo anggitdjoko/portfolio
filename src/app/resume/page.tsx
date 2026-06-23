@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, Download, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { usePerformance } from '@/hooks/usePerformance';
 
 export default function ResumePage() {

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPost } from '@/types';
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 
 interface BlogCardProps {
     post: BlogPost;

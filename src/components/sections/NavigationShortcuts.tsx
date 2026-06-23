@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { portfolioData } from "@/data/portfolio";
 import { ArrowUpRight } from "lucide-react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 
 // Gallery assets for background randomization
 const GALLERY_IMAGES = [

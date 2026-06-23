@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, animate } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { portfolioData } from '@/data/portfolio';
 import { BlogCard } from '@/components/ui/BlogCard';
 import { BentoHero } from '@/components/sections/blog/BentoHero';

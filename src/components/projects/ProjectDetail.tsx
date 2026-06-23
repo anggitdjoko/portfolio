@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform, useScroll } from 'framer-motion';
 import { useLenis } from 'lenis/react';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { X, Calendar, Code, Box, Award, Share2, ExternalLink, Github, Terminal, ChevronRight, ChevronLeft, CheckCircle2, Copy, Check, Maximize2, ArrowUpRight, Zap, Sparkles, Cpu, Info } from 'lucide-react';
 import { cn, formatDate } from '@/lib/utils';
 import { Project } from '@/types';

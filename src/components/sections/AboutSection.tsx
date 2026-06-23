@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/useTranslations";
 import { WarpBackground } from "@/components/ui/warp-background";
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";

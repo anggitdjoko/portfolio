@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/lib/useTranslations';
 import { formatDistanceToNow } from 'date-fns';
 import { GitCommit, Star, Trophy, Zap, TrendingUp, Calendar as CalendarIcon, Github, GitPullRequest, ChevronDown } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
