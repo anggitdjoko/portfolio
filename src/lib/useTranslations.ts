@@ -14,7 +14,7 @@ function getNestedValue(obj: any, path: string): any {
 export function useTranslations(namespace?: string) {
     const translations = namespace ? getNestedValue(en, namespace) : en;
     
-    return function t(key: string): string {
+    function t(key: string): string {
         if (Array.isArray(translations)) {
             const index = parseInt(key, 10);
             return translations[index] ?? key;
@@ -23,7 +23,19 @@ export function useTranslations(namespace?: string) {
         if (typeof value === 'string') return value;
         if (typeof value === 'object' && value !== null) return key;
         return value ?? key;
+    }
+    
+    t.raw = function(key: string): string {
+        if (Array.isArray(translations)) {
+            const index = parseInt(key, 10);
+            return translations[index] ?? key;
+        }
+        const value = translations?.[key];
+        if (typeof value === 'string') return value;
+        return value ?? key;
     };
+    
+    return t;
 }
 
 export function useLocale() {
