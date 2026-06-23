@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AppleHelloEnglishEffect } from '@/components/ui/apple-hello-effect';
+import { HiEffect } from '@/components/ui/hi-effect';
 
 interface LoadingScreenProps {
     onComplete?: () => void;
@@ -48,7 +48,7 @@ export function LoadingScreen({ onComplete, onExitStart, duration }: LoadingScre
                         }}
                         className="relative flex flex-col items-center justify-center w-full max-w-[400px] will-change-transform"
                     >
-                        <AppleHelloEnglishEffect speed={1.2} onAnimationComplete={handleAnimationComplete} className="text-foreground h-16 sm:h-20 md:h-24 will-change-transform" />
+                        <HiEffect speed={1.2} onAnimationComplete={handleAnimationComplete} className="text-5xl sm:text-6xl md:text-7xl will-change-transform" />
                     </motion.div>
 
                     {/* Subtle aesthetic dot */}
