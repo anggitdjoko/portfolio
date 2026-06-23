@@ -9,7 +9,7 @@ export default function NarrativeBridge() {
         <section className="relative py-32 bg-foreground text-background overflow-hidden flex flex-col items-center justify-center text-center px-6">
 
             {/* Background Texture */}
-            <div className="absolute inset-0 opacity-10 bg-[url('/noise.svg')]" />
+            <div className="absolute inset-0 opacity-10 bg-[url('/portfolio/noise.svg')]" />
 
             <motion.div
                 initial={{ opacity: 0, y: 50 }}

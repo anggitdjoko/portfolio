@@ -482,7 +482,7 @@ const AuditFunnel = () => {
 
             {/* Subtle Grain Texture Overlay */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay">
-                <div className="absolute inset-0 bg-[url('/noise.svg')]" />
+                <div className="absolute inset-0 bg-[url('/portfolio/noise.svg')]" />
             </div>
         </div>
     );

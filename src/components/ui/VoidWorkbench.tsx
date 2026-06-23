@@ -48,7 +48,7 @@ export const VoidWorkbench = ({ tools, className }: VoidWorkbenchProps) => {
 
             {/* Infinite Grain/Smoke Overlay */}
             <div className="absolute inset-0 z-20 pointer-events-none opacity-20 mix-blend-overlay"
-                style={{ backgroundImage: 'url("/noise.svg")' }} />
+                style={{ backgroundImage: 'url("/portfolio/noise.svg")' }} />
         </div>
     );
 };

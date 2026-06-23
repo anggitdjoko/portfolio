@@ -81,7 +81,7 @@ export const MaskContainer = ({
       className={cn("relative h-[20rem] overflow-hidden rounded-2xl", className)}
     >
       <motion.div
-        className="absolute flex h-full w-full items-center justify-center bg-background text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat]"
+        className="absolute flex h-full w-full items-center justify-center bg-background text-6xl [mask-image:url(/portfolio/mask.svg)] [mask-repeat:no-repeat]"
         style={{
           maskPosition,
           WebkitMaskPosition: maskPosition, // Safari/Chrome support

@@ -331,7 +331,7 @@ export default function ContactPage() {
     return (
         <div ref={containerRef} className="relative bg-background selection:bg-primary/20">
             {/* 2. HEADER & BACKGROUNDS */}
-            <div className="fixed inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none z-0" />
+            <div className="fixed inset-0 bg-[url('/portfolio/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none z-0" />
             <div className="fixed inset-0 bg-background/60 backdrop-blur-[2px] pointer-events-none z-0" />
             <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden">
                 {!isLowPowerMode && <Meteors number={50} />}

@@ -89,7 +89,7 @@ const CenterImage = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                     borderRadius,
                     opacity,
                     backgroundImage:
-                        "url('/experience/Foto Utama.jpeg')",
+                        "url('/portfolio/experience/Foto Utama.jpeg')",
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",

@@ -78,7 +78,7 @@ export default function CreditsFooter() {
             </div>
 
             {/* Grain Overlay */}
-            <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none bg-[url('/noise.svg')]" />
+            <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none bg-[url('/portfolio/noise.svg')]" />
 
         </section>
     );
