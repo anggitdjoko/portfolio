@@ -45,7 +45,7 @@
         "badge": "Available for opportunities",
         "scroll": "Scroll Down",
         "role": "Full-Stack Developer",
-        "description": "Building web apps that matter. Shipping <span class='text-primary font-semibold'>Servgo</span> for cafés & restaurants. <span class='text-secondary font-semibold'>Data analytics</span> background.",
+        "description": "Building web apps that solve real problems. <span class='text-primary font-semibold'>Full-stack</span> with Next.js, React, TypeScript. <span class='text-secondary font-semibold'>Data analytics</span> background.",
     },
     "about": {
         "title": "About Me",
