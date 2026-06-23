@@ -12,26 +12,26 @@ function getNestedValue(obj: any, path: string): any {
 }
 
 export function useTranslations(namespace?: string) {
-    const translations = namespace ? getNestedValue(en, namespace) : en;
+    const baseTranslations = namespace ? getNestedValue(en, namespace) : en;
     
     function t(key: string): string {
-        if (Array.isArray(translations)) {
+        if (Array.isArray(baseTranslations)) {
             const index = parseInt(key, 10);
-            return translations[index] ?? key;
+            return baseTranslations[index] ?? key;
         }
-        const value = translations?.[key];
+        const value = getNestedValue(baseTranslations, key);
         if (typeof value === 'string') return value;
+        if (Array.isArray(value)) return key;
         if (typeof value === 'object' && value !== null) return key;
         return value ?? key;
     }
     
-    t.raw = function(key: string): string {
-        if (Array.isArray(translations)) {
+    t.raw = function(key: string): any {
+        if (Array.isArray(baseTranslations)) {
             const index = parseInt(key, 10);
-            return translations[index] ?? key;
+            return baseTranslations[index] ?? key;
         }
-        const value = translations?.[key];
-        if (typeof value === 'string') return value;
+        const value = getNestedValue(baseTranslations, key);
         return value ?? key;
     };
     
