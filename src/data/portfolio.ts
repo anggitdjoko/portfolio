@@ -5,7 +5,7 @@ export const portfolioData: PortfolioData = {
         name: 'Anggit Djoko Wibowo',
         title: 'Full-Stack Developer',
         subtitle: 'Full-Stack Developer · Data Analyst',
-        bio: 'I build web apps that solve real problems. Currently shipping Servgo, a SaaS POS & storefront platform for cafés and restaurants. Background in data analytics, now full-time on Next.js, React, and TypeScript.',
+        bio: 'Building web apps that matter. Shipping Servgo for cafés & restaurants. Data analytics background.',
         avatar: '/portfolio/about/anggit.jpg',
         location: 'Pontianak, Indonesia',
         email: 'anggitdjokow00@gmail.com',
