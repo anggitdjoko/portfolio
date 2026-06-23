@@ -36,7 +36,7 @@
     },
     "hero": {
         "greeting": "Welcome to my digital space",
-        "subtitle": "Full Stack Developer • AI Engineer • Data Scientist",
+        "subtitle": "Full-Stack Developer · Data Analyst",
         "cta": {
             "primary": "Explore Projects",
             "secondary": "Get in Touch",
@@ -44,13 +44,13 @@
         },
         "badge": "Available for opportunities",
         "scroll": "Scroll Down",
-        "role": "Software Engineer",
-        "description": "Building intelligent systems at the intersection of <span class='text-primary font-semibold'>AI</span>, <span class='text-secondary font-semibold'>Engineering</span>, and <span class='text-accent font-semibold'>Scalable Architecture</span>."
+        "role": "Full-Stack Developer",
+        "description": "I build web apps that solve real problems. Currently shipping <span class='text-primary font-semibold'>Servgo</span>, a SaaS POS & storefront platform for cafés and restaurants. Background in <span class='text-secondary font-semibold'>data analytics</span>, now full-time on <span class='text-accent font-semibold'>Next.js, React, and TypeScript</span>."
     },
     "about": {
         "title": "About Me",
-        "subtitle": "Tech Explorer & Problem Solver",
-        "description": "A passionate tech explorer specializing in Full Stack Development, Artificial Intelligence, and Data Science. Currently diving deep into AI Agents and Blockchain technology.",
+        "subtitle": "Full-Stack Developer · Data Analyst",
+        "description": "I started in data analytics, spending months turning messy spreadsheets into business decisions for companies in logistics, F&B, and heavy machinery. Now I work full-stack with Next.js, React, TypeScript, and Supabase. My current project is Servgo, a SaaS platform combining POS, digital storefront, and analytics for cafés and restaurants.",
         "stats": {
             "experience": "Years Learning",
             "projects": "Projects Done",
@@ -62,16 +62,16 @@
         "digitalReality": "Digital Reality",
         "leadIn": {
             "label": "WHAT I DO",
-            "applied": "Applied",
-            "intelligence": "intelligence.",
-            "production": "Production",
-            "engineering": "engineering.",
-            "thesis": "I build intelligent systems and the <span class='text-primary italic font-serif-elegant font-normal'>data infrastructure</span> that makes them reliable at scale.",
-            "scope": "Focusing on predictive models, optimized data processing, and RAG pipelines designed for production environments and measurable performance.",
-            "bridging": "Bridging labs and live systems.",
-            "integration": "Beyond models, I architect full-stack ecosystems: secure backends, robust data architectures, and scalable pipelines.",
-            "signature": "Azril",
-            "role": "AI, Data & Software Engineer",
+            "applied": "Full-Stack",
+            "intelligence": "Developer.",
+            "production": "Data",
+            "engineering": "Analyst.",
+            "thesis": "I build web apps that solve real problems. Currently shipping <span class='text-primary italic font-serif-elegant font-normal'>Servgo</span>, a SaaS POS & storefront platform for cafés and restaurants.",
+            "scope": "Building production web applications with Next.js, React, TypeScript, and Supabase. Background in data analytics with SQL, Python, Tableau, and Excel.",
+            "bridging": "From data analytics to full-stack development.",
+            "integration": "End-to-end product development: database design, authentication, payments, real-time dashboards, multi-tenant architecture.",
+            "signature": "Anggit",
+            "role": "Full-Stack Developer · Data Analyst",
             "aboutMe": "About Me",
             "scroll": "Scroll to Explore",
             "shortStory": "My Short Story"
@@ -79,12 +79,12 @@
         "coreEngineering": {
             "label": "Core Engineering",
             "title": "Proven <span class='text-primary italic font-serif font-light lowercase'>stack.</span> <br /> Measurable <span class='italic font-serif font-light text-foreground'>results.</span>",
-            "p1": "I develop applied AI systems using TensorFlow, Scikit-learn, and LangChain, structuring workflows and exposing models as services through Flask and FastAPI.",
-            "p2": "Integrated into full-stack apps with Next.js, Express.js, and Spring Boot, backed by PostgreSQL and Prisma ORM.",
-            "p3": "All projects use disciplined version control, Docker containerization, and are built for stable production deployment.",
-            "gpa": "Academic GPA",
-            "projects": "Projects Built",
-            "years": "Years Exp."
+            "p1": "I build production web applications with Next.js, React, TypeScript, and Supabase, focusing on scalable architecture and clean code.",
+            "p2": "My data analytics background informs decision-making: SQL, Python, Tableau, and Excel for actionable insights.",
+            "p3": "Currently shipping Servgo, a SaaS platform with 31 DB tables, serving 2 live locations with real-time dashboards.",
+            "gpa": "Projects Shipped",
+            "projects": "DB Tables Built",
+            "years": "Records Analyzed"
         },
         "emergingResearch": {
             "label": "Exploration Phase",
@@ -99,26 +99,26 @@
             }
         },
         "profile": {
-            "title": "Architecting Scalable Systems <br /> Where Intelligence Meets Engineering.",
+            "title": "Building Web Apps <br /> That Solve Real Problems.",
             "narrativeLabel": "Core Narrative",
-            "narrative": "As an Information Technology student specializing in Artificial Intelligence and Software Engineering, I focus on building systems that bridge research foundations with production-ready implementation.",
-            "narrative2": "My work combines algorithmic thinking, backend engineering, and scalable architecture to deliver solutions that are intelligent, reliable, and built for real-world impact.",
+            "narrative": "I started in data analytics, spending months turning messy spreadsheets into business decisions for companies in logistics, F&B, and heavy machinery. Somewhere along the way I got hooked on programming and decided to stop analyzing other people's products and build my own.",
+            "narrative2": "Now I work full-stack with Next.js, React, TypeScript, and Supabase. My current project is Servgo, a SaaS platform combining POS, digital storefront, and analytics for cafés and restaurants. It's live, serving a coffee chain with two locations.",
             "pillars": {
                 "reliable": {
-                    "title": "Robust by Design",
-                    "desc": "Engineered for reliability under scale and operational pressure."
+                    "title": "Production-Ready",
+                    "desc": "Live products serving real users, not just portfolio demos."
                 },
                 "optimized": {
-                    "title": "Production-Ready",
-                    "desc": "From prototype to deployment with engineering discipline."
+                    "title": "Data-Informed",
+                    "desc": "Analytics background drives better product decisions."
                 },
                 "maintainable": {
-                    "title": "Architected for Evolution",
-                    "desc": "Designed to grow, adapt, and sustain long-term system development."
+                    "title": "Scalable Architecture",
+                    "desc": "Multi-tenant SaaS with 31 DB tables and real-time dashboards."
                 },
                 "evolvable": {
-                    "title": "Data-Driven Intelligence",
-                    "desc": "Decisions powered by models, metrics, and measurable performance."
+                    "title": "Full-Stack Ownership",
+                    "desc": "From database design to deployment, end-to-end."
                 }
             }
         },

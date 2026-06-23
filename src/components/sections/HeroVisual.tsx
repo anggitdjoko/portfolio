@@ -45,7 +45,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-[10px] md:text-xs text-muted-foreground text-start md:text-right leading-relaxed max-w-[200px] md:max-w-[220px] font-medium uppercase tracking-[0.2em]"
             >
-              Hi, I'm {personal.name}. I build scalable systems powered by intelligence.
+              Hi, I'm {personal.name}. {personal.bio}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -53,7 +53,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
             >
-              AI & DATA
+              FULL-STACK
             </motion.h1>
           </div>
 
@@ -65,7 +65,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
             >
-              SOFTWARE
+              DEVELOPER
             </motion.h1>
           </div>
 
@@ -77,7 +77,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2rem,8vw,13rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform px-4"
             >
-              ENGINEER
+              & DATA ANALYST
             </motion.h1>
 
             <motion.p
@@ -96,7 +96,7 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
           <div className="flex items-center gap-6">
             <Separator className="flex-1 h-[1px] bg-foreground/10 hidden md:block" />
             <div className="text-[10px] md:text-xs whitespace-nowrap font-bold tracking-[0.3em] text-muted-foreground uppercase">
-              JAKARTA, ID — 2026
+              PONTIANAK, ID — 2026
             </div>
             <Link
               href="/resume"
@@ -149,8 +149,8 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
               >
                 <ProfileCard
                   name={personal.name}
-                  title="AI Engineer & Software Engineer"
-                  description={`${personal.name} is a dedicated AI & Software Engineer focused on building scalable, intelligent systems and robust software architectures. He specializes in bridging technical innovation with high-performance execution to deliver meaningful and impactful digital solutions.`}
+                  title={personal.subtitle}
+                  description={personal.bio}
                   imageUrl={personal.avatar}
                   githubUrl={personal.socialLinks.find(s => s.platform === 'GitHub')?.url}
                   linkedinUrl={personal.socialLinks.find(s => s.platform === 'LinkedIn')?.url}
