@@ -41,7 +41,7 @@ const pages = [
     },
     {
         isBridge: true,
-        heading: 'Discover my latest work and creative solutions that bring ideas to life',
+        heading: 'From data analytics to full-stack development — building products that solve real problems',
         subheading: 'SCROLL TO EXPLORE',
     }
 ];
