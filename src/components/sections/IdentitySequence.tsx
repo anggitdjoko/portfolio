@@ -192,7 +192,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                                     src={portfolioData.personal.avatar}
                                                     alt="Profile"
                                                     fill
-                                                    className="object-cover object-bottom grayscale-0"
+                                                    className="object-contain grayscale-0"
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                                                     priority
                                                 />
