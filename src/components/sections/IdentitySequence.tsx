@@ -21,9 +21,9 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
     const t = useTranslations("about");
     const [isHovered, setIsHovered] = React.useState(false);
 
-    // Map the parent's scroll progress (0.4 to 0.85) to local progress (0 to 1).
-    // This leaves 0.85 to 1.0 (approx 90vh) as a "pause" where the user can just read the Tech Stack before it scrolls away.
-    const localProgress = useTransform(scrollYProgress, [0.4, 0.85], [0, 1]);
+    // Map the parent's scroll progress (0.2 to 0.9) to local progress (0 to 1).
+    // This leaves 0.9 to 1.0 as a "pause" where the user can just read the Tech Stack before it scrolls away.
+    const localProgress = useTransform(scrollYProgress, [0.2, 0.9], [0, 1]);
 
     // 1. Card Transformation (Entrance & Scaling)
     const cardScale = useTransform(localProgress, [0, 0.4], [0.8, 1], { ease: easeInOut });
