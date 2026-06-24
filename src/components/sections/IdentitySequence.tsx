@@ -231,7 +231,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
 
                             {/* Paragraph Right */}
                             <div className="md:col-span-5 pt-1">
-                                <p className="text-[13px] md:text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-normal">
+                                <p className="text-[13px] md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                                     {t("profile.narrative")} {t("profile.narrative2")}
                                 </p>
                             </div>
@@ -244,7 +244,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                         className="w-full max-w-[1700px] mx-auto py-20 flex flex-col gap-8 flex-shrink-0"
                     >
                         <div className="px-8 md:px-16 lg:px-24 mb-6">
-                            <h4 className="text-lg md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-500 dark:text-zinc-400">
+                            <h4 className="text-lg md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-700 dark:text-zinc-300">
                                 Tech Stack & Ecosystem
                             </h4>
                         </div>
