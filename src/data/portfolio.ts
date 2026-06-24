@@ -6,7 +6,7 @@ export const portfolioData: PortfolioData = {
         title: 'Full-Stack Developer',
         subtitle: 'Full-Stack Developer · Data Analyst',
         bio: 'Full-Stack Developer building products from database to deployment. Data-driven, production-focused.',
-        avatar: '/portfolio/about/anggit.jpg',
+        avatar: '/portfolio/about/Linkedin.jpg',
         location: 'Pontianak, Indonesia',
         email: 'anggitdjokow00@gmail.com',
         phone: '+62 813 5033 8618',
