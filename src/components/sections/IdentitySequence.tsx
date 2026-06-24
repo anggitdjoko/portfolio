@@ -176,7 +176,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                         scale: photoScale,
                                     }}
                                     animate={{
-                                        filter: isHovered ? "grayscale(0%) contrast(1)" : "grayscale(100%) contrast(1.1)",
+                                        filter: isHovered ? "grayscale(0%) contrast(1)" : "grayscale(30%) contrast(1.05)",
                                     }}
                                     transition={{ duration: 0.8, ease: "easeOut" }}
                                     className="relative w-full h-full"
