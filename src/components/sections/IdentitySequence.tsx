@@ -69,7 +69,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
         <span key="1" className="text-[10rem] md:text-[16rem] font-black uppercase tracking-tighter mx-12 text-black dark:text-white leading-none">
             {portfolioData.personal.title}
         </span>,
-        <div key="icon" className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-[#D1FF4D] flex items-center justify-center mx-12">
+        <div key="icon" className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-zinc-900 dark:bg-white flex items-center justify-center mx-12">
             <svg viewBox="0 0 100 100" className="w-20 h-20 md:w-32 md:h-32 fill-black dark:fill-zinc-900">
                 <path d="M50 0 C60 30 100 40 100 50 C100 60 60 70 50 100 C40 70 0 60 0 50 C0 40 40 30 50 0" />
             </svg>
@@ -87,7 +87,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                 <div className="mb-16 pointer-events-auto">
                     <MagneticEffect>
                         <div className="group flex items-center gap-1 cursor-pointer">
-                            <div className="relative px-10 py-5 rounded-full bg-[#D1FF4D] overflow-hidden transition-all duration-500">
+                            <div className="relative px-10 py-5 rounded-full bg-zinc-900 dark:bg-white overflow-hidden transition-all duration-500">
                                 <div className="absolute inset-0 bg-black dark:bg-white -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                                 <div className="relative z-10 h-7 overflow-hidden">
                                     <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
@@ -101,7 +101,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                 </div>
                             </div>
 
-                            <div className="relative w-16 h-16 rounded-full bg-[#D1FF4D] overflow-hidden flex items-center justify-center transition-all duration-500">
+                            <div className="relative w-16 h-16 rounded-full bg-zinc-900 dark:bg-white overflow-hidden flex items-center justify-center transition-all duration-500">
                                 <div className="absolute inset-0 bg-black dark:bg-white -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                                 <div className="relative z-10 h-8 overflow-hidden">
                                     <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
