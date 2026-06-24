@@ -54,12 +54,12 @@ export function ProfileCard(props: ProfileCardProps) {
       {/* Desktop */}
       <div className='hidden md:flex relative items-center'>
         {/* Square Image */}
-        <div className='w-[480px] h-[480px] rounded-[2.5rem] overflow-hidden bg-gray-200 dark:bg-gray-800 flex-shrink-0 shadow-2xl relative z-0'>
+        <div className='w-[320px] h-[320px] rounded-[2rem] overflow-hidden bg-gray-200 dark:bg-gray-800 flex-shrink-0 shadow-2xl relative z-0'>
           <Image
             src={imageUrl}
             alt={name}
-            width={480}
-            height={480}
+            width={320}
+            height={320}
             className='w-full h-full object-contain'
             draggable={false}
             priority
