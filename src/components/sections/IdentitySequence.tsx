@@ -216,8 +216,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                     </div>
 
                     {/* Phase 3: Final Layout Text */}
-                    <motion.div
-                        style={{ opacity: textOpacity }}
+                    <div
                         className="w-full max-w-[1700px] mx-auto px-8 md:px-16 lg:px-24 pt-24 pb-8 md:pt-32 md:pb-12 flex-shrink-0"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
@@ -236,11 +235,10 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                 </p>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Phase 4: Tech Stack & Tools Scrollers */}
-                    <motion.div
-                        style={{ opacity: textOpacity }}
+                    <div
                         className="w-full max-w-[1700px] mx-auto py-20 flex flex-col gap-8 flex-shrink-0"
                     >
                         <div className="px-8 md:px-16 lg:px-24 mb-6">
@@ -250,7 +248,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                         </div>
                         <BrandScroller />
                         <BrandScrollerReverse />
-                    </motion.div>
+                    </div>
                 </motion.div>
             </motion.div>
         </div>
