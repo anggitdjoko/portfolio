@@ -96,10 +96,10 @@ export default function Testimonial1() {
         {/* Main Heading with Refined Block Reveal Animation */}
         <div className="text-center max-w-5xl mx-auto relative text-neutral-900 dark:text-white px-4 space-y-1 md:space-y-2">
           {[
-            { text: "Data that speaks. Code that ships.", color: "#6366f1", delay: 0 },
-            { text: "Products that work.", color: "#10b981", delay: 0.15 },
-            { text: "Full-stack developer", color: "#f59e0b", delay: 0.3 },
-            { text: "with a data-driven mindset.", color: "#ef4444", delay: 0.45 }
+            { text: "Data that speaks. Code that ships.", color: "#171717", delay: 0 },
+            { text: "Products that work.", color: "#404040", delay: 0.15 },
+            { text: "Full-stack developer", color: "#525252", delay: 0.3 },
+            { text: "with a data-driven mindset.", color: "#737373", delay: 0.45 }
           ].map((line, i) => (
             <div key={i} className="relative block overflow-hidden py-1.5">
               <motion.h1
