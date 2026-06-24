@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 22
       - run: npm install
-      - run: npx next build
+      - run: npx next build --webpack
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
