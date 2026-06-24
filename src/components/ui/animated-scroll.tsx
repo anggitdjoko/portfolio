@@ -227,8 +227,8 @@ function BridgeSlide({ page, isActive, scrollProgress, index }: { page: any, isA
         >
             <motion.div style={{ y }} className="space-y-16 max-w-[1200px] w-full px-[5%]">
                 <h2 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight text-foreground dark:text-white leading-[1.1] font-sans">
-                    Discover my latest work and creative solutions <br className="hidden md:block" />
-                    that bring ideas to life
+                    From data analytics to full-stack development <br className="hidden md:block" />
+                    — building products that solve real problems
                 </h2>
                 <div className="flex flex-col items-center gap-6 opacity-30 pt-10">
                     <span className="text-[11px] font-mono font-bold tracking-[0.5em] uppercase text-foreground dark:text-white">
