@@ -11,9 +11,9 @@ const pages = [
         rightBgImage: null,
         leftContent: null,
         rightContent: {
-            heading: 'Intelligence Systems',
-            description: 'Specializing in architecting autonomous systems and intelligence-driven platforms. From fine-tuning LLMs and engineering RAG architectures to developing deep learning models for Computer Vision and NLP.',
-            skills: ["LLM Fine-tuning", "RAG Systems", "Deep Learning", "Computer Vision", "MLOps", "Data Analytics"],
+            heading: 'Full-Stack Development',
+            description: 'Building web applications and SaaS products from database to deployment. Specializing in Next.js, React, TypeScript, and Supabase with production-focused architecture.',
+            skills: ["Next.js / React", "TypeScript", "Supabase", "Tailwind CSS", "REST APIs", "Vercel"],
             hoverColor: "bg-red-600/10"
         },
     },
