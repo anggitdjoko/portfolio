@@ -153,6 +153,8 @@ export default function HomePage() {
                 {!isLoading && (
                     <>
                         <ExpertiseSection />
+                        <AboutSection />
+                        <MetricCTAHijack />
                         <SocialCorner className="fixed bottom-12 right-12 z-[30]" />
                     </>
                 )}
