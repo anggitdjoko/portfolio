@@ -609,8 +609,6 @@ export default function AboutSection() {
                         <div className="absolute top-4 left-4 z-[9999] bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold font-mono shadow-lg">1.2 STATS & CTA</div>
                         <ScrollAdventure />
                     </div>
-                    <ArgentLoopInfiniteSlider />
-                    <AuditFunnel />
                 </div>
             </div>
         </section >
