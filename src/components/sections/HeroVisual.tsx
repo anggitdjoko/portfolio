@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Separator } from "@/components/ui/separator";
 import { ArrowDownRight } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import Link from 'next/link';
