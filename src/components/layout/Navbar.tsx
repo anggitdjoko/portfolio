@@ -49,10 +49,9 @@ const useNavItems = () => {
             label: "About",
             links: [
                 { label: t('achievements'), href: "/achievements", description: t('achievementsDesc') },
-                { label: t('skills'), href: "/skills", description: t('skillsDesc') },
-                { label: t('experience'), href: "/experience", description: t('experienceDesc') },
-                { label: t('projects'), href: "/projects", description: t('projectsDesc') },
-                { label: t('blog'), href: "/blog", description: t('blogDesc') },
+                  { label: t('skills'), href: "/skills", description: t('skillsDesc') },
+                  { label: t('experience'), href: "/experience", description: t('experienceDesc') },
+                  { label: t('blog'), href: "/blog", description: t('blogDesc') },
             ]
         }
     ];

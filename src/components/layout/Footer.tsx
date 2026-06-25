@@ -455,10 +455,9 @@ function AboutHoverMenu({ tNav, onExpandChange }: { tNav: (key: string) => strin
 
     const subLinks = [
         { href: '/achievements', label: tNav('achievements') },
-        { href: '/skills', label: tNav('skills') },
-        { href: '/experience', label: tNav('experience') },
-        { href: '/projects', label: tNav('projects') },
-        { href: '/blog', label: tNav('blog') },
+          { href: '/skills', label: tNav('skills') },
+          { href: '/experience', label: tNav('experience') },
+          { href: '/blog', label: tNav('blog') },
         { href: '/gallery', label: tNav('gallery') },
     ];
 
