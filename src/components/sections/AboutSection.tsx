@@ -589,7 +589,6 @@ export default function AboutSection() {
         >
             {/* 1. STICKY PLANE - Lead-in */}
             <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-4 left-4 z-[9999] bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold font-mono shadow-lg">1.1 I BELIEVE</div>
                 <motion.div
                     style={{ scale, opacity, y: yLeadIn }}
                     className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
@@ -605,10 +604,7 @@ export default function AboutSection() {
                 <div className="bg-background dark:bg-black transition-colors duration-500 pointer-events-auto relative">
 
                     <ScrollHijackSection />
-                    <div className="relative">
-                        <div className="absolute top-4 left-4 z-[9999] bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold font-mono shadow-lg">1.2 STATS & CTA</div>
-                        <ScrollAdventure />
-                    </div>
+                    <ScrollAdventure />
                 </div>
             </div>
         </section >
