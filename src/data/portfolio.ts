@@ -6,7 +6,7 @@ export const portfolioData: PortfolioData = {
         title: 'Full-Stack Developer',
         subtitle: 'Full-Stack Developer · Data Analyst',
         bio: 'Full-Stack Developer building products from database to deployment. Data-driven, production-focused.',
-        avatar: '/portfolio/about/anggit.jpg',
+        avatar: '/portfolio/about/Linkedin.jpg',
         location: 'Pontianak, Indonesia',
         email: 'anggitdjokow00@gmail.com',
         phone: '+62 813 5033 8618',
@@ -2937,7 +2937,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-03-20',
             category: 'applied-ai',
             tags: ['AI', 'Agents', 'Enterprise'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '5'
         },
         {
@@ -2950,7 +2950,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-03-15',
             category: 'more',
             tags: ['Web3', 'Blockchain', 'UX'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '4'
         },
         {
@@ -2963,7 +2963,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-03-05',
             category: 'software-development',
             tags: ['Next.js', 'React', 'Performance'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '6'
         },
         {
@@ -2976,7 +2976,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-02-28',
             category: 'applied-ai',
             tags: ['AI', 'Security', 'Deep Learning'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '7'
         },
         {
@@ -2989,7 +2989,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-02-15',
             category: 'applied-ai',
             tags: ['LLM', 'Python', 'Ollama'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '8'
         },
         {
@@ -3002,7 +3002,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-02-01',
             category: 'more',
             tags: ['Solidity', 'Ethereum', 'Security'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '5'
         },
         {
@@ -3015,7 +3015,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-01-25',
             category: 'software-development',
             tags: ['React', 'Zustand', 'Architecture'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '4'
         },
         {
@@ -3028,7 +3028,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-01-10',
             category: 'software-development',
             tags: ['IoT', 'ESP32', 'Edge'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '6'
         },
         {
@@ -3041,7 +3041,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-01-05',
             category: 'applied-ai',
             tags: ['Healthcare', 'AI', 'Ethics'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '7'
         },
         {
@@ -3054,7 +3054,7 @@ WAKATIME_API_KEY=your_wakatime_key`
             date: '2026-03-31',
             category: 'about-me',
             tags: ['Philosophy', 'Engineering', 'About Me'],
-            author: { name: 'Azril', avatar: '/about/arfazrll.jpeg' },
+            author: { name: 'Anggit', avatar: '/portfolio/about/Linkedin.jpg' },
             readTime: '5'
         }
     ],
