@@ -39,11 +39,6 @@ const pages = [
             hoverColor: "bg-purple-600/10"
         },
     },
-    {
-        isBridge: true,
-        heading: 'From data analytics to full-stack development — building products that solve real problems',
-        subheading: 'SCROLL TO EXPLORE',
-    }
 ];
 
 export default function ScrollAdventure() {
