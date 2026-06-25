@@ -485,20 +485,14 @@ const AuditFunnel = () => {
 const ScrollHijackSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: sectionRef });
-    const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: 0.5 });
     const [isComp2Visible, setIsComp2Visible] = React.useState(false);
     const [showBorder, setShowBorder] = React.useState(true);
 
-    // Hooks moved to top level to avoid React Hook Rules violations
-    const borderOpacity = useTransform(smoothProgress, [0.1, 0.15], [1, 0]);
-    const xShift = useTransform(smoothProgress, [0, 0.1, 0.4, 1], ["0vw", "0vw", "-100vw", "-100vw"]);
+    const xShift = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], ["0vw", "0vw", "-100vw", "-100vw"]);
 
-    useMotionValueEvent(smoothProgress, "change", (v: any) => {
-        // Hard toggle for the decorative border to ensure it's GONE
+    useMotionValueEvent(scrollYProgress, "change", (v: any) => {
         if (v >= 0.20 && showBorder) setShowBorder(false);
         if (v < 0.15 && !showBorder) setShowBorder(true);
-
-        // Trigger precisely as the second panel begins to enter the viewport
         if (v >= 0.30 && !isComp2Visible) setIsComp2Visible(true);
         if (v < 0.25 && isComp2Visible) setIsComp2Visible(false);
     });
@@ -508,14 +502,9 @@ const ScrollHijackSection = () => {
         offset: ["end end", "end start"]
     });
 
-    // Apply a spring physics wrapper to make the scale/fade exit incredibly buttery smooth
-    const exitProgress = useSpring(exitProgressRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
-
-
-    const exitScale = useTransform(exitProgress, [0, 1], [1, 0.85]);
-    const exitOpacity = useTransform(exitProgress, [0, 1], [1, 0]); // Changed to 1 to ensure full fade out
-    const exitBorderRadius = useTransform(exitProgress, [0, 1], ["0px", "40px"]);
+    const exitScale = useTransform(exitProgressRaw, [0, 1], [1, 0.85]);
+    const exitOpacity = useTransform(exitProgressRaw, [0, 1], [1, 0]);
+    const exitBorderRadius = "40px";
 
     return (
         <div ref={sectionRef} className="relative h-[600vh]">
