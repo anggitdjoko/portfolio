@@ -152,8 +152,16 @@ export default function HomePage() {
 
                 {!isLoading && (
                     <>
-                        <AboutSection />
-                        <MetricCTAHijack />
+                        {/* SECTION 1 - AboutSection */}
+                        <div className="relative">
+                            <div className="absolute top-4 left-4 z-[9999] bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold font-mono shadow-lg">SECTION 1</div>
+                            <AboutSection />
+                        </div>
+                        {/* SECTION 2 - MetricCTAHijack */}
+                        <div className="relative">
+                            <div className="absolute top-4 left-4 z-[9999] bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold font-mono shadow-lg">SECTION 2</div>
+                            <MetricCTAHijack />
+                        </div>
                         <SocialCorner className="fixed bottom-12 right-12 z-[30]" />
                     </>
                 )}
