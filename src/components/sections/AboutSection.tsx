@@ -610,47 +610,6 @@ export default function AboutSection() {
                         <ScrollAdventure />
                     </div>
                     <ArgentLoopInfiniteSlider />
-                    {/* Seamless solid background section overlapping the slider's dead space */}
-                    <div className="-mt-[50vh] flex flex-col items-center w-full bg-background relative z-20 pt-32 pb-32">
-                        <div className="absolute top-4 left-4 z-[9999] bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold font-mono shadow-lg">1.3 EXPERIENCE</div>
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
-                            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                            className="w-full flex flex-col items-center max-w-[1700px] px-4 md:px-6"
-                        >
-                            <div className="mb-6 md:mb-10 text-center space-y-4">
-                                <h3 className="text-foreground text-3xl md:text-5xl font-black tracking-tighter">
-                                    View My Related Experience
-                                </h3>
-                                <p className="text-muted-foreground text-[10px] md:text-xs font-mono uppercase tracking-[0.4em]">
-                                    Professional Background
-                                </p>
-                            </div>
-                            <div className="w-full">
-                                <TeamShowcase members={showcaseMembers} />
-                            </div>
-                        </motion.div>
-
-                        {/* Certificate Showcase Section */}
-                        <div className="w-full mt-32 md:mt-48">
-                            <CertificateShowcase />
-                        </div>
-
-                        {/* Stacking Card Showcases */}
-                        <ShowcaseStack>
-                            <div className="w-full">
-                                <GitHubShowcase />
-                            </div>
-                            <div className="w-full">
-                                <KaggleShowcase />
-                            </div>
-                            <div className="w-full">
-                                <WakaTimeShowcase />
-                            </div>
-                        </ShowcaseStack>
-                    </div>
                     <AuditFunnel />
                 </div>
             </div>
