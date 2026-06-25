@@ -277,20 +277,12 @@ const TECH_LOGOS = [
 // --- Component 2: Core Engineering Panel ---
 // --- Component 1: Core Engineering Panel (Stats) ---
 const CoreEngineeringPanel = ({ scrollYProgress }: { scrollYProgress: any }) => {
-    // Panel 1 exits between 0.45 and 0.65
     const opacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0.45, 0.6], [1, 0.9]);
-    const blur = useTransform(scrollYProgress, [0.45, 0.6], [0, 10]);
 
     return (
         <div className="w-screen h-full flex items-center justify-center bg-background transition-colors duration-500 overflow-hidden">
             <motion.div
-                style={{
-                    opacity,
-                    scale,
-                    filter: `blur(${blur}px)`,
-                    willChange: "transform, opacity, filter",
-                }}
+                style={{ opacity }}
                 className="w-full h-full flex items-center justify-center"
             >
                 <Testimonial1 />
