@@ -22,48 +22,17 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
     const [isHovered, setIsHovered] = React.useState(false);
 
     // Map the parent's scroll progress (0.2 to 0.9) to local progress (0 to 1).
-    // This leaves 0.9 to 1.0 as a "pause" where the user can just read the Tech Stack before it scrolls away.
     const localProgress = useTransform(scrollYProgress, [0.2, 0.9], [0, 1]);
 
-    // 1. Card Transformation (Entrance & Scaling)
-    const cardScale = useTransform(localProgress, [0, 0.4], [0.8, 1], { ease: easeInOut });
-    const cardY = useTransform(localProgress, [0, 0.4], ["60vh", "0vh"], { ease: easeInOut });
-    const cardBorderRadius = useTransform(localProgress, [0.1, 0.4], ["60px", "0px"], { ease: easeInOut });
-
-    // 2. Internal Content Scroll
-    const contentY = useTransform(localProgress, [0.35, 1], ["0%", "-70%"], { ease: easeInOut });
-    const imageParallaxY = useTransform(localProgress, [0.35, 1], ["-10%", "10%"], { ease: easeInOut });
-
-    // 3. Elements specific animations
+    // Simplified animations - fewer transforms for better performance
+    const cardScale = useTransform(localProgress, [0, 0.4], [0.85, 1]);
+    const cardY = useTransform(localProgress, [0, 0.4], ["40vh", "0vh"]);
+    const contentY = useTransform(localProgress, [0.35, 1], ["0%", "-50%"]);
     const phase0Opacity = useTransform(localProgress, [0, 0.15], [1, 0]);
     const cardContentOpacity = useTransform(localProgress, [0.1, 0.3], [0, 1]);
-    const photoScale = useTransform(localProgress, [0.3, 0.8], [1.15, 1], { ease: easeInOut });
-    const textOpacity = useTransform(localProgress, [0.85, 1], [0, 1]);
-
-    // 4. Background Color Transition (Smoothing the exit)
-    const cardBg = useTransform(
-        localProgress,
-        [0.8, 1],
-        ["#EBEBEB", "#FFFFFF"]
-    );
-    const cardBgDark = useTransform(
-        localProgress,
-        [0.8, 1],
-        ["#18181b", "#000000"]
-    );
 
     const { resolvedTheme } = useTheme();
-    const cardBgValue = resolvedTheme === 'dark' ? cardBgDark : cardBg;
-
-    // Dynamic vault frame gradients that always match the card's transitioning background
-    const vaultGradientDown = useTransform(cardBgValue, (color: string) => {
-        const hex = color.replace('#', '');
-        return `linear-gradient(to bottom, #${hex}, #${hex}00)`;
-    });
-    const vaultGradientUp = useTransform(cardBgValue, (color: string) => {
-        const hex = color.replace('#', '');
-        return `linear-gradient(to top, #${hex}, #${hex}00)`;
-    });
+    const cardBgValue = resolvedTheme === 'dark' ? '#000000' : '#FFFFFF';
 
     const marqueeItems = [
         <span key="1" className="text-[10rem] md:text-[16rem] font-black uppercase tracking-tighter mx-12 text-black dark:text-white leading-none">
@@ -138,7 +107,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                 style={{
                     scale: cardScale,
                     y: cardY,
-                    borderRadius: cardBorderRadius,
+                    borderRadius: "0px",
                     backgroundColor: cardBgValue,
                     willChange: "transform, background-color",
                 }}
@@ -173,7 +142,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                             <div className="absolute inset-0 overflow-hidden">
                                 <motion.div
                                     style={{
-                                        scale: photoScale,
+                                        scale: 1,
                                     }}
                                     animate={{
                                         filter: isHovered ? "grayscale(0%) contrast(1)" : "grayscale(30%) contrast(1.05)",
@@ -186,7 +155,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                         <div className="absolute w-[calc(100%+100px)] h-[130vh] -top-[15vh] -left-[50px]">
                                             <motion.div 
                                                 className="relative h-full w-full" 
-                                                style={{ y: imageParallaxY }}
+                                                style={{ y: 0 }}
                                             >
                                                 <Image
                                                     src={portfolioData.personal.avatar}
@@ -206,11 +175,11 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                             <div className="absolute inset-0 pointer-events-none z-20">
                                 {/* Top bar: -top-px + h-[52px] covers the clip edge by 1px */}
                                 <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -top-px left-0 w-full h-[52px]" />
-                                <motion.div style={{ background: vaultGradientDown }} className="absolute top-[50px] left-0 w-full h-32" />
+                                <motion.div style={{ background: 'transparent' }} className="absolute top-[50px] left-0 w-full h-32" />
                                 
                                 {/* Bottom bar: -bottom-px + h-[52px] covers the clip edge by 1px */}
                                 <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -bottom-px left-0 w-full h-[52px]" />
-                                <motion.div style={{ background: vaultGradientUp }} className="absolute bottom-[50px] left-0 w-full h-32" />
+                                <motion.div style={{ background: 'transparent' }} className="absolute bottom-[50px] left-0 w-full h-32" />
                             </div>
                         </div>
                     </div>
