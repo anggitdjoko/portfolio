@@ -56,8 +56,8 @@ export default function ScrollAdventure() {
     });
 
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 30,
-        damping: 30,
+        stiffness: 10,
+        damping: 50,
         mass: 1,
         restDelta: 0.001
     });
@@ -74,7 +74,7 @@ export default function ScrollAdventure() {
     });
     
     // Spring physics wrapper for the entrance to mirror the buttery smooth exit
-    const enterProgress = useSpring(enterProgressRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
+    const enterProgress = useSpring(enterProgressRaw, { stiffness: 50, damping: 40, restDelta: 0.001 });
 
     const enterScale = useTransform(enterProgress, [0, 1], [0.85, 1]);
     const enterOpacity = useTransform(enterProgress, [0, 1], [0, 1]);
