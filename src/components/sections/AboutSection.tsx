@@ -485,13 +485,14 @@ const AuditFunnel = () => {
 const ScrollHijackSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: sectionRef });
+    const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: 0.5 });
     const [isComp2Visible, setIsComp2Visible] = React.useState(false);
     const [showBorder, setShowBorder] = React.useState(true);
 
-    const borderOpacity = useTransform(scrollYProgress, [0.1, 0.15], [1, 0]);
-    const xShift = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], ["0vw", "0vw", "-100vw", "-100vw"]);
+    const borderOpacity = useTransform(smoothProgress, [0.1, 0.15], [1, 0]);
+    const xShift = useTransform(smoothProgress, [0, 0.1, 0.4, 1], ["0vw", "0vw", "-100vw", "-100vw"]);
 
-    useMotionValueEvent(scrollYProgress, "change", (v: any) => {
+    useMotionValueEvent(smoothProgress, "change", (v: any) => {
         if (v >= 0.20 && showBorder) setShowBorder(false);
         if (v < 0.15 && !showBorder) setShowBorder(true);
         if (v >= 0.30 && !isComp2Visible) setIsComp2Visible(true);
