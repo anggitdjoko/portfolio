@@ -118,18 +118,11 @@ function PageSlide({ page, isActive, scrollProgress, index }: { page: any, isAct
     const step = 1 / totalPages;
     const base = index * step;
 
-    let enterStart = index === 0 ? -0.1 : base - step / 4;
-    let enterEnd = index === 0 ? -0.05 : base + step / 4;
-    let exitStart = base + step * 0.75;
-    let exitEnd = base + step * 1.25;
-
-    if (index === 0) {
-        exitStart = 0.125;
-        exitEnd = 0.3125;
-    } else if (index === 1) {
-        enterStart = 0.125;
-        enterEnd = 0.3125;
-    }
+    // Simplified scroll mapping - faster transitions
+    const enterStart = base;
+    const enterEnd = base + step * 0.3;
+    const exitStart = base + step * 0.7;
+    const exitEnd = base + step;
 
     const leftY = useTransform(
         scrollProgress,
