@@ -488,6 +488,7 @@ const ScrollHijackSection = () => {
     const [isComp2Visible, setIsComp2Visible] = React.useState(false);
     const [showBorder, setShowBorder] = React.useState(true);
 
+    const borderOpacity = useTransform(scrollYProgress, [0.1, 0.15], [1, 0]);
     const xShift = useTransform(scrollYProgress, [0, 0.1, 0.4, 1], ["0vw", "0vw", "-100vw", "-100vw"]);
 
     useMotionValueEvent(scrollYProgress, "change", (v: any) => {
