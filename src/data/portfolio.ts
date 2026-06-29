@@ -186,8 +186,8 @@ export const portfolioData: PortfolioData = {
             id: 'project-24',
             slug: 'lpg-distribution-analysis',
             title: 'LPG 3Kg Distribution Analysis 2023-2024',
-            description: 'Comprehensive 2-year analysis of LPG distribution: baseline establishment, YoY growth tracking, government policy impact analysis.',
-            longDescription: 'Comprehensive 2-year analysis: from establishing the 2023 baseline (31,459 txn) to tracking +19.9% YoY growth in 2024 (37,723 txn). Analyzed government policy impact on Household vs SME segmentation and adaptive distribution strategies for Pangkalan Gas Joeherman.',
+            description: 'Comprehensive 2-year analysis of 69,182 LPG transactions with YoY growth tracking and policy impact analysis.',
+            longDescription: 'Full 2-year analysis of LPG 3Kg distribution at Pangkalan Gas Joeherman. Tracked 69,182 transactions (2023: 31,459 → 2024: 37,723, +19.9% YoY). Analyzed Household vs UMKM segmentation, seasonal patterns, and government policy impact on subsidized LPG distribution.',
 
             techStack: ['Excel', 'SQL', 'Tableau', 'YoY Analysis', 'Demand Analysis'],
             tools: ['Excel', 'Tableau', 'SQL'],
@@ -199,22 +199,40 @@ export const portfolioData: PortfolioData = {
             customTimeline: '2023 - 2024',
             team: 'Freelance',
 
-            highlights: ['69.2K Transactions', '+19.9% YoY Growth', 'Rp 207.5M Combined Profit'],
+            highlights: ['69,182 Transactions', '+19.9% YoY Growth', 'Rp 207.5M Combined Profit', '2 Sectors Analyzed'],
             category: 'Data Analytics',
             features: [
                 {
-                    title: 'Analysis Scope',
+                    title: 'Market Segmentation',
                     items: [
-                        '**2-Year Trend Analysis**: Baseline 2023 (31,459 txn) to 2024 (37,723 txn) with +19.9% YoY growth.',
-                        '**Segmentation**: Household vs SME distribution patterns and government policy impact.',
-                        '**Profit Tracking**: Documented +18.9% profit increase YoY (Rp 94.3M to Rp 113.2M).',
+                        '**2023 Baseline**: 31,459 transactions - Household 82.1% (25,825), UMKM 17.9% (5,634).',
+                        '**2024 Growth**: 37,723 transactions (+19.9%) - Household 83.4% (31,455), UMKM 16.6% (6,265).',
+                        '**Policy Impact**: Government prioritized Household for subsidized LPG, reducing UMKM share.',
                     ]
                 },
                 {
-                    title: 'Key Impact',
+                    title: 'Seasonal Patterns',
                     items: [
-                        '**Growth Documentation**: 69,182 transactions analyzed over 2 years.',
-                        '**Policy Analysis**: Government policy impact on distribution strategies.',
+                        '**Q1 Growth**: Healthy increase in both sectors (Household +21%, UMKM +24.7%).',
+                        '**Q3 Spike**: UMKM surged 504.9% from July to September - peak demand period.',
+                        '**Year-end Drop**: Sharp decline in December (Household -78.56% in 2023).',
+                    ]
+                },
+                {
+                    title: 'Financial Performance',
+                    items: [
+                        '**2023 Profit**: Rp 94.3M (avg Rp 7.86M/month) at Rp 3,000 margin/transaction.',
+                        '**2024 Profit**: Rp 113.2M (+18.9% YoY).',
+                        '**Peak**: September (Rp 10.3M in 2023, Rp 14.8M in 2024) - UMKM surge.',
+                        '**Low**: December (Rp 2.8M in 2023, Rp 3.8M in 2024) - seasonal drop.',
+                    ]
+                },
+                {
+                    title: 'Strategic Recommendations',
+                    items: [
+                        '**Inventory Management**: Stock up for August-September UMKM surge to avoid shortages.',
+                        '**December Mitigation**: Diversify revenue streams to offset seasonal decline.',
+                        '**Policy Adaptation**: Adjust UMKM allocation strategy based on government regulations.',
                     ]
                 },
             ],
