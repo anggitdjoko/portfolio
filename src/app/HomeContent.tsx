@@ -15,6 +15,7 @@ import { TextPressure } from '@/components/ui/TextPressure';
 import { portfolioData } from '@/data/portfolio';
 import { cn } from "@/lib/utils";
 import { SocialCorner } from '@/components/layout/SocialCorner';
+import { GhibliLayout } from '@/components/ghibli';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -132,7 +133,7 @@ export default function HomePage() {
     };
 
     return (
-        <>
+        <GhibliLayout>
             {isLoading && <LoadingScreen onComplete={handleLoadingComplete} onExitStart={handleExitStart} duration={2500} />}
             <motion.main
                 initial={{ opacity: 0, y: 40 }}
@@ -154,6 +155,6 @@ export default function HomePage() {
                     <SocialCorner className="fixed bottom-12 right-12 z-[30]" />
                 )}
             </motion.main>
-        </>
+        </GhibliLayout>
     );
 }

@@ -39,6 +39,18 @@ const config: Config = {
 					purple: '#A855F7',
 					pink: '#EC4899'
 				},
+				ghibli: {
+					sky: '#87CEEB',
+					'leaf': '#7CA982',
+					bark: '#8B6F47',
+					sunset: '#F4A261',
+					cream: '#FDF6E3',
+					'forest-dark': '#2D5016',
+					'moss': '#4A7C59',
+					'gold': '#D4A843',
+					'warm-white': '#FFF8F0',
+					'deep-green': '#1A3A1A',
+				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
 					foreground: 'hsl(var(--popover-foreground))'
@@ -82,8 +94,17 @@ const config: Config = {
 			},
 			fontFamily: {
 				sans: [
+					'var(--font-quicksand)',
 					'var(--font-inter)',
 					'system-ui',
+					'sans-serif'
+				],
+				heading: [
+					'var(--font-caveat)',
+					'cursive'
+				],
+				body: [
+					'var(--font-quicksand)',
 					'sans-serif'
 				],
 				mono: [
@@ -104,7 +125,15 @@ const config: Config = {
 				marquee: 'marquee 30s linear infinite',
 				'marquee-reverse': 'marqueeReverse 30s linear infinite',
 				scan: 'scan 3s linear infinite',
-				meteor: 'meteor 5s linear infinite'
+				meteor: 'meteor 5s linear infinite',
+				'ghibli-float': 'ghibliFloat 4s ease-in-out infinite',
+				'falling-leaf': 'fallingLeaf var(--fall-duration, 12s) linear forwards',
+				'leaf-sway': 'leafSway var(--sway-duration, 3s) ease-in-out infinite',
+				'door-rise': 'doorRise 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+				'avatar-in': 'avatarIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+				'house-bounce': 'houseBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+				'glow-soft': 'glowSoft 2s ease-in-out infinite',
+				'sunray': 'sunray 8s ease-in-out infinite',
 			},
 			keyframes: {
 				meteor: {
@@ -213,6 +242,87 @@ const config: Config = {
 					},
 					'100%': {
 						transform: 'translateX(0%)'
+					}
+				},
+				ghibliFloat: {
+					'0%, 100%': {
+						transform: 'translateY(0px) rotate(-1deg)'
+					},
+					'50%': {
+						transform: 'translateY(-12px) rotate(1deg)'
+					}
+				},
+				fallingLeaf: {
+					'0%': {
+						transform: 'translateY(-10vh) translateX(0) rotate(0deg)',
+						opacity: '0'
+					},
+					'10%': {
+						opacity: '0.8'
+					},
+					'90%': {
+						opacity: '0.7'
+					},
+					'100%': {
+						transform: 'translateY(110vh) translateX(var(--drift, 100px)) rotate(var(--end-rotation, 360deg))',
+						opacity: '0'
+					}
+				},
+				leafSway: {
+					'0%, 100%': {
+						transform: 'translateX(0) rotate(var(--base-rotation, 0deg))'
+					},
+					'50%': {
+						transform: 'translateX(var(--sway-amount, 30px)) rotate(var(--sway-rotation, 15deg))'
+					}
+				},
+				doorRise: {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(40px) scale(0.9)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0) scale(1)'
+					}
+				},
+				avatarIn: {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.5) translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1) translateY(0)'
+					}
+				},
+				houseBounce: {
+					'0%': {
+						transform: 'scale(1)'
+					},
+					'50%': {
+						transform: 'scale(1.08)'
+					},
+					'100%': {
+						transform: 'scale(1.05)'
+					}
+				},
+				glowSoft: {
+					'0%, 100%': {
+						boxShadow: '0 0 15px rgba(244, 162, 97, 0.3), 0 0 30px rgba(244, 162, 97, 0.1)'
+					},
+					'50%': {
+						boxShadow: '0 0 25px rgba(244, 162, 97, 0.5), 0 0 50px rgba(244, 162, 97, 0.2)'
+					}
+				},
+				sunray: {
+					'0%, 100%': {
+						opacity: '0.3',
+						transform: 'scale(1) rotate(0deg)'
+					},
+					'50%': {
+						opacity: '0.6',
+						transform: 'scale(1.1) rotate(5deg)'
 					}
 				}
 			},

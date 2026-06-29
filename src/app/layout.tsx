@@ -1,6 +1,20 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono, Playfair_Display, Alex_Brush } from 'next/font/google';
+import { Caveat, Quicksand, Inter, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
+
+const caveat = Caveat({
+    subsets: ['latin'],
+    variable: '--font-caveat',
+    display: 'swap',
+    weight: ['400', '500', '600', '700'],
+});
+
+const quicksand = Quicksand({
+    subsets: ['latin'],
+    variable: '--font-quicksand',
+    display: 'swap',
+    weight: ['300', '400', '500', '600', '700'],
+});
 
 const inter = Inter({
     subsets: ['latin'],
@@ -14,26 +28,13 @@ const jetbrainsMono = JetBrains_Mono({
     display: 'swap',
 });
 
-const playfair = Playfair_Display({
-    subsets: ['latin'],
-    variable: '--font-playfair',
-    display: 'swap',
-});
-
-const signature = Alex_Brush({
-    weight: '400',
-    subsets: ['latin'],
-    variable: '--font-signature',
-    display: 'swap',
-});
-
 export const metadata: Metadata = {
     title: {
-        default: 'Anggit Djoko Wibowo | Full-Stack Developer',
+        default: 'Anggit Djoko Wibowo | Ghibli Portfolio',
         template: '%s | Anggit Portfolio',
     },
-    description: 'Full-Stack Developer building web apps with Next.js, React, and TypeScript. Currently Building Servgo, a SaaS POS platform.',
-    keywords: ['developer', 'portfolio', 'full-stack', 'nextjs', 'react', 'typescript'],
+    description: 'A magical Studio Ghibli-inspired portfolio. Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
+    keywords: ['developer', 'portfolio', 'full-stack', 'nextjs', 'react', 'typescript', 'ghibli', 'studio ghibli'],
     authors: [{ name: 'Anggit Djoko Wibowo' }],
     creator: 'Anggit Djoko Wibowo',
     icons: {
@@ -42,14 +43,14 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        title: 'Anggit Djoko Wibowo | Full-Stack Developer',
-        description: 'Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
+        title: 'Anggit Djoko Wibowo | Ghibli Portfolio',
+        description: 'A magical Studio Ghibli-inspired portfolio. Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
         siteName: 'Anggit Portfolio',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Anggit Djoko Wibowo | Full-Stack Developer',
-        description: 'Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
+        title: 'Anggit Djoko Wibowo | Ghibli Portfolio',
+        description: 'A magical Studio Ghibli-inspired portfolio. Full-Stack Developer building web apps with Next.js, React, and TypeScript.',
     },
 };
 
@@ -69,7 +70,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
-            <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} ${signature.variable} font-sans relative`}>
+            <body className={`${caveat.variable} ${quicksand.variable} ${inter.variable} ${jetbrainsMono.variable} font-quicksand relative`}>
                 {children}
             </body>
         </html>
