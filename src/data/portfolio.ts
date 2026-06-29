@@ -134,8 +134,8 @@ export const portfolioData: PortfolioData = {
             id: 'project-23',
             slug: 'restaurant-sales-analytics',
             title: 'Restaurant Sales & Menu Analytics',
-            description: 'Full exploratory data analysis on restaurant transactions: best/worst selling menu items, peak hours, payment methods, sales channels, daily trends.',
-            longDescription: 'Full exploratory data analysis on restaurant transactions: best and worst selling menu items, peak hours, payment methods, sales channels, daily trends, and customer behavior analysis for PT Jar Andalan Rasa.',
+            description: 'Full exploratory data analysis on 7,437 restaurant transactions worth Rp 164.8M net sales.',
+            longDescription: 'Comprehensive EDA on 7,437 restaurant transactions for PT Jar Andalan Rasa. Analyzed menu performance across 10 categories, identified Kare Ramen as top seller (803 units), and discovered delivery platforms (GoFood+GrabFood) contribute only 1.7% of sales - a significant growth opportunity.',
 
             techStack: ['Python', 'Excel', 'EDA', 'Data Visualization'],
             tools: ['Excel', 'Python', 'Jupyter Notebook'],
@@ -147,23 +147,31 @@ export const portfolioData: PortfolioData = {
             customTimeline: '2025',
             team: 'Freelance',
 
-            highlights: ['7.4K Records', 'Rp 164.8M Net Sales', '2,254 Transactions'],
+            highlights: ['7,437 Records', 'Rp 164.8M Net Sales', '10 Categories', '1.7% Delivery Share'],
             category: 'Data Analytics',
             features: [
                 {
                     title: 'Analysis Scope',
                     items: [
-                        '**Menu Performance**: Best and worst selling menu items with revenue contribution analysis.',
-                        '**Peak Hours Analysis**: Transaction volume patterns throughout the day and week.',
-                        '**Payment Methods**: Distribution of cash, QRIS, and digital wallet transactions.',
-                        '**Sales Channels**: Dine-in vs delivery platform comparison (GoFood, GrabFood).',
+                        '**Menu Performance**: 10 categories analyzed - Drinks (2,383), Ramen (1,839), Rice Bowl (1,219), Sushi (1,179).',
+                        '**Top Seller**: Kare Ramen - 803 units sold, highest revenue contributor.',
+                        '**Payment Mix**: Cash 49.2%, BCA QR 45.7%, Digital wallets 1.6%.',
                     ]
                 },
                 {
-                    title: 'Key Impact',
+                    title: 'Key Findings',
                     items: [
-                        '**Revenue Opportunity**: Quantified Rp 30-50M annual revenue opportunity from underutilized GoFood/GrabFood channels (only 2.8% of current sales).',
-                        '**Customer Behavior**: Identified ordering patterns and preferences for menu optimization.',
+                        '**Delivery Gap**: GoFood + GrabFood only 1.7% of sales (94+31 transactions).',
+                        '**Revenue Opportunity**: Rp 30-50M annual revenue from underutilized delivery channels.',
+                        '**Dine-in Dominance**: 94.5% of orders are dine-in, low delivery penetration.',
+                    ]
+                },
+                {
+                    title: 'Impact',
+                    items: [
+                        '**Growth Strategy**: Recommended delivery platform expansion for revenue growth.',
+                        '**Menu Optimization**: Identified fast-moving vs slow-moving items per category.',
+                        '**Payment Insights**: BCA QR adoption at 45.7% shows digital payment readiness.',
                     ]
                 },
             ],
