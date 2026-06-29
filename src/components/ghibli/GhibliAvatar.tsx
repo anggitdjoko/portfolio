@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
-const MAX_ARM_ROTATION = 30;
+const MAX_ARM_ROTATION = 25;
 
 export const GhibliAvatar = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -34,119 +34,119 @@ export const GhibliAvatar = () => {
     }, [handleMouseMove]);
 
     useEffect(() => {
-        const interval = setInterval(() => setIsWaving(prev => !prev), 4000);
+        const interval = setInterval(() => setIsWaving(prev => !prev), 4500);
         return () => clearInterval(interval);
     }, []);
 
     return (
         <motion.div
             ref={containerRef}
-            className="relative w-44 h-56 sm:w-52 sm:h-64"
+            className="relative w-40 h-52 sm:w-48 sm:h-60"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-            <svg width="100%" height="100%" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg"
-                style={{ filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.15))' }}>
+            <svg width="100%" height="100%" viewBox="0 0 180 220" fill="none" xmlns="http://www.w3.org/2000/svg"
+                style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }}>
                 <defs>
-                    <linearGradient id="sweaterGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#FFF8F0" />
-                        <stop offset="100%" stopColor="#F5E6D3" />
+                    <linearGradient id="skinReal" x1="0.3" y1="0" x2="0.7" y2="1">
+                        <stop offset="0%" stopColor="#FFE0C2" />
+                        <stop offset="100%" stopColor="#FFD0A8" />
                     </linearGradient>
-                    <radialGradient id="skinGrad" cx="0.4" cy="0.3" r="0.6">
-                        <stop offset="0%" stopColor="#FFE8D0" />
-                        <stop offset="100%" stopColor="#FFDAB9" />
-                    </radialGradient>
+                    <linearGradient id="sweaterReal" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#F0E8D8" />
+                        <stop offset="100%" stopColor="#E0D4BE" />
+                    </linearGradient>
+                    <linearGradient id="hairReal" x1="0.3" y1="0" x2="0.7" y2="1">
+                        <stop offset="0%" stopColor="#4A3828" />
+                        <stop offset="100%" stopColor="#3A2818" />
+                    </linearGradient>
                 </defs>
 
                 {/* Body */}
-                <path d="M55 145 Q55 120, 72 110 L128 110 Q145 120, 145 145 L147 210 Q147 220, 137 220 L63 220 Q53 220, 53 210 Z"
-                    fill="url(#sweaterGrad)" stroke="#E8DCC8" strokeWidth="1.5" />
+                <path d="M50 130 Q50 108, 65 98 L115 98 Q130 108, 130 130 L132 195 Q132 205, 122 205 L58 205 Q48 205, 48 195 Z"
+                    fill="url(#sweaterReal)" stroke="rgba(180,160,130,0.4)" strokeWidth="1" />
 
-                {/* Sweater texture */}
-                <path d="M60 135 Q100 130, 140 135" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.6" />
-                <path d="M58 150 Q100 145, 142 150" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.5" />
-                <path d="M57 165 Q100 160, 143 165" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.4" />
-                <path d="M56 180 Q100 175, 144 180" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.35" />
-                <path d="M55 195 Q100 190, 145 195" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.3" />
+                {/* Sweater knit */}
+                <path d="M55 120 Q90 115, 125 120" fill="none" stroke="rgba(200,185,160,0.5)" strokeWidth="0.8" />
+                <path d="M53 135 Q90 130, 127 135" fill="none" stroke="rgba(200,185,160,0.4)" strokeWidth="0.8" />
+                <path d="M52 150 Q90 145, 128 150" fill="none" stroke="rgba(200,185,160,0.35)" strokeWidth="0.8" />
+                <path d="M51 165 Q90 160, 129 165" fill="none" stroke="rgba(200,185,160,0.3)" strokeWidth="0.8" />
 
                 {/* Collar */}
-                <path d="M72 110 Q100 104, 128 110" fill="none" stroke="#E8DCC8" strokeWidth="2" />
-                <path d="M78 113 Q100 108, 122 113" fill="none" stroke="#E8DCC8" strokeWidth="1" opacity="0.5" />
+                <path d="M65 98 Q90 92, 115 98" fill="none" stroke="rgba(180,160,130,0.5)" strokeWidth="1.5" />
 
                 {/* Neck */}
-                <rect x="85" y="95" width="30" height="18" fill="url(#skinGrad)" rx="8" />
+                <rect x="80" y="86" width="20" height="15" fill="url(#skinReal)" rx="6" />
 
                 {/* Head */}
-                <ellipse cx="100" cy="62" rx="40" ry="44" fill="url(#skinGrad)" />
+                <ellipse cx="90" cy="56" rx="36" ry="40" fill="url(#skinReal)" />
 
                 {/* Hair */}
-                <path d="M60 52 Q60 18, 100 10 Q140 18, 140 52 Q140 38, 130 30 Q118 18, 100 14 Q82 18, 70 30 Q60 38, 60 52Z"
-                    fill="#5A4A32" />
-                <path d="M60 52 Q56 70, 60 90 Q62 78, 66 68" fill="#5A4A32" />
-                <path d="M140 52 Q144 70, 140 90 Q138 78, 134 68" fill="#5A4A32" />
-                <path d="M62 60 Q58 75, 62 88" fill="#4A3A28" />
-                <path d="M138 60 Q142 75, 138 88" fill="#4A3A28" />
-                <path d="M72 38 Q78 26, 90 22 Q85 32, 78 45" fill="#4A3A28" />
-                <path d="M110 22 Q122 26, 128 38 Q122 45, 115 32" fill="#4A3A28" />
-                <path d="M82 25 Q90 18, 98 14 Q94 22, 88 32" fill="#5A4A32" />
+                <path d="M54 46 Q54 16, 90 8 Q126 16, 126 46 Q126 34, 118 26 Q108 16, 90 12 Q72 16, 62 26 Q54 34, 54 46Z"
+                    fill="url(#hairReal)" />
+                <path d="M54 46 Q50 62, 54 78 Q56 66, 60 58" fill="url(#hairReal)" />
+                <path d="M126 46 Q130 62, 126 78 Q124 66, 120 58" fill="url(#hairReal)" />
+                <path d="M56 52 Q52 65, 56 76" fill="#3A2818" />
+                <path d="M124 52 Q128 65, 124 76" fill="#3A2818" />
+                <path d="M68 34 Q74 24, 84 20 Q80 28, 74 40" fill="#3A2818" />
+                <path d="M106 20 Q116 24, 122 34 Q116 40, 110 28" fill="#3A2818" />
+                <path d="M78 22 Q86 14, 94 10 Q90 18, 84 28" fill="#4A3828" />
 
                 {/* Eyes */}
-                <ellipse cx="82" cy="60" rx="9" ry="10" fill="white" />
-                <ellipse cx="118" cy="60" rx="9" ry="10" fill="white" />
-                <circle cx="83" cy="61" r="6" fill="#3A2818" />
-                <circle cx="119" cy="61" r="6" fill="#3A2818" />
-                <circle cx="84" cy="60" r="3.5" fill="#1A1008" />
-                <circle cx="120" cy="60" r="3.5" fill="#1A1008" />
-                <circle cx="86" cy="58" r="2.5" fill="white" />
-                <circle cx="122" cy="58" r="2.5" fill="white" />
-                <circle cx="82" cy="62" r="1.2" fill="white" opacity="0.6" />
-                <circle cx="118" cy="62" r="1.2" fill="white" opacity="0.6" />
+                <ellipse cx="76" cy="52" rx="8" ry="9" fill="white" />
+                <ellipse cx="104" cy="52" rx="8" ry="9" fill="white" />
+                <circle cx="77" cy="53" r="5.5" fill="#2A1A0A" />
+                <circle cx="105" cy="53" r="5.5" fill="#2A1A0A" />
+                <circle cx="78" cy="52" r="3" fill="#1A0A00" />
+                <circle cx="106" cy="52" r="3" fill="#1A0A00" />
+                <circle cx="80" cy="50" r="2" fill="white" />
+                <circle cx="108" cy="50" r="2" fill="white" />
+                <circle cx="76" cy="54" r="1" fill="white" opacity="0.5" />
+                <circle cx="104" cy="54" r="1" fill="white" opacity="0.5" />
 
                 {/* Eyebrows */}
-                <path d="M73 48 Q82 44, 91 48" fill="none" stroke="#4A3A28" strokeWidth="2.2" strokeLinecap="round" />
-                <path d="M109 48 Q118 44, 127 48" fill="none" stroke="#4A3A28" strokeWidth="2.2" strokeLinecap="round" />
+                <path d="M68 42 Q76 38, 84 42" fill="none" stroke="#3A2818" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M96 42 Q104 38, 112 42" fill="none" stroke="#3A2818" strokeWidth="1.8" strokeLinecap="round" />
 
                 {/* Nose */}
-                <ellipse cx="100" cy="72" rx="3" ry="2.5" fill="#FFCBA4" />
+                <ellipse cx="90" cy="64" rx="2.5" ry="2" fill="rgba(220,180,150,0.6)" />
 
                 {/* Mouth */}
-                <path d="M88 80 Q100 90, 112 80" fill="none" stroke="#C4725A" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M80 72 Q90 80, 100 72" fill="none" stroke="#B86B50" strokeWidth="2" strokeLinecap="round" />
 
                 {/* Cheeks */}
-                <ellipse cx="70" cy="74" rx="10" ry="7" fill="#FFB5B5" opacity="0.4" />
-                <ellipse cx="130" cy="74" rx="10" ry="7" fill="#FFB5B5" opacity="0.4" />
+                <ellipse cx="65" cy="66" rx="8" ry="5" fill="rgba(220,150,150,0.3)" />
+                <ellipse cx="115" cy="66" rx="8" ry="5" fill="rgba(220,150,150,0.3)" />
 
                 {/* Left arm */}
-                <path d="M55 138 Q38 150, 32 165 Q26 178, 32 184" fill="none" stroke="url(#skinGrad)" strokeWidth="16" strokeLinecap="round" />
-                <path d="M55 138 Q38 150, 32 165 Q26 178, 32 184" fill="none" stroke="#E8DCC8" strokeWidth="1.5" strokeLinecap="round" />
-                <circle cx="32" cy="184" r="10" fill="url(#skinGrad)" />
-                <circle cx="32" cy="184" r="10" fill="none" stroke="#E8C8A8" strokeWidth="0.8" />
+                <path d="M50 125 Q35 135, 30 148 Q25 160, 30 165" fill="none" stroke="url(#skinReal)" strokeWidth="14" strokeLinecap="round" />
+                <path d="M50 125 Q35 135, 30 148 Q25 160, 30 165" fill="none" stroke="rgba(180,160,130,0.3)" strokeWidth="1" strokeLinecap="round" />
+                <circle cx="30" cy="165" r="8" fill="url(#skinReal)" />
             </svg>
 
             {/* Right arm */}
-            <svg className="absolute top-0 right-0 w-full h-full" viewBox="0 0 200 240" fill="none"
+            <svg className="absolute top-0 right-0 w-full h-full" viewBox="0 0 180 220" fill="none"
                 xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
                 <g style={{
                     transform: `rotate(${armRotation}deg)`,
-                    transformOrigin: '145px 138px',
+                    transformOrigin: '130px 125px',
                     transition: 'transform 0.15s ease-out',
                 }}>
-                    <path d="M145 138 Q165 120, 170 105 Q175 88, 168 78" fill="none"
-                        stroke="url(#skinGrad)" strokeWidth="16" strokeLinecap="round" />
-                    <path d="M145 138 Q165 120, 170 105 Q175 88, 168 78" fill="none"
-                        stroke="#E8DCC8" strokeWidth="1.5" strokeLinecap="round" />
-                    <circle cx="168" cy="78" r="10" fill="url(#skinGrad)" />
-                    <circle cx="168" cy="78" r="10" fill="none" stroke="#E8C8A8" strokeWidth="0.8" />
+                    <path d="M130 125 Q148 108, 152 92 Q156 78, 150 68" fill="none"
+                        stroke="url(#skinReal)" strokeWidth="14" strokeLinecap="round" />
+                    <path d="M130 125 Q148 108, 152 92 Q156 78, 150 68" fill="none"
+                        stroke="rgba(180,160,130,0.3)" strokeWidth="1" strokeLinecap="round" />
+                    <circle cx="150" cy="68" r="8" fill="url(#skinReal)" />
                     <motion.g
-                        animate={isWaving ? { rotate: [0, -15, 15, -15, 0] } : { rotate: 0 }}
-                        transition={{ duration: 2, repeat: isWaving ? Infinity : 0, ease: "easeInOut" }}
-                        style={{ transformOrigin: '168px 78px' }}
+                        animate={isWaving ? { rotate: [0, -12, 12, -12, 0] } : { rotate: 0 }}
+                        transition={{ duration: 2.2, repeat: isWaving ? Infinity : 0, ease: "easeInOut" }}
+                        style={{ transformOrigin: '150px 68px' }}
                     >
-                        <path d="M162 72 L158 62" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
-                        <path d="M166 69 L164 58" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
-                        <path d="M171 69 L171 58" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
-                        <path d="M175 71 L178 61" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M144 62 L140 54" stroke="url(#skinReal)" strokeWidth="5" strokeLinecap="round" />
+                        <path d="M148 60 L146 50" stroke="url(#skinReal)" strokeWidth="5" strokeLinecap="round" />
+                        <path d="M153 60 L153 50" stroke="url(#skinReal)" strokeWidth="5" strokeLinecap="round" />
+                        <path d="M157 62 L160 54" stroke="url(#skinReal)" strokeWidth="5" strokeLinecap="round" />
                     </motion.g>
                 </g>
             </svg>

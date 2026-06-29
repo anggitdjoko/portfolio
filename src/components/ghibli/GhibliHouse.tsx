@@ -6,148 +6,104 @@ import { GhibliAvatar } from './GhibliAvatar';
 import { DoorNav } from './DoorNav';
 
 const HouseSVG = ({ isOpen }: { isOpen: boolean }) => (
-    <svg
-        width="150"
-        height="170"
-        viewBox="0 0 150 170"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.2))' }}
-    >
+    <svg width="140" height="155" viewBox="0 0 140 155" fill="none" xmlns="http://www.w3.org/2000/svg"
+        style={{ filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}>
         <defs>
-            <radialGradient id="houseGlowPro" cx="50%" cy="45%" r="55%">
-                <stop offset="0%" stopColor="#F4A261" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#F4A261" stopOpacity="0" />
-            </radialGradient>
-            <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#8B4513" />
-                <stop offset="100%" stopColor="#A0522D" />
+            <linearGradient id="roofReal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#6B4226" />
+                <stop offset="100%" stopColor="#7A5230" />
             </linearGradient>
-            <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#FFF8F0" />
-                <stop offset="100%" stopColor="#F5E6D3" />
+            <linearGradient id="wallReal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#F5EDE0" />
+                <stop offset="100%" stopColor="#E8DCC8" />
             </linearGradient>
         </defs>
 
-        {/* Warm glow */}
-        <circle cx="75" cy="85" r="65" fill="url(#houseGlowPro)" />
-
         {/* Chimney */}
-        <rect x="102" y="18" width="18" height="40" fill="#7A6240" rx="2" />
-        <rect x="100" y="14" width="22" height="7" fill="#6B5A3E" rx="2" />
-        {/* Chimney bricks */}
-        <line x1="102" y1="25" x2="120" y2="25" stroke="#6B5A3E" strokeWidth="0.5" opacity="0.4" />
-        <line x1="102" y1="32" x2="120" y2="32" stroke="#6B5A3E" strokeWidth="0.5" opacity="0.4" />
-        <line x1="102" y1="39" x2="120" y2="39" stroke="#6B5A3E" strokeWidth="0.5" opacity="0.4" />
-        <line x1="111" y1="18" x2="111" y2="58" stroke="#6B5A3E" strokeWidth="0.5" opacity="0.3" />
+        <rect x="98" y="15" width="16" height="38" fill="#5C4830" rx="1" />
+        <rect x="96" y="12" width="20" height="5" fill="#4D3D28" rx="1" />
 
         {/* Smoke */}
-        <motion.g
-            animate={{ y: [0, -15, 0], opacity: [0.5, 0.15, 0.5] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        >
-            <circle cx="111" cy="10" r="6" fill="#D4C4A8" opacity="0.4" />
-            <circle cx="117" cy="1" r="5" fill="#D4C4A8" opacity="0.3" />
-            <circle cx="110" cy="-6" r="4" fill="#D4C4A8" opacity="0.2" />
-            <circle cx="115" cy="-12" r="3" fill="#D4C4A8" opacity="0.1" />
+        <motion.g animate={{ y: [0, -12, 0], opacity: [0.4, 0.1, 0.4] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
+            <circle cx="106" cy="8" r="5" fill="rgba(200,190,170,0.4)" />
+            <circle cx="110" cy="0" r="4" fill="rgba(200,190,170,0.3)" />
+            <circle cx="105" cy="-6" r="3" fill="rgba(200,190,170,0.2)" />
         </motion.g>
 
         {/* Roof */}
-        <path d="M12 65 L75 14 L138 65 Z" fill="url(#roofGrad)" stroke="#6B3A1F" strokeWidth="1.5" />
-        <path d="M28 58 L75 22 L122 58" fill="none" stroke="#6B3A1F" strokeWidth="0.8" opacity="0.35" />
-        <path d="M38 62 L75 30 L112 62" fill="none" stroke="#6B3A1F" strokeWidth="0.6" opacity="0.25" />
+        <path d="M10 62 L70 12 L130 62 Z" fill="url(#roofReal)" stroke="#5C3A1A" strokeWidth="1" />
+        <path d="M25 56 L70 20 L115 56" fill="none" stroke="rgba(80,50,25,0.3)" strokeWidth="0.8" />
 
         {/* Roof moss */}
-        <circle cx="42" cy="45" r="5" fill="#5A8A64" opacity="0.5" />
-        <circle cx="38" cy="48" r="3" fill="#4A7C59" opacity="0.4" />
-        <circle cx="108" cy="45" r="4" fill="#5A8A64" opacity="0.45" />
-        <circle cx="112" cy="48" r="2.5" fill="#4A7C59" opacity="0.35" />
-        <circle cx="75" cy="28" r="3" fill="#5A8A64" opacity="0.3" />
+        <circle cx="38" cy="42" r="4" fill="rgba(90,130,70,0.45)" />
+        <circle cx="35" cy="45" r="2.5" fill="rgba(70,110,50,0.35)" />
+        <circle cx="102" cy="42" r="3.5" fill="rgba(90,130,70,0.4)" />
+        <circle cx="105" cy="45" r="2" fill="rgba(70,110,50,0.3)" />
 
-        {/* House body */}
-        <rect x="18" y="65" width="114" height="78" fill="url(#wallGrad)" rx="2" />
-        <rect x="18" y="65" width="114" height="78" fill="none" stroke="#D4C4A8" strokeWidth="1.5" rx="2" />
+        {/* Wall */}
+        <rect x="16" y="62" width="108" height="72" fill="url(#wallReal)" stroke="rgba(180,160,130,0.5)" strokeWidth="1" rx="1" />
 
-        {/* Wood planks */}
-        <line x1="18" y1="83" x2="132" y2="83" stroke="#E8DCC8" strokeWidth="0.5" opacity="0.5" />
-        <line x1="18" y1="101" x2="132" y2="101" stroke="#E8DCC8" strokeWidth="0.5" opacity="0.5" />
-        <line x1="18" y1="119" x2="132" y2="119" stroke="#E8DCC8" strokeWidth="0.5" opacity="0.5" />
-        <line x1="18" y1="137" x2="132" y2="137" stroke="#E8DCC8" strokeWidth="0.5" opacity="0.4" />
+        {/* Wood texture */}
+        <line x1="16" y1="80" x2="124" y2="80" stroke="rgba(200,180,150,0.4)" strokeWidth="0.5" />
+        <line x1="16" y1="98" x2="124" y2="98" stroke="rgba(200,180,150,0.4)" strokeWidth="0.5" />
+        <line x1="16" y1="116" x2="124" y2="116" stroke="rgba(200,180,150,0.4)" strokeWidth="0.5" />
 
         {/* Door */}
-        <rect x="55" y="90" width="40" height="53" fill="#8B6F47" rx="20 20 0 0" />
-        <rect x="55" y="90" width="40" height="53" fill="none" stroke="#6B5A3E" strokeWidth="1.5" rx="20 20 0 0" />
-        {/* Door panels */}
-        <rect x="60" y="98" width="13" height="18" fill="#7A6240" rx="1" opacity="0.3" />
-        <rect x="77" y="98" width="13" height="18" fill="#7A6240" rx="1" opacity="0.3" />
-        <rect x="60" y="120" width="13" height="18" fill="#7A6240" rx="1" opacity="0.3" />
-        <rect x="77" y="120" width="13" height="18" fill="#7A6240" rx="1" opacity="0.3" />
-        {/* Door light leak */}
-        <rect x="57" y="92" width="2.5" height="48" fill="#F4A261" opacity="0.35" rx="1" />
-        {/* Door handle */}
-        <circle cx="86" cy="118" r="3.5" fill="#D4A843" />
-        <circle cx="86" cy="118" r="2" fill="#F4A261" />
-        <circle cx="86.5" cy="117" r="1" fill="#FFF8F0" opacity="0.5" />
+        <rect x="52" y="85" width="36" height="49" fill="#6B5538" rx="18 18 0 0" />
+        <rect x="52" y="85" width="36" height="49" fill="none" stroke="#5C4830" strokeWidth="1" rx="18 18 0 0" />
+        <rect x="56" y="92" width="12" height="16" fill="rgba(90,70,45,0.3)" rx="1" />
+        <rect x="72" y="92" width="12" height="16" fill="rgba(90,70,45,0.3)" rx="1" />
+        <rect x="56" y="112" width="12" height="16" fill="rgba(90,70,45,0.3)" rx="1" />
+        <rect x="72" y="112" width="12" height="16" fill="rgba(90,70,45,0.3)" rx="1" />
+        <rect x="54" y="87" width="2" height="44" fill="rgba(244,162,97,0.25)" rx="1" />
+        <circle cx="80" cy="112" r="3" fill="#C4A040" />
+        <circle cx="80" cy="112" r="1.5" fill="#D4B050" />
 
         {/* Windows */}
         <g>
-            <rect x="26" y="74" width="22" height="18" fill="#87CEEB" rx="2" />
-            <rect x="26" y="74" width="22" height="18" fill="none" stroke="#8B6F47" strokeWidth="1.5" rx="2" />
-            <line x1="37" y1="74" x2="37" y2="92" stroke="#8B6F47" strokeWidth="1" />
-            <line x1="26" y1="83" x2="48" y2="83" stroke="#8B6F47" strokeWidth="1" />
-            <rect x="27" y="75" width="9" height="7" fill="#F4A261" opacity="0.4" rx="1" />
-            <rect x="27" y="84" width="9" height="7" fill="#F4A261" opacity="0.3" rx="1" />
+            <rect x="24" y="72" width="20" height="16" fill="rgba(135,180,210,0.6)" rx="1" />
+            <rect x="24" y="72" width="20" height="16" fill="none" stroke="#6B5538" strokeWidth="1.5" rx="1" />
+            <line x1="34" y1="72" x2="34" y2="88" stroke="#6B5538" strokeWidth="0.8" />
+            <line x1="24" y1="80" x2="44" y2="80" stroke="#6B5538" strokeWidth="0.8" />
+            <rect x="25" y="73" width="8" height="6" fill="rgba(244,162,97,0.3)" rx="0.5" />
         </g>
         <g>
-            <rect x="102" y="74" width="22" height="18" fill="#87CEEB" rx="2" />
-            <rect x="102" y="74" width="22" height="18" fill="none" stroke="#8B6F47" strokeWidth="1.5" rx="2" />
-            <line x1="113" y1="74" x2="113" y2="92" stroke="#8B6F47" strokeWidth="1" />
-            <line x1="102" y1="83" x2="124" y2="83" stroke="#8B6F47" strokeWidth="1" />
-            <rect x="111" y="75" width="9" height="7" fill="#F4A261" opacity="0.4" rx="1" />
-            <rect x="111" y="84" width="9" height="7" fill="#F4A261" opacity="0.3" rx="1" />
+            <rect x="96" y="72" width="20" height="16" fill="rgba(135,180,210,0.6)" rx="1" />
+            <rect x="96" y="72" width="20" height="16" fill="none" stroke="#6B5538" strokeWidth="1.5" rx="1" />
+            <line x1="106" y1="72" x2="106" y2="88" stroke="#6B5538" strokeWidth="0.8" />
+            <line x1="96" y1="80" x2="116" y2="80" stroke="#6B5538" strokeWidth="0.8" />
+            <rect x="103" y="73" width="8" height="6" fill="rgba(244,162,97,0.3)" rx="0.5" />
         </g>
 
         {/* Window boxes */}
-        <rect x="24" y="92" width="26" height="4" fill="#8B6F47" rx="1" />
-        <circle cx="28" cy="91" r="2" fill="#FF6B6B" opacity="0.7" />
-        <circle cx="33" cy="90" r="1.5" fill="#F4A261" opacity="0.6" />
-        <circle cx="38" cy="91" r="2" fill="#FF6B6B" opacity="0.7" />
-        <circle cx="43" cy="90" r="1.5" fill="#87CEEB" opacity="0.6" />
-        <rect x="100" y="92" width="26" height="4" fill="#8B6F47" rx="1" />
-        <circle cx="104" cy="91" r="2" fill="#F4A261" opacity="0.7" />
-        <circle cx="109" cy="90" r="1.5" fill="#FF6B6B" opacity="0.6" />
-        <circle cx="114" cy="91" r="2" fill="#87CEEB" opacity="0.7" />
-        <circle cx="119" cy="90" r="1.5" fill="#F4A261" opacity="0.6" />
+        <rect x="22" y="88" width="24" height="3" fill="#6B5538" rx="0.5" />
+        <circle cx="26" cy="87" r="1.8" fill="rgba(200,80,80,0.6)" />
+        <circle cx="31" cy="86" r="1.3" fill="rgba(244,162,97,0.5)" />
+        <circle cx="36" cy="87" r="1.8" fill="rgba(200,80,80,0.6)" />
+        <circle cx="41" cy="86" r="1.3" fill="rgba(135,180,210,0.5)" />
+        <rect x="94" y="88" width="24" height="3" fill="#6B5538" rx="0.5" />
+        <circle cx="98" cy="87" r="1.8" fill="rgba(244,162,97,0.6)" />
+        <circle cx="103" cy="86" r="1.3" fill="rgba(200,80,80,0.5)" />
+        <circle cx="108" cy="87" r="1.8" fill="rgba(135,180,210,0.6)" />
+        <circle cx="113" cy="86" r="1.3" fill="rgba(244,162,97,0.5)" />
 
         {/* Foundation */}
-        <rect x="12" y="141" width="126" height="7" fill="#8B6F47" rx="2" />
+        <rect x="10" y="132" width="120" height="5" fill="#6B5538" rx="1" />
 
-        {/* Grass & flowers */}
-        <path d="M8 148 Q18 138, 28 148 Q38 138, 48 148 Q58 138, 68 148 Q78 138, 88 148 Q98 138, 108 148 Q118 138, 128 148 Q138 138, 148 148" fill="#7CA982" />
+        {/* Grass */}
+        <path d="M6 137 Q16 128, 26 137 Q36 128, 46 137 Q56 128, 66 137 Q76 128, 86 137 Q96 128, 106 137 Q116 128, 126 137 Q136 128, 140 137" fill="rgba(100,150,80,0.5)" />
 
-        {/* Wildflowers */}
-        <circle cx="22" cy="144" r="3" fill="#F4A261" />
-        <circle cx="22" cy="144" r="1.5" fill="#D4A843" />
-        <circle cx="45" cy="146" r="2.5" fill="#EC4899" opacity="0.8" />
-        <circle cx="45" cy="146" r="1" fill="#F4A261" opacity="0.6" />
-        <circle cx="125" cy="145" r="2.5" fill="#87CEEB" />
-        <circle cx="125" cy="145" r="1" fill="#D4A843" />
-        <circle cx="140" cy="147" r="2" fill="#F4A261" />
-        <circle cx="140" cy="147" r="1" fill="#D4A843" />
-
-        {/* Fence */}
-        <line x1="2" y1="142" x2="2" y2="155" stroke="#8B6F47" strokeWidth="2" />
-        <line x1="10" y1="142" x2="10" y2="155" stroke="#8B6F47" strokeWidth="2" />
-        <line x1="0" y1="147" x2="12" y2="147" stroke="#8B6F47" strokeWidth="1.5" />
-        <line x1="140" y1="142" x2="140" y2="155" stroke="#8B6F47" strokeWidth="2" />
-        <line x1="148" y1="142" x2="148" y2="155" stroke="#8B6F47" strokeWidth="2" />
-        <line x1="138" y1="147" x2="150" y2="147" stroke="#8B6F47" strokeWidth="1.5" />
+        {/* Flowers */}
+        <circle cx="20" cy="133" r="2.5" fill="rgba(244,162,97,0.7)" />
+        <circle cx="20" cy="133" r="1.2" fill="rgba(180,120,50,0.5)" />
+        <circle cx="42" cy="135" r="2" fill="rgba(200,100,150,0.6)" />
+        <circle cx="120" cy="134" r="2" fill="rgba(135,180,210,0.6)" />
+        <circle cx="135" cy="136" r="1.5" fill="rgba(244,162,97,0.5)" />
 
         {/* Stone path */}
-        <ellipse cx="75" cy="158" rx="10" ry="3.5" fill="#D4C4A8" opacity="0.6" />
-        <ellipse cx="63" cy="163" rx="7" ry="3" fill="#D4C4A8" opacity="0.5" />
-        <ellipse cx="87" cy="163" rx="6" ry="2.5" fill="#D4C4A8" opacity="0.5" />
-        <ellipse cx="75" cy="167" rx="5" ry="2" fill="#D4C4A8" opacity="0.4" />
+        <ellipse cx="70" cy="148" rx="9" ry="3" fill="rgba(180,170,150,0.5)" />
+        <ellipse cx="60" cy="152" rx="6" ry="2.5" fill="rgba(180,170,150,0.4)" />
+        <ellipse cx="80" cy="152" rx="5" ry="2" fill="rgba(180,170,150,0.4)" />
     </svg>
 );
 
@@ -180,7 +136,7 @@ export const GhibliHouse = () => {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.5, y: 20 }}
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                        className="absolute bottom-40 right-0 sm:bottom-48"
+                        className="absolute bottom-36 right-0 sm:bottom-44"
                     >
                         <GhibliAvatar />
                     </motion.div>
@@ -189,25 +145,20 @@ export const GhibliHouse = () => {
 
             <motion.button
                 onClick={handleClick}
-                className="relative cursor-pointer focus:outline-none focus:ring-4 focus:ring-ghibli-sunset/30 rounded-2xl group"
-                whileHover={{ scale: 1.05 }}
+                className="relative cursor-pointer focus:outline-none focus:ring-4 focus:ring-ghibli-sunset/20 rounded-xl group"
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                animate={{ y: [0, -6, 0] }}
-                transition={{ y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
+                animate={{ y: [0, -4, 0] }}
+                transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
                 aria-label={isOpen ? "Close navigation" : "Open navigation"}
             >
                 <HouseSVG isOpen={isOpen} />
 
                 <AnimatePresence>
                     {isOpen && (
-                        <motion.div
-                            className="absolute inset-0 rounded-2xl pointer-events-none"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            style={{
-                                boxShadow: '0 0 50px rgba(244, 162, 97, 0.5), 0 0 100px rgba(244, 162, 97, 0.25)',
-                            }}
+                        <motion.div className="absolute inset-0 rounded-xl pointer-events-none"
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                            style={{ boxShadow: '0 0 40px rgba(244,162,97,0.4), 0 0 80px rgba(244,162,97,0.2)' }}
                         />
                     )}
                 </AnimatePresence>
