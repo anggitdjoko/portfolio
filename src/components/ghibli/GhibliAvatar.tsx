@@ -13,217 +13,140 @@ export const GhibliAvatar = () => {
 
     const handleMouseMove = useCallback((e: MouseEvent) => {
         if (!containerRef.current) return;
-
         const rect = containerRef.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 3;
-
         const deltaX = e.clientX - centerX;
         const deltaY = e.clientY - centerY;
-
         const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
         const clampedAngle = Math.max(-MAX_ARM_ROTATION, Math.min(MAX_ARM_ROTATION, angle - 90));
 
-        if (animationFrameRef.current) {
-            cancelAnimationFrame(animationFrameRef.current);
-        }
-
-        animationFrameRef.current = requestAnimationFrame(() => {
-            setArmRotation(clampedAngle);
-        });
+        if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = requestAnimationFrame(() => setArmRotation(clampedAngle));
     }, []);
 
     useEffect(() => {
         window.addEventListener('mousemove', handleMouseMove);
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
+            if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
         };
     }, [handleMouseMove]);
 
     useEffect(() => {
-        const waveInterval = setInterval(() => {
-            setIsWaving(prev => !prev);
-        }, 3500);
-        return () => clearInterval(waveInterval);
+        const interval = setInterval(() => setIsWaving(prev => !prev), 4000);
+        return () => clearInterval(interval);
     }, []);
 
     return (
         <motion.div
             ref={containerRef}
-            className="relative w-40 h-52 sm:w-48 sm:h-60"
+            className="relative w-44 h-56 sm:w-52 sm:h-64"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-            <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 180 220"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.15))' }}
-            >
+            <svg width="100%" height="100%" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg"
+                style={{ filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.15))' }}>
                 <defs>
-                    <filter id="soft">
-                        <feGaussianBlur stdDeviation="0.5" />
-                    </filter>
+                    <linearGradient id="sweaterGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#FFF8F0" />
+                        <stop offset="100%" stopColor="#F5E6D3" />
+                    </linearGradient>
+                    <radialGradient id="skinGrad" cx="0.4" cy="0.3" r="0.6">
+                        <stop offset="0%" stopColor="#FFE8D0" />
+                        <stop offset="100%" stopColor="#FFDAB9" />
+                    </radialGradient>
                 </defs>
 
-                {/* Body - oversized sweater */}
-                <path
-                    d="M50 130 Q50 110, 65 100 L115 100 Q130 110, 130 130 L132 190 Q132 200, 122 200 L58 200 Q48 200, 48 190 Z"
-                    fill="#FFF8F0"
-                    stroke="#E8DCC8"
-                    strokeWidth="1.5"
-                />
+                {/* Body */}
+                <path d="M55 145 Q55 120, 72 110 L128 110 Q145 120, 145 145 L147 210 Q147 220, 137 220 L63 220 Q53 220, 53 210 Z"
+                    fill="url(#sweaterGrad)" stroke="#E8DCC8" strokeWidth="1.5" />
 
-                {/* Sweater knit texture */}
-                <path d="M55 120 Q90 115, 125 120" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.6" />
-                <path d="M53 135 Q90 130, 127 135" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.5" />
-                <path d="M52 150 Q90 145, 128 150" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.4" />
-                <path d="M51 165 Q90 160, 129 165" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.3" />
+                {/* Sweater texture */}
+                <path d="M60 135 Q100 130, 140 135" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.6" />
+                <path d="M58 150 Q100 145, 142 150" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.5" />
+                <path d="M57 165 Q100 160, 143 165" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.4" />
+                <path d="M56 180 Q100 175, 144 180" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.35" />
+                <path d="M55 195 Q100 190, 145 195" fill="none" stroke="#F0E6D0" strokeWidth="1" opacity="0.3" />
 
-                {/* Sweater collar */}
-                <path d="M65 100 Q90 95, 115 100" fill="none" stroke="#E8DCC8" strokeWidth="2" />
+                {/* Collar */}
+                <path d="M72 110 Q100 104, 128 110" fill="none" stroke="#E8DCC8" strokeWidth="2" />
+                <path d="M78 113 Q100 108, 122 113" fill="none" stroke="#E8DCC8" strokeWidth="1" opacity="0.5" />
 
                 {/* Neck */}
-                <rect x="80" y="88" width="20" height="16" fill="#FFDAB9" rx="6" />
+                <rect x="85" y="95" width="30" height="18" fill="url(#skinGrad)" rx="8" />
 
                 {/* Head */}
-                <ellipse cx="90" cy="58" rx="36" ry="40" fill="#FFDAB9" />
+                <ellipse cx="100" cy="62" rx="40" ry="44" fill="url(#skinGrad)" />
 
-                {/* Hair - messy, organic */}
-                <path
-                    d="M54 48 Q54 18, 90 12 Q126 18, 126 48 Q126 35, 118 28 Q108 18, 90 14 Q72 18, 62 28 Q54 35, 54 48Z"
-                    fill="#5A4A32"
-                />
-                {/* Hair sides - messy strands */}
-                <path d="M54 48 Q50 65, 54 82 Q56 70, 60 60" fill="#5A4A32" />
-                <path d="M126 48 Q130 65, 126 82 Q124 70, 120 60" fill="#5A4A32" />
-                <path d="M56 55 Q52 70, 56 80" fill="#4A3A28" />
-                <path d="M124 55 Q128 70, 124 80" fill="#4A3A28" />
+                {/* Hair */}
+                <path d="M60 52 Q60 18, 100 10 Q140 18, 140 52 Q140 38, 130 30 Q118 18, 100 14 Q82 18, 70 30 Q60 38, 60 52Z"
+                    fill="#5A4A32" />
+                <path d="M60 52 Q56 70, 60 90 Q62 78, 66 68" fill="#5A4A32" />
+                <path d="M140 52 Q144 70, 140 90 Q138 78, 134 68" fill="#5A4A32" />
+                <path d="M62 60 Q58 75, 62 88" fill="#4A3A28" />
+                <path d="M138 60 Q142 75, 138 88" fill="#4A3A28" />
+                <path d="M72 38 Q78 26, 90 22 Q85 32, 78 45" fill="#4A3A28" />
+                <path d="M110 22 Q122 26, 128 38 Q122 45, 115 32" fill="#4A3A28" />
+                <path d="M82 25 Q90 18, 98 14 Q94 22, 88 32" fill="#5A4A32" />
 
-                {/* Bangs - soft, Ghibli-style */}
-                <path d="M66 35 Q72 25, 82 22 Q78 32, 72 42" fill="#4A3A28" />
-                <path d="M98 22 Q108 25, 114 35 Q108 42, 102 32" fill="#4A3A28" />
-                <path d="M78 24 Q85 18, 92 16 Q88 24, 82 30" fill="#5A4A32" />
+                {/* Eyes */}
+                <ellipse cx="82" cy="60" rx="9" ry="10" fill="white" />
+                <ellipse cx="118" cy="60" rx="9" ry="10" fill="white" />
+                <circle cx="83" cy="61" r="6" fill="#3A2818" />
+                <circle cx="119" cy="61" r="6" fill="#3A2818" />
+                <circle cx="84" cy="60" r="3.5" fill="#1A1008" />
+                <circle cx="120" cy="60" r="3.5" fill="#1A1008" />
+                <circle cx="86" cy="58" r="2.5" fill="white" />
+                <circle cx="122" cy="58" r="2.5" fill="white" />
+                <circle cx="82" cy="62" r="1.2" fill="white" opacity="0.6" />
+                <circle cx="118" cy="62" r="1.2" fill="white" opacity="0.6" />
 
-                {/* Eyes - big, expressive, Ghibli-style */}
-                <g>
-                    {/* Eye whites */}
-                    <ellipse cx="75" cy="55" rx="8" ry="9" fill="white" />
-                    <ellipse cx="105" cy="55" rx="8" ry="9" fill="white" />
+                {/* Eyebrows */}
+                <path d="M73 48 Q82 44, 91 48" fill="none" stroke="#4A3A28" strokeWidth="2.2" strokeLinecap="round" />
+                <path d="M109 48 Q118 44, 127 48" fill="none" stroke="#4A3A28" strokeWidth="2.2" strokeLinecap="round" />
 
-                    {/* Irises */}
-                    <circle cx="76" cy="56" r="5.5" fill="#3A2818" />
-                    <circle cx="106" cy="56" r="5.5" fill="#3A2818" />
+                {/* Nose */}
+                <ellipse cx="100" cy="72" rx="3" ry="2.5" fill="#FFCBA4" />
 
-                    {/* Pupils */}
-                    <circle cx="77" cy="55" r="3" fill="#1A1008" />
-                    <circle cx="107" cy="55" r="3" fill="#1A1008" />
+                {/* Mouth */}
+                <path d="M88 80 Q100 90, 112 80" fill="none" stroke="#C4725A" strokeWidth="2.5" strokeLinecap="round" />
 
-                    {/* Eye highlights - Ghibli signature */}
-                    <circle cx="79" cy="53" r="2" fill="white" />
-                    <circle cx="109" cy="53" r="2" fill="white" />
-                    <circle cx="75" cy="57" r="1" fill="white" opacity="0.6" />
-                    <circle cx="105" cy="57" r="1" fill="white" opacity="0.6" />
-                </g>
+                {/* Cheeks */}
+                <ellipse cx="70" cy="74" rx="10" ry="7" fill="#FFB5B5" opacity="0.4" />
+                <ellipse cx="130" cy="74" rx="10" ry="7" fill="#FFB5B5" opacity="0.4" />
 
-                {/* Eyebrows - soft */}
-                <path d="M67 44 Q75 40, 83 44" fill="none" stroke="#4A3A28" strokeWidth="2" strokeLinecap="round" />
-                <path d="M97 44 Q105 40, 113 44" fill="none" stroke="#4A3A28" strokeWidth="2" strokeLinecap="round" />
-
-                {/* Nose - subtle */}
-                <ellipse cx="90" cy="66" rx="2.5" ry="2" fill="#FFCBA4" />
-
-                {/* Mouth - warm smile */}
-                <path
-                    d="M80 74 Q90 82, 100 74"
-                    fill="none"
-                    stroke="#C4725A"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                />
-
-                {/* Cheeks - rosy, Ghibli signature */}
-                <ellipse cx="65" cy="68" rx="9" ry="6" fill="#FFB5B5" opacity="0.45" />
-                <ellipse cx="115" cy="68" rx="9" ry="6" fill="#FFB5B5" opacity="0.45" />
-
-                {/* Left arm (static, resting) */}
-                <path
-                    d="M50 125 Q35 135, 30 150 Q25 162, 30 168"
-                    fill="none"
-                    stroke="#FFDAB9"
-                    strokeWidth="14"
-                    strokeLinecap="round"
-                />
-                <path
-                    d="M50 125 Q35 135, 30 150 Q25 162, 30 168"
-                    fill="none"
-                    stroke="#E8DCC8"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                />
-
-                {/* Left hand */}
-                <circle cx="30" cy="168" r="9" fill="#FFDAB9" />
-                <circle cx="30" cy="168" r="9" fill="none" stroke="#E8C8A8" strokeWidth="0.8" />
+                {/* Left arm */}
+                <path d="M55 138 Q38 150, 32 165 Q26 178, 32 184" fill="none" stroke="url(#skinGrad)" strokeWidth="16" strokeLinecap="round" />
+                <path d="M55 138 Q38 150, 32 165 Q26 178, 32 184" fill="none" stroke="#E8DCC8" strokeWidth="1.5" strokeLinecap="round" />
+                <circle cx="32" cy="184" r="10" fill="url(#skinGrad)" />
+                <circle cx="32" cy="184" r="10" fill="none" stroke="#E8C8A8" strokeWidth="0.8" />
             </svg>
 
-            {/* Right arm (animated with cursor tracking) */}
-            <svg
-                className="absolute top-0 right-0 w-full h-full"
-                viewBox="0 0 180 220"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ overflow: 'visible' }}
-            >
-                <g
-                    style={{
-                        transform: `rotate(${armRotation}deg)`,
-                        transformOrigin: '130px 125px',
-                        transition: 'transform 0.15s ease-out',
-                    }}
-                >
-                    {/* Right arm */}
-                    <path
-                        d="M130 125 Q148 110, 152 95 Q156 80, 150 70"
-                        fill="none"
-                        stroke="#FFDAB9"
-                        strokeWidth="14"
-                        strokeLinecap="round"
-                    />
-                    <path
-                        d="M130 125 Q148 110, 152 95 Q156 80, 150 70"
-                        fill="none"
-                        stroke="#E8DCC8"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                    />
-
-                    {/* Right hand */}
-                    <circle cx="150" cy="70" r="9" fill="#FFDAB9" />
-                    <circle cx="150" cy="70" r="9" fill="none" stroke="#E8C8A8" strokeWidth="0.8" />
-
-                    {/* Fingers - waving */}
+            {/* Right arm */}
+            <svg className="absolute top-0 right-0 w-full h-full" viewBox="0 0 200 240" fill="none"
+                xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
+                <g style={{
+                    transform: `rotate(${armRotation}deg)`,
+                    transformOrigin: '145px 138px',
+                    transition: 'transform 0.15s ease-out',
+                }}>
+                    <path d="M145 138 Q165 120, 170 105 Q175 88, 168 78" fill="none"
+                        stroke="url(#skinGrad)" strokeWidth="16" strokeLinecap="round" />
+                    <path d="M145 138 Q165 120, 170 105 Q175 88, 168 78" fill="none"
+                        stroke="#E8DCC8" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle cx="168" cy="78" r="10" fill="url(#skinGrad)" />
+                    <circle cx="168" cy="78" r="10" fill="none" stroke="#E8C8A8" strokeWidth="0.8" />
                     <motion.g
-                        animate={isWaving ? {
-                            rotate: [0, -12, 12, -12, 0],
-                        } : { rotate: 0 }}
-                        transition={{
-                            duration: 1.8,
-                            repeat: isWaving ? Infinity : 0,
-                            ease: "easeInOut",
-                        }}
-                        style={{ transformOrigin: '150px 70px' }}
+                        animate={isWaving ? { rotate: [0, -15, 15, -15, 0] } : { rotate: 0 }}
+                        transition={{ duration: 2, repeat: isWaving ? Infinity : 0, ease: "easeInOut" }}
+                        style={{ transformOrigin: '168px 78px' }}
                     >
-                        <path d="M144 64 L140 56" stroke="#FFDAB9" strokeWidth="5" strokeLinecap="round" />
-                        <path d="M148 61 L146 52" stroke="#FFDAB9" strokeWidth="5" strokeLinecap="round" />
-                        <path d="M153 61 L153 52" stroke="#FFDAB9" strokeWidth="5" strokeLinecap="round" />
-                        <path d="M157 63 L160 55" stroke="#FFDAB9" strokeWidth="5" strokeLinecap="round" />
+                        <path d="M162 72 L158 62" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M166 69 L164 58" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M171 69 L171 58" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M175 71 L178 61" stroke="url(#skinGrad)" strokeWidth="6" strokeLinecap="round" />
                     </motion.g>
                 </g>
             </svg>
