@@ -5,7 +5,7 @@ import { ArrowDownRight } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import Link from 'next/link';
 import { ProfileCard } from "@/components/ui/profile-card";
-import { Spotlight } from "@/components/ui/spotlight-new";
+import { TreeBackground } from "@/components/ui/tree-background";
 
 export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
   const { personal } = portfolioData;
@@ -17,20 +17,8 @@ export function HeroVisual({ isExiting }: { isExiting?: boolean }) {
       animate={{ opacity: 1 }}
       className="relative min-h-screen w-full flex flex-col bg-background text-foreground overflow-hidden selection:bg-primary/20"
     >
-      {/* Background Pattern */}
-      <div className="w-full absolute h-full z-0 bg-[radial-gradient(circle,_#888_0.5px,_transparent_0.5px)] dark:bg-[radial-gradient(circle,_#444_0.5px,_transparent_0.5px)] opacity-20 [background-size:24px_24px]" />
-
-      {/* Spotlight Effect - Dramatic lighting */}
-      <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden">
-        <Spotlight
-          duration={10}
-          xOffset={120}
-          translateY={-300}
-          gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(0, 0%, 100%, .15) 0, hsla(0, 0%, 100%, .05) 50%, transparent 80%)"
-          gradientSecond="radial-gradient(50% 50% at 50% 50%, hsla(0, 0%, 100%, .1) 0, hsla(0, 0%, 100%, .02) 80%, transparent 100%)"
-          gradientThird="radial-gradient(50% 50% at 50% 50%, hsla(0, 0%, 100%, .08) 0, hsla(0, 0%, 100%, 0) 80%, transparent 100%)"
-        />
-      </div>
+      {/* Tree Background with Falling Leaves */}
+      <TreeBackground />
 
       <main className="relative flex-1 flex flex-col justify-center pt-40 pb-20 z-10">
         <div className="flex relative gap-4 px-6 md:items-center w-full flex-col justify-center">
