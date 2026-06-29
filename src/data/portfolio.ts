@@ -222,9 +222,9 @@ export const portfolioData: PortfolioData = {
             slug: 'kobelco-spare-parts-analytics',
             title: 'Spare Parts Sales & Inventory Analytics',
             description: 'Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion for KOBELCO heavy machinery.',
-            longDescription: 'Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion. Evaluated sales trends, customer concentration, fast-moving items, material group performance, and inventory optimization for KOBELCO heavy machinery at PT DKCMI.',
+            longDescription: 'Comprehensive analysis of 7,153 spare parts transactions worth Rp 17.6 Billion for PT DKCMI (KOBELCO). Identified customer concentration risk (98% from single customer), classified 320 unique parts using ABC analysis, and provided inventory optimization recommendations.',
 
-            techStack: ['Excel', 'Tableau', 'WMS', 'Inventory Analysis'],
+            techStack: ['Excel', 'SQL', 'Tableau', 'WMS', 'Inventory Analysis'],
             tools: ['Excel', 'Tableau', 'WMS'],
             status: 'completed',
             repoUrl: null,
@@ -234,14 +234,34 @@ export const portfolioData: PortfolioData = {
             customTimeline: 'Jan - Sep 2023',
             team: 'PT DKCMI (KOBELCO)',
 
-            highlights: ['7,153 Transactions', 'Rp 17.6B Total Sales', '319 Unique Parts'],
+            highlights: ['7,153 Transactions', 'Rp 17.6B Total Sales', '320 Unique Parts', '3 Customers'],
             category: 'Data Analytics',
             features: [
                 {
                     title: 'Analysis Scope',
                     items: [
-                        '**Transaction Analysis**: 7,153 spare parts transactions worth Rp 17.6 Billion.',
-                        '**Inventory Optimization**: ABC analysis to classify fast-moving items for 319 unique parts.',
+                        '**Transaction Analysis**: 7,153 spare parts transactions worth Rp 17.6 Billion across 3 customers.',
+                        '**Inventory Optimization**: ABC analysis to classify 320 unique parts by sales volume and value.',
+                        '**Customer Concentration**: Identified 98% transaction concentration risk with single customer (PT.KALIMANTAN INTI MAJU).',
+                    ]
+                },
+                {
+                    title: 'Key Findings',
+                    items: [
+                        '**Top Customer**: PT.KALIMANTAN INTI MAJU - 7,031 transactions (98%), Rp 8.4B sales.',
+                        '**Top Part**: VH23390E0020J1M - 802 units sold, Rp 95.5M revenue.',
+                        '**Fast-moving Items**: Top 10 parts account for 40%+ of total transaction volume.',
+                    ]
+                },
+                {
+                    title: 'Impact',
+                    items: [
+                        '**Stock-out Reduction**: Contributed to 20% reduction through predictive reorder analysis.',
+                        '**Inventory Visibility**: Dashboard for 320 unique parts across 3 customer segments.',
+                        '**Management Reporting**: Weekly performance reports for data-driven decisions.',
+                    ]
+                },
+            ],
                         '**Sales Trends**: Customer concentration and material group performance evaluation.',
                     ]
                 },

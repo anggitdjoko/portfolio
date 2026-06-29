@@ -1,0 +1,53 @@
+Experience Template - Isi data kamu di sini
+
+=== Experience 1: Full-Stack Developer ===
+Company: Independent
+Position: Full-Stack Developer
+Period: 2024 - Present
+Location: Remote
+
+Responsibilities:
+- 
+- 
+- 
+
+Skills: Next.js, React, TypeScript
+
+Projects:
+- Servgo: SaaS POS platform
+- 
+
+=== Experience 2: Freelance Data Analyst ===
+Company: Independent
+Position: Freelance Data Analyst
+Period: 2024 - Present
+Location: Remote
+
+Responsibilities:
+- 
+- 
+- 
+
+Skills: Python, SQL, Tableau, Excel
+
+Projects:
+- 
+- 
+
+=== Experience 3: Logistics Analyst ===
+Company: PT DKCMI (KOBELCO)
+Position: Logistics Analyst
+Period: Jan 2023 - Sep 2023
+Location: Pontianak
+
+Responsibilities:
+- Analyzed 7,153 spare parts transactions worth Rp 17.6 Billion
+- Managed WMS and optimized inventory levels
+- Implemented ABC analysis to classify fast-moving items
+- Created weekly performance reports
+
+Skills: Excel, SQL, Tableau, WMS
+
+Achievements:
+- Reduced stock-outs by 20%
+- 
