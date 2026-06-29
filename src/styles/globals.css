@@ -337,7 +337,7 @@
   }
 
   .subheading {
-    @apply text-lg md-xl text-muted-foreground font-normal tracking-wide;
+    @apply text-lg md:text-xl text-muted-foreground font-normal tracking-wide;
     font-family: var(--font-quicksand), sans-serif;
   }
 
