@@ -151,10 +151,7 @@ export default function HomePage() {
                 <HeroVisual isExiting={isExiting || !isLoading} />
 
                 {!isLoading && (
-                    <>
-                        <AboutSection />
-                        <SocialCorner className="fixed bottom-12 right-12 z-[30]" />
-                    </>
+                    <SocialCorner className="fixed bottom-12 right-12 z-[30]" />
                 )}
             </motion.main>
         </>
