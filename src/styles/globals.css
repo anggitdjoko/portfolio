@@ -2,34 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .border-border { border-color: hsl(var(--border)); }
-  .bg-background { background-color: hsl(var(--background)); }
-  .text-foreground { color: hsl(var(--foreground)); }
-  .bg-primary { background-color: hsl(var(--primary)); }
-  .text-primary { color: hsl(var(--primary)); }
-  .bg-muted { background-color: hsl(var(--muted)); }
-  .text-muted-foreground { color: hsl(var(--muted-foreground)); }
-  .bg-primary\/20 { background-color: hsl(var(--primary) / 0.2); }
-  .bg-primary\/10 { background-color: hsl(var(--primary) / 0.1); }
-  .bg-primary\/5 { background-color: hsl(var(--primary) / 0.05); }
-  .bg-secondary { background-color: hsl(var(--secondary)); }
-  .bg-secondary\/10 { background-color: hsl(var(--secondary) / 0.1); }
-  .text-secondary { color: hsl(var(--secondary)); }
-  .bg-accent { background-color: hsl(var(--accent)); }
-  .text-accent { color: hsl(var(--accent)); }
-  .bg-card { background-color: hsl(var(--card)); }
-  .text-card-foreground { color: hsl(var(--card-foreground)); }
-  .border-primary { border-color: hsl(var(--primary)); }
-  .border-muted { border-color: hsl(var(--muted)); }
-  .ring-primary { --tw-ring-color: hsl(var(--primary)); }
-  .bg-destructive { background-color: hsl(var(--destructive, 0 84.2% 60.2%)); }
-  .text-destructive-foreground { color: hsl(var(--destructive-foreground, 0 0% 98%)); }
-}
-
 @layer base {
   :root {
-    /* Ghibli Light Mode - Warm, magical, cozy */
     --background: 42 60% 95%;
     --foreground: 140 20% 20%;
     --card: 42 50% 92%;
@@ -44,698 +18,207 @@
     --accent-foreground: 140 20% 20%;
     --border: 140 15% 78%;
     --ring: 140 30% 40%;
-    --popover: 42 50% 92%;
-    --popover-foreground: 140 20% 20%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --input: 140 15% 78%;
-    --chart-1: 140 30% 40%;
-    --chart-2: 140 25% 50%;
-    --chart-3: 30 40% 60%;
-    --chart-4: 200 40% 50%;
-    --chart-5: 42 50% 70%;
     --radius: 1rem;
-    --primary-rgb: 76, 124, 89;
   }
 
-  .dark {
-    /* Ghibli Dark Mode - Deep forest at twilight */
-    --background: 150 25% 10%;
-    --foreground: 42 50% 90%;
-    --card: 150 20% 14%;
-    --card-foreground: 42 50% 90%;
-    --primary: 140 35% 55%;
-    --primary-foreground: 150 25% 10%;
-    --secondary: 150 15% 20%;
-    --secondary-foreground: 42 50% 90%;
-    --muted: 150 12% 18%;
-    --muted-foreground: 42 30% 60%;
-    --accent: 30 35% 30%;
-    --accent-foreground: 42 50% 90%;
-    --border: 150 12% 25%;
-    --ring: 140 35% 55%;
-    --popover: 150 20% 14%;
-    --popover-foreground: 42 50% 90%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --input: 150 12% 20%;
-    --chart-1: 140 35% 55%;
-    --chart-2: 140 30% 65%;
-    --chart-3: 30 35% 50%;
-    --chart-4: 200 35% 55%;
-    --chart-5: 150 15% 40%;
-    --primary-rgb: 100, 180, 130;
-  }
-
-  .theme {
-    --animate-marquee-left: marquee-left var(--duration, 30s) linear infinite;
-    --animate-marquee-right: marquee-right var(--duration, 30s) linear infinite;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   html {
     scroll-behavior: smooth;
-    position: relative;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    overflow-x: clip;
     font-family: var(--font-quicksand), sans-serif;
-  }
-
-  ::selection {
-    @apply bg-primary/20 text-foreground;
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-caveat), cursive;
   }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
 }
 
 @layer components {
-  /* Ghibli Glass - Warm, inviting */
-  .glass {
-    @apply backdrop-blur-2xl;
+  .ghibli-card {
+    @apply rounded-2xl transition-all duration-500;
     background: rgba(253, 246, 227, 0.85);
-    border: 1px solid rgba(139, 111, 71, 0.15);
-    box-shadow: 0 8px 32px rgba(139, 111, 71, 0.1);
-  }
-
-  .dark .glass {
-    background: rgba(26, 58, 26, 0.7);
-    border: 1px solid rgba(124, 169, 130, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  .glass-card {
-    @apply backdrop-blur-2xl rounded-2xl transition-all duration-500 relative;
-    background: rgba(253, 246, 227, 0.9);
+    backdrop-filter: blur(16px);
     border: 1px solid rgba(139, 111, 71, 0.12);
-    box-shadow: 
-      0 0 0 1px rgba(139, 111, 71, 0.05),
-      0 20px 50px -20px rgba(139, 111, 71, 0.2);
+    box-shadow: 0 8px 32px rgba(139, 111, 71, 0.08);
   }
 
-  .dark .glass-card {
-    background: rgba(26, 58, 26, 0.8);
-    border: 1px solid rgba(124, 169, 130, 0.15);
-    box-shadow: 
-      0 0 0 1px rgba(124, 169, 130, 0.05),
-      0 20px 50px -20px rgba(0, 0, 0, 0.5);
+  .ghibli-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(139, 111, 71, 0.15);
   }
 
-  .glass-strong {
-    @apply backdrop-blur-3xl rounded-2xl transition-all duration-500 relative;
-    background: rgba(253, 246, 227, 0.95);
-    border: 1px solid rgba(139, 111, 71, 0.2);
-    box-shadow: 0 25px 50px -12px rgba(139, 111, 71, 0.15);
+  .ghibli-section {
+    @apply relative py-20 px-6 md:px-12 lg:px-20;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .dark .glass-strong {
-    background: rgba(26, 58, 26, 0.9);
-    border: 1px solid rgba(124, 169, 130, 0.2);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  .ghibli-heading {
+    font-family: var(--font-caveat), cursive;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    color: #4A7C59;
   }
 
-  /* Ghibli Gradient Text */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #4A7C59, #7CA982, #8B6F47);
-    background-size: 200% 200%;
-    animation: gradient-flow 6s ease infinite;
+  .ghibli-subheading {
+    font-family: var(--font-quicksand), sans-serif;
+    @apply text-lg md:text-xl;
+    color: #8B6F47;
   }
 
-  .dark .text-gradient {
-    background-image: linear-gradient(135deg, #7CA982, #A8D5BA, #D4A843);
-  }
-
-  .text-shiny {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      120deg,
-      #4A7C59 30%,
-      #7CA982 50%,
-      #4A7C59 70%
-    );
-    background-size: 200% auto;
-    animation: text-shiny 4s linear infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .dark .text-shiny {
-    background-image: linear-gradient(
-      120deg,
-      #7CA982 30%,
-      #A8D5BA 50%,
-      #7CA982 70%
-    );
-  }
-
-  @keyframes text-shiny {
-    from { background-position: 200% center; }
-    to { background-position: -200% center; }
-  }
-
-  .glow {
-    box-shadow: 
-      0 0 20px rgba(139, 111, 71, 0.15),
-      0 0 40px rgba(139, 111, 71, 0.08);
-  }
-
-  .dark .glow {
-    box-shadow: 
-      0 0 20px rgba(124, 169, 130, 0.15),
-      0 0 40px rgba(124, 169, 130, 0.08);
-  }
-
-  .glow-text {
-    text-shadow: 
-      0 0 10px rgba(139, 111, 71, 0.3),
-      0 0 20px rgba(139, 111, 71, 0.15);
-  }
-
-  .dark .glow-text {
-    text-shadow: 
-      0 0 10px rgba(124, 169, 130, 0.3),
-      0 0 20px rgba(124, 169, 130, 0.15);
-  }
-
-  /* Ghibli Button */
-  .btn-creative {
-    @apply relative px-8 py-4 font-bold overflow-hidden rounded-full transition-all;
+  .ghibli-btn {
+    @apply px-8 py-3 rounded-full font-semibold transition-all duration-300;
+    font-family: var(--font-quicksand), sans-serif;
     background: linear-gradient(135deg, #4A7C59, #7CA982);
     color: #FDF6E3;
-    font-family: var(--font-quicksand), sans-serif;
     box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
   }
 
-  .dark .btn-creative {
-    background: linear-gradient(135deg, #7CA982, #A8D5BA);
-    color: #1A3A1A;
-    box-shadow: 0 4px 15px rgba(124, 169, 130, 0.3);
-  }
-
-  .btn-creative::before {
-    content: '';
-    @apply absolute inset-0 rounded-full opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, #376B4D, #4A7C59);
-  }
-
-  .dark .btn-creative::before {
-    background: linear-gradient(135deg, #A8D5BA, #C8E6C9);
-  }
-
-  .btn-creative:hover::before {
-    @apply opacity-100;
-  }
-
-  .btn-creative:hover {
-    transform: translateY(-2px) scale(1.02);
+  .ghibli-btn:hover {
+    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(74, 124, 89, 0.4);
   }
 
-  .dark .btn-creative:hover {
-    box-shadow: 0 8px 25px rgba(124, 169, 130, 0.4);
-  }
-
-  .btn-creative > * {
-    @apply relative z-10;
-  }
-
-  .btn-outline-creative {
-    @apply relative px-8 py-4 font-bold rounded-full border-2 overflow-hidden transition-all;
-    border-color: rgba(74, 124, 89, 0.4);
+  .ghibli-btn-outline {
+    @apply px-8 py-3 rounded-full font-semibold transition-all duration-300 border-2;
+    font-family: var(--font-quicksand), sans-serif;
+    border-color: #4A7C59;
     color: #4A7C59;
     background: transparent;
-    font-family: var(--font-quicksand), sans-serif;
   }
 
-  .dark .btn-outline-creative {
-    border-color: rgba(124, 169, 130, 0.4);
-    color: #A8D5BA;
-  }
-
-  .btn-outline-creative:hover {
-    border-color: #4A7C59;
+  .ghibli-btn-outline:hover {
     background: rgba(74, 124, 89, 0.08);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(74, 124, 89, 0.2);
   }
 
-  .dark .btn-outline-creative:hover {
-    border-color: rgba(124, 169, 130, 0.8);
-    background: rgba(124, 169, 130, 0.1);
+  .ghibli-tag {
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+    background: rgba(124, 169, 130, 0.15);
+    color: #4A7C59;
+    border: 1px solid rgba(124, 169, 130, 0.2);
   }
 
-  .nav-creative {
-    @apply fixed z-50;
-  }
-
-  .card-creative {
-    @apply glass-card p-6 transition-all duration-500;
-  }
-
-  .card-creative:hover {
-    transform: translateY(-8px) rotateX(2deg);
-    box-shadow: 
-      0 30px 60px -20px rgba(139, 111, 71, 0.2),
-      0 0 40px rgba(139, 111, 71, 0.05);
-  }
-
-  .dark .card-creative:hover {
-    box-shadow: 
-      0 30px 60px -20px rgba(0, 0, 0, 0.5),
-      0 0 40px rgba(124, 169, 130, 0.05);
-  }
-
-  .section-creative {
-    @apply min-h-screen relative overflow-hidden;
-  }
-
-  .container-creative {
-    @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative;
-  }
-
-  .heading-xl {
-    @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight;
-    font-family: var(--font-caveat), cursive;
-    line-height: 0.95;
-  }
-
-  .heading-lg {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
-    font-family: var(--font-caveat), cursive;
-    line-height: 1.05;
-  }
-
-  .subheading {
-    @apply text-lg md:text-xl text-muted-foreground font-normal tracking-wide;
-    font-family: var(--font-quicksand), sans-serif;
-  }
-
-  .font-heading {
-    font-family: var(--font-caveat), cursive;
-  }
-
-  .font-body {
-    font-family: var(--font-quicksand), sans-serif;
+  .ghibli-divider {
+    @apply w-full h-px my-8;
+    background: linear-gradient(90deg, transparent, rgba(139, 111, 71, 0.2), transparent);
   }
 }
 
 @layer utilities {
-  .perspective-deep {
-    perspective: 2000px;
-  }
+  .text-ghibli-leaf { color: #7CA982; }
+  .text-ghibli-bark { color: #8B6F47; }
+  .text-ghibli-sunset { color: #F4A261; }
+  .text-ghibli-sky { color: #87CEEB; }
+  .text-ghibli-cream { color: #FDF6E3; }
+  .bg-ghibli-cream { background-color: #FDF6E3; }
+  .bg-ghibli-leaf { background-color: #7CA982; }
+}
 
-  .perspective-1000 {
-    perspective: 1000px;
-  }
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
 
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
+::-webkit-scrollbar-track {
+  background: rgba(253, 246, 227, 0.5);
+}
 
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
+::-webkit-scrollbar-thumb {
+  background: #8B6F47;
+  border-radius: 3px;
+}
 
-  .rotate-y-6 {
-    transform: rotateY(6deg);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #6B5A3E;
+}
 
-  .rotate-x-6 {
-    transform: rotateX(6deg);
+/* Animations */
+@keyframes fallingLeaf {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
   }
-
-  .mask-fade-b {
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  }
-
-  .mask-fade-t {
-    mask-image: linear-gradient(to top, black 70%, transparent 100%);
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-float-delayed {
-    animation: float 6s ease-in-out infinite 2s;
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-
-  .animate-spin-slow {
-    animation: spin 20s linear infinite;
-  }
-
-  /* Ghibli-specific utilities */
-  .ghibli-glow {
-    box-shadow: 0 0 20px rgba(244, 162, 97, 0.3), 0 0 40px rgba(244, 162, 97, 0.1);
-  }
-
-  .ghibli-glow-green {
-    box-shadow: 0 0 20px rgba(124, 169, 130, 0.3), 0 0 40px rgba(124, 169, 130, 0.1);
-  }
-
-  .text-ghibli-bark {
-    color: #8B6F47;
-  }
-
-  .text-ghibli-leaf {
-    color: #7CA982;
-  }
-
-  .text-ghibli-sunset {
-    color: #F4A261;
-  }
-
-  .text-ghibli-sky {
-    color: #87CEEB;
-  }
-
-  .bg-ghibli-cream {
-    background-color: #FDF6E3;
-  }
-
-  .bg-ghibli-leaf {
-    background-color: #7CA982;
-  }
-
-  .bg-ghibli-bark {
-    background-color: #8B6F47;
+  10% { opacity: 0.8; }
+  90% { opacity: 0.7; }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 100px)) rotate(var(--end-rotation, 360deg));
+    opacity: 0;
   }
 }
 
-@keyframes gradient-flow {
+@keyframes leafSway {
   0%, 100% {
-    background-position: 0% 50%;
+    transform: translateX(0) rotate(var(--base-rotation, 0deg));
   }
   50% {
-    background-position: 100% 50%;
+    transform: translateX(var(--sway-amount, 30px)) rotate(var(--sway-rotation, 15deg));
   }
 }
 
-@keyframes float {
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    box-shadow: 0 0 15px rgba(244, 162, 97, 0.3);
   }
   50% {
-    transform: translateY(-20px) rotate(2deg);
+    box-shadow: 0 0 30px rgba(244, 162, 97, 0.5);
   }
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(139, 111, 71, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(139, 111, 71, 0.2);
-  }
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
 }
 
-@keyframes marquee-reverse {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
 }
 
-.animate-marquee {
-  animation: marquee 20s linear infinite;
-}
-
-.animate-marquee-reverse {
-  animation: marquee-reverse 20s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Noise texture */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  /* Utility to hide elements when any modal is open */
-  body[data-modal-open="true"] .hide-on-modal {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-    transition: all 0.3s ease-in-out;
-  }
-}
-
-/* --- Ghibli Scrollbar --- */
-html, body, * {
-  scrollbar-width: auto;
-}
-
-::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
-}
-
-::-webkit-scrollbar-button,
-::-webkit-scrollbar-button:start,
-::-webkit-scrollbar-button:end,
-::-webkit-scrollbar-button:vertical:start:increment,
-::-webkit-scrollbar-button:vertical:start:decrement,
-::-webkit-scrollbar-button:vertical:end:increment,
-::-webkit-scrollbar-button:vertical:end:decrement {
-  display: none !important;
-  height: 0 !important;
-  width: 0 !important;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(253, 246, 227, 0.5) !important;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #8B6F47;
-  border-radius: 3px !important;
-  border: none !important;
-}
-
-.dark ::-webkit-scrollbar-track,
-.dark::-webkit-scrollbar-track {
-  background: rgba(26, 58, 26, 0.5) !important;
-}
-
-.dark ::-webkit-scrollbar-thumb,
-.dark::-webkit-scrollbar-thumb {
-  background-color: #7CA982 !important;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #6B5A3E !important;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover,
-.dark::-webkit-scrollbar-thumb:hover {
-  background-color: #5A8A64 !important;
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent !important;
-}
-
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-}
-
-@keyframes move-x {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(200%);
-  }
-}
-
-@theme inline {
-  @keyframes marquee-left {
-  from {
-    transform: translateX(0);
-    }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-    }
-  }
-  @keyframes marquee-right {
-  from {
-    transform: translateX(calc(-100% - var(--gap)));
-    }
-  to {
-    transform: translateX(0);
-    }
-  }
-}
-
-/* Bulletproof Native Compositor Arc Animations */
-@keyframes arc-spin {
-  from { transform: translateZ(0) rotate(0deg); }
-  to { transform: translateZ(0) rotate(360deg); }
-}
-@keyframes arc-spin-reverse {
-  from { transform: translateZ(0) rotate(360deg); }
-  to { transform: translateZ(0) rotate(0deg); }
-}
-.animate-arc-spin {
-  animation: arc-spin 60s linear infinite;
-}
-.animate-arc-spin-reverse {
-  animation: arc-spin-reverse 60s linear infinite;
-}
-
-/* Layout Shield */
-#crxjs-app, [id*='crxjs-'], [id^='crxjs-'], .crxjs-app {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    max-height: 0 !important;
-    width: 0 !important;
-    position: absolute !important;
-    pointer-events: none !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Ghibli Tree Background */
-.ghibli-tree-bg {
-  background: 
-    radial-gradient(ellipse at 50% 100%, rgba(74, 124, 89, 0.3) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 0%, rgba(135, 206, 235, 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(244, 162, 97, 0.2) 0%, transparent 40%),
-    linear-gradient(180deg, 
-      #87CEEB 0%, 
-      #B8D4E3 20%,
-      #FDF6E3 40%,
-      #E8DCC8 60%,
-      #D4C4A8 80%,
-      #C8B898 100%
-    );
-}
-
-.dark .ghibli-tree-bg {
-  background: 
-    radial-gradient(ellipse at 50% 100%, rgba(26, 58, 26, 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 0%, rgba(20, 40, 60, 0.6) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(212, 168, 67, 0.15) 0%, transparent 40%),
-    linear-gradient(180deg, 
-      #0F1A14 0%, 
-      #1A2E1A 20%,
-      #1A3A1A 40%,
-      #152515 60%,
-      #101E10 80%,
-      #0A150A 100%
-    );
-}
-
-/* Sunray effect */
-.sunray {
-  position: absolute;
-  background: linear-gradient(
-    180deg,
-    rgba(244, 162, 97, 0.3) 0%,
-    rgba(244, 162, 97, 0.1) 40%,
-    transparent 100%
-  );
-  transform-origin: top center;
-  pointer-events: none;
-}
-
-/* Falling leaf particle */
-.leaf-particle {
-  position: fixed;
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-/* Door navigation glow */
-.door-glow {
-  box-shadow: 
-    0 0 15px rgba(244, 162, 97, 0.3),
-    0 0 30px rgba(244, 162, 97, 0.1),
-    inset 0 0 15px rgba(244, 162, 97, 0.1);
-}
-
-.door-glow:hover {
-  box-shadow: 
-    0 0 25px rgba(244, 162, 97, 0.5),
-    0 0 50px rgba(244, 162, 97, 0.2),
-    inset 0 0 25px rgba(244, 162, 97, 0.15);
-}
-
-/* Avatar cursor tracking */
-.avatar-arm {
-  transform-origin: 80% 50%;
-  transition: transform 0.15s ease-out;
-}
-
-/* House hover effect */
-.ghibli-house {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.ghibli-house:hover {
-  transform: scale(1.05);
-}
-
-.ghibli-house.open {
-  transform: scale(1.08);
 }

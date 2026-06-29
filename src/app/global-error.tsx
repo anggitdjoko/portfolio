@@ -10,20 +10,19 @@ export default function GlobalError({
     return (
         <html>
             <body>
-                <div style={{ padding: '20px', background: '#1a1a1a', color: 'white', fontFamily: 'monospace' }}>
-                    <h1 style={{ color: '#ff4444' }}>Global Error Caught</h1>
-                    <p><strong>Message:</strong> {error.message}</p>
-                    <p><strong>Digest:</strong> {error.digest}</p>
-                    <details>
-                        <summary>Stack Trace</summary>
-                        <pre style={{ whiteSpace: 'pre-wrap', fontSize: '12px' }}>{error.stack}</pre>
-                    </details>
-                    <button 
-                        onClick={reset}
-                        style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}
-                    >
-                        Try Again
-                    </button>
+                <div className="min-h-screen flex items-center justify-center" style={{ background: '#FDF6E3' }}>
+                    <div className="text-center">
+                        <h2 style={{ fontFamily: 'var(--font-caveat), cursive', fontSize: '2rem', color: '#8B6F47' }}>Something went wrong</h2>
+                        <button onClick={reset} style={{
+                            padding: '12px 24px',
+                            borderRadius: '9999px',
+                            background: 'linear-gradient(135deg, #4A7C59, #7CA982)',
+                            color: '#FDF6E3',
+                            border: 'none',
+                            cursor: 'pointer',
+                            marginTop: '1rem'
+                        }}>Try again</button>
+                    </div>
                 </div>
             </body>
         </html>
