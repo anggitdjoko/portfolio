@@ -118,4 +118,10 @@
   })();
 
   root.appendChild(el('<div class="kb-ins"><div class="ins"><h4><i></i>Household-Driven Base</h4><p><strong>Rumah Tangga</strong> accounts for <strong>'+D.totals.pctRT+'% of volume</strong> ('+grp(D.totals.rt)+' of '+grp(D.totals.tx)+' transactions), confirming the retail base as the primary contributor.</p><p>UMKM demand is smaller but spikes sharply mid-year \u2014 worth a dedicated allocation.</p></div><div class="ins"><h4><i></i>Seasonal Pattern</h4><p>Transactions peak in <strong>'+D.peak.m+' ('+grp(D.peak.total)+')</strong> and collapse in <strong>'+D.low.m+' ('+grp(D.low.total)+')</strong>, a clear seasonal signal for stock planning.</p><p>The Aug\u2013Sep UMKM surge suggests a policy or demand shift toward business buyers.</p></div></div>'));
+
+  root.appendChild(el('<div class="roadmap"><h4>Strategic Roadmap</h4>'
+    +'<div class="step"><span class="n">01</span><div><b>Stock to the season</b><span>Build up inventory ahead of the '+D.peak.m+' peak and trim it in the '+D.low.m+' trough to cut both stockouts and idle capital tied up in cylinders.</span></div></div>'
+    +'<div class="step"><span class="n">02</span><div><b>Capture the UMKM upswing</b><span>Give business buyers a dedicated mid-year allocation and a simple pre-order channel, converting the Aug\u2013Sep surge into planned, reliable volume.</span></div></div>'
+    +'<div class="step"><span class="n">03</span><div><b>Protect the household base</b><span>Keep the Rumah Tangga quota consistent \u2014 it is '+D.totals.pctRT+'% of volume \u2014 and use steady supply to reinforce loyalty among regular retail buyers.</span></div></div>'
+    +'</div>'));
 })();

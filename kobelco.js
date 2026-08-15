@@ -133,4 +133,10 @@
   /* ================= insights ================= */
   root.appendChild(el('<div class="kb-ins"><div class="ins"><h4><i></i>Concentration Risk</h4><p><strong>PT Kalimantan Inti Maju</strong> alone drives <strong>95.7% of revenue</strong> (98.3% of transactions). The business is highly exposed to a single client.</p><p>Diversifying the customer base would materially de-risk the branch.</p></div><div class="ins"><h4><i></i>Demand Pattern</h4><p>Sales track maintenance cycles: a <strong>March peak (Rp 1.40B)</strong> against a Rp 980M monthly average, with a July trough.</p><p>Lubricants and undercarriage parts are the fast movers worth prioritizing in stock planning.</p></div></div>'));
 
+  root.appendChild(el('<div class="roadmap"><h4>Strategic Roadmap</h4>'
+    +'<div class="step"><span class="n">01</span><div><b>Diversify the customer base</b><span>Actively pursue secondary contractors and rental fleets to reduce the 95.7% revenue dependence on a single client and de-risk the branch.</span></div></div>'
+    +'<div class="step"><span class="n">02</span><div><b>Stock to the maintenance cycle</b><span>Prioritize lubricants and undercarriage parts and pre-position inventory ahead of the March peak, when demand runs well above the Rp 980M monthly average.</span></div></div>'
+    +'<div class="step"><span class="n">03</span><div><b>Smooth the demand troughs</b><span>Use quieter months like July for planned service campaigns and preventive-maintenance offers, levelling revenue across the year.</span></div></div>'
+    +'</div>'));
+
 })();
