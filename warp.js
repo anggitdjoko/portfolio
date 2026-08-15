@@ -46,16 +46,19 @@
   function setSceneTransition(ms, ease) {
     var s = scene();
     if (!s) return;
+    // transform + opacity only — both composite on the GPU. filter is no longer
+    // animated; keeping it out of will-change lets the browser keep the page on
+    // a single fast compositor layer instead of re-rasterizing each frame.
     s.style.transition =
       'transform ' + ms + 'ms ' + ease + ', ' +
-      'filter ' + ms + 'ms ' + ease + ', ' +
       'opacity ' + ms + 'ms ' + ease;
-    s.style.willChange = 'transform, filter, opacity';
+    s.style.willChange = 'transform, opacity';
+    s.style.backfaceVisibility = 'hidden';
   }
   function setScene(sc, bl, op) {
     var s = scene();
     if (!s) return;
-    s.style.transform = 'scale(' + sc + ')';
+    s.style.transform = 'translateZ(0) scale(' + sc + ')';
     s.style.filter = bl ? 'blur(' + bl + 'px)' : 'none';
     s.style.opacity = String(op);
   }
@@ -106,7 +109,7 @@
   function run(mode, done) {
     var ui = buildOverlay();
     var cv = ui.cv, ctx = cv.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.25);
     var W, H, cx, cy, focal;
     function size() {
       W = cv.width = innerWidth * dpr;
@@ -117,7 +120,7 @@
     size();
     addEventListener('resize', size);
 
-    var N = Math.min(380, Math.floor(innerWidth / 4) + 140);
+    var N = Math.min(280, Math.floor(innerWidth / 5) + 120);
     var stars = makeStars(N);
     for (var i = 0; i < N; i++) stars[i].pz = stars[i].z;
 
@@ -231,7 +234,7 @@
     setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
     // transform + opacity only (GPU-composited) — no filter:blur, which forces
     // a full-page repaint every frame and fights the star canvas for budget.
-    requestAnimationFrame(function () { setScene(1.18, 0, 0); });
+    requestAnimationFrame(function () { setScene(1.12, 0, 0); });
     run('out', function () { location.href = url; });
   }
   window.__warpTo = warpTo;
@@ -259,7 +262,7 @@
 
     // Take over the head-guard cover with inline styles (still hidden), so
     // universe B never flickers in at rest before it emerges from the flash.
-    setScene(1.10, 0, 0);
+    setScene(1.07, 0, 0);
     de.classList.remove('warp-cover');
     requestAnimationFrame(function () {
       setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
