@@ -2,21 +2,22 @@
    warp.js — cinematic "universe A → universe B" hyperspace transition.
    Shared by index.html (portfolio) and data.html (data showcase).
 
-   • Outbound: when a [data-warp] link is clicked, the current universe
-     dims and the camera jumps into a star-streak hyperspace tunnel whose
-     colour crosses over from warm Andromeda gold to data-blue, ending in
-     a bright flash — then the browser navigates.
+   • Outbound: when a [data-warp] link is clicked, universe A (the whole
+     page) is pulled toward the camera — it scales up, blurs and dims —
+     while a star-streak hyperspace tunnel accelerates from warm Andromeda
+     gold to data-blue, ending in a bright white-out. Then the browser
+     navigates.
    • Inbound: the destination page detects it was reached through a warp
-     and plays the tunnel in reverse (decelerating out of the flash) before
-     fading away to reveal the new universe.
+     and emerges out of the flash — the tunnel decelerates while universe B
+     settles from a slight zoom/blur back to rest.
    Respects prefers-reduced-motion (skips straight to navigation).
    ===================================================================== */
 (function () {
   'use strict';
 
   var FLAG = '__warp_in';
-  var DUR_OUT = 1150;   // ms — leaving universe A
-  var DUR_IN = 1250;    // ms — arriving in universe B
+  var DUR_OUT = 1250;   // ms — leaving universe A
+  var DUR_IN = 1350;    // ms — arriving in universe B
   var reduce = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -26,28 +27,63 @@
   var COOL2 = [124, 140, 255];
 
   function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
   function mix(c1, c2, t) {
     return [Math.round(lerp(c1[0], c2[0], t)),
             Math.round(lerp(c1[1], c2[1], t)),
             Math.round(lerp(c1[2], c2[2], t))];
   }
-  var easeIn = function (t) { return t * t * t; };
-  var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+  // smootherstep — zero velocity AND zero acceleration at both ends,
+  // so nothing ever "jerks" into or out of motion.
+  function smooth(t) { t = clamp01(t); return t * t * t * (t * (t * 6 - 15) + 10); }
+  var easeInQuint = function (t) { return t * t * t * t * t; };
+  var easeOutQuint = function (t) { return 1 - Math.pow(1 - t, 5); };
+
+  /* ---------- the outgoing / incoming page ("scene") ---------- */
+  // We transform the page itself so it feels like flying through it.
+  // The overlay lives on <html> (not <body>) so it is NOT transformed.
+  function scene() { return document.body; }
+  function setSceneTransition(ms, ease) {
+    var s = scene();
+    if (!s) return;
+    s.style.transition =
+      'transform ' + ms + 'ms ' + ease + ', ' +
+      'filter ' + ms + 'ms ' + ease + ', ' +
+      'opacity ' + ms + 'ms ' + ease;
+    s.style.willChange = 'transform, filter, opacity';
+  }
+  function setScene(sc, bl, op) {
+    var s = scene();
+    if (!s) return;
+    s.style.transform = 'scale(' + sc + ')';
+    s.style.filter = bl ? 'blur(' + bl + 'px)' : 'none';
+    s.style.opacity = String(op);
+  }
+  function clearScene() {
+    var s = scene();
+    if (!s) return;
+    s.style.transition = '';
+    s.style.transform = '';
+    s.style.filter = '';
+    s.style.opacity = '';
+    s.style.willChange = '';
+  }
 
   /* ---------- overlay + starfield tunnel ---------- */
   function buildOverlay() {
     var o = document.createElement('div');
     o.id = 'warp-overlay';
     o.style.cssText = 'position:fixed;inset:0;z-index:99999;pointer-events:none;' +
-      'opacity:0;transition:opacity .28s ease;background:#02040a;';
+      'opacity:0;transition:opacity .38s ease;background:radial-gradient(circle at 50% 50%,#050a18 0%,#02040a 70%);';
     var cv = document.createElement('canvas');
     cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block';
     o.appendChild(cv);
     var flash = document.createElement('div');
     flash.style.cssText = 'position:absolute;inset:0;opacity:0;' +
-      'background:radial-gradient(circle at 50% 50%,#ffffff 0%,#dbeeff 35%,rgba(150,200,255,0) 72%);';
+      'background:radial-gradient(circle at 50% 50%,#ffffff 0%,#dbeeff 38%,rgba(150,200,255,0) 74%);';
     o.appendChild(flash);
-    document.body.appendChild(o);
+    // attach to <html> so page transforms don't drag the overlay around
+    (document.documentElement || document.body).appendChild(o);
     return { o: o, cv: cv, flash: flash };
   }
 
@@ -80,36 +116,42 @@
     size();
     addEventListener('resize', size);
 
-    var N = Math.min(520, Math.floor(innerWidth / 3) + 160);
+    var N = Math.min(560, Math.floor(innerWidth / 3) + 180);
     var stars = makeStars(N);
     for (var i = 0; i < N; i++) stars[i].pz = stars[i].z;
 
     var dur = mode === 'out' ? DUR_OUT : DUR_IN;
     var start = performance.now();
-    // fade the dark overlay in (outbound) or leave it opaque then fade out (inbound)
-    ui.o.style.opacity = mode === 'out' ? '0' : '1';
-    if (mode === 'out') requestAnimationFrame(function () { ui.o.style.opacity = '1'; });
+
+    // Fade the dark overlay in (outbound) or leave it opaque then fade out (inbound)
+    if (mode === 'out') {
+      ui.o.style.opacity = '0';
+      requestAnimationFrame(function () { ui.o.style.opacity = '1'; });
+    } else {
+      ui.o.style.transition = 'none';
+      ui.o.style.opacity = '1';
+    }
 
     function tick(now) {
-      var p = Math.min(1, (now - start) / dur);   // 0..1 timeline
+      var p = clamp01((now - start) / dur);   // 0..1 timeline
 
-      // speed profile: outbound accelerates, inbound decelerates
-      var speed, colT, flashV, overlayFade;
+      var speed, colT, flashV;
       if (mode === 'out') {
-        speed = 0.006 + easeIn(p) * 0.075;         // accelerate into the jump
-        colT = Math.min(1, p / 0.75);              // gold → blue crossover
-        flashV = p < 0.72 ? 0 : Math.pow((p - 0.72) / 0.28, 2); // white-out at end
-        overlayFade = 1;
+        // accelerate smoothly into the jump — starts already gliding
+        speed = 0.010 + easeInQuint(p) * 0.088;
+        colT = smooth(clamp01(p / 0.78));               // gold → blue crossover
+        flashV = p < 0.74 ? 0 : Math.pow((p - 0.74) / 0.26, 2.2); // white-out at end
       } else {
-        speed = 0.006 + easeOut(1 - p) * 0.075;    // decelerate out of the jump
-        colT = 1;                                  // stay in universe B (blue)
-        flashV = p < 0.35 ? (1 - p / 0.35) : 0;    // start bright, clear the flash
-        overlayFade = p < 0.6 ? 1 : (1 - (p - 0.6) / 0.4); // reveal the page
+        // decelerate smoothly out of the jump
+        speed = 0.010 + easeOutQuint(1 - p) * 0.088;
+        colT = 1;                                        // stay in universe B (blue)
+        flashV = p < 0.34 ? (1 - smooth(p / 0.34)) : 0;  // start bright, clear the flash
+        var overlayFade = p < 0.55 ? 1 : (1 - smooth((p - 0.55) / 0.45));
         ui.o.style.opacity = String(overlayFade);
       }
 
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(2,4,10,0.35)';         // motion-blur trails
+      ctx.fillStyle = 'rgba(2,4,10,0.32)';         // motion-blur trails
       ctx.fillRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter';
 
@@ -131,7 +173,7 @@
 
         var base = s.cool ? COOL : COOL2;
         var col = mix(WARM, base, colT);
-        var lw = Math.max(dpr * 0.6, (1 - s.z) * 3.4 * dpr);
+        var lw = Math.max(dpr * 0.6, (1 - s.z) * 3.6 * dpr);
         var a = Math.min(1, (1 - s.z) * 1.1);
         ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + a + ')';
         ctx.lineWidth = lw;
@@ -158,6 +200,9 @@
   function warpTo(url) {
     if (reduce) { location.href = url; return; }
     try { sessionStorage.setItem(FLAG, '1'); } catch (e) {}
+    // pull universe A toward the camera in sync with the tunnel
+    setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
+    requestAnimationFrame(function () { setScene(1.16, 9, 0); });
     run('out', function () { location.href = url; });
   }
   window.__warpTo = warpTo;
@@ -180,8 +225,18 @@
     if (!flagged) return;
     try { sessionStorage.removeItem(FLAG); } catch (e) {}
     if (reduce) return;
+
+    // Set the emerged-from-flash state synchronously, before first paint,
+    // so universe B never flickers in at rest first.
+    setScene(1.12, 10, 0);
+    requestAnimationFrame(function () {
+      setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
+      requestAnimationFrame(function () { setScene(1, 0, 1); });
+    });
+
     run('in', function (ui) {
       ui.o.parentNode && ui.o.parentNode.removeChild(ui.o);
+      clearScene();
     });
   }
   if (document.readyState === 'loading') {
