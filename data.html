@@ -133,6 +133,52 @@ main{position:relative;z-index:2}
 footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
   margin-top:60px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
 
+/* ===== Kobelco LIVE dashboard ===== */
+#kobelco-dash{position:relative}
+.kb-live{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--line);border-radius:999px;padding:6px 13px;margin-bottom:20px}
+.kb-live i{width:7px;height:7px;border-radius:50%;background:#37f5a0;
+  box-shadow:0 0 0 0 rgba(55,245,160,.6);animation:kbPulse 1.8s infinite}
+@keyframes kbPulse{0%{box-shadow:0 0 0 0 rgba(55,245,160,.55)}70%{box-shadow:0 0 0 7px rgba(55,245,160,0)}100%{box-shadow:0 0 0 0 rgba(55,245,160,0)}}
+.kb-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:760px){.kb-kpis{grid-template-columns:repeat(2,1fr)}}
+.kb-kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.kb-kpi b{display:block;font-size:1.5rem;font-weight:700;
+  background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.kb-kpi span{font-size:.76rem;color:var(--muted)}
+.kb-row{display:grid;grid-template-columns:0.8fr 1.2fr;gap:18px;margin-bottom:18px}
+@media(max-width:760px){.kb-row{grid-template-columns:1fr}}
+.kb-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-bottom:18px}
+.kb-wide{margin-bottom:18px}
+.kb-h{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px}
+.kb-h b{display:block;font-size:1.02rem;font-weight:600}
+.kb-h span{font-size:.84rem;color:var(--muted)}
+.kb-toggle{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:none}
+.kb-toggle button{background:transparent;border:0;color:var(--muted);font:inherit;font-size:.78rem;
+  padding:7px 12px;cursor:pointer;transition:all .2s;font-family:'JetBrains Mono',monospace}
+.kb-toggle button.on{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#04060d;font-weight:600}
+.kb-svg{display:block;overflow:visible}
+.kb-tip{position:absolute;z-index:60;pointer-events:none;opacity:0;transform:translate(-50%,-115%);
+  transition:opacity .15s;background:rgba(8,12,24,.96);border:1px solid var(--line);border-radius:10px;
+  padding:9px 12px;font-size:.8rem;line-height:1.45;color:var(--ink);white-space:nowrap;
+  box-shadow:0 12px 34px -12px rgba(0,0,0,.7)}
+.kb-tip b{display:block;color:var(--accent);font-weight:600;margin-bottom:2px;font-size:.82rem}
+.kb-leg{margin-top:8px}
+.kb-leg div{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:.84rem;color:var(--muted)}
+.kb-leg i{width:11px;height:11px;border-radius:3px;flex:none}
+.kb-leg span{flex:1}.kb-leg b{color:var(--ink);font-weight:600}
+.kb-bar{margin-bottom:11px;cursor:default}
+.kb-bl{display:flex;justify-content:space-between;gap:12px;margin-bottom:5px}
+.kb-bn{font-size:.82rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%}
+.kb-bv{font-size:.8rem;color:var(--muted);font-family:'JetBrains Mono',monospace;flex:none}
+.kb-btrack{height:8px;background:rgba(140,160,220,.10);border-radius:6px;overflow:hidden}
+.kb-btrack i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent2),var(--accent));
+  transform-origin:left;animation:kbGrow 1s cubic-bezier(.2,.7,.3,1) both}
+@keyframes kbGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.kb-ins{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:2px}
+@media(max-width:760px){.kb-ins{grid-template-columns:1fr}}
+
 /* lightbox */
 #lb{position:fixed;inset:0;z-index:120;background:rgba(2,4,10,.92);
   display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
@@ -207,16 +253,8 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
           <span class="tag">Heavy Equipment</span>
         </div>
       </div>
-      <div class="dgrid">
-        <div class="dcard"><figure><img src="assets/data/kob-sales.png" alt="Monthly sales performance heavy equipment"></figure>
-          <div class="cap"><b>Monthly Sales Performance</b>Sales peaked in March (Rp 1.40B) against a Rp 980.5M monthly average, matching maintenance cycles.</div></div>
-        <div class="dcard"><figure><img src="assets/data/kob-customer.png" alt="Customer concentration analysis"></figure>
-          <div class="cap"><b>Customer Concentration Risk</b>A single client held 95.7% of revenue, flagging a major dependency worth managing.</div></div>
-        <div class="dcard"><figure><img src="assets/data/kob-topparts.png" alt="Top 10 spare parts by sales value"></figure>
-          <div class="cap"><b>Top Spare Parts by Value</b>Hydraulic oil led at Rp 1.29B, with the top five parts making up a fifth of total value.</div></div>
-        <div class="dcard"><figure><img src="assets/data/kob-material.png" alt="Material group and quantity analysis"></figure>
-          <div class="cap"><b>Material Group Analysis</b>Across 13 material groups, lubricants and undercarriage parts led both value and fast-moving quantity.</div></div>
-      </div>
+      <div class="kb-live"><i></i>Live data · computed from 7,151 transaction records</div>
+      <div id="kobelco-dash"></div>
     </div>
   </section>
 
@@ -273,6 +311,7 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
 <div id="lb"><img src="" alt=""></div>
 
 <script src="./warp.js"></script>
+<script src="./kobelco.js"></script>
 <script>
 /* lightbox */
 (function(){
