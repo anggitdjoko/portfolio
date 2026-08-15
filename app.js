@@ -56,7 +56,9 @@ if (P.projects && P.projects.length) {
         <p class="pdesc">${p.desc || ''}</p>
         <div class="ptech">${(p.tech || []).map(t => `<span class="chip">${t}</span>`).join('')}</div>
         <div class="plinks">
-          ${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>` : ''}
+          ${p.demo ? (/^https?:\/\//i.test(p.demo)
+            ? `<a href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`
+            : `<a href="${p.demo}" data-warp>Live Data ↗</a>`) : ''}
         </div>
       </article>`).join('');
   }
