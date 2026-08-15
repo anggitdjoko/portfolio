@@ -139,18 +139,22 @@
     // light that stutters": its opacity used to be re-set every canvas frame.
     if (ui.flash.animate) {
       if (mode === 'out') {
+        // one single bloom: grow from nothing to a full-screen white-out
         ui.flash.animate(
-          [{ opacity: 0, transform: 'scale(.6)' },
-           { opacity: 1, transform: 'scale(1.65)' }],
+          [{ opacity: 0, transform: 'scale(.7)' },
+           { opacity: 1, transform: 'scale(1.9)' }],
           { duration: Math.round(dur * 0.30), delay: Math.round(dur * 0.70),
             easing: 'cubic-bezier(.45,0,.85,.55)', fill: 'forwards' });
       } else {
+        // CONTINUE that same white-out — start already full & large (matching
+        // the outbound end state), then simply dissolve while settling gently
+        // inward. No second "bloom", so it reads as one continuous flash.
         ui.flash.style.opacity = '1';
-        ui.flash.style.transform = 'scale(1.35)';
+        ui.flash.style.transform = 'scale(1.9)';
         ui.flash.animate(
-          [{ opacity: 1, transform: 'scale(1.35)' },
-           { opacity: 0, transform: 'scale(2.4)' }],
-          { duration: Math.round(dur * 0.44),
+          [{ opacity: 1, transform: 'scale(1.9)' },
+           { opacity: 0, transform: 'scale(1.55)' }],
+          { duration: Math.round(dur * 0.46),
             easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
       }
     }
