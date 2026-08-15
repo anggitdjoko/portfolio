@@ -130,8 +130,76 @@
     host.appendChild(s);
   })();
 
+  /* ---- Sales Forecast: least-squares trend + residual band, computed live from the Jan–Sep 2023 series.
+         Only 9 months (one observation per calendar month) → no seasonal index is fitted; that would overfit.
+         The band is a residual-based prediction interval, so it honestly reflects month-to-month volatility. ---- */
+  var FC = (function(){
+    var s=D.monthly.map(function(d){return d.sales;}), n=s.length;
+    var xb=(n-1)/2, yb=0; for(var i=0;i<n;i++) yb+=s[i]; yb/=n;
+    var num=0,den=0; for(i=0;i<n;i++){ num+=(i-xb)*(s[i]-yb); den+=(i-xb)*(i-xb); }
+    var b=num/den, a=yb-b*xb;
+    var ss=0; for(i=0;i<n;i++){ var r=s[i]-(a+b*i); ss+=r*r; }
+    var rstd=Math.sqrt(ss/(n-2)), band=1.15*rstd;   // ~ prediction interval
+    var labels=['Oct','Nov','Dec'], out=[];
+    for(var k=0;k<3;k++){ var fi=n+k, pt=a+b*fi;
+      out.push({m:labels[k],pt:Math.round(pt),lo:Math.round(pt-band),hi:Math.round(pt+band)}); }
+    return {fc:out, slope:Math.round(b), mean:Math.round(yb), band:Math.round(band), bandPct:Math.round(band/yb*1000)/10};
+  })();
+
+  var fSec = el('<div class="kb-card kb-wide"><div class="kb-h"><div><b>Sales Forecast \u2014 Q4 2023</b><span>Least-squares trend + residual band, recomputed live from the Jan\u2013Sep series. No seasonal index is fitted \u2014 nine months is a single partial cycle.</span></div><div class="kb-toggle" style="pointer-events:none;opacity:.85"><button class="on" style="cursor:default">\u00b1'+FC.bandPct+'% band</button></div></div><div class="kb-chart" id="kb-fc"></div><div class="kb-leg" id="kb-fleg"></div></div>');
+  root.appendChild(fSec);
+  (function(){
+    var host=fSec.querySelector('#kb-fc');
+    var hist=D.monthly.map(function(d){return {m:d.m,v:d.sales,fcast:false};});
+    var last=hist[hist.length-1];
+    var band=[{m:last.m,lo:last.v,hi:last.v}].concat(FC.fc.map(function(f){return {m:f.m,lo:f.lo,hi:f.hi};}));
+    var linePts=hist.concat(FC.fc.map(function(f){return {m:f.m,v:f.pt,fcast:true};}));
+    var N=linePts.length;
+    var W=720,H=280,padL=48,padR=20,padT=24,padB=30;
+    var maxV=Math.max.apply(null,band.map(function(d){return d.hi;}).concat(linePts.map(function(d){return d.v;})));
+    maxV=Math.ceil(maxV/2e8)*2e8;
+    var s=svg(W,H); s.classList.add('kb-svg');
+    var iw=W-padL-padR, ih=H-padT-padB;
+    var X=function(i){ return padL+iw*i/(N-1); };
+    var Y=function(v){ return padT+ih*(1-v/maxV); };
+    for(var g=0;g<=4;g++){ var gy=padT+ih*g/4; s.appendChild(node('line',{x1:padL,y1:gy,x2:W-padR,y2:gy,stroke:'rgba(140,160,220,.10)','stroke-width':1}));
+      s.appendChild(node('text',{x:padL-6,y:gy+3,'text-anchor':'end',fill:'#5f6b8a','font-size':9,'font-family':'JetBrains Mono, monospace'})).textContent=(maxV*(1-g/4)/1e6).toFixed(0)+'M'; }
+    var divX=X(hist.length-1);
+    s.appendChild(node('line',{x1:divX,y1:padT,x2:divX,y2:H-padB,stroke:'rgba(124,140,255,.35)','stroke-width':1,'stroke-dasharray':'3 4'}));
+    s.appendChild(node('text',{x:divX+6,y:padT+10,fill:'#8b96b3','font-size':9})).textContent='forecast \u2192';
+    var defs=node('defs',{}); defs.innerHTML='<linearGradient id="kbFcLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5ad1ff"/><stop offset="1" stop-color="#7c8cff"/></linearGradient>'; s.appendChild(defs);
+    var bi0=hist.length-1, up='',dn='';
+    band.forEach(function(d,i){ var xi=X(bi0+i); up+=(i?'L':'M')+xi+' '+Y(d.hi)+' '; });
+    for(var bi=band.length-1;bi>=0;bi--){ var xi=X(bi0+bi); dn+='L'+xi+' '+Y(band[bi].lo)+' '; }
+    s.appendChild(node('path',{d:up+dn+'Z',fill:'#7c8cff',opacity:.14}));
+    var la=''; hist.forEach(function(d,i){ la+=(i?'L':'M')+X(i)+' '+Y(d.v)+' '; });
+    s.appendChild(node('path',{d:la,fill:'none',stroke:'url(#kbFcLine)','stroke-width':2.4,'stroke-linejoin':'round'}));
+    var lf='M'+X(hist.length-1)+' '+Y(last.v)+' ';
+    FC.fc.forEach(function(f,i){ lf+='L'+X(hist.length+i)+' '+Y(f.pt)+' '; });
+    s.appendChild(node('path',{d:lf,fill:'none',stroke:'#7c8cff','stroke-width':2.4,'stroke-dasharray':'6 5','stroke-linejoin':'round'}));
+    linePts.forEach(function(d,i){
+      var cxp=X(i), cyp=Y(d.v);
+      var dot=node('circle',{cx:cxp,cy:cyp,r:d.fcast?4:3.2,fill:d.fcast?'#0b1020':'#5ad1ff',stroke:d.fcast?'#7c8cff':'none','stroke-width':d.fcast?2:0,style:'cursor:pointer'});
+      dot.addEventListener('mousemove',function(e){
+        if(d.fcast){ var f=FC.fc[i-hist.length]; showTip('<b>'+d.m+' 2023 \u00b7 forecast</b>'+money(f.pt)+'<br>range '+money(f.lo)+'\u2013'+money(f.hi),e.clientX,e.clientY); }
+        else showTip('<b>'+d.m+' 2023 \u00b7 actual</b>'+money(d.v),e.clientX,e.clientY);
+      });
+      dot.addEventListener('mouseleave',hideTip);
+      s.appendChild(dot);
+      if(d.fcast){ var vt=node('text',{x:cxp,y:cyp-10,'text-anchor':'middle',fill:'#c7d0ee','font-size':10,'font-weight':600}); vt.textContent=(d.v/1e6).toFixed(0)+'M'; s.appendChild(vt); }
+      s.appendChild(node('text',{x:cxp,y:H-padB+15,'text-anchor':'middle',fill:d.fcast?'#a9b4d6':'#8b96b3','font-size':9.5,'font-family':'JetBrains Mono, monospace'})).textContent=d.m;
+    });
+    host.appendChild(s);
+    var q4=FC.fc.reduce(function(a,f){return a+f.pt;},0);
+    var leg=fSec.querySelector('#kb-fleg'); leg.innerHTML='';
+    leg.appendChild(el('<div><i style="background:#5ad1ff"></i><span>Actual Jan\u2013Sep</span></div>'));
+    leg.appendChild(el('<div><i style="background:#7c8cff"></i><span>Forecast Q4</span><b>'+money(q4)+'</b></div>'));
+    leg.appendChild(el('<div><i style="background:rgba(124,140,255,.35)"></i><span>Prediction \u00b1'+FC.bandPct+'%</span></div>'));
+  })();
+
   /* ================= insights ================= */
-  root.appendChild(el('<div class="kb-ins"><div class="ins"><h4><i></i>Concentration Risk</h4><p><strong>PT Kalimantan Inti Maju</strong> alone drives <strong>95.7% of revenue</strong> (98.3% of transactions). The business is highly exposed to a single client.</p><p>Diversifying the customer base would materially de-risk the branch.</p></div><div class="ins"><h4><i></i>Demand Pattern</h4><p>Sales track maintenance cycles: a <strong>March peak (Rp 1.40B)</strong> against a Rp 980M monthly average, with a July trough.</p><p>Lubricants and undercarriage parts are the fast movers worth prioritizing in stock planning.</p></div></div>'));
+  var q4fc=FC.fc.reduce(function(a,f){return a+f.pt;},0);
+  root.appendChild(el('<div class="kb-ins"><div class="ins"><h4><i></i>Concentration Risk</h4><p><strong>PT Kalimantan Inti Maju</strong> alone drives <strong>95.7% of revenue</strong> (98.3% of transactions). The business is highly exposed to a single client.</p><p>Diversifying the customer base would materially de-risk the branch.</p></div><div class="ins"><h4><i></i>Demand Pattern</h4><p>Sales track maintenance cycles: a <strong>March peak (Rp 1.40B)</strong> against a Rp 980M monthly average, with a July trough.</p><p>Lubricants and undercarriage parts are the fast movers worth prioritizing in stock planning.</p></div><div class="ins"><h4><i></i>Forward Look \u2014 Q4 2023</h4><p>A trend model projects <strong>'+money(q4fc)+'</strong> across Oct\u2013Dec ('+money(FC.fc[0].pt)+' \u00b7 '+money(FC.fc[1].pt)+' \u00b7 '+money(FC.fc[2].pt)+'), essentially holding the <strong>'+money(FC.mean)+'/month</strong> run-rate.</p><p>The wide \u00b1'+FC.bandPct+'% band is honest: nine months carry real volatility and no full seasonal cycle to lean on.</p></div></div>'));
 
   root.appendChild(el('<div class="roadmap"><h4>Strategic Roadmap</h4>'
     +'<div class="step"><span class="n">01</span><div><b>Diversify the customer base</b><span>Actively pursue secondary contractors and rental fleets to reduce the 95.7% revenue dependence on a single client and de-risk the branch.</span></div></div>'
