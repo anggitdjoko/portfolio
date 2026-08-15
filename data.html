@@ -227,16 +227,8 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
           <span class="tag">LPG Distribution</span>
         </div>
       </div>
-      <div class="dgrid">
-        <div class="dcard"><figure><img src="assets/data/gas-yoy.png" alt="Year over year transaction comparison 2023 vs 2024"></figure>
-          <div class="cap"><b>Year-over-Year Growth</b>Transactions rose from 31,459 to 37,723 (+19.9%), lifting annual profit from Rp 94.4M to Rp 113.2M.</div></div>
-        <div class="dcard"><figure><img src="assets/data/gas-segment2023.png" alt="Customer segmentation household versus SME 2023"></figure>
-          <div class="cap"><b>Customer Segmentation</b>Household buyers drove 82.1% of volume, confirming the retail base as the primary contributor.</div></div>
-        <div class="dcard"><figure><img src="assets/data/gas-profit2023.png" alt="Monthly profit 2023"></figure>
-          <div class="cap"><b>Monthly Profit Trend</b>Profit peaked in September (Rp 10.38M) and dipped in December, revealing a clear seasonal pattern.</div></div>
-        <div class="dcard"><figure><img src="assets/data/gas-shift.png" alt="Household versus SME segmentation shift after policy change"></figure>
-          <div class="cap"><b>Policy Impact Shift</b>Subsidy policy pushed the household share up to 83.4%, while SMEs still grew in absolute terms.</div></div>
-      </div>
+      <div class="kb-live"><i></i>Live data · computed from 31,459 transaction records (2024)</div>
+      <div id="gas-dash"></div>
     </div>
   </section>
 
@@ -271,11 +263,15 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
         </div>
       </div>
 
+      <div class="kb-live"><i></i>Live data · interactive dashboard built from outlet sales records</div>
+
       <div class="kpis">
         <div class="kpi"><b>Rp 164.8M</b><span>Total net sales</span></div>
         <div class="kpi"><b>7,437</b><span>Total transactions</span></div>
         <div class="kpi"><b>Rp 22,164</b><span>Average order value</span></div>
       </div>
+
+      <div id="jar-dash"></div>
 
       <div class="insights">
         <div class="ins">
@@ -297,11 +293,7 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
         <div class="step"><span class="n">03</span><div><b>Protect the core and retain</b><span>Prioritize Kare Ramen in stock planning to avoid lost sales, and use the high QR share to build a simple returning-customer program.</span></div></div>
       </div>
 
-      <a class="livebtn" href="https://lookerstudio.google.com/reporting/e493a616-fb2b-4510-906f-134514a18792" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>
-        View live dashboard on Looker Studio
-      </a>
-      <p class="note">Interactive report built as part of a data analyst assessment for PT JAR Andalan Rasa.</p>
+      <p class="note">Interactive dashboard built as part of a data analyst assessment for PT JAR Andalan Rasa.</p>
     </div>
   </section>
 
@@ -311,7 +303,9 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
 <div id="lb"><img src="" alt=""></div>
 
 <script src="./warp.js"></script>
+<script src="./gas.js"></script>
 <script src="./kobelco.js"></script>
+<script src="./jar.js"></script>
 <script>
 /* lightbox */
 (function(){
