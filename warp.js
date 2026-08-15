@@ -202,7 +202,9 @@
     try { sessionStorage.setItem(FLAG, '1'); } catch (e) {}
     // pull universe A toward the camera in sync with the tunnel
     setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
-    requestAnimationFrame(function () { setScene(1.16, 9, 0); });
+    // transform + opacity only (GPU-composited) — no filter:blur, which forces
+    // a full-page repaint every frame and fights the star canvas for budget.
+    requestAnimationFrame(function () { setScene(1.18, 0, 0); });
     run('out', function () { location.href = url; });
   }
   window.__warpTo = warpTo;
@@ -220,15 +222,18 @@
 
   /* ---------- inbound: arrived through a warp ---------- */
   function playInbound() {
+    var de = document.documentElement;
     var flagged = false;
     try { flagged = sessionStorage.getItem(FLAG) === '1'; } catch (e) {}
-    if (!flagged) return;
+    // Always release the head-guard cover so the page can never get stuck hidden.
+    if (!flagged) { de.classList.remove('warp-cover'); return; }
     try { sessionStorage.removeItem(FLAG); } catch (e) {}
-    if (reduce) return;
+    if (reduce) { de.classList.remove('warp-cover'); return; }
 
-    // Set the emerged-from-flash state synchronously, before first paint,
-    // so universe B never flickers in at rest first.
-    setScene(1.12, 10, 0);
+    // Take over the head-guard cover with inline styles (still hidden), so
+    // universe B never flickers in at rest before it emerges from the flash.
+    setScene(1.10, 0, 0);
+    de.classList.remove('warp-cover');
     requestAnimationFrame(function () {
       setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
       requestAnimationFrame(function () { setScene(1, 0, 1); });
