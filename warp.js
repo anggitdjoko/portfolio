@@ -79,7 +79,8 @@
     cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block';
     o.appendChild(cv);
     var flash = document.createElement('div');
-    flash.style.cssText = 'position:absolute;inset:0;opacity:0;' +
+    flash.style.cssText = 'position:absolute;inset:0;opacity:0;will-change:opacity,transform;' +
+      'transform:scale(.6);transform-origin:50% 50%;' +
       'background:radial-gradient(circle at 50% 50%,#ffffff 0%,#dbeeff 38%,rgba(150,200,255,0) 74%);';
     o.appendChild(flash);
     // attach to <html> so page transforms don't drag the overlay around
@@ -105,7 +106,7 @@
   function run(mode, done) {
     var ui = buildOverlay();
     var cv = ui.cv, ctx = cv.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     var W, H, cx, cy, focal;
     function size() {
       W = cv.width = innerWidth * dpr;
@@ -116,7 +117,7 @@
     size();
     addEventListener('resize', size);
 
-    var N = Math.min(560, Math.floor(innerWidth / 3) + 180);
+    var N = Math.min(380, Math.floor(innerWidth / 4) + 140);
     var stars = makeStars(N);
     for (var i = 0; i < N; i++) stars[i].pz = stars[i].z;
 
@@ -130,6 +131,28 @@
     } else {
       ui.o.style.transition = 'none';
       ui.o.style.opacity = '1';
+    }
+
+    // Drive the white-out flash on the compositor thread (Web Animations API),
+    // fully decoupled from the star-canvas rAF loop — so it stays perfectly
+    // smooth even when a canvas frame is dropped. This was the "big round white
+    // light that stutters": its opacity used to be re-set every canvas frame.
+    if (ui.flash.animate) {
+      if (mode === 'out') {
+        ui.flash.animate(
+          [{ opacity: 0, transform: 'scale(.6)' },
+           { opacity: 1, transform: 'scale(1.65)' }],
+          { duration: Math.round(dur * 0.30), delay: Math.round(dur * 0.70),
+            easing: 'cubic-bezier(.45,0,.85,.55)', fill: 'forwards' });
+      } else {
+        ui.flash.style.opacity = '1';
+        ui.flash.style.transform = 'scale(1.35)';
+        ui.flash.animate(
+          [{ opacity: 1, transform: 'scale(1.35)' },
+           { opacity: 0, transform: 'scale(2.4)' }],
+          { duration: Math.round(dur * 0.44),
+            easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+      }
     }
 
     function tick(now) {
@@ -183,7 +206,7 @@
         ctx.stroke();
       }
 
-      ui.flash.style.opacity = String(flashV);
+      if (!ui.flash.animate) ui.flash.style.opacity = String(flashV);
 
       if (p < 1) {
         requestAnimationFrame(tick);
