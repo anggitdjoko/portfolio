@@ -97,7 +97,7 @@ window.PORTFOLIO = {
     {
       category: "Data",
       title: "Data Reporting Dashboards",
-      desc: "Analytics dashboards built from real transaction data across three companies in LPG distribution, heavy equipment, and F&B. Covers revenue breakdowns, customer concentration, top-product analysis, and year-over-year growth.",
+      desc: "Analytics dashboards built from real transaction data across three companies in LPG distribution, heavy equipment, and F&B. Covers revenue breakdowns, customer concentration, top-product analysis, and demand forecasting.",
       tech: ["Data Analysis", "Dashboards", "SQL"],
       demo: "data.html"
     }

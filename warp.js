@@ -43,6 +43,19 @@
   // We transform the page itself so it feels like flying through it.
   // The overlay lives on <html> (not <body>) so it is NOT transformed.
   function scene() { return document.body; }
+  // The page (universe A/B) is the <body>, whose transform-origin defaults to
+  // the centre of the WHOLE document — far below the fold on a long mobile
+  // page. Scaling around that point makes the visible area drift diagonally
+  // instead of zooming straight in, so the warp looked like two separate
+  // moves on phones. Anchoring the zoom to the centre of the current viewport
+  // (where the star tunnel's vanishing point already is) fuses both layers
+  // into one straight "jump into the screen".
+  function viewportOrigin() {
+    var sx = window.scrollX != null ? window.scrollX : window.pageXOffset;
+    var sy = window.scrollY != null ? window.scrollY : window.pageYOffset;
+    return Math.round(sx + window.innerWidth / 2) + 'px ' +
+           Math.round(sy + window.innerHeight / 2) + 'px';
+  }
   function setSceneTransition(ms, ease) {
     var s = scene();
     if (!s) return;
@@ -58,6 +71,7 @@
   function setScene(sc, bl, op) {
     var s = scene();
     if (!s) return;
+    s.style.transformOrigin = viewportOrigin();
     s.style.transform = 'translateZ(0) scale(' + sc + ')';
     s.style.filter = bl ? 'blur(' + bl + 'px)' : 'none';
     s.style.opacity = String(op);
@@ -67,6 +81,7 @@
     if (!s) return;
     s.style.transition = '';
     s.style.transform = '';
+    s.style.transformOrigin = '';
     s.style.filter = '';
     s.style.opacity = '';
     s.style.willChange = '';
