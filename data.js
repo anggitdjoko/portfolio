@@ -80,6 +80,12 @@ window.PORTFOLIO = {
   // Real projects
   projects: [
     {
+      category: "Full-Stack",
+      title: "GearGrid — Equipment Mapping & Maintenance System",
+      desc: "Web app to map building/mall equipment over engineering floor plans (DXF), with preventive/corrective maintenance management, logbook, shift scheduling, dashboards, reporting, and role-based access control (Guest/Supervisor/Admin). Equipment data is encrypted at rest (AES-256).",
+      tech: ["PHP 8.3", "SQLite", "JavaScript", "Canvas / DXF", "AES-256", "RBAC"]
+    },
+    {
       category: "Web App",
       title: "Servgo",
       desc: "POS and digital storefront platform for cafes and restaurants. It's live in 2 outlets with real daily transactions, handling orders, menu and storefront end to end.",
