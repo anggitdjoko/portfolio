@@ -20,6 +20,13 @@
   var DUR_IN = 1350;    // ms — arriving in universe B
   var reduce = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // On phones the page-zoom layer (universe A/B scaling) and the star tunnel
+  // read as TWO separate moves — the zoom's anchor can never fully match the
+  // tunnel's vanishing point on a long, scrollable page, so it looks stiff.
+  // On mobile we therefore run ONLY the star tunnel and skip the page zoom,
+  // leaving a single, smooth "jump into the screen". Desktop keeps both.
+  var mobile = window.matchMedia &&
+    window.matchMedia('(max-width: 820px), (pointer: coarse)').matches;
 
   // Palette: warm gold (universe A) → data cyan/indigo (universe B)
   var WARM = [255, 207, 138];
@@ -57,6 +64,7 @@
            Math.round(sy + window.innerHeight / 2) + 'px';
   }
   function setSceneTransition(ms, ease) {
+    if (mobile) return;            // mobile: no page-zoom layer, tunnel only
     var s = scene();
     if (!s) return;
     // transform + opacity only — both composite on the GPU. filter is no longer
@@ -69,6 +77,7 @@
     s.style.backfaceVisibility = 'hidden';
   }
   function setScene(sc, bl, op) {
+    if (mobile) return;            // mobile: no page-zoom layer, tunnel only
     var s = scene();
     if (!s) return;
     s.style.transformOrigin = viewportOrigin();
