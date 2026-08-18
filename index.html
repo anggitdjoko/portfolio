@@ -40,6 +40,10 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- background canvas ---------- */
 #space{position:fixed;inset:0;z-index:0;display:block}
+/* Static backdrop when WebGL is unavailable (e.g. iOS Safari GPU failure),
+   so the hero still looks intentional instead of an empty void. */
+html.nowebgl #space{display:none}
+html.nowebgl body{background:var(--bg) url('./andromeda.jpg') center center / cover no-repeat fixed}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(120% 90% at 50% 20%,transparent 40%,rgba(2,4,10,.75) 100%)}
 

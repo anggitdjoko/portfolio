@@ -1,6 +1,25 @@
 /* ============ Anggit Djoko Wibowo — cinematic portfolio ============ */
 const P = window.PORTFOLIO;
 
+/* ---------- loader safety net ----------
+   Reveal the page no matter what. If a later step (e.g. WebGL on iOS)
+   throws and aborts the rest of this script, these still fire and the
+   user is never stranded on the "Hello !" splash. hideLoader (below) is
+   a hoisted function declaration, so it is safe to reference here. */
+function hideLoaderSafe() {
+  try {
+    const l = document.getElementById('loader');
+    if (l && !l.classList.contains('hide')) {
+      l.classList.add('hide');
+      document.querySelectorAll('#hero .reveal')
+        .forEach((el, i) => setTimeout(() => el.classList.add('in'), 120 * i));
+    }
+  } catch (e) {}
+}
+addEventListener('load', () => setTimeout(hideLoaderSafe, 600));
+setTimeout(hideLoaderSafe, 2000);
+addEventListener('error', () => setTimeout(hideLoaderSafe, 50));
+
 /* ---------- populate content ---------- */
 document.getElementById('i-loc').textContent = P.location;
 document.getElementById('i-edu').textContent = P.availability;
@@ -110,10 +129,25 @@ navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
    THREE.JS — a living universe of round particles that, as you scroll,
    gather from all across space into ONE big glowing sphere.
    ======================================================================= */
+try {   // ---- WebGL galaxy: degrade gracefully if the GPU/context fails ----
 const canvas = document.getElementById('space');
-const MOBILE = innerWidth < 700;
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: !MOBILE, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+// iPadOS reports as "MacIntel" with touch points; treat all iOS as mobile so
+// iPad no longer runs the heavy desktop path (16k particles + AA + DPR 2),
+// which is what exhausts the GPU and blocks the page on iOS Safari.
+const iOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const MOBILE = innerWidth < 700 || iOS;
+const renderer = new THREE.WebGLRenderer({
+  canvas, antialias: !MOBILE, alpha: true,
+  powerPreference: 'default', failIfMajorPerformanceCaveat: false
+});
+renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.25 : 2));
+// If iOS drops the context under memory pressure, fall back to the static
+// backdrop instead of throwing on every frame.
+canvas.addEventListener('webglcontextlost', (e) => {
+  e.preventDefault();
+  document.documentElement.classList.add('nowebgl');
+}, false);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.1, 4000);
 camera.position.z = 620;
@@ -158,7 +192,7 @@ function discTexture() {
 const disc = discTexture();
 
 /* --- build particle field --- */
-const COUNT = MOBILE ? 6000 : 16000;
+const COUNT = iOS ? 4000 : (MOBILE ? 6000 : 16000);
 const geo = new THREE.BufferGeometry();
 const cur = new Float32Array(COUNT * 3);   // current animated position
 const uni = new Float32Array(COUNT * 3);   // scattered "universe" home
@@ -437,6 +471,11 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+} catch (err) {   // ---- WebGL unavailable/failed: show static backdrop ----
+  console.warn('WebGL galaxy disabled, using static backdrop:', err);
+  document.documentElement.classList.add('nowebgl');
+  hideLoaderSafe();
+}
 
 /* ---------- hide loader ---------- */
 function hideLoader() {
