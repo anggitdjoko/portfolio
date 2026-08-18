@@ -91,7 +91,7 @@ window.PORTFOLIO = {
       title: "Servgo",
       desc: "POS and digital storefront platform for cafes and restaurants. It's live in 2 outlets with real daily transactions, handling orders, menu and storefront end to end.",
       tech: ["Next.js", "React", "TypeScript", "Supabase", "Vercel"],
-      demo: "https://servgo.vercel.app"
+      demo: "https://servgo.vercel.app/admin/login"
     },
     {
       category: "Web",
