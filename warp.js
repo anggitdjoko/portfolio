@@ -27,6 +27,39 @@
   // leaving a single, smooth "jump into the screen". Desktop keeps both.
   var mobile = window.matchMedia &&
     window.matchMedia('(max-width: 820px), (pointer: coarse)').matches;
+  // iOS (iPhone/iPad, incl. iPadOS reporting as Mac + touch) needs extra care:
+  // its collapsing URL bar fires spurious resizes mid-animation, and its
+  // rubber-band scroll can drag a fixed overlay. We detect it to (a) size the
+  // canvas from visualViewport, (b) ignore URL-bar resize jitter, (c) lock
+  // scroll during the warp, and (d) trim DPR / star count for steady 60fps.
+  var iOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  // Lock/unlock page scrolling so the fixed tunnel can't drift with iOS
+  // momentum / rubber-band while the transition plays.
+  var _scrollLock = null;
+  function lockScroll() {
+    if (_scrollLock) return;
+    var de = document.documentElement, b = document.body;
+    _scrollLock = {
+      deOverflow: de.style.overflow, bOverflow: b ? b.style.overflow : '',
+      touch: de.style.touchAction
+    };
+    de.style.overflow = 'hidden';
+    if (b) b.style.overflow = 'hidden';
+    de.style.touchAction = 'none';
+  }
+  function unlockScroll() {
+    if (!_scrollLock) return;
+    var de = document.documentElement, b = document.body;
+    de.style.overflow = _scrollLock.deOverflow;
+    if (b) b.style.overflow = _scrollLock.bOverflow;
+    de.style.touchAction = _scrollLock.touch;
+    _scrollLock = null;
+  }
+  // Viewport size that matches what iOS actually paints (excludes URL bar).
+  function vpW() { return (window.visualViewport && visualViewport.width) || window.innerWidth; }
+  function vpH() { return (window.visualViewport && visualViewport.height) || window.innerHeight; }
 
   // Palette: warm gold (universe A) → data cyan/indigo (universe B)
   var WARM = [255, 207, 138];
@@ -131,20 +164,32 @@
 
   // Runs the tunnel. mode: 'out' | 'in'. Calls done() when finished.
   function run(mode, done) {
+    lockScroll();                                // steady tunnel on iOS/touch
     var ui = buildOverlay();
     var cv = ui.cv, ctx = cv.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+    // iOS screens are DPR 2–3; cap tighter there so the per-frame stroke work
+    // stays within a 60fps budget on older iPhones (lines still read crisp).
+    var dpr = Math.min(window.devicePixelRatio || 1, iOS ? 1 : 1.25);
     var W, H, cx, cy, focal;
     function size() {
-      W = cv.width = innerWidth * dpr;
-      H = cv.height = innerHeight * dpr;
+      W = cv.width = Math.round(vpW() * dpr);
+      H = cv.height = Math.round(vpH() * dpr);
       cx = W / 2; cy = H / 2;
       focal = Math.max(W, H) * 0.16;
     }
     size();
-    addEventListener('resize', size);
+    // Only re-init on a real width change (orientation) — NOT on the height
+    // jitter iOS emits as its URL bar collapses, which would reset the canvas
+    // and make the star trails flicker mid-warp.
+    var baseW = vpW();
+    function onResize() {
+      if (Math.abs(vpW() - baseW) < 1) return;
+      baseW = vpW(); size();
+    }
+    addEventListener('resize', onResize);
 
-    var N = Math.min(280, Math.floor(innerWidth / 5) + 120);
+    var N = Math.min(iOS ? 190 : 280,
+      Math.floor(innerWidth / (iOS ? 7 : 5)) + (iOS ? 90 : 120));
     var stars = makeStars(N);
     for (var i = 0; i < N; i++) stars[i].pz = stars[i].z;
 
@@ -242,7 +287,8 @@
       if (p < 1) {
         requestAnimationFrame(tick);
       } else {
-        removeEventListener('resize', size);
+        removeEventListener('resize', onResize);
+        unlockScroll();
         if (done) done(ui);
       }
     }
