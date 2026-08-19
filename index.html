@@ -24,7 +24,7 @@
   --accent:#5ad1ff;
   --accent2:#7c8cff;
   --line:rgba(140,160,220,.14);
-  --card:rgba(16,22,40,.55);
+  --card:rgba(14,19,34,.85);
   --maxw:1120px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -175,7 +175,12 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
 .plinks a.disabled{color:var(--muted);opacity:.5;pointer-events:none}
 
 /* ---------- contact ---------- */
-#contact{text-align:center}
+#contact{text-align:center;position:relative}
+#contact::before{content:"";position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
+  width:min(820px,94%);height:380px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at center,rgba(2,4,10,.72),rgba(2,4,10,.38) 52%,transparent 78%)}
+#contact>*{position:relative;z-index:1}
+#contact .title,#contact .lead{text-shadow:0 2px 20px rgba(2,4,10,.9),0 0 46px rgba(2,4,10,.65)}
 .contact-methods{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:34px}
 .cm{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);
   border-radius:14px;padding:16px 22px;transition:.3s;backdrop-filter:blur(8px)}
