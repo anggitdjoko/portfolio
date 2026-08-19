@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- warp inbound guard: hide the page before first paint when arriving through a warp, so it never flashes at rest before the transition takes over -->
-<script>(function(){try{if(sessionStorage.getItem('__warp_in')==='1'){var d=document.documentElement;d.className+=(d.className?' ':'')+'warp-cover';setTimeout(function(){d.classList.remove('warp-cover');},4500);}}catch(e){}})();</script>
+<script>(function(){try{if(sessionStorage.getItem('__warp_in')==='1'){var d=document.documentElement;d.className+=(d.className?' ':'')+'warp-cover';setTimeout(function(){d.classList.remove('warp-cover');d.style.overflow='';d.style.touchAction='';if(document.body){document.body.style.overflow='';}},4000);}}catch(e){}})();</script>
 <style>html.warp-cover{background:#02040a!important}html.warp-cover body{opacity:0!important}</style>
 <title>Anggit Djoko Wibowo · Software Engineer</title>
 <meta name="description" content="Anggit Djoko Wibowo · Software Engineer building web apps and software products end to end with Next.js, React, TypeScript, Node.js and Supabase." />

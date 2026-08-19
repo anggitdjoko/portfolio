@@ -167,6 +167,14 @@
     lockScroll();                                // steady tunnel on iOS/touch
     var ui = buildOverlay();
     var cv = ui.cv, ctx = cv.getContext('2d');
+    var finished = false;
+    function finish() {
+      if (finished) return;
+      finished = true;
+      try { removeEventListener('resize', onResize); } catch (e) {}
+      unlockScroll();
+      if (done) done(ui);
+    }
     // iOS screens are DPR 2–3; cap tighter there so the per-frame stroke work
     // stays within a 60fps budget on older iPhones (lines still read crisp).
     var dpr = Math.min(window.devicePixelRatio || 1, iOS ? 1 : 1.25);
@@ -232,6 +240,8 @@
     }
 
     function tick(now) {
+      if (finished) return;                    // failsafe already completed us
+      if (!ctx) { finish(); return; }          // no 2D canvas → just complete safely
       var p = clamp01((now - start) / dur);   // 0..1 timeline
 
       var speed, colT, flashV;
@@ -287,11 +297,14 @@
       if (p < 1) {
         requestAnimationFrame(tick);
       } else {
-        removeEventListener('resize', onResize);
-        unlockScroll();
-        if (done) done(ui);
+        finish();
       }
     }
+    // Hard failsafe: iOS Safari can throttle or suspend rAF (backgrounding,
+    // scroll momentum, low-power mode). If the frame loop ever stalls, this
+    // guarantees the warp still completes — scroll is unlocked and the page
+    // navigates / cleans up — so it can NEVER freeze blank with locked scroll.
+    setTimeout(finish, dur + 1200);
     requestAnimationFrame(tick);
     return ui;
   }
@@ -299,13 +312,22 @@
   /* ---------- outbound: intercept warp links ---------- */
   function warpTo(url) {
     if (reduce) { location.href = url; return; }
-    try { sessionStorage.setItem(FLAG, '1'); } catch (e) {}
-    // pull universe A toward the camera in sync with the tunnel
-    setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
-    // transform + opacity only (GPU-composited) — no filter:blur, which forces
-    // a full-page repaint every frame and fights the star canvas for budget.
-    requestAnimationFrame(function () { setScene(1.12, 0, 0); });
-    run('out', function () { location.href = url; });
+    // Absolute guarantee we navigate even if the animation below throws or its
+    // rAF loop is suspended by iOS — the user can never get stranded on the
+    // outgoing page behind a locked overlay.
+    var navFailsafe = setTimeout(function () { location.href = url; }, DUR_OUT + 1600);
+    try {
+      try { sessionStorage.setItem(FLAG, '1'); } catch (e) {}
+      // pull universe A toward the camera in sync with the tunnel
+      setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
+      // transform + opacity only (GPU-composited) — no filter:blur, which forces
+      // a full-page repaint every frame and fights the star canvas for budget.
+      requestAnimationFrame(function () { setScene(1.12, 0, 0); });
+      run('out', function () { clearTimeout(navFailsafe); location.href = url; });
+    } catch (err) {
+      clearTimeout(navFailsafe);
+      location.href = url;
+    }
   }
   window.__warpTo = warpTo;
 
@@ -332,17 +354,24 @@
 
     // Take over the head-guard cover with inline styles (still hidden), so
     // universe B never flickers in at rest before it emerges from the flash.
-    setScene(1.07, 0, 0);
-    de.classList.remove('warp-cover');
-    requestAnimationFrame(function () {
-      setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
-      requestAnimationFrame(function () { setScene(1, 0, 1); });
-    });
+    try {
+      setScene(1.07, 0, 0);
+      de.classList.remove('warp-cover');
+      requestAnimationFrame(function () {
+        setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
+        requestAnimationFrame(function () { setScene(1, 0, 1); });
+      });
 
-    run('in', function (ui) {
-      ui.o.parentNode && ui.o.parentNode.removeChild(ui.o);
+      run('in', function (ui) {
+        ui.o.parentNode && ui.o.parentNode.removeChild(ui.o);
+        clearScene();
+      });
+    } catch (err) {
+      // never let a broken inbound animation leave the page hidden or locked
+      de.classList.remove('warp-cover');
+      unlockScroll();
       clearScene();
-    });
+    }
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', playInbound);
