@@ -87,6 +87,13 @@ window.PORTFOLIO = {
       demo: "https://geargrid.xo.je/"
     },
     {
+      category: "Full-Stack",
+      title: "HK Farm — Agri-Investment Management System",
+      desc: "Enterprise platform for managing agribusiness investments. Admins handle investors, lands, commodities, investments and financials, with real-time analytics, interactive land-distribution mapping, per-project ROI tracking, progress and financial reports, audit logs, notifications, background jobs and role-based access (Admin/Investor). Multi-language (ID/EN) with IDR reporting.",
+      tech: ["React", "Vite", "JavaScript", "Charts", "Geo Mapping", "RBAC"],
+      demo: "https://hk-farm-frontend-production.up.railway.app"
+    },
+    {
       category: "Web App",
       title: "Servgo",
       desc: "POS and digital storefront platform for cafes and restaurants. It's live in 2 outlets with real daily transactions, handling orders, menu and storefront end to end.",
