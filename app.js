@@ -141,7 +141,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas, antialias: !MOBILE, alpha: true,
   powerPreference: 'default', failIfMajorPerformanceCaveat: false
 });
-renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.25 : 2));
+renderer.setPixelRatio(Math.min(devicePixelRatio, iOS ? 1 : (MOBILE ? 1.25 : 2)));
 // If iOS drops the context under memory pressure, fall back to the static
 // backdrop instead of throwing on every frame.
 canvas.addEventListener('webglcontextlost', (e) => {
@@ -192,7 +192,7 @@ function discTexture() {
 const disc = discTexture();
 
 /* --- build particle field --- */
-const COUNT = iOS ? 4000 : (MOBILE ? 6000 : 16000);
+const COUNT = iOS ? 2600 : (MOBILE ? 6000 : 16000);
 const geo = new THREE.BufferGeometry();
 const cur = new Float32Array(COUNT * 3);   // current animated position
 const uni = new Float32Array(COUNT * 3);   // scattered "universe" home
@@ -316,7 +316,9 @@ const haze = new THREE.Points(geo, hazeMat);
 const galaxy = new THREE.Group();
 galaxy.rotation.x = 1.02;   // lay the disk back
 galaxy.rotation.z = 0.28;   // slight roll
-galaxy.add(haze);
+// haze = large additive sprites → heavy overdraw/fill-rate, the main killer on
+// iOS Safari. Drop it on iOS; the dot field + core glow still read as a galaxy.
+if (!iOS) galaxy.add(haze);
 galaxy.add(points);
 scene.add(galaxy);
 
@@ -373,8 +375,16 @@ const easeInOut = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 const clock = new THREE.Clock();
 const pos = geo.attributes.position.array;
 let frame = 0;
+// pause rendering when the tab/page is hidden (saves GPU + battery on iOS and
+// avoids a big time-delta jump when the user returns)
+let hidden = document.hidden;
+document.addEventListener('visibilitychange', () => {
+  hidden = document.hidden;
+  if (!hidden) clock.getDelta();   // discard the elapsed gap so motion stays smooth
+});
 function animate() {
   requestAnimationFrame(animate);
+  if (hidden) return;
   // frame-rate independent timing: dt normalized to 60fps so motion stays
   // perfectly smooth whether the device runs at 30, 60 or 120 fps
   const dt = Math.min(clock.getDelta(), 0.05);
