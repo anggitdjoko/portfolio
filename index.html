@@ -55,7 +55,7 @@ html.nowebgl body{background:var(--bg)}
 #loader{position:fixed;inset:0;z-index:100;background:var(--bg);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
   transition:opacity .8s ease,visibility .8s ease}
-#loader.hide{opacity:0;visibility:hidden}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
 .ring{width:64px;height:64px;border-radius:50%;
   border:2px solid rgba(90,209,255,.18);border-top-color:var(--accent);
   animation:spin 1s linear infinite}
@@ -300,5 +300,39 @@ footer .heart{color:var(--accent)}
 <script src="./data.js"></script>
 <script src="./warp.js"></script>
 <script src="./app.js"></script>
+<!-- ===== hard content failsafe: the page must NEVER stay blank or stuck =====
+     Independent of PORTFOLIO/THREE/GSAP/app.js. Even if any of them fail to load
+     or throw on iOS Safari, this reveals all content, closes the "Hello!" loader,
+     and releases any scroll lock. Depends on nothing but the DOM. -->
+<script>(function(){
+  function revealAll(){
+    try{
+      var els=document.querySelectorAll('.reveal');
+      for(var i=0;i<els.length;i++){ els[i].classList.add('in'); }
+    }catch(e){}
+    try{
+      var l=document.getElementById('loader');
+      if(l){ l.classList.add('hide'); l.style.pointerEvents='none'; }
+    }catch(e){}
+    try{
+      var d=document.documentElement;
+      d.style.overflow=''; d.style.touchAction='';
+      if(document.body){ document.body.style.overflow=''; document.body.style.touchAction=''; }
+    }catch(e){}
+  }
+  // Run after the DOM is built, then again as a hard timed failsafe.
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){ setTimeout(revealAll,50); });
+  } else { setTimeout(revealAll,0); }
+  addEventListener('load',function(){ setTimeout(revealAll,700); });
+  setTimeout(revealAll,2000);            // absolute guarantee: content shows within 2s
+  // If any later script errors, recover immediately.
+  addEventListener('error',function(){ setTimeout(revealAll,60); },true);
+  // First user interaction also forces a clean, visible state.
+  function once(){ revealAll(); removeEventListener('scroll',once); removeEventListener('touchmove',once); removeEventListener('touchstart',once); }
+  addEventListener('scroll',once,{passive:true});
+  addEventListener('touchmove',once,{passive:true});
+  addEventListener('touchstart',once,{passive:true});
+})();</script>
 </body>
 </html>
