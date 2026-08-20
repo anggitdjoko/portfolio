@@ -170,6 +170,14 @@ const canvas = document.getElementById('space');
 const iOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const MOBILE = innerWidth < 700 || iOS;
+// --- iOS reliability: skip the live WebGL galaxy entirely ---
+// iPhone/iPad Safari (esp. 4GB devices like iPhone 11) frequently kill or
+// reload the whole tab under the GPU/memory pressure of a continuous three.js
+// render loop, which shows up as a blank, "buggy", un-scrollable page. The
+// static Andromeda backdrop looks intentional and costs zero GPU/memory, so
+// iOS gets that instead of the live particle simulation. Everything else
+// (content, scrolling, buttons, warp) works normally.
+if (iOS) { throw new Error('iOS: using static galaxy backdrop for reliability'); }
 const renderer = new THREE.WebGLRenderer({
   canvas, antialias: !MOBILE, alpha: true,
   powerPreference: 'default', failIfMajorPerformanceCaveat: false
