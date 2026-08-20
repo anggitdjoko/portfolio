@@ -125,6 +125,39 @@ const navlinks = document.getElementById('navlinks');
 menuBtn.addEventListener('click', () => navlinks.classList.toggle('open'));
 navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
 
+/* ---------- reliable in-page smooth scroll (iOS-safe) ----------
+   iOS Safari frequently ignores anchor jumps that rely only on CSS
+   scroll-behavior:smooth (especially when the URL already carries a
+   leftover #hash from the warp round-trip), which made "View My Work"
+   and "Say Hello" feel dead. Drive the scroll from JS instead. */
+(function () {
+  var supportsSmooth = 'scrollBehavior' in document.documentElement.style;
+  function goToHash(hash) {
+    var target;
+    try { target = document.querySelector(hash); } catch (e) { return false; }
+    if (!target) return false;
+    var navH = nav ? nav.offsetHeight : 0;
+    var y = target.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+    if (y < 0) y = 0;
+    if (supportsSmooth) {
+      try { window.scrollTo({ top: y, behavior: 'smooth' }); }
+      catch (e) { window.scrollTo(0, y); }
+    } else {
+      window.scrollTo(0, y);
+    }
+    if (history.replaceState) { try { history.replaceState(null, '', hash); } catch (e) {} }
+    return true;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    if (a.hasAttribute('data-warp')) return;      // warp links handled elsewhere
+    var hash = a.getAttribute('href');
+    if (!hash || hash === '#') return;
+    if (goToHash(hash)) { e.preventDefault(); navlinks.classList.remove('open'); }
+  }, false);
+})();
+
 /* =======================================================================
    THREE.JS — a living universe of round particles that, as you scroll,
    gather from all across space into ONE big glowing sphere.
