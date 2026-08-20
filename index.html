@@ -52,6 +52,15 @@ html.nowebgl #space{display:block;background:transparent}
 html.nowebgl body{background:var(--bg)}
 html.nowebgl body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:#02040a url('./andromeda.jpg') center center / cover no-repeat}
+/* iOS Safari has a long-standing bug: an element that uses backdrop-filter
+   together with overflow:hidden can fail to paint entirely, so the whole
+   project/info card (text included) renders invisible — an empty black gap.
+   On touch / narrow / no-WebGL devices, drop backdrop-filter and use a solid
+   opaque card background so cards ALWAYS render. Desktop keeps the glass look. */
+@media (max-width:820px), (hover:none){
+  .pcard,.info-card{-webkit-backdrop-filter:none !important;backdrop-filter:none !important;background:#0e1322 !important}
+}
+html.nowebgl .pcard,html.nowebgl .info-card{-webkit-backdrop-filter:none;backdrop-filter:none;background:#0e1322}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(120% 90% at 50% 20%,transparent 40%,rgba(2,4,10,.75) 100%)}
 
