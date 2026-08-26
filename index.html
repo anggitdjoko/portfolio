@@ -58,9 +58,9 @@ html.nowebgl body{background:radial-gradient(140% 120% at 50% 40%,#0a1030 0%,#06
 html.nowebgl body::before{content:"";position:fixed;left:-50%;top:-50%;width:200%;height:200%;
   z-index:0;pointer-events:none;transform-origin:50% 50%;
   background:
-    radial-gradient(closest-side at 50% 50%, rgba(255,246,224,.95), rgba(255,214,170,.5) 26%, rgba(255,190,150,.12) 46%, transparent 60%) 50% 50% / 10% 10% no-repeat,
-    radial-gradient(closest-side at 50% 50%, rgba(150,180,255,.42), rgba(120,110,220,.2) 42%, rgba(80,60,160,.07) 66%, transparent 78%) 50% 50% / 62% 34% no-repeat,
-    radial-gradient(closest-side at 50% 50%, rgba(90,120,230,.16), transparent 70%) 50% 50% / 90% 60% no-repeat;
+    radial-gradient(closest-side at 50% 50%, rgba(255,246,224,.5), rgba(255,214,170,.26) 26%, rgba(255,190,150,.06) 46%, transparent 60%) 50% 50% / 10% 10% no-repeat,
+    radial-gradient(closest-side at 50% 50%, rgba(150,180,255,.3), rgba(120,110,220,.14) 42%, rgba(80,60,160,.05) 66%, transparent 78%) 50% 50% / 62% 34% no-repeat,
+    radial-gradient(closest-side at 50% 50%, rgba(90,120,230,.12), transparent 70%) 50% 50% / 90% 60% no-repeat;
   animation:galaxySpin 150s linear infinite}
 html.nowebgl body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background-repeat:repeat;background-position:0 0;background-size:230px 230px;
@@ -88,6 +88,12 @@ html.nowebgl body::after{content:"";position:fixed;inset:0;z-index:0;pointer-eve
 html.nowebgl .pcard,html.nowebgl .info-card{-webkit-backdrop-filter:none;backdrop-filter:none;background:#0e1322}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(120% 90% at 50% 20%,transparent 40%,rgba(2,4,10,.75) 100%)}
+/* iOS/static-galaxy readability: the fixed CSS galaxy core would otherwise sit
+   dead-centre on a narrow phone and wash out section text. Darken the backdrop
+   uniformly (still below content, z-index 1) and add a soft text-shadow so copy
+   stays legible over the glow. Desktop WebGL path is unaffected. */
+html.nowebgl .vignette{background:radial-gradient(120% 120% at 50% 35%, rgba(2,4,10,.5) 0%, rgba(2,4,10,.74) 55%, rgba(2,4,10,.9) 100%)}
+html.nowebgl .lead,html.nowebgl h2.title,html.nowebgl .hero-sub,html.nowebgl .hero-name,html.nowebgl .eyebrow{text-shadow:0 2px 18px rgba(2,4,10,.9)}
 
 /* ---------- loader ---------- */
 #loader{position:fixed;inset:0;z-index:100;background:var(--bg);
