@@ -68,18 +68,92 @@ if (P.projects && P.projects.length) {
   const grid = document.getElementById('projGrid');
   function renderProjects(cat) {
     const list = cat === 'All' ? P.projects : P.projects.filter(p => p.category === cat);
-    grid.innerHTML = list.map(p => `
-      <article class="pcard reveal in">
+    grid.innerHTML = list.map(p => {
+      const media = p.video ? `
+        <div class="pmedia" data-src="${p.video}" tabindex="0" role="button" aria-label="Play ${p.title} demo reel">
+          <video muted loop playsinline preload="none"${p.poster ? ` poster="${p.poster}"` : ''}></video>
+          <div class="shade"></div>
+          <span class="pbadge"><i></i>${p.reelLabel || 'Demo reel'}</span>
+          <button class="pfull" aria-label="Watch full screen">⛶</button>
+        </div>` : '';
+      const body = `
         <div class="pcat">${p.category || ''}</div>
         <h3 class="ptitle">${p.title}</h3>
         <p class="pdesc">${p.desc || ''}</p>
         <div class="ptech">${(p.tech || []).map(t => `<span class="chip">${t}</span>`).join('')}</div>
         <div class="plinks">
+          ${p.video ? `<a href="#" data-play="${p.video}">Watch reel ▶</a>` : ''}
           ${p.demo ? (/^https?:\/\//i.test(p.demo)
             ? `<a href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`
             : `<a href="${p.demo}" data-warp>Live Data ↗</a>`) : ''}
-        </div>
-      </article>`).join('');
+          ${p.code ? `<a href="${p.code}" target="_blank" rel="noopener">Code ↗</a>` : ''}
+        </div>`;
+      return `<article class="pcard reveal in${p.video ? ' has-media' : ''}">
+        ${media}
+        ${p.video ? `<div class="pbody">${body}</div>` : body}
+      </article>`;
+    }).join('');
+    initReels();
+  }
+
+  /* ---- demo reels: lazy load, autoplay in view, lightbox ---- */
+  let lbox = null, lboxVid = null, lboxBound = false;
+  function ensureLb() {
+    if (!lbox) lbox = document.getElementById('lbox');
+    if (lbox && !lboxVid) lboxVid = lbox.querySelector('video');
+    if (lbox && !lboxBound) {
+      lboxBound = true;
+      lbox.addEventListener('click', e => {
+        if (e.target === lbox || e.target.classList.contains('close')) closeReel();
+      });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeReel(); });
+    }
+    return lbox;
+  }
+  const softMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = (navigator.connection || {}).saveData === true;
+
+  function openReel(src) {
+    if (!ensureLb()) { window.open(src, '_blank'); return; }
+    lboxVid.src = src;
+    lbox.classList.add('on');
+    lbox.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+    lboxVid.currentTime = 0;
+    lboxVid.play().catch(() => { });
+  }
+  function closeReel() {
+    if (!lbox) return;
+    lbox.classList.remove('on');
+    lbox.setAttribute('aria-hidden', 'true');
+    document.documentElement.style.overflow = '';
+    lboxVid.pause();
+  }
+  let reelIO = null;
+  function initReels() {
+    const cells = grid.querySelectorAll('.pmedia');
+    if (!cells.length) return;
+    if (reelIO) reelIO.disconnect();
+    reelIO = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        const v = en.target.querySelector('video');
+        if (!v) return;
+        if (en.isIntersecting) {
+          if (!v.getAttribute('src')) v.setAttribute('src', en.target.dataset.src);
+          if (!softMotion && !saveData) v.play().catch(() => { });
+        } else { v.pause(); }
+      });
+    }, { threshold: 0.28 });
+    cells.forEach(c => {
+      reelIO.observe(c);
+      c.addEventListener('click', () => openReel(c.dataset.src));
+      c.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReel(c.dataset.src); }
+      });
+    });
+    grid.querySelectorAll('[data-play]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); openReel(a.dataset.play); });
+    });
   }
   renderProjects('All');
   filtersEl.addEventListener('click', e => {

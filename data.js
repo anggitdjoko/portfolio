@@ -80,6 +80,16 @@ window.PORTFOLIO = {
   // Real projects
   projects: [
     {
+      category: "Web App",
+      title: "Servgo — POS & Digital Storefront",
+      desc: "An all-in-one SaaS platform for cafes and restaurants: cashier POS with dine-in/takeaway/delivery, QRIS and multi-method payments, kitchen display, ingredient-level inventory, customer loyalty and real-time analytics — plus a public storefront with QR menu for every merchant. Live in 2 outlets with real daily transactions.",
+      tech: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Vercel", "PWA"],
+      video: "assets/video/servgo-demo.mp4",
+      poster: "assets/video/servgo-poster.jpg",
+      reelLabel: "Product demo · 32s",
+      demo: "https://servgo.vercel.app/admin/login"
+    },
+    {
       category: "Full-Stack",
       title: "GearGrid — Equipment Mapping & Maintenance System",
       desc: "Web app to map building/mall equipment over engineering floor plans (DXF), with preventive/corrective maintenance management, logbook, shift scheduling, dashboards, reporting, and role-based access control (Guest/Supervisor/Admin). Equipment data is encrypted at rest (AES-256).",
@@ -92,13 +102,6 @@ window.PORTFOLIO = {
       desc: "Enterprise platform for managing agribusiness investments. Admins handle investors, lands, commodities, investments and financials, with real-time analytics, interactive land-distribution mapping, per-project ROI tracking, progress and financial reports, audit logs, notifications, background jobs and role-based access (Admin/Investor). Multi-language (ID/EN) with IDR reporting.",
       tech: ["React", "Vite", "JavaScript", "Charts", "Geo Mapping", "RBAC"],
       demo: "https://hk-farm-frontend-production.up.railway.app"
-    },
-    {
-      category: "Web App",
-      title: "Servgo",
-      desc: "POS and digital storefront platform for cafes and restaurants. It's live in 2 outlets with real daily transactions, handling orders, menu and storefront end to end.",
-      tech: ["Next.js", "React", "TypeScript", "Supabase", "Vercel"],
-      demo: "https://servgo.vercel.app/admin/login"
     },
     {
       category: "Web",
