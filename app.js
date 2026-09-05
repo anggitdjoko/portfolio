@@ -70,7 +70,7 @@ if (P.projects && P.projects.length) {
     const list = cat === 'All' ? P.projects : P.projects.filter(p => p.category === cat);
     grid.innerHTML = list.map(p => {
       const media = p.video ? `
-        <div class="pmedia" data-src="${p.video}" tabindex="0" role="button" aria-label="Play ${p.title} demo reel">
+        <div class="pmedia" data-src="${p.loop || p.video}" data-full="${p.video}" tabindex="0" role="button" aria-label="Play ${p.title} demo reel">
           <video muted loop playsinline preload="none"${p.poster ? ` poster="${p.poster}"` : ''}></video>
           <div class="shade"></div>
           <span class="pbadge"><i></i>${p.reelLabel || 'Demo reel'}</span>
@@ -84,7 +84,7 @@ if (P.projects && P.projects.length) {
         <div class="plinks">
           ${p.video ? `<a href="#" data-play="${p.video}">Watch reel ▶</a>` : ''}
           ${p.demo ? (/^https?:\/\//i.test(p.demo)
-            ? `<a href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`
+            ? (p.video ? '' : `<a href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`)
             : `<a href="${p.demo}" data-warp>Live Data ↗</a>`) : ''}
           ${p.code ? `<a href="${p.code}" target="_blank" rel="noopener">Code ↗</a>` : ''}
         </div>`;
@@ -146,9 +146,9 @@ if (P.projects && P.projects.length) {
     }, { threshold: 0.28 });
     cells.forEach(c => {
       reelIO.observe(c);
-      c.addEventListener('click', () => openReel(c.dataset.src));
+      c.addEventListener('click', () => openReel(c.dataset.full || c.dataset.src));
       c.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReel(c.dataset.src); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReel(c.dataset.full || c.dataset.src); }
       });
     });
     grid.querySelectorAll('[data-play]').forEach(a => {

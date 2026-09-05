@@ -81,13 +81,13 @@ window.PORTFOLIO = {
   projects: [
     {
       category: "Web App",
-      title: "Servgo — POS & Digital Storefront",
-      desc: "An all-in-one SaaS platform for cafes and restaurants: cashier POS with dine-in/takeaway/delivery, QRIS and multi-method payments, kitchen display, ingredient-level inventory, customer loyalty and real-time analytics — plus a public storefront with QR menu for every merchant. Live in 2 outlets with real daily transactions.",
+      title: "Servgo, POS and digital storefront",
+      desc: "A point of sale and storefront platform for cafes and restaurants. Cashier with dine in, take away and delivery, five payment methods, kitchen display, ingredient level inventory, customer loyalty, six analytics tabs, and multi outlet switching. Each merchant also gets a public storefront with a QR menu. Running in 2 outlets with real daily transactions.",
       tech: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Vercel", "PWA"],
       video: "assets/video/servgo-demo.mp4",
+      loop: "assets/video/servgo-hook.mp4",
       poster: "assets/video/servgo-poster.jpg",
-      reelLabel: "Product demo · 32s",
-      demo: "https://servgo.vercel.app/admin/login"
+      reelLabel: "Product demo · 65s"
     },
     {
       category: "Full-Stack",
