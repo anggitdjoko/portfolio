@@ -91,17 +91,20 @@ window.PORTFOLIO = {
     },
     {
       category: "Full-Stack",
-      title: "GearGrid — Equipment Mapping & Maintenance System",
+      title: "GearGrid, equipment mapping and maintenance",
       desc: "Web app to map building/mall equipment over engineering floor plans (DXF), with preventive/corrective maintenance management, logbook, shift scheduling, dashboards, reporting, and role-based access control (Guest/Supervisor/Admin). Equipment data is encrypted at rest (AES-256).",
       tech: ["PHP 8.3", "SQLite", "JavaScript", "Canvas / DXF", "AES-256", "RBAC"],
       demo: "https://geargrid.xo.je/"
     },
     {
       category: "Full-Stack",
-      title: "HK Farm — Agri-Investment Management System",
-      desc: "Enterprise platform for managing agribusiness investments. Admins handle investors, lands, commodities, investments and financials, with real-time analytics, interactive land-distribution mapping, per-project ROI tracking, progress and financial reports, audit logs, notifications, background jobs and role-based access (Admin/Investor). Multi-language (ID/EN) with IDR reporting.",
-      tech: ["React", "Vite", "JavaScript", "Charts", "Geo Mapping", "RBAC"],
-      demo: "https://hk-farm-frontend-production.up.railway.app"
+      title: "HK Farm, agri investment management",
+      desc: "Investment platform for agricultural land. Thirteen modules, two roles, land mapping on Leaflet, per project ROI, IDR reporting, and an audit log over every change.",
+      tech: ["React", "Vite", "JavaScript", "Leaflet", "Chart.js", "RBAC"],
+      video: "assets/video/hkfarm-demo.mp4",
+      loop: "assets/video/hkfarm-hook.mp4",
+      poster: "assets/video/hkfarm-poster.jpg",
+      reelLabel: "Product demo · 101s"
     },
     {
       category: "Web",
