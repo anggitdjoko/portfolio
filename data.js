@@ -87,7 +87,7 @@ window.PORTFOLIO = {
       video: "assets/video/servgo-demo.mp4",
       loop: "assets/video/servgo-hook.mp4",
       poster: "assets/video/servgo-poster.jpg",
-      reelLabel: "Product demo · 65s"
+      reelLabel: "Product demo · 81s"
     },
     {
       category: "Full-Stack",
