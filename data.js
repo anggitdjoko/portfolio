@@ -107,7 +107,7 @@ window.PORTFOLIO = {
       reelLabel: "Product demo · 101s"
     },
     {
-      category: "Web App",
+      category: "Full-Stack",
       title: "SIMRS Rumkit KTP, hospital management system",
       desc: "Hospital information system with a separate workspace for every role: administrator, receptionist, nurse, doctor, pharmacist and patient. Covers the activity dashboard, appointment and front desk worklists, vital sign entry, patient record search, medicine inventory with a drug interaction check, and a patient portal for booking appointments and keeping personal health notes.",
       tech: ["Laravel 13", "Vue 3", "TypeScript", "Tailwind CSS", "MySQL", "Flutter"],
