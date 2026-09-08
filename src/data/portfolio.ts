@@ -46,6 +46,25 @@ export const portfolioData: PortfolioData = {
     },
     projects: [
         {
+            "id": "project-simrs-rumkit-ktp",
+            "slug": "simrs-rumkit-ktp",
+            "title": "SIMRS — Hospital Management System",
+            "description": "A hospital information system with dedicated views for administrators, receptionists, nurses, doctors, pharmacists, and patients.",
+            "longDescription": "SIMRS Rumkit KTP brings hospital administration, clinical worklists, pharmacy tools, and patient self-service into one role-based application. This 70-second walkthrough introduces six user perspectives, with English on-screen explanations that can be followed without sound.",
+            "techStack": [],
+            "tools": [],
+            "status": "demo",
+            "category": "Healthcare Software",
+            "videoUrl": "/portfolio/project/simrs-rumkit-ktp/SIMRS-Portfolio-HD-Final.mp4",
+            "videoPoster": "/portfolio/project/simrs-rumkit-ktp/SIMRS-Portfolio-HD-Final-Poster.jpg",
+            "highlights": [
+                "Administration & reception: activity dashboard and appointment worklists.",
+                "Clinical tools: vital-sign entry, doctor worklists, and a patient-record search interface.",
+                "Pharmacy: medicine inventory and a drug-interaction checking form.",
+                "Patient portal: appointment requests and personal health notes."
+            ]
+        },
+        {
             id: 'project-1',
             slug: 'browser-automation-agent',
             title: 'Browser Automation Agent',
