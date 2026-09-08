@@ -271,17 +271,53 @@ const ProjectsSection = () => {
                         key={project.id}
                         {...stagger}
                         transition={{ delay: i * 0.08, duration: 0.6 }}
-                        className="ghibli-card p-6 flex flex-col"
+                        className={`ghibli-card p-6 flex flex-col ${project.videoUrl ? 'md:col-span-2' : ''}`}
                     >
                         <div className="flex items-center gap-2 mb-3">
                             <span className="ghibli-tag text-xs">{project.category}</span>
-                            <span className={`text-xs px-2 py-0.5 rounded-full ${project.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                                {project.status}
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${project.status === 'completed' ? 'bg-green-100 text-green-700' : project.status === 'demo' ? 'bg-ghibli-leaf/10 text-ghibli-leaf' : 'bg-yellow-100 text-yellow-700'}`}>
+                                {project.status === 'demo' ? 'Video walkthrough' : project.status}
                             </span>
                         </div>
 
                         <h3 className="font-[family-name:var(--font-caveat)] text-xl text-ghibli-bark mb-2">{project.title}</h3>
-                        <p className="text-ghibli-bark/70 text-sm flex-1 mb-4 line-clamp-3">{project.description}</p>
+                        <p className={`text-ghibli-bark/70 text-sm mb-4 ${project.videoUrl ? '' : 'flex-1 line-clamp-3'}`}>{project.description}</p>
+
+                        {project.videoUrl && (
+                            <div className="mb-4">
+                                <video
+                                    controls
+                                    playsInline
+                                    preload="none"
+                                    poster={project.videoPoster}
+                                    width={1920}
+                                    height={1080}
+                                    aria-label={`${project.title} — 70-second English-captioned walkthrough`}
+                                    className="w-full aspect-video rounded-xl bg-black"
+                                >
+                                    <source src={project.videoUrl} type="video/mp4" />
+                                    Your browser does not support embedded video.{' '}
+                                    <a href={project.videoUrl}>Open the video walkthrough.</a>
+                                </video>
+                                <p className="mt-2 text-xs text-ghibli-bark/60">
+                                    70 seconds · 1080p · English on-screen explanations · No audio needed
+                                </p>
+                            </div>
+                        )}
+
+                        {project.videoUrl && project.longDescription && (
+                            <details className="mb-4 rounded-xl border border-ghibli-bark/10 p-4">
+                                <summary className="cursor-pointer text-sm font-medium text-ghibli-leaf focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+                                    Project overview
+                                </summary>
+                                <p className="mt-3 text-sm leading-relaxed text-ghibli-bark/80">{project.longDescription}</p>
+                                {project.highlights && (
+                                    <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-ghibli-bark/70">
+                                        {project.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
+                                    </ul>
+                                )}
+                            </details>
+                        )}
 
                         <div className="flex flex-wrap gap-1.5 mb-4">
                             {project.techStack.slice(0, 4).map(tech => (
@@ -297,6 +333,12 @@ const ProjectsSection = () => {
                         </div>
 
                         <div className="flex gap-2">
+                            {project.videoUrl && (
+                                <a href={project.videoUrl} target="_blank" rel="noopener noreferrer"
+                                    className="text-sm text-ghibli-leaf hover:text-ghibli-bark transition-colors">
+                                    Open video ↗
+                                </a>
+                            )}
                             {project.repoUrl && project.repoUrl !== '#' && (
                                 <a href={project.repoUrl} target="_blank" rel="noopener noreferrer"
                                     className="text-sm text-ghibli-leaf hover:text-ghibli-bark transition-colors">
