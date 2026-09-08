@@ -1,8 +1,14 @@
-name: Build and Deploy
+name: Build Ghibli experiment (manual only)
+
+# NOTE (2026-09-08): automatic deploys on push to `main` were REMOVED.
+# `main` holds an old Next.js "Ghibli" experiment. The live portfolio at
+# https://anggitdjoko.github.io/portfolio/ is the static space-themed site on
+# the `gh-pages` branch. Pushing to main used to trigger this workflow and
+# overwrite that live site. Run it manually only if you really want to publish
+# the Next.js build instead of the portfolio.
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
