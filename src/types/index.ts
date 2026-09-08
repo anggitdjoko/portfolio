@@ -9,10 +9,12 @@ export interface Project {
     image?: string;
     techStack: string[];
     tools: string[];
-    status: 'ongoing' | 'completed' | 'planned';
+    status: 'ongoing' | 'completed' | 'planned' | 'demo';
+    videoUrl?: string;
+    videoPoster?: string;
     demoUrl?: string;
     repoUrl?: string;
-    startDate: string;
+    startDate?: string;
     endDate?: string;
     highlights?: string[];
     challenges?: string[];
