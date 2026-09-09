@@ -20,7 +20,7 @@ The improvement plan is being published before any frontend changes. Baseline co
 |---|---|
 | T01 Mobile navigation | Complete; existing implementation retained; Pages build and live script verified |
 | T02 Factual video explanation | Implemented and locally tested in this commit; deployment verification follows |
-| T03 Video overlay keyboard support | Planned; no patch published yet |
+| T03 Video overlay keyboard support | Implemented and locally tested in this commit; deployment verification follows |
 | T04 Readability / T05 Content order | Separate visual review; existing design retained for now |
 | T06 Ownership / T07 CV / T10 GearGrid video | Waiting for verified source material |
 | T08 Filters and labels | Retained pending evidence of a better alternative |
@@ -62,3 +62,19 @@ The unsupported private/on-premise infrastructure claim was reproduced in the fe
 Source comparison confirms this task changes only that sentence in application files. Runtime comparison matched all five filter states, six project records, titles and category counts. Project descriptions, tags, media, filters, contacts, styles, navigation and animation source are unchanged. No hosting assumptions or new project claims were added.
 
 Local browser checks used Chromium with external font/Three.js/GSAP requests blocked to exercise the fallback consistently; this is distinct from the live WebGL check above. No application page errors occurred. Physical iPhone/Android, Safari and assistive-technology certification are not claimed. Deployment status is deliberately pending until the resulting commit is built and checked live.
+
+## T03 — Video overlay keyboard support
+
+Parent/task T02: [fe1bd6d6](https://github.com/anggitdjoko/portfolio/commit/fe1bd6d67752b6b559e36aa98f72fe622c0acff6). The current overlay defect was reproduced at 390 and 1440 px: opening left focus outside, Tab reached background links, and programmatic background focus succeeded. The existing touchstart failsafe also cleared its inline scroll lock.
+
+Changed the existing full-window overlay to a native modal dialog, retaining its styling, recorded assets and native video controls. Focus enters the close button; background controls become unavailable through native modal behavior. Escape, close and backdrop dismissal restore the exact triggering media tile, nested full-screen button or Watch reel link. A scoped HTML class holds the scroll lock without changing/restoring unrelated inline styles. Native nested-button keyboard activation is preserved without double-opening. The app script URL is versioned to avoid stale JavaScript with new dialog markup.
+
+Local results:
+- Click and native Enter/Space paths, Tab/Shift+Tab, blocked background focus, all dismissal paths, exact invoker restoration and repeated opening passed at 390 and 1440 px.
+- Scroll stayed locked after the existing touchstart failsafe and restored after close.
+- Servgo, HK Farm and SIMRS full MP4s loaded valid metadata, advanced playback time and retained controls; recorded durations were approximately 81.067, 100.7 and 70 seconds respectively.
+- Filter rerender All → Full-Stack → All preserved 6 → 3 → 6 cards and restored all three video tiles.
+- Baseline/candidate overlay, video and close-button geometry/styles matched at desktop and mobile widths. Nav/hero/unchanged sections were retained; the intended shorter T02 paragraph is not a layout regression.
+- JavaScript syntax validation passed. Application page errors: none in the local runs. Video request cancellations while pausing/closing were observed, not treated as failed playback.
+
+Limits: deterministic local runs block external CDNs and exercise the fallback; native dialog behavior was tested in Chromium, not certified on physical devices or with screen readers. Existing narrow-screen media geometry includes a small right-side overflow (about 8 px at 390 px); it was reproduced in baseline and retained to keep this keyboard task visually scoped. A separate media-layout review can address it. Final publication/build/live results follow after this implementation commit.

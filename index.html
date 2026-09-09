@@ -256,7 +256,11 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
 @media(hover:none){.pfull{opacity:1;transform:none}}
 #lbox{position:fixed;inset:0;z-index:9999;display:none;place-items:center;padding:24px;
   background:rgba(2,4,10,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-#lbox.on{display:grid}
+#lbox[open]{display:grid}
+/* Keep the existing overlay geometry while using native modal focus isolation. */
+#lbox{width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;color:var(--ink)}
+#lbox::backdrop{background:transparent}
+html.reel-open{overflow:hidden}
 #lbox video{width:min(1240px,96vw);max-height:86vh;border-radius:14px;border:1px solid var(--line);
   box-shadow:0 40px 130px rgba(0,0,0,.85);background:#05070f}
 #lbox .close{position:absolute;top:20px;right:26px;font-size:1.7rem;line-height:1;color:#eaf0ff;
@@ -386,7 +390,7 @@ footer .heart{color:var(--accent)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="./data.js"></script>
 <script src="./warp.js"></script>
-<script src="./app.js?v=ux-nav-20260909"></script>
+<script src="./app.js?v=ux-reel-20260909"></script>
 <!-- ===== hard content failsafe: the page must NEVER stay blank or stuck =====
      Independent of PORTFOLIO/THREE/GSAP/app.js. Even if any of them fail to load
      or throw on iOS Safari, this reveals all content, closes the "Hello!" loader,
@@ -421,6 +425,6 @@ footer .heart{color:var(--accent)}
   addEventListener('touchmove',once,{passive:true});
   addEventListener('touchstart',once,{passive:true});
 })();</script>
-<div id="lbox" aria-hidden="true"><button class="close" aria-label="Close">✕</button><video controls playsinline preload="none"></video></div>
+<dialog id="lbox" aria-label="Project demo video" aria-hidden="true"><button class="close" type="button" aria-label="Close video">✕</button><video controls playsinline preload="none" aria-label="Recorded project demo"></video></dialog>
 </body>
 </html>
