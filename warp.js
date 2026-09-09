@@ -2,391 +2,314 @@
    warp.js — cinematic "universe A → universe B" hyperspace transition.
    Shared by index.html (portfolio) and data.html (data showcase).
 
-   • Outbound: when a [data-warp] link is clicked, universe A (the whole
-     page) is pulled toward the camera — it scales up, blurs and dims —
-     while a star-streak hyperspace tunnel accelerates from warm Andromeda
-     gold to data-blue, ending in a bright white-out. Then the browser
-     navigates.
-   • Inbound: the destination page detects it was reached through a warp
-     and emerges out of the flash — the tunnel decelerates while universe B
-     settles from a slight zoom/blur back to rest.
-   Respects prefers-reduced-motion (skips straight to navigation).
+   The warp remains a hard navigation (so it works on static GitHub Pages),
+   but keeps the exit/entry movement short and calm. Scroll position is stored
+   only for this hand-off, with a hash fallback for direct data-page visits.
    ===================================================================== */
 (function () {
   'use strict';
 
   var FLAG = '__warp_in';
-  var DUR_OUT = 1250;   // ms — leaving universe A
-  var DUR_IN = 1350;    // ms — arriving in universe B
+  var SCROLL_KEY = '__warp_scroll';
+  // Deliberately short: 360ms exit + 420ms entry = 780ms animation time,
+  // excluding the destination document's network/paint time.
+  var DUR_OUT = 360;
+  var DUR_IN = 420;
+  var GUARD_TIMEOUT = 2200;
   var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = motionPreference.matches;
-  motionPreference.addEventListener('change', function (e) { reduce = e.matches; });
-  // On phones the page-zoom layer (universe A/B scaling) and the star tunnel
-  // read as TWO separate moves — the zoom's anchor can never fully match the
-  // tunnel's vanishing point on a long, scrollable page, so it looks stiff.
-  // On mobile we therefore run ONLY the star tunnel and skip the page zoom,
-  // leaving a single, smooth "jump into the screen". Desktop keeps both.
+  var transitioning = false;
+  var motionListener = function (e) { reduce = e.matches; };
+  if (motionPreference.addEventListener) motionPreference.addEventListener('change', motionListener);
+  else if (motionPreference.addListener) motionPreference.addListener(motionListener);
+
   var mobile = window.matchMedia &&
     window.matchMedia('(max-width: 820px), (pointer: coarse)').matches;
-  // iOS (iPhone/iPad, incl. iPadOS reporting as Mac + touch) needs extra care:
-  // its collapsing URL bar fires spurious resizes mid-animation, and its
-  // rubber-band scroll can drag a fixed overlay. We detect it to (a) size the
-  // canvas from visualViewport, (b) ignore URL-bar resize jitter, (c) lock
-  // scroll during the warp, and (d) trim DPR / star count for steady 60fps.
   var iOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-  // Lock/unlock page scrolling so the fixed tunnel can't drift with iOS
-  // momentum / rubber-band while the transition plays.
-  var _scrollLock = null;
+  function safeStorage(action) {
+    try { return action(window.sessionStorage); } catch (e) { return null; }
+  }
+  function setStorage(key, value) { safeStorage(function (s) { s.setItem(key, value); }); }
+  function getStorage(key) { return safeStorage(function (s) { return s.getItem(key); }); }
+  function removeStorage(key) { safeStorage(function (s) { s.removeItem(key); }); }
+
+  // Lock/unlock scrolling while a fixed tunnel is active. Every exit path
+  // calls unlockScroll, including canvas/storage errors and motion changes.
+  var scrollLock = null;
   function lockScroll() {
-    if (_scrollLock) return;
+    if (scrollLock) return;
     var de = document.documentElement, b = document.body;
-    _scrollLock = {
-      deOverflow: de.style.overflow, bOverflow: b ? b.style.overflow : '',
-      touch: de.style.touchAction
-    };
+    scrollLock = { deOverflow: de.style.overflow, bOverflow: b ? b.style.overflow : '', touch: de.style.touchAction };
     de.style.overflow = 'hidden';
     if (b) b.style.overflow = 'hidden';
     de.style.touchAction = 'none';
   }
   function unlockScroll() {
-    if (!_scrollLock) return;
+    if (!scrollLock) return;
     var de = document.documentElement, b = document.body;
-    de.style.overflow = _scrollLock.deOverflow;
-    if (b) b.style.overflow = _scrollLock.bOverflow;
-    de.style.touchAction = _scrollLock.touch;
-    _scrollLock = null;
+    de.style.overflow = scrollLock.deOverflow;
+    if (b) b.style.overflow = scrollLock.bOverflow;
+    de.style.touchAction = scrollLock.touch;
+    scrollLock = null;
   }
-  // Viewport size that matches what iOS actually paints (excludes URL bar).
   function vpW() { return (window.visualViewport && visualViewport.width) || window.innerWidth; }
   function vpH() { return (window.visualViewport && visualViewport.height) || window.innerHeight; }
 
-  // Palette: warm gold (universe A) → data cyan/indigo (universe B)
   var WARM = [255, 207, 138];
   var COOL = [90, 209, 255];
   var COOL2 = [124, 140, 255];
-
   function lerp(a, b, t) { return a + (b - a) * t; }
   function clamp01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
   function mix(c1, c2, t) {
-    return [Math.round(lerp(c1[0], c2[0], t)),
-            Math.round(lerp(c1[1], c2[1], t)),
-            Math.round(lerp(c1[2], c2[2], t))];
+    return [Math.round(lerp(c1[0], c2[0], t)), Math.round(lerp(c1[1], c2[1], t)), Math.round(lerp(c1[2], c2[2], t))];
   }
-  // smootherstep — zero velocity AND zero acceleration at both ends,
-  // so nothing ever "jerks" into or out of motion.
   function smooth(t) { t = clamp01(t); return t * t * t * (t * (t * 6 - 15) + 10); }
-  var easeInQuint = function (t) { return t * t * t * t * t; };
-  var easeOutQuint = function (t) { return 1 - Math.pow(1 - t, 5); };
+  function easeInQuint(t) { return t * t * t * t * t; }
+  function easeOutQuint(t) { return 1 - Math.pow(1 - t, 5); }
 
-  /* ---------- the outgoing / incoming page ("scene") ---------- */
-  // We transform the page itself so it feels like flying through it.
-  // The overlay lives on <html> (not <body>) so it is NOT transformed.
   function scene() { return document.body; }
-  // The page (universe A/B) is the <body>, whose transform-origin defaults to
-  // the centre of the WHOLE document — far below the fold on a long mobile
-  // page. Scaling around that point makes the visible area drift diagonally
-  // instead of zooming straight in, so the warp looked like two separate
-  // moves on phones. Anchoring the zoom to the centre of the current viewport
-  // (where the star tunnel's vanishing point already is) fuses both layers
-  // into one straight "jump into the screen".
   function viewportOrigin() {
     var sx = window.scrollX != null ? window.scrollX : window.pageXOffset;
     var sy = window.scrollY != null ? window.scrollY : window.pageYOffset;
-    return Math.round(sx + window.innerWidth / 2) + 'px ' +
-           Math.round(sy + window.innerHeight / 2) + 'px';
+    return Math.round(sx + window.innerWidth / 2) + 'px ' + Math.round(sy + window.innerHeight / 2) + 'px';
   }
   function setSceneTransition(ms, ease) {
-    if (mobile) return;            // mobile: no page-zoom layer, tunnel only
-    var s = scene();
-    if (!s) return;
-    // transform + opacity only — both composite on the GPU. filter is no longer
-    // animated; keeping it out of will-change lets the browser keep the page on
-    // a single fast compositor layer instead of re-rasterizing each frame.
-    s.style.transition =
-      'transform ' + ms + 'ms ' + ease + ', ' +
-      'opacity ' + ms + 'ms ' + ease;
+    if (mobile) return;
+    var s = scene(); if (!s) return;
+    s.style.transition = 'transform ' + ms + 'ms ' + ease + ', opacity ' + ms + 'ms ' + ease;
     s.style.willChange = 'transform, opacity';
     s.style.backfaceVisibility = 'hidden';
   }
-  function setScene(sc, bl, op) {
-    if (mobile) return;            // mobile: no page-zoom layer, tunnel only
-    var s = scene();
-    if (!s) return;
+  function setScene(sc, op) {
+    if (mobile) return;
+    var s = scene(); if (!s) return;
     s.style.transformOrigin = viewportOrigin();
     s.style.transform = 'translateZ(0) scale(' + sc + ')';
-    s.style.filter = bl ? 'blur(' + bl + 'px)' : 'none';
+    s.style.filter = 'none';
     s.style.opacity = String(op);
   }
   function clearScene() {
-    var s = scene();
-    if (!s) return;
-    s.style.transition = '';
-    s.style.transform = '';
-    s.style.transformOrigin = '';
-    s.style.filter = '';
-    s.style.opacity = '';
-    s.style.willChange = '';
+    var s = scene(); if (!s) return;
+    s.style.transition = ''; s.style.transform = ''; s.style.transformOrigin = '';
+    s.style.filter = ''; s.style.opacity = ''; s.style.willChange = '';
   }
 
-  /* ---------- overlay + starfield tunnel ---------- */
   function buildOverlay() {
     var o = document.createElement('div');
     o.id = 'warp-overlay';
-    o.style.cssText = 'position:fixed;inset:0;z-index:99999;pointer-events:none;' +
-      'opacity:0;transition:opacity .38s ease;background:radial-gradient(circle at 50% 50%,#050a18 0%,#02040a 70%);';
+    o.style.cssText = 'position:fixed;inset:0;z-index:99999;pointer-events:none;opacity:0;transition:opacity .16s ease;background:radial-gradient(circle at 50% 50%,#050a18 0%,#02040a 70%);';
     var cv = document.createElement('canvas');
     cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block';
     o.appendChild(cv);
     var flash = document.createElement('div');
-    flash.style.cssText = 'position:absolute;inset:0;opacity:0;will-change:opacity,transform;' +
-      'transform:scale(.6);transform-origin:50% 50%;' +
-      'background:radial-gradient(circle at 50% 50%,#ffffff 0%,#dbeeff 38%,rgba(150,200,255,0) 74%);';
+    flash.style.cssText = 'position:absolute;inset:0;opacity:0;will-change:opacity,transform;transform:scale(.82);transform-origin:50% 50%;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.72) 0%,rgba(219,238,255,.30) 38%,rgba(150,200,255,0) 74%);';
     o.appendChild(flash);
-    // attach to <html> so page transforms don't drag the overlay around
     (document.documentElement || document.body).appendChild(o);
     return { o: o, cv: cv, flash: flash };
   }
-
   function makeStars(n) {
     var s = new Array(n);
-    for (var i = 0; i < n; i++) {
-      s[i] = {
-        x: (Math.random() * 2 - 1),
-        y: (Math.random() * 2 - 1),
-        z: Math.random(),                 // 0..1 depth (0 = at camera)
-        pz: 0,
-        cool: Math.random() < 0.5
-      };
-    }
+    for (var i = 0; i < n; i++) s[i] = { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random(), pz: 0, cool: Math.random() < 0.5 };
     return s;
   }
 
-  // Runs the tunnel. mode: 'out' | 'in'. Calls done() when finished.
   function run(mode, done) {
-    lockScroll();                                // steady tunnel on iOS/touch
-    var ui = buildOverlay();
-    var cv = ui.cv, ctx = cv.getContext('2d');
+    lockScroll();
+    var ui = buildOverlay(), cv = ui.cv, ctx = null;
+    try { ctx = cv.getContext('2d'); } catch (e) { ctx = null; }
     var finished = false;
     function finish() {
       if (finished) return;
       finished = true;
       try { removeEventListener('resize', onResize); } catch (e) {}
-      motionPreference.removeEventListener('change', onMotionChange);
+      if (motionPreference.removeEventListener) motionPreference.removeEventListener('change', onMotionChange);
+      else if (motionPreference.removeListener) motionPreference.removeListener(onMotionChange);
       unlockScroll();
       if (done) done(ui);
     }
-    function onMotionChange() {
+    function onMotionChange(e) {
+      reduce = e.matches;
       if (!reduce || finished) return;
       if (ui.flash.getAnimations) ui.flash.getAnimations().forEach(function (a) { a.cancel(); });
       if (ui.o.parentNode) ui.o.parentNode.removeChild(ui.o);
       clearScene();
       finish();
     }
-    motionPreference.addEventListener('change', onMotionChange);
-    // iOS screens are DPR 2–3; cap tighter there so the per-frame stroke work
-    // stays within a 60fps budget on older iPhones (lines still read crisp).
-    var dpr = Math.min(window.devicePixelRatio || 1, iOS ? 1 : 1.25);
+    if (motionPreference.addEventListener) motionPreference.addEventListener('change', onMotionChange);
+    else if (motionPreference.addListener) motionPreference.addListener(onMotionChange);
+
+    var dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : (iOS ? 1 : 1.25));
     var W, H, cx, cy, focal;
     function size() {
-      W = cv.width = Math.round(vpW() * dpr);
-      H = cv.height = Math.round(vpH() * dpr);
-      cx = W / 2; cy = H / 2;
-      focal = Math.max(W, H) * 0.16;
+      W = cv.width = Math.round(vpW() * dpr); H = cv.height = Math.round(vpH() * dpr);
+      cx = W / 2; cy = H / 2; focal = Math.max(W, H) * 0.16;
     }
     size();
-    // Only re-init on a real width change (orientation) — NOT on the height
-    // jitter iOS emits as its URL bar collapses, which would reset the canvas
-    // and make the star trails flicker mid-warp.
     var baseW = vpW();
-    function onResize() {
-      if (Math.abs(vpW() - baseW) < 1) return;
-      baseW = vpW(); size();
-    }
+    function onResize() { if (Math.abs(vpW() - baseW) < 1) return; baseW = vpW(); size(); }
     addEventListener('resize', onResize);
 
-    var N = Math.min(iOS ? 190 : 280,
-      Math.floor(innerWidth / (iOS ? 7 : 5)) + (iOS ? 90 : 120));
+    // Mobile gets a deliberately small field; reduced-motion skips run entirely.
+    var N = mobile ? (iOS ? 96 : 120) : 220;
     var stars = makeStars(N);
     for (var i = 0; i < N; i++) stars[i].pz = stars[i].z;
-
     var dur = mode === 'out' ? DUR_OUT : DUR_IN;
     var start = performance.now();
+    var inboundToData = /(?:^|\/)data\.html$/i.test(location.pathname);
 
-    // Fade the dark overlay in (outbound) or leave it opaque then fade out (inbound)
     if (mode === 'out') {
       ui.o.style.opacity = '0';
-      requestAnimationFrame(function () { ui.o.style.opacity = '1'; });
+      requestAnimationFrame(function () { ui.o.style.opacity = '.90'; });
     } else {
-      ui.o.style.transition = 'none';
-      ui.o.style.opacity = '1';
+      ui.o.style.transition = 'none'; ui.o.style.opacity = '.90';
     }
-
-    // Drive the white-out flash on the compositor thread (Web Animations API),
-    // fully decoupled from the star-canvas rAF loop — so it stays perfectly
-    // smooth even when a canvas frame is dropped. This was the "big round white
-    // light that stutters": its opacity used to be re-set every canvas frame.
     if (ui.flash.animate) {
       if (mode === 'out') {
-        // one single bloom: grow from nothing to a full-screen white-out
-        ui.flash.animate(
-          [{ opacity: 0, transform: 'scale(.7)' },
-           { opacity: 1, transform: 'scale(1.9)' }],
-          { duration: Math.round(dur * 0.30), delay: Math.round(dur * 0.70),
-            easing: 'cubic-bezier(.45,0,.85,.55)', fill: 'forwards' });
+        ui.flash.animate([{ opacity: 0, transform: 'scale(.82)' }, { opacity: .34, transform: 'scale(1.24)' }], { duration: Math.round(dur * .30), delay: Math.round(dur * .70), easing: 'cubic-bezier(.45,0,.85,.55)', fill: 'forwards' });
       } else {
-        // CONTINUE that same white-out — start already full & large (matching
-        // the outbound end state), then simply dissolve while settling gently
-        // inward. No second "bloom", so it reads as one continuous flash.
-        ui.flash.style.opacity = '1';
-        ui.flash.style.transform = 'scale(1.9)';
-        ui.flash.animate(
-          [{ opacity: 1, transform: 'scale(1.9)' },
-           { opacity: 0, transform: 'scale(1.55)' }],
-          { duration: Math.round(dur * 0.46),
-            easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+        ui.flash.style.opacity = '.34'; ui.flash.style.transform = 'scale(1.24)';
+        ui.flash.animate([{ opacity: .34, transform: 'scale(1.24)' }, { opacity: 0, transform: 'scale(1.08)' }], { duration: Math.round(dur * .46), easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
       }
     }
-
     function tick(now) {
-      if (finished) return;                    // failsafe already completed us
-      if (!ctx) { finish(); return; }          // no 2D canvas → just complete safely
-      var p = clamp01((now - start) / dur);   // 0..1 timeline
-
-      var speed, colT, flashV;
+      if (finished) return;
+      if (!ctx) { finish(); return; }
+      var p = clamp01((now - start) / dur), speed, colT;
       if (mode === 'out') {
-        // accelerate smoothly into the jump — starts already gliding
-        speed = 0.010 + easeInQuint(p) * 0.088;
-        colT = smooth(clamp01(p / 0.78));               // gold → blue crossover
-        flashV = p < 0.74 ? 0 : Math.pow((p - 0.74) / 0.26, 2.2); // white-out at end
+        speed = .010 + easeInQuint(p) * .072;
+        colT = smooth(clamp01(p / .80));
       } else {
-        // decelerate smoothly out of the jump
-        speed = 0.010 + easeOutQuint(1 - p) * 0.088;
-        colT = 1;                                        // stay in universe B (blue)
-        flashV = p < 0.34 ? (1 - smooth(p / 0.34)) : 0;  // start bright, clear the flash
-        var overlayFade = p < 0.55 ? 1 : (1 - smooth((p - 0.55) / 0.45));
+        speed = .010 + easeOutQuint(1 - p) * .072;
+        // Forward arrival settles in blue; reverse arrival settles back to warm.
+        colT = inboundToData ? 1 : 0;
+        var overlayFade = p < .55 ? .90 : .90 * (1 - smooth((p - .55) / .45));
         ui.o.style.opacity = String(overlayFade);
       }
-
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(2,4,10,0.32)';         // motion-blur trails
-      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(2,4,10,0.32)'; ctx.fillRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter';
-
       for (var k = 0; k < N; k++) {
-        var s = stars[k];
-        s.pz = s.z;
-        s.z -= speed;
-        if (s.z <= 0.02) {                         // recycle stars that fly past
-          s.x = Math.random() * 2 - 1;
-          s.y = Math.random() * 2 - 1;
-          s.z = 1; s.pz = 1;
-          s.cool = Math.random() < 0.5;
-          continue;
-        }
-        var sx = cx + (s.x / s.z) * focal;
-        var sy = cy + (s.y / s.z) * focal;
-        var px = cx + (s.x / s.pz) * focal;
-        var py = cy + (s.y / s.pz) * focal;
-
-        var base = s.cool ? COOL : COOL2;
-        var col = mix(WARM, base, colT);
-        var lw = Math.max(dpr * 0.6, (1 - s.z) * 3.6 * dpr);
-        var a = Math.min(1, (1 - s.z) * 1.1);
-        ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + a + ')';
-        ctx.lineWidth = lw;
-        ctx.beginPath();
-        ctx.moveTo(px, py);
-        ctx.lineTo(sx, sy);
-        ctx.stroke();
+        var s = stars[k]; s.pz = s.z; s.z -= speed;
+        if (s.z <= .02) { s.x = Math.random() * 2 - 1; s.y = Math.random() * 2 - 1; s.z = 1; s.pz = 1; s.cool = Math.random() < .5; continue; }
+        var sx = cx + (s.x / s.z) * focal, sy = cy + (s.y / s.z) * focal;
+        var px = cx + (s.x / s.pz) * focal, py = cy + (s.y / s.pz) * focal;
+        var col = mix(WARM, s.cool ? COOL : COOL2, colT);
+        ctx.lineWidth = Math.max(dpr * .6, (1 - s.z) * 3.2 * dpr);
+        ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + Math.min(1, (1 - s.z) * 1.05) + ')';
+        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(sx, sy); ctx.stroke();
       }
-
-      if (!ui.flash.animate) ui.flash.style.opacity = String(flashV);
-
-      if (p < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        finish();
-      }
+      if (!ui.flash.animate && mode === 'out') ui.flash.style.opacity = p < .70 ? 0 : .34 * Math.pow((p - .70) / .30, 1.8);
+      if (p < 1) requestAnimationFrame(tick); else finish();
     }
-    // Hard failsafe: iOS Safari can throttle or suspend rAF (backgrounding,
-    // scroll momentum, low-power mode). If the frame loop ever stalls, this
-    // guarantees the warp still completes — scroll is unlocked and the page
-    // navigates / cleans up — so it can NEVER freeze blank with locked scroll.
-    setTimeout(finish, dur + 1200);
+    setTimeout(finish, dur + 700);
     requestAnimationFrame(tick);
     return ui;
   }
 
-  /* ---------- outbound: intercept warp links ---------- */
-  function warpTo(url) {
-    if (reduce) { location.href = url; return; }
-    // Absolute guarantee we navigate even if the animation below throws or its
-    // rAF loop is suspended by iOS — the user can never get stranded on the
-    // outgoing page behind a locked overlay.
-    var navFailsafe = setTimeout(function () { location.href = url; }, DUR_OUT + 1600);
-    try {
-      try { sessionStorage.setItem(FLAG, '1'); } catch (e) {}
-      // pull universe A toward the camera in sync with the tunnel
-      setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
-      // transform + opacity only (GPU-composited) — no filter:blur, which forces
-      // a full-page repaint every frame and fights the star canvas for budget.
-      requestAnimationFrame(function () { if (!reduce) setScene(1.12, 0, 0); });
-      run('out', function () { clearTimeout(navFailsafe); location.href = url; });
-    } catch (err) {
-      clearTimeout(navFailsafe);
-      location.href = url;
-    }
+  function rememberScroll() {
+    var payload = { x: window.scrollX || 0, y: window.scrollY || 0, width: window.innerWidth || 0, height: window.innerHeight || 0, path: location.pathname, at: Date.now() };
+    setStorage(SCROLL_KEY, JSON.stringify(payload));
   }
+  function validSavedScroll() {
+    var raw = getStorage(SCROLL_KEY); if (!raw) return null;
+    try {
+      var p = JSON.parse(raw);
+      if (!p || typeof p.y !== 'number' || typeof p.path !== 'string' || Date.now() - p.at > 10 * 60 * 1000) return null;
+      return p;
+    } catch (e) { return null; }
+  }
+  function restorePortfolioScroll() {
+    var saved = validSavedScroll();
+    var isPortfolio = /(?:^|\/)index\.html$/i.test(location.pathname) || /\/$/.test(location.pathname);
+    var fromPortfolio = saved && (/(?:^|\/)index\.html$/i.test(saved.path) || /\/$/.test(saved.path));
+    if (!isPortfolio || !saved || !fromPortfolio) return false;
+    removeStorage(SCROLL_KEY);
+    // The return URL contains #projects for a useful direct-link fallback.
+    // When a saved position exists, suppress the browser's automatic hash jump
+    // so it cannot win a race with restoration (including pageshow/bfcache).
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+    var target = Math.max(0, saved.y), tries = 0;
+    function restore() {
+      tries++;
+      try { window.scrollTo(saved.x || 0, target); } catch (e) {}
+      // app.js fills the project grid after parsing data.js; several frames and
+      // one delayed pass let layout/hash restoration settle without a lock.
+      if (tries < 10) requestAnimationFrame(restore);
+      else setTimeout(function () { try { window.scrollTo(saved.x || 0, target); } catch (e) {} }, 120);
+    }
+    requestAnimationFrame(restore);
+    return true;
+  }
+
+  function navigate(url) {
+    if (transitioning) return;
+    transitioning = true;
+    // Persist before the reduced-motion fast path too: the return link still
+    // restores the project position even when no animation is requested.
+    // Preserve the portfolio position while leaving data.html; the return
+    // link must not overwrite that record with data-page scrollY (usually 0).
+    if (!/(?:^|\/)data\.html$/i.test(location.pathname)) rememberScroll();
+    setStorage(FLAG, '1');
+    if (reduce) { location.href = url; return; }
+    var navFailsafe = setTimeout(function () { location.href = url; }, DUR_OUT + 700);
+    try {
+      setSceneTransition(DUR_OUT, 'cubic-bezier(.55,0,.85,.35)');
+      requestAnimationFrame(function () { if (!reduce) setScene(1.045, .94); });
+      run('out', function () { clearTimeout(navFailsafe); location.href = url; });
+    } catch (err) { clearTimeout(navFailsafe); location.href = url; }
+  }
+  function warpTo(url) { navigate(url); }
   window.__warpTo = warpTo;
 
   document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target.closest && e.target.closest('a[data-warp]');
-    if (!a) return;
-    var url = a.getAttribute('href');
-    if (!url || url.charAt(0) === '#') return;
-    // let modified clicks (new tab, etc.) behave normally
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    if (!a || a.hasAttribute('download') || (a.target && a.target !== '_self')) return;
+    var raw = a.getAttribute('href'); if (!raw || raw.charAt(0) === '#') return;
+    var dest;
+    try { dest = new URL(raw, location.href); } catch (err) { return; }
+    if (dest.origin !== location.origin || (dest.protocol !== 'http:' && dest.protocol !== 'https:')) return;
     e.preventDefault();
-    warpTo(url);
-  });
+    if (!transitioning) navigate(dest.href);
+  }, false);
 
-  /* ---------- inbound: arrived through a warp ---------- */
   function playInbound() {
     var de = document.documentElement;
-    var flagged = false;
-    try { flagged = sessionStorage.getItem(FLAG) === '1'; } catch (e) {}
-    // Always release the head-guard cover so the page can never get stuck hidden.
+    var flagged = getStorage(FLAG) === '1';
+    removeStorage(FLAG);
+    var restored = restorePortfolioScroll();
     if (!flagged) { de.classList.remove('warp-cover'); return; }
-    try { sessionStorage.removeItem(FLAG); } catch (e) {}
     if (reduce) { de.classList.remove('warp-cover'); return; }
-
-    // Take over the head-guard cover with inline styles (still hidden), so
-    // universe B never flickers in at rest before it emerges from the flash.
     try {
-      setScene(1.07, 0, 0);
+      setScene(1.035, .98);
       de.classList.remove('warp-cover');
       requestAnimationFrame(function () {
-        if (reduce) return;
+        if (reduce) { clearScene(); return; }
         setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
-        requestAnimationFrame(function () { if (!reduce) setScene(1, 0, 1); });
+        requestAnimationFrame(function () { if (!reduce) setScene(1, 1); });
       });
-
       run('in', function (ui) {
-        ui.o.parentNode && ui.o.parentNode.removeChild(ui.o);
+        if (ui.o.parentNode) ui.o.parentNode.removeChild(ui.o);
         clearScene();
       });
     } catch (err) {
-      // never let a broken inbound animation leave the page hidden or locked
-      de.classList.remove('warp-cover');
-      unlockScroll();
-      clearScene();
+      de.classList.remove('warp-cover'); unlockScroll(); clearScene();
     }
+    // A direct data-page load has no saved hand-off. Its #projects fallback is
+    // intentionally left to normal browser anchor behavior.
+    void restored;
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', playInbound);
-  } else {
-    playInbound();
-  }
+
+  // bfcache restores can bypass DOMContentLoaded. Never re-run the animation
+  // without a flag, but make sure the cover is gone and saved scroll is used.
+  addEventListener('pageshow', function () {
+    if (!transitioning) {
+      document.documentElement.classList.remove('warp-cover');
+      restorePortfolioScroll();
+    }
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', playInbound);
+  else playInbound();
 })();

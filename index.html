@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- warp inbound guard: hide the page before first paint when arriving through a warp, so it never flashes at rest before the transition takes over -->
-<script>(function(){try{if(sessionStorage.getItem('__warp_in')==='1'&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.className+=(d.className?' ':'')+'warp-cover';setTimeout(function(){d.classList.remove('warp-cover');d.style.overflow='';d.style.touchAction='';if(document.body){document.body.style.overflow='';}},4000);}}catch(e){}})();</script>
+<script>(function(){try{var w=sessionStorage.getItem('__warp_in')==='1';if(w){try{history.scrollRestoration='manual';}catch(e){}}if(w&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.className+=(d.className?' ':'')+'warp-cover';setTimeout(function(){d.classList.remove('warp-cover');d.style.overflow='';d.style.touchAction='';if(document.body){document.body.style.overflow='';}},2200);}}catch(e){}})();</script>
 <style>html.warp-cover{background:#02040a!important}html.warp-cover body{opacity:0!important}</style>
 <title>Anggit Djoko Wibowo · Software Engineer</title>
 <meta name="description" content="Anggit Djoko Wibowo · Software Engineer building web apps and software products end to end with Next.js, React, TypeScript, Node.js and Supabase." />
@@ -397,7 +397,7 @@ footer .heart{color:var(--accent)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="./data.js"></script>
-<script src="./warp.js?v=ux-motion-20260909"></script>
+<script src="./warp.js?v=ux-motion-20260909-2"></script>
 <script src="./app.js?v=ux-motion-20260909"></script>
 <!-- ===== hard content failsafe: the page must NEVER stay blank or stuck =====
      Independent of PORTFOLIO/THREE/GSAP/app.js. Even if any of them fail to load
