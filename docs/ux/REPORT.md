@@ -18,7 +18,7 @@ The improvement plan is being published before any frontend changes. Baseline co
 
 | Task | Status |
 |---|---|
-| T01 Mobile navigation | Planned; no patch published yet |
+| T01 Mobile navigation | Implemented; local regression checks passed; live deployment verification pending |
 | T02 Factual video explanation | Planned; no patch published yet |
 | T03 Video overlay keyboard support | Planned; no patch published yet |
 | T04 Readability / T05 Content order | Separate visual review; existing design retained for now |
@@ -33,4 +33,16 @@ Space theme, colors, typography, animation, warp transition, working hero links,
 
 ## Test scope
 
-Implementation checks and live verification will be added per task. No implementation task is marked complete at this stage.
+## T01 — Mobile navigation
+
+Changes are confined to navigation CSS/markup/handlers, plus a versioned app script URL to avoid serving stale navigation code. The panel now has explicit viewport height and safe scrolling at short heights. Menu button and links have 44 px targets. Open/closed labels and state, background isolation, Escape, focus restoration, keyboard wrapping, and breakpoint cleanup were added. Desktop navigation styling is unchanged.
+
+Local results:
+- 27/27 responsive and interaction checks passed at 320, 390, 760 and 761 px, including a 320 px-high short landscape viewport.
+- All five navigation links fit; closed links cannot receive focus; scroll/background state restores after closing and resizing.
+- Native Escape and Shift+Tab were tested in addition to synthetic boundary tests.
+- Projects anchor and all five existing filters passed. The anchor test initially checked too early during the existing smooth-scroll animation; after waiting for the target position it passed. No scroll animation was changed.
+- Baseline/candidate desktop comparisons matched exactly for viewport, section dimensions, navigation rectangles, main content, project data, and palette.
+- JavaScript syntax check passed. `data.js`, `warp.js`, video files and the Three.js code are unchanged.
+
+Preview limitation: the local HTTP server is not reachable from the browser environment. Tests used local file pages and source-equivalent responsive frames instead; this is not a production defect. Live publication verification follows this commit. Physical mobile hardware was not tested.

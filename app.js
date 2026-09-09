@@ -196,8 +196,55 @@ const nav = document.getElementById('nav');
 addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
 const menuBtn = document.getElementById('menuBtn');
 const navlinks = document.getElementById('navlinks');
-menuBtn.addEventListener('click', () => navlinks.classList.toggle('open'));
-navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+const mobileNav = window.matchMedia('(max-width: 760px)');
+let menuIsOpen = false;
+let menuBackground = [];
+function setMenuOpen(open, restoreFocus = true) {
+  open = Boolean(open && mobileNav.matches);
+  if (open === menuIsOpen) {
+    navlinks.inert = mobileNav.matches && !open;
+    return;
+  }
+  menuIsOpen = open;
+  navlinks.inert = mobileNav.matches && !open;
+  navlinks.classList.toggle('open', open);
+  nav.classList.toggle('menu-open', open);
+  document.documentElement.classList.toggle('mobile-menu-open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  menuBtn.textContent = open ? '✕' : '☰';
+  if (open) {
+    menuBackground = [...document.querySelectorAll('main, footer, #sound')].map(el => [el, el.inert]);
+    menuBackground.forEach(([el]) => { el.inert = true; });
+    const firstLink = [...navlinks.querySelectorAll('a')].find(a => a.getClientRects().length);
+    if (firstLink) firstLink.focus({ preventScroll: true });
+  } else {
+    menuBackground.forEach(([el, wasInert]) => { el.inert = wasInert; });
+    menuBackground = [];
+    if (restoreFocus && mobileNav.matches) menuBtn.focus({ preventScroll: true });
+  }
+}
+menuBtn.addEventListener('click', () => setMenuOpen(!menuIsOpen));
+navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false, false)));
+document.addEventListener('keydown', e => {
+  if (!menuIsOpen) return;
+  if (e.key === 'Escape') { e.preventDefault(); setMenuOpen(false); }
+  if (e.key === 'Tab') {
+    const items = [menuBtn, ...navlinks.querySelectorAll('a')].filter(el => el.getClientRects().length);
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+mobileNav.addEventListener('change', () => {
+  const menuHadFocus = nav.contains(document.activeElement);
+  setMenuOpen(false, false);
+  if (!mobileNav.matches && menuHadFocus) {
+    const firstLink = [...navlinks.querySelectorAll('a')].find(a => a.getClientRects().length);
+    if (firstLink) firstLink.focus({ preventScroll: true });
+  } else if (mobileNav.matches && menuHadFocus) menuBtn.focus({ preventScroll: true });
+});
+setMenuOpen(false, false);
 
 /* ---------- reliable in-page smooth scroll (iOS-safe) ----------
    iOS Safari frequently ignores anchor jumps that rely only on CSS
@@ -228,7 +275,7 @@ navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
     if (a.hasAttribute('data-warp')) return;      // warp links handled elsewhere
     var hash = a.getAttribute('href');
     if (!hash || hash === '#') return;
-    if (goToHash(hash)) { e.preventDefault(); navlinks.classList.remove('open'); }
+    if (goToHash(hash)) { e.preventDefault(); setMenuOpen(false, false); }
   }, false);
 })();
 

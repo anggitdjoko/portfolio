@@ -122,12 +122,22 @@ nav.scrolled{background:rgba(4,6,13,.7);border-bottom:1px solid var(--line)}
 .navlinks a:hover::after{width:100%}
 .menu-btn{display:none;background:none;border:none;color:var(--ink);cursor:pointer;font-size:1.4rem}
 @media(max-width:760px){
-  .navlinks{position:fixed;inset:0;background:rgba(4,6,13,.96);flex-direction:column;
-    align-items:center;justify-content:center;gap:34px;font-size:1rem;transform:translateX(100%);
-    transition:transform .4s ease}
-  .navlinks.open{transform:translateX(0)}
-  .menu-btn{display:block;z-index:50}
+  /* Explicit viewport height avoids the fixed menu being sized to the blurred nav. */
+  nav{padding-top:13px;padding-bottom:13px}
+  nav.menu-open{z-index:60}
+  html.mobile-menu-open{overflow:hidden}
+  .navlinks{position:fixed;inset:0;height:100vh;height:100dvh;overflow-y:auto;
+    background:rgba(4,6,13,.96);flex-direction:column;align-items:center;
+    justify-content:flex-start;padding:76px 20px 24px;gap:clamp(10px,4vh,34px);
+    font-size:1rem;transform:translateX(100%);visibility:hidden;pointer-events:none;
+    transition:transform .4s ease,visibility 0s .4s}
+  .navlinks.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition-delay:0s}
+  .navlinks a{min-height:44px;display:flex;align-items:center;flex-shrink:0}
+  .navlinks a:first-child{margin-top:auto}
+  .navlinks a:last-child{margin-bottom:auto}
+  .menu-btn{display:grid;place-items:center;width:44px;height:44px;z-index:50}
 }
+@media(max-width:760px) and (prefers-reduced-motion:reduce){.navlinks{transition:none}}
 
 /* ---------- layout ---------- */
 main{position:relative;z-index:10}
@@ -300,7 +310,7 @@ footer .heart{color:var(--accent)}
 
 <nav id="nav">
   <div class="brand"></div>
-  <button class="menu-btn" id="menuBtn">☰</button>
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navlinks">☰</button>
   <div class="navlinks" id="navlinks">
     <a href="#hero">Intro</a>
     <a href="#about">About</a>
@@ -376,7 +386,7 @@ footer .heart{color:var(--accent)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="./data.js"></script>
 <script src="./warp.js"></script>
-<script src="./app.js"></script>
+<script src="./app.js?v=ux-nav-20260909"></script>
 <!-- ===== hard content failsafe: the page must NEVER stay blank or stuck =====
      Independent of PORTFOLIO/THREE/GSAP/app.js. Even if any of them fail to load
      or throw on iOS Safari, this reveals all content, closes the "Hello!" loader,
