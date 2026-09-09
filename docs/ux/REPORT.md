@@ -21,9 +21,10 @@ The improvement plan is being published before any frontend changes. Baseline co
 | T01 Mobile navigation | Complete; existing implementation retained; Pages build and live script verified |
 | T02 Factual video explanation | Complete; tested, committed, Pages build and live text verified |
 | T03 Video overlay keyboard support | Complete; tested, committed, Pages build and live interaction verified |
-| T04 Readability / T05 Content order | Separate visual review; existing design retained for now |
+| T04 Readability | Narrow lead-text improvement implemented and locally compared; publication verification follows |
+| T05 Content order | Reviewed with a local prototype; original order retained |
 | T06 Ownership / T07 CV / T10 GearGrid video | Waiting for verified source material |
-| T08 Filters and labels | Retained pending evidence of a better alternative |
+| T08 Filters and labels | Reviewed; existing labels and all five working filter states retained |
 | T09 Reduced motion | Separate technical review |
 | T11 Investor pitch | Not needed for this personal portfolio; no changes planned |
 
@@ -107,3 +108,23 @@ Machine-readable verification: [verification-2026-09-09.json](verification-2026-
 ### Rollback references
 
 T02 parent: [08d4f4e4](https://github.com/anggitdjoko/portfolio/commit/08d4f4e423fb6e3f11dca457f89c781486024c7e); T03 parent: [fe1bd6d6](https://github.com/anggitdjoko/portfolio/commit/fe1bd6d67752b6b559e36aa98f72fe622c0acff6). If a regression appears, check the latest branch and revert only the affected task in a new commit, preserving later work. No rollback was needed in this batch.
+
+## Second batch — T04 / T05 / T08 review
+
+Baseline fetched from gh-pages: [1cb905b6](https://github.com/anggitdjoko/portfolio/commit/1cb905b64319f474bb0fb739e1b7e66eaa29430c). Original data and report were read before making candidates.
+
+### T04 — Narrow readability improvement
+
+Compared original lead text and a slightly lighter blue-grey candidate at 1440 px desktop and 390 px mobile. Both the CSS fallback and actual CDN-loaded Three.js WebGL path were inspected. For the final WebGL comparison, the already-rendered scene was frozen only in the test session so before/after screenshots had the same background; production animation code was not changed by T04. The brighter About text was easier to distinguish over the galaxy core without dimming the galaxy.
+
+Implemented one CSS declaration only: .lead color changes from #8b96b3 to #a9b3cb. Typography, text, geometry, backgrounds, palette variables, project cards, navigation, warp and animations are unchanged. Measured lead rectangles were identical before/after at both widths. Declared contrast against the flat #04060d base increased from 6.86:1 to 9.64:1; this is not a pixel-sampled contrast audit over every animated galaxy frame, nor a WCAG conformance claim. No broad dimming or redesign was shipped.
+
+### T05 — Prototype reviewed; order retained
+
+A local-only prototype moved Projects immediately after Hero. Desktop project position improved from about 4199 px to 900 px, and anchors/content remained intact, but it placed 03 Projects before 01 About and 02 Experience while navigation still followed the original order. Shipping that move would require wider sequencing and reveal/warp review. The existing direct View My Work link already provides project access. The bounded evidence does not justify that disruption; no section-order or numbering change is published.
+
+### T08 — Existing filters retained
+
+Verified all five controls and their matching results: All 6; Web App 1; Full-Stack 3; Web 1; Data 1. No failed state or evidence of a net clarity gain justified changing categories, labels or records. The current controls and project data remain unchanged.
+
+Review evidence: [review-2026-09-09.json](review-2026-09-09.json). T04 live publication verification will follow its implementation commit. T05/T08 are completed reviews with explicit retain decisions, not unimplemented redesigns.

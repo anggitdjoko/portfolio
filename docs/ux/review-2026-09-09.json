@@ -1,0 +1,149 @@
+{
+  "review": {
+    "head": "1cb905b64319f474bb0fb739e1b7e66eaa29430c",
+    "t04": {
+      "recommendation": "change",
+      "contrast": {
+        "baselineMutedVsBg": 6.86,
+        "candidateLeadVsBg": 9.64
+      },
+      "geometry": {
+        "desktop": [
+          {
+            "top": 4199,
+            "height": 2162,
+            "width": 1120
+          },
+          {
+            "top": 4199,
+            "height": 2162,
+            "width": 1120
+          }
+        ],
+        "mobile": [
+          {
+            "top": 5851,
+            "height": 3570,
+            "width": 390
+          },
+          {
+            "top": 5851,
+            "height": 3570,
+            "width": 390
+          }
+        ]
+      }
+    },
+    "t05": {
+      "recommendation": "defer",
+      "baselineProjectTop": 4199,
+      "prototypeProjectTop": 900,
+      "baselineOrder": [
+        "hero",
+        "about",
+        "experience",
+        "projects",
+        "contact"
+      ],
+      "prototypeOrder": [
+        "hero",
+        "projects",
+        "about",
+        "experience",
+        "contact"
+      ]
+    },
+    "t08": {
+      "recommendation": "keep",
+      "filters": [
+        "All",
+        "Web App",
+        "Full-Stack",
+        "Web",
+        "Data"
+      ],
+      "counts": {
+        "Web App": 1,
+        "Full-Stack": 3,
+        "Web": 1,
+        "Data": 1
+      },
+      "filterResults": {
+        "All": 6,
+        "Web App": 1,
+        "Full-Stack": 3,
+        "Web": 1,
+        "Data": 1
+      }
+    }
+  },
+  "actualWebGLComparison": [
+    {
+      "width": 1440,
+      "before": {
+        "color": "rgb(139, 150, 179)",
+        "rect": {
+          "x": 200,
+          "y": 384.765625,
+          "width": 620,
+          "height": 130.46875,
+          "top": 384.765625,
+          "right": 820,
+          "bottom": 515.234375,
+          "left": 200
+        },
+        "webgl": true
+      },
+      "after": {
+        "color": "rgb(169, 179, 203)",
+        "rect": {
+          "x": 200,
+          "y": 384.765625,
+          "width": 620,
+          "height": 130.46875,
+          "top": 384.765625,
+          "right": 820,
+          "bottom": 515.234375,
+          "left": 200
+        }
+      },
+      "geometryUnchanged": true
+    },
+    {
+      "width": 390,
+      "before": {
+        "color": "rgb(139, 150, 179)",
+        "rect": {
+          "x": 20,
+          "y": 345.390625,
+          "width": 350,
+          "height": 208.75,
+          "top": 345.390625,
+          "right": 370,
+          "bottom": 554.140625,
+          "left": 20
+        },
+        "webgl": true
+      },
+      "after": {
+        "color": "rgb(169, 179, 203)",
+        "rect": {
+          "x": 20,
+          "y": 345.390625,
+          "width": 350,
+          "height": 208.75,
+          "top": 345.390625,
+          "right": 370,
+          "bottom": 554.140625,
+          "left": 20
+        }
+      },
+      "geometryUnchanged": true
+    }
+  ],
+  "limits": [
+    "Declared color contrast is not pixel-sampled animated-background contrast.",
+    "Project reordering remained a local prototype; no production movement.",
+    "Physical devices and screen readers were not tested."
+  ]
+}
