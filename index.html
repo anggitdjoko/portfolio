@@ -33,6 +33,7 @@ body{
   font-family:'Space Grotesk',system-ui,sans-serif;
   background:var(--bg);color:var(--ink);
   overflow-x:hidden;line-height:1.6;
+  overscroll-behavior-x:none;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none}
@@ -58,19 +59,20 @@ html.nowebgl body{background:radial-gradient(140% 120% at 50% 40%,#0a1030 0%,#06
 html.nowebgl body::before{content:"";position:fixed;left:-50%;top:-50%;width:200%;height:200%;
   z-index:0;pointer-events:none;transform-origin:50% 50%;
   background:
-    radial-gradient(closest-side at 50% 50%, rgba(255,246,224,.5), rgba(255,214,170,.26) 26%, rgba(255,190,150,.06) 46%, transparent 60%) 50% 50% / 10% 10% no-repeat,
-    radial-gradient(closest-side at 50% 50%, rgba(150,180,255,.3), rgba(120,110,220,.14) 42%, rgba(80,60,160,.05) 66%, transparent 78%) 50% 50% / 62% 34% no-repeat,
-    radial-gradient(closest-side at 50% 50%, rgba(90,120,230,.12), transparent 70%) 50% 50% / 90% 60% no-repeat;
-  animation:galaxySpin 150s linear infinite}
+    radial-gradient(closest-side at 50% 50%, rgba(255,246,224,.88), rgba(255,214,170,.48) 26%, rgba(255,190,150,.13) 46%, transparent 60%) 50% 50% / 16% 14% no-repeat,
+    radial-gradient(closest-side at 50% 50%, rgba(150,180,255,.48), rgba(120,110,220,.24) 42%, rgba(80,60,160,.09) 66%, transparent 78%) 50% 50% / 76% 42% no-repeat,
+    radial-gradient(closest-side at 50% 50%, rgba(90,120,230,.18), transparent 70%) 50% 50% / 105% 72% no-repeat;
+  animation:galaxySpin 108s linear infinite}
 html.nowebgl body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-repeat:repeat;background-position:0 0;background-size:230px 230px;
+  background-repeat:repeat;background-position:0 0;background-size:190px 190px;
   background-image:
     radial-gradient(1.3px 1.3px at 24px 32px,rgba(255,255,255,.95),transparent),
-    radial-gradient(1px 1px at 72px 96px,rgba(210,225,255,.8),transparent),
-    radial-gradient(1.5px 1.5px at 132px 54px,rgba(255,255,255,.9),transparent),
-    radial-gradient(1px 1px at 176px 140px,rgba(255,240,220,.75),transparent),
-    radial-gradient(1.2px 1.2px at 210px 26px,rgba(200,220,255,.85),transparent),
-    radial-gradient(1px 1px at 40px 180px,rgba(255,255,255,.7),transparent);
+    radial-gradient(1px 1px at 72px 96px,rgba(210,225,255,.85),transparent),
+    radial-gradient(1.5px 1.5px at 132px 54px,rgba(255,255,255,.95),transparent),
+    radial-gradient(1px 1px at 176px 140px,rgba(255,240,220,.82),transparent),
+    radial-gradient(1.2px 1.2px at 18px 166px,rgba(200,220,255,.85),transparent),
+    radial-gradient(1px 1px at 108px 154px,rgba(255,255,255,.8),transparent),
+    radial-gradient(1px 1px at 158px 18px,rgba(220,235,255,.78),transparent);
   animation:starTwinkle 5.5s ease-in-out infinite}
 @keyframes galaxySpin{to{transform:rotate(360deg)}}
 @keyframes starTwinkle{0%,100%{opacity:.55}50%{opacity:1}}
@@ -92,7 +94,7 @@ html.nowebgl .pcard,html.nowebgl .info-card{-webkit-backdrop-filter:none;backdro
    dead-centre on a narrow phone and wash out section text. Darken the backdrop
    uniformly (still below content, z-index 1) and add a soft text-shadow so copy
    stays legible over the glow. Desktop WebGL path is unaffected. */
-html.nowebgl .vignette{background:radial-gradient(120% 120% at 50% 35%, rgba(2,4,10,.5) 0%, rgba(2,4,10,.74) 55%, rgba(2,4,10,.9) 100%)}
+html.nowebgl .vignette{background:radial-gradient(120% 120% at 50% 35%, rgba(2,4,10,.34) 0%, rgba(2,4,10,.62) 55%, rgba(2,4,10,.88) 100%)}
 html.nowebgl .lead,html.nowebgl h2.title,html.nowebgl .hero-sub,html.nowebgl .hero-name,html.nowebgl .eyebrow{text-shadow:0 2px 18px rgba(2,4,10,.9)}
 
 /* ---------- loader ---------- */
@@ -123,12 +125,16 @@ nav.scrolled{background:rgba(4,6,13,.7);border-bottom:1px solid var(--line)}
 .menu-btn{display:none;background:none;border:none;color:var(--ink);cursor:pointer;font-size:1.4rem}
 @media(max-width:760px){
   /* Explicit viewport height avoids the fixed menu being sized to the blurred nav. */
-  nav{padding-top:13px;padding-bottom:13px}
+  nav{padding-top:calc(13px + env(safe-area-inset-top, 0px));padding-bottom:13px;
+    padding-left:calc(18px + env(safe-area-inset-left, 0px));
+    padding-right:calc(18px + env(safe-area-inset-right, 0px))}
   nav.menu-open{z-index:60}
   html.mobile-menu-open{overflow:hidden}
-  .navlinks{position:fixed;inset:0;height:100vh;height:100dvh;overflow-y:auto;
+  .navlinks{position:fixed;inset:0;height:100vh;height:100svh;height:100dvh;overflow-y:auto;
+    -webkit-overflow-scrolling:touch;overscroll-behavior:contain;
     background:rgba(4,6,13,.96);flex-direction:column;align-items:center;
-    justify-content:flex-start;padding:76px 20px 24px;gap:clamp(10px,4vh,34px);
+    justify-content:flex-start;padding:calc(76px + env(safe-area-inset-top, 0px))
+      20px calc(24px + env(safe-area-inset-bottom, 0px));gap:clamp(10px,4vh,34px);
     font-size:1rem;transform:translateX(100%);visibility:hidden;pointer-events:none;
     transition:transform .4s ease,visibility 0s .4s}
   .navlinks.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition-delay:0s}
@@ -149,7 +155,7 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
 .lead{color:#a9b3cb;max-width:620px;font-size:1.02rem}
 
 /* ---------- hero ---------- */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+#hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
   max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px);position:relative;z-index:10}
 .hero-role{font-family:'JetBrains Mono',monospace;color:var(--accent);
   font-size:clamp(.75rem,2vw,.95rem);letter-spacing:.24em;text-transform:uppercase;margin-bottom:20px}
@@ -163,7 +169,7 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
 .btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#04060d;border:none;font-weight:600}
 .btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(90,209,255,.28)}
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
-.scrolldown{position:absolute;bottom:34px;left:clamp(20px,5vw,40px);color:var(--muted);
+.scrolldown{position:absolute;bottom:calc(34px + env(safe-area-inset-bottom, 0px));left:clamp(20px,5vw,40px);color:var(--muted);
   font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
 .scrolldown .dot{width:22px;height:36px;border:1px solid var(--line);border-radius:14px;position:relative}
 .scrolldown .dot::after{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);
@@ -254,7 +260,11 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
   cursor:pointer;opacity:0;transform:translateY(6px);transition:.25s;font-size:.95rem;line-height:1}
 .pcard:hover .pfull,.pmedia:focus-within .pfull{opacity:1;transform:none}
 @media(hover:none){.pfull{opacity:1;transform:none}}
-#lbox{position:fixed;inset:0;z-index:9999;display:none;place-items:center;padding:24px;
+#lbox{position:fixed;inset:0;z-index:9999;display:none;place-items:center;
+  padding:calc(24px + env(safe-area-inset-top, 0px))
+    calc(24px + env(safe-area-inset-right, 0px))
+    calc(24px + env(safe-area-inset-bottom, 0px))
+    calc(24px + env(safe-area-inset-left, 0px));
   background:rgba(2,4,10,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 #lbox[open]{display:grid}
 /* Keep the existing overlay geometry while using native modal focus isolation. */
@@ -263,7 +273,7 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
 html.reel-open{overflow:hidden}
 #lbox video{width:min(1240px,96vw);max-height:86vh;border-radius:14px;border:1px solid var(--line);
   box-shadow:0 40px 130px rgba(0,0,0,.85);background:#05070f}
-#lbox .close{position:absolute;top:20px;right:26px;font-size:1.7rem;line-height:1;color:#eaf0ff;
+#lbox .close{position:absolute;top:calc(20px + env(safe-area-inset-top, 0px));right:calc(26px + env(safe-area-inset-right, 0px));font-size:1.7rem;line-height:1;color:#eaf0ff;
   cursor:pointer;opacity:.7;transition:.2s;background:none;border:0}
 #lbox .close:hover{opacity:1}
 @media(prefers-reduced-motion:reduce){.pbadge i{animation:none}}
@@ -293,7 +303,7 @@ footer{text-align:center;padding:40px 20px 60px;color:var(--muted);font-size:.82
 footer .heart{color:var(--accent)}
 
 /* sound toggle */
-#sound{position:fixed;right:22px;bottom:22px;z-index:45;width:46px;height:46px;border-radius:50%;
+#sound{position:fixed;right:calc(22px + env(safe-area-inset-right, 0px));bottom:calc(22px + env(safe-area-inset-bottom, 0px));z-index:45;width:46px;height:46px;border-radius:50%;
   border:1px solid var(--line);background:rgba(4,6,13,.6);color:var(--muted);cursor:pointer;
   display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:.3s}
 #sound:hover{color:var(--accent);border-color:var(--accent)}
