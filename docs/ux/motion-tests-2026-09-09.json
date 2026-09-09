@@ -1,0 +1,188 @@
+{
+  "time": "2026-09-09T04:13:05.227Z",
+  "results": [
+    {
+      "name": "baseline reduced WebGL still animates (defect reproduced)",
+      "ok": true
+    },
+    {
+      "name": "baseline reduced loader/scroll gap reproduced",
+      "ok": true,
+      "data": {
+        "ring": "spin",
+        "scroll": "smooth",
+        "webgl": true
+      }
+    },
+    {
+      "name": "reduced CSS and WebGL path",
+      "ok": true,
+      "data": {
+        "webgl": true,
+        "fallback": false,
+        "ring": "none",
+        "dot": "none",
+        "stars": "none",
+        "spin": "none",
+        "reveal": "none",
+        "scroll": "auto",
+        "cards": 6
+      }
+    },
+    {
+      "name": "reduced galaxy schedules no animation frames false",
+      "ok": true
+    },
+    {
+      "name": "reduced anchor jumps without smooth animation false",
+      "ok": true,
+      "data": {
+        "args": [
+          0,
+          4071.1875
+        ],
+        "hash": "#projects",
+        "top": 79.1875,
+        "nav": 71.421875
+      }
+    },
+    {
+      "name": "reduced preview reels do not autoplay false",
+      "ok": true
+    },
+    {
+      "name": "manual video still opens with modal focus false",
+      "ok": true
+    },
+    {
+      "name": "video close restores scroll lock false",
+      "ok": true
+    },
+    {
+      "name": "runtime preference resumes WebGL",
+      "ok": true
+    },
+    {
+      "name": "runtime preference stops WebGL",
+      "ok": true,
+      "data": {
+        "delta": 0,
+        "counts": {
+          "yl": 150,
+          "_rafBugFix": 414,
+          "_updateAll": 29,
+          "animate": 19
+        }
+      }
+    },
+    {
+      "name": "reduced WebGL remains correctly sized on resize",
+      "ok": true
+    },
+    {
+      "name": "reduced CSS and fallback path",
+      "ok": true,
+      "data": {
+        "webgl": false,
+        "fallback": true,
+        "ring": "none",
+        "dot": "none",
+        "stars": "none",
+        "spin": "none",
+        "reveal": "none",
+        "scroll": "auto",
+        "cards": 6
+      }
+    },
+    {
+      "name": "reduced galaxy schedules no animation frames true",
+      "ok": true
+    },
+    {
+      "name": "reduced anchor jumps without smooth animation true",
+      "ok": true,
+      "data": {
+        "args": [
+          0,
+          5588.625
+        ],
+        "hash": "#projects",
+        "top": 78.625,
+        "nav": 71
+      }
+    },
+    {
+      "name": "reduced preview reels do not autoplay true",
+      "ok": true
+    },
+    {
+      "name": "manual video still opens with modal focus true",
+      "ok": true
+    },
+    {
+      "name": "video close restores scroll lock true",
+      "ok": true
+    },
+    {
+      "name": "reduced mobile navigation works",
+      "ok": true
+    },
+    {
+      "name": "reduced menu closes",
+      "ok": true
+    },
+    {
+      "name": "ordinary CSS and WebGL preserved",
+      "ok": true,
+      "data": {
+        "ring": "spin",
+        "scroll": "smooth",
+        "webgl": true
+      }
+    },
+    {
+      "name": "ordinary galaxy still animates",
+      "ok": true
+    },
+    {
+      "name": "ordinary warp overlay created",
+      "ok": true
+    },
+    {
+      "name": "ordinary inbound warp cleaned up",
+      "ok": true
+    },
+    {
+      "name": "ordinary data starfield animates",
+      "ok": true
+    },
+    {
+      "name": "data starfield stops on preference change",
+      "ok": true
+    },
+    {
+      "name": "reduced return skips warp",
+      "ok": true
+    },
+    {
+      "name": "baseline reduced data starfield defect reproduced",
+      "ok": true
+    },
+    {
+      "name": "reduced data initial starfield is still",
+      "ok": true
+    },
+    {
+      "name": "reduced data resize draws at new width",
+      "ok": true
+    },
+    {
+      "name": "data starfield resumes on preference change",
+      "ok": true
+    },
+    {
+      "name": "enabling reduced motion during warp completes navigation cleanly",
+      "ok": true
+    }
+  ]
+}

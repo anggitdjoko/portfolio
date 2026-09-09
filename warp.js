@@ -18,8 +18,9 @@
   var FLAG = '__warp_in';
   var DUR_OUT = 1250;   // ms — leaving universe A
   var DUR_IN = 1350;    // ms — arriving in universe B
-  var reduce = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduce = motionPreference.matches;
+  motionPreference.addEventListener('change', function (e) { reduce = e.matches; });
   // On phones the page-zoom layer (universe A/B scaling) and the star tunnel
   // read as TWO separate moves — the zoom's anchor can never fully match the
   // tunnel's vanishing point on a long, scrollable page, so it looks stiff.
@@ -172,9 +173,18 @@
       if (finished) return;
       finished = true;
       try { removeEventListener('resize', onResize); } catch (e) {}
+      motionPreference.removeEventListener('change', onMotionChange);
       unlockScroll();
       if (done) done(ui);
     }
+    function onMotionChange() {
+      if (!reduce || finished) return;
+      if (ui.flash.getAnimations) ui.flash.getAnimations().forEach(function (a) { a.cancel(); });
+      if (ui.o.parentNode) ui.o.parentNode.removeChild(ui.o);
+      clearScene();
+      finish();
+    }
+    motionPreference.addEventListener('change', onMotionChange);
     // iOS screens are DPR 2–3; cap tighter there so the per-frame stroke work
     // stays within a 60fps budget on older iPhones (lines still read crisp).
     var dpr = Math.min(window.devicePixelRatio || 1, iOS ? 1 : 1.25);
@@ -322,7 +332,7 @@
       setSceneTransition(Math.round(DUR_OUT * 0.94), 'cubic-bezier(.55,0,.85,.35)');
       // transform + opacity only (GPU-composited) — no filter:blur, which forces
       // a full-page repaint every frame and fights the star canvas for budget.
-      requestAnimationFrame(function () { setScene(1.12, 0, 0); });
+      requestAnimationFrame(function () { if (!reduce) setScene(1.12, 0, 0); });
       run('out', function () { clearTimeout(navFailsafe); location.href = url; });
     } catch (err) {
       clearTimeout(navFailsafe);
@@ -358,8 +368,9 @@
       setScene(1.07, 0, 0);
       de.classList.remove('warp-cover');
       requestAnimationFrame(function () {
+        if (reduce) return;
         setSceneTransition(DUR_IN, 'cubic-bezier(.16,.84,.3,1)');
-        requestAnimationFrame(function () { setScene(1, 0, 1); });
+        requestAnimationFrame(function () { if (!reduce) setScene(1, 0, 1); });
       });
 
       run('in', function (ui) {

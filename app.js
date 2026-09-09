@@ -1,5 +1,6 @@
 /* ============ Anggit Djoko Wibowo — cinematic portfolio ============ */
 const P = window.PORTFOLIO;
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /* ---------- loader safety net ----------
    Reveal the page no matter what. If a later step (e.g. WebGL on iOS)
@@ -117,7 +118,9 @@ if (P.projects && P.projects.length) {
     }
     return lbox;
   }
-  const softMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  motionPreference.addEventListener('change', e => {
+    if (e.matches) grid.querySelectorAll('.pmedia video').forEach(v => v.pause());
+  });
   const saveData = (navigator.connection || {}).saveData === true;
 
   function openReel(src, invoker) {
@@ -146,7 +149,7 @@ if (P.projects && P.projects.length) {
         if (!v) return;
         if (en.isIntersecting) {
           if (!v.getAttribute('src')) v.setAttribute('src', en.target.dataset.src);
-          if (!softMotion && !saveData) v.play().catch(() => { });
+          if (!motionPreference.matches && !saveData) v.play().catch(() => { });
         } else { v.pause(); }
       });
     }, { threshold: 0.28 });
@@ -266,7 +269,7 @@ setMenuOpen(false, false);
     var navH = nav ? nav.offsetHeight : 0;
     var y = target.getBoundingClientRect().top + window.pageYOffset - navH - 8;
     if (y < 0) y = 0;
-    if (supportsSmooth) {
+    if (supportsSmooth && !motionPreference.matches) {
       try { window.scrollTo({ top: y, behavior: 'smooth' }); }
       catch (e) { window.scrollTo(0, y); }
     } else {
@@ -327,6 +330,7 @@ function applySize() {
   renderer.setSize(vw, vh);
   camera.aspect = vw / vh;
   camera.updateProjectionMatrix();
+  if (motionPreference.matches) renderer.render(scene, camera);
 }
 function resize() {
   // ignore height-only changes from the mobile address bar; only respond
@@ -550,8 +554,12 @@ document.addEventListener('visibilitychange', () => {
   hidden = document.hidden;
   if (!hidden) clock.getDelta();   // discard the elapsed gap so motion stays smooth
 });
+let animationId = 0;
 function animate() {
-  requestAnimationFrame(animate);
+  animationId = 0;
+  // Preserve a still WebGL galaxy; do not schedule drift, parallax or convergence.
+  if (motionPreference.matches) { renderer.render(scene, camera); return; }
+  animationId = requestAnimationFrame(animate);
   if (hidden) return;
   // frame-rate independent timing: dt normalized to 60fps so motion stays
   // perfectly smooth whether the device runs at 30, 60 or 120 fps
@@ -648,6 +656,11 @@ function animate() {
 
   renderer.render(scene, camera);
 }
+motionPreference.addEventListener('change', () => {
+  if (animationId) cancelAnimationFrame(animationId);
+  clock.getDelta(); // discard elapsed time before resuming the ordinary animation
+  animate();
+});
 animate();
 } catch (err) {   // ---- WebGL unavailable/failed: show static backdrop ----
   console.warn('WebGL galaxy disabled, using static backdrop:', err);

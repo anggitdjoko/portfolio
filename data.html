@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- warp inbound guard: hide the page before first paint when arriving through a warp, so it never flashes at rest before the transition takes over -->
-<script>(function(){try{if(sessionStorage.getItem('__warp_in')==='1'){var d=document.documentElement;d.className+=(d.className?' ':'')+'warp-cover';setTimeout(function(){d.classList.remove('warp-cover');d.style.overflow='';d.style.touchAction='';if(document.body){document.body.style.overflow='';}},4000);}}catch(e){}})();</script>
+<script>(function(){try{if(sessionStorage.getItem('__warp_in')==='1'&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.className+=(d.className?' ':'')+'warp-cover';setTimeout(function(){d.classList.remove('warp-cover');d.style.overflow='';d.style.touchAction='';if(document.body){document.body.style.overflow='';}},4000);}}catch(e){}})();</script>
 <style>html.warp-cover{background:#02040a!important}html.warp-cover body{opacity:0!important}</style>
 <title>Anggit Djoko Wibowo · Data Analysis Showcase</title>
 <meta name="description" content="Data analysis showcase by Anggit Djoko Wibowo: real reporting dashboards and business insights across LPG distribution, heavy equipment, and F&B." />
@@ -188,6 +188,14 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
 #lb.open{display:flex}
 #lb img{max-width:100%;max-height:92vh;border-radius:12px;
   box-shadow:0 30px 90px -20px rgba(0,0,0,.8)}
+
+/* Reduced motion is opt-in; ordinary visitors keep every existing animation. */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .btn:hover,.pcard:hover,.skill:hover,.cm:hover,.socials a:hover{transform:none}
+}
 </style>
 </head>
 <body>
@@ -292,7 +300,7 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
 
 <div id="lb"><img src="" alt=""></div>
 
-<script src="./warp.js"></script>
+<script src="./warp.js?v=ux-motion-20260909"></script>
 <script src="./gas.js"></script>
 <script src="./kobelco.js"></script>
 <script src="./jar.js"></script>
@@ -311,7 +319,8 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
 /* lightweight drifting starfield (round glowing particles) */
 (function(){
   var c=document.getElementById('space'),x=c.getContext('2d');
-  var w,h,dpr,stars;
+  var w,h,dpr,stars,frameId=0;
+  var motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
   function size(){
     dpr=Math.min(window.devicePixelRatio||1,2);
     w=c.width=innerWidth*dpr;h=c.height=innerHeight*dpr;
@@ -331,10 +340,11 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
     }
   }
   function frame(t){
+    frameId=0;
     x.clearRect(0,0,w,h);
     for(var i=0;i<stars.length;i++){
       var s=stars[i];
-      s.x+=s.vx;s.y+=s.vy;s.tw+=0.02;
+      if(!motionPreference.matches){s.x+=s.vx;s.y+=s.vy;s.tw+=0.02;}
       if(s.x<0)s.x=w;if(s.x>w)s.x=0;if(s.y<0)s.y=h;if(s.y>h)s.y=0;
       var a=s.a*(0.6+0.4*Math.sin(s.tw));
       var g=x.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*3);
@@ -343,10 +353,14 @@ footer{position:relative;z-index:2;text-align:center;padding:70px 0 46px;
       x.fillStyle=g;
       x.beginPath();x.arc(s.x,s.y,s.r*3,0,Math.PI*2);x.fill();
     }
-    requestAnimationFrame(frame);
+    if(!motionPreference.matches) frameId=requestAnimationFrame(frame);
   }
-  size();requestAnimationFrame(frame);
-  addEventListener('resize',size);
+  size();frameId=requestAnimationFrame(frame);
+  addEventListener('resize',function(){size();if(motionPreference.matches)frame();});
+  motionPreference.addEventListener('change',function(){
+    if(frameId)cancelAnimationFrame(frameId);
+    frame();
+  });
 })();
 </script>
 </body>

@@ -25,7 +25,7 @@ The improvement plan is being published before any frontend changes. Baseline co
 | T05 Content order | Reviewed with a local prototype; original order retained |
 | T06 Ownership / T07 CV / T10 GearGrid video | Waiting for verified source material |
 | T08 Filters and labels | Reviewed; existing labels and all five working filter states retained |
-| T09 Reduced motion | Separate technical review |
+| T09 Reduced motion | Technical review complete; implementation passed 31 local checks; live verification follows |
 | T11 Investor pitch | Not needed for this personal portfolio; no changes planned |
 
 ### Explicitly retained
@@ -128,3 +128,18 @@ A local-only prototype moved Projects immediately after Hero. Desktop project po
 Verified all five controls and their matching results: All 6; Web App 1; Full-Stack 3; Web 1; Data 1. No failed state or evidence of a net clarity gain justified changing categories, labels or records. The current controls and project data remain unchanged.
 
 Review evidence: [review-2026-09-09.json](review-2026-09-09.json). T04 live publication verification will follow its implementation commit. T05/T08 are completed reviews with explicit retain decisions, not unimplemented redesigns.
+
+## T09 — Complete reduced-motion support
+
+Reviewed separately after T04; parent is [dc244508](https://github.com/anggitdjoko/portfolio/commit/dc2445083c9bca4e3b80d92b655699db7db984f9). The initial implementation respected the preference for preview autoplay, badge pulse, fallback galaxy animation and warp only at page load. Reproduced gaps: WebGL drift/parallax/convergence continued; loader/scroll indicator/reveal/hover transitions and smooth anchor scrolling remained; the data-page starfield kept drifting; preference changes after load did not consistently update behavior.
+
+Changes are scoped to prefers-reduced-motion: reduce:
+- Preserve a still WebGL galaxy, stop its animation loop, redraw when needed on resize, and resume the unchanged ordinary animation when the preference is disabled. CSS fallback remains still.
+- Suppress decorative CSS animations/transitions, reveal movement and hover displacement only for reduced-motion visitors; make anchor movement immediate.
+- Pause inline preview reels if the preference becomes reduced. Explicitly opened full demos remain available with controls and T03 modal behavior.
+- Render the data-page starfield once in reduced mode, redraw on resize, and handle preference changes without ongoing drift.
+- Respect updated preferences for warp navigation, skip the inbound cover for reduced motion, and safely finish/clean up an active warp if the preference changes mid-transition. Versioned app/warp URLs prevent stale script combinations on both pages.
+
+Final local checks: **31/31 passed** with actual CDN-loaded Three.js/GSAP and an explicitly forced no-WebGL fallback. Covered initial and runtime motion preferences, zero continuing WebGL/data animation callbacks in reduced mode, restored callbacks in ordinary mode, CSS animation/scroll settings, viewport resize, anchors, preview autoplay suppression, manual modal open/close, mobile navigation, normal outgoing/incoming warp, reduced return navigation and changing preference during a warp. Both ordinary and reduced data-page starfields were exercised. Ordinary WebGL animation, smooth scrolling, warp overlays and cleanup remained functional. Browser synchronization waits were required for preference/resize events and navigation; the final matrix reflects settled page state, not premature readings.
+
+The T04 text-color declaration is retained in the combined candidate. No project records, tags, filters, media files, contacts, chart data, theme variables or section order were changed. This is UI/browser verification, not physical-device, screen-reader, performance or full-browser certification. See [motion-tests-2026-09-09.json](motion-tests-2026-09-09.json) for the recorded assertions. Live build and publication results follow this implementation commit.
