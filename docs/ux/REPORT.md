@@ -21,11 +21,11 @@ The improvement plan is being published before any frontend changes. Baseline co
 | T01 Mobile navigation | Complete; existing implementation retained; Pages build and live script verified |
 | T02 Factual video explanation | Complete; tested, committed, Pages build and live text verified |
 | T03 Video overlay keyboard support | Complete; tested, committed, Pages build and live interaction verified |
-| T04 Readability | Narrow lead-text improvement implemented and locally compared; publication verification follows |
+| T04 Readability | Complete; text-only improvement compared in WebGL/fallback and verified live |
 | T05 Content order | Reviewed with a local prototype; original order retained |
 | T06 Ownership / T07 CV / T10 GearGrid video | Waiting for verified source material |
 | T08 Filters and labels | Reviewed; existing labels and all five working filter states retained |
-| T09 Reduced motion | Technical review complete; implementation passed 31 local checks; live verification follows |
+| T09 Reduced motion | Complete; 31/31 local and 17/17 live checks passed; Pages built |
 | T11 Investor pitch | Not needed for this personal portfolio; no changes planned |
 
 ### Explicitly retained
@@ -143,3 +143,30 @@ Changes are scoped to prefers-reduced-motion: reduce:
 Final local checks: **31/31 passed** with actual CDN-loaded Three.js/GSAP and an explicitly forced no-WebGL fallback. Covered initial and runtime motion preferences, zero continuing WebGL/data animation callbacks in reduced mode, restored callbacks in ordinary mode, CSS animation/scroll settings, viewport resize, anchors, preview autoplay suppression, manual modal open/close, mobile navigation, normal outgoing/incoming warp, reduced return navigation and changing preference during a warp. Both ordinary and reduced data-page starfields were exercised. Ordinary WebGL animation, smooth scrolling, warp overlays and cleanup remained functional. Browser synchronization waits were required for preference/resize events and navigation; the final matrix reflects settled page state, not premature readings.
 
 The T04 text-color declaration is retained in the combined candidate. No project records, tags, filters, media files, contacts, chart data, theme variables or section order were changed. This is UI/browser verification, not physical-device, screen-reader, performance or full-browser certification. See [motion-tests-2026-09-09.json](motion-tests-2026-09-09.json) for the recorded assertions. Live build and publication results follow this implementation commit.
+
+## Second-batch publication verification
+
+Checked: 2026-09-09T04:18:00.911Z (UTC; 2026-09-09 Asia/Jakarta).
+
+| Task | Implementation commit | Pages verification |
+|---|---|---|
+| T04 lead-text readability | [dc244508](https://github.com/anggitdjoko/portfolio/commit/dc2445083c9bca4e3b80d92b655699db7db984f9) | Build 1203352784: built; production lead color rgb(169, 179, 203), with WebGL and six cards present |
+| T09 reduced motion | [b35bba98](https://github.com/anggitdjoko/portfolio/commit/b35bba983c39ac0c884451b715e7f8c479919a45) | Build 1203354738: built; 17/17 live checks passed |
+
+Production HTML and JavaScript for all four changed application files were fetched fresh through the browser; their SHA-256 hashes exactly matched the published candidates. This also verifies the versioned asset/cache combination rather than assuming the branch update was visible.
+
+The live matrix verified ordinary animated WebGL, unchanged normal scroll/loader settings, the brighter T04 lead color, runtime switching to reduced motion, initial reduced motion at 390 px, no continuing galaxy animation callbacks, menu/anchor interaction, manually played video with controls and restored scroll lock, no-flash navigation to Data, a still reduced-mode data starfield, and resuming its ordinary motion when the preference is disabled. No production page errors occurred in these checks. Local testing additionally covered the forced CSS fallback, ordinary warp round-trip, and preference changes during an active warp.
+
+Source-integrity comparison against the second-batch baseline preserved all original paths. Only index.html, app.js, data.html, warp.js and REPORT.md changed among existing files; 25 other original file blobs remain byte-identical. Project/experience/contact data, video/image assets and chart datasets/scripts were not edited. New files contain review/test evidence only. Pages configuration and workflows were not changed; all branch updates were checked against the expected parent and used force:false.
+
+Evidence: [second-batch-verification-2026-09-09.json](second-batch-verification-2026-09-09.json). This final follow-up commit records documentation/evidence only; the verified application revision is the T09 commit above.
+
+### Current disposition
+
+- Implemented and published: T01, T02, T03, T04 and T09.
+- Reviewed, intentionally retained: T05 section order and T08 filters/labels. T11 still requires no investor-pitch changes.
+- Blocked on source material, not fabricated: T06 verified ownership/status facts; T07 approved current CV and destination; T10 genuine GearGrid recording.
+- Known separate review item: small pre-existing mobile video overflow, recorded in T03. No broad layout redesign was introduced to mask it.
+- Limits: responsive Chromium and browser preference emulation do not replace physical Safari/iPhone/Android or screen-reader testing; no performance score, accessibility certification, backend or business metric is claimed.
+
+Rollback remains additive and task-scoped: T04 parent [1cb905b6](https://github.com/anggitdjoko/portfolio/commit/1cb905b64319f474bb0fb739e1b7e66eaa29430c); T09 parent [dc244508](https://github.com/anggitdjoko/portfolio/commit/dc2445083c9bca4e3b80d92b655699db7db984f9). Check for later work before creating any revert commit. No rollback was needed.

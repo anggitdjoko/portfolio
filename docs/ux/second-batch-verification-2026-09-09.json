@@ -1,0 +1,166 @@
+{
+  "checkedAt": "2026-09-09T04:18:02.865Z",
+  "commits": {
+    "T04": "dc2445083c9bca4e3b80d92b655699db7db984f9",
+    "T09": "b35bba983c39ac0c884451b715e7f8c479919a45"
+  },
+  "builds": {
+    "T04": {
+      "commit": "dc2445083c9bca4e3b80d92b655699db7db984f9",
+      "status": "built",
+      "error": {
+        "message": null
+      },
+      "id": "1203352784",
+      "updated_at": "2026-09-09T04:15:15Z"
+    },
+    "T09": {
+      "commit": "b35bba983c39ac0c884451b715e7f8c479919a45",
+      "status": "built",
+      "error": {
+        "message": null
+      },
+      "id": "1203354738",
+      "updated_at": "2026-09-09T04:16:36Z"
+    }
+  },
+  "integrity": {
+    "baseline": "1cb905b64319f474bb0fb739e1b7e66eaa29430c",
+    "current": "b35bba983c39ac0c884451b715e7f8c479919a45",
+    "changed": [
+      "app.js",
+      "data.html",
+      "docs/ux/REPORT.md",
+      "index.html",
+      "warp.js"
+    ],
+    "added": [
+      "docs/ux/motion-tests-2026-09-09.json",
+      "docs/ux/review-2026-09-09.json"
+    ],
+    "unchangedOriginalFiles": 25,
+    "allOriginalPathsPreserved": true
+  },
+  "liveT04": {
+    "url": "https://anggitdjoko.github.io/portfolio/?verify=ux-readability-20260909",
+    "leadColor": "rgb(169, 179, 203)",
+    "cards": 6,
+    "three": true,
+    "fallback": false
+  },
+  "liveT09": {
+    "checkedAt": "2026-09-09T04:16:50.872Z",
+    "site": "https://anggitdjoko.github.io/portfolio/",
+    "checks": [
+      {
+        "name": "live bytes match index.html",
+        "ok": true,
+        "data": {
+          "status": 200,
+          "hash": "66fdec9e32097a3d3b6b03148bba19b3e3babe64dfd513291ae367b82f33697e",
+          "expected": "66fdec9e32097a3d3b6b03148bba19b3e3babe64dfd513291ae367b82f33697e"
+        }
+      },
+      {
+        "name": "live bytes match app.js",
+        "ok": true,
+        "data": {
+          "status": 200,
+          "hash": "1567238f1327e2d77ca0597ad42375bf04754b8609bf3ccc2bc5b1a7da52681c",
+          "expected": "1567238f1327e2d77ca0597ad42375bf04754b8609bf3ccc2bc5b1a7da52681c"
+        }
+      },
+      {
+        "name": "live bytes match data.html",
+        "ok": true,
+        "data": {
+          "status": 200,
+          "hash": "b425a519f91af83c8b750c1e2d7cea80cda56d625f01025f62738daa1b90b6f0",
+          "expected": "b425a519f91af83c8b750c1e2d7cea80cda56d625f01025f62738daa1b90b6f0"
+        }
+      },
+      {
+        "name": "live bytes match warp.js",
+        "ok": true,
+        "data": {
+          "status": 200,
+          "hash": "1e900717b3088518905d0e74237533a49f5a435d9ec8e6c6bb980c97078d1568",
+          "expected": "1e900717b3088518905d0e74237533a49f5a435d9ec8e6c6bb980c97078d1568"
+        }
+      },
+      {
+        "name": "ordinary WebGL and visual settings retained",
+        "ok": true,
+        "data": {
+          "three": true,
+          "fallback": false,
+          "ring": "spin",
+          "scroll": "smooth",
+          "lead": "rgb(169, 179, 203)",
+          "cards": 6,
+          "scripts": [
+            "https://anggitdjoko.github.io/portfolio/warp.js?v=ux-motion-20260909",
+            "https://anggitdjoko.github.io/portfolio/app.js?v=ux-motion-20260909"
+          ]
+        }
+      },
+      {
+        "name": "ordinary production galaxy animates",
+        "ok": true
+      },
+      {
+        "name": "live preference change stops galaxy",
+        "ok": true
+      },
+      {
+        "name": "initial reduced motion on live mobile layout",
+        "ok": true,
+        "data": {
+          "three": true,
+          "fallback": false,
+          "ring": "none",
+          "scroll": "auto",
+          "dot": "none"
+        }
+      },
+      {
+        "name": "live reduced galaxy is still",
+        "ok": true
+      },
+      {
+        "name": "live reduced mobile menu opens",
+        "ok": true
+      },
+      {
+        "name": "live reduced anchor works",
+        "ok": true
+      },
+      {
+        "name": "live manual modal retains focus",
+        "ok": true
+      },
+      {
+        "name": "live manual video advances despite reduced motion",
+        "ok": true
+      },
+      {
+        "name": "live close releases scroll lock",
+        "ok": true
+      },
+      {
+        "name": "live reduced warp navigation skips flash",
+        "ok": true
+      },
+      {
+        "name": "live reduced data starfield is still",
+        "ok": true
+      },
+      {
+        "name": "live data starfield resumes for ordinary motion",
+        "ok": true
+      }
+    ],
+    "passed": 17,
+    "total": 17
+  }
+}
