@@ -3,8 +3,8 @@ const P = window.PORTFOLIO;
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /* ---------- loader safety net ----------
-   Reveal the page no matter what. If a later step (e.g. WebGL on iOS)
-   throws and aborts the rest of this script, these still fire and the
+   Reveal the page no matter what. If optional WebGL/library setup throws,
+   these still fire and the user is never stranded on the splash.
    user is never stranded on the "Hello !" splash. hideLoader (below) is
    a hoisted function declaration, so it is safe to reference here. */
 function hideLoaderSafe() {
@@ -255,8 +255,8 @@ mobileNav.addEventListener('change', () => {
 });
 setMenuOpen(false, false);
 
-/* ---------- reliable in-page smooth scroll (iOS-safe) ----------
-   iOS Safari frequently ignores anchor jumps that rely only on CSS
+/* ---------- reliable in-page smooth scroll (mobile-safe) ----------
+   Mobile Safari frequently ignores anchor jumps that rely only on CSS
    scroll-behavior:smooth (especially when the URL already carries a
    leftover #hash from the warp round-trip), which made "View My Work"
    and "Say Hello" feel dead. Drive the scroll from JS instead. */
@@ -294,30 +294,43 @@ setMenuOpen(false, false);
    ======================================================================= */
 try {   // ---- WebGL galaxy: degrade gracefully if the GPU/context fails ----
 const canvas = document.getElementById('space');
-// iPadOS reports as "MacIntel" with touch points; treat all iOS as mobile so
-// iPad no longer runs the heavy desktop path (16k particles + AA + DPR 2),
-// which is what exhausts the GPU and blocks the page on iOS Safari.
-const iOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
-  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-const MOBILE = innerWidth < 700 || iOS;
-// --- iOS reliability: skip the live WebGL galaxy entirely ---
-// iPhone/iPad Safari (esp. 4GB devices like iPhone 11) frequently kill or
-// reload the whole tab under the GPU/memory pressure of a continuous three.js
-// render loop, which shows up as a blank, "buggy", un-scrollable page. The
-// static Andromeda backdrop looks intentional and costs zero GPU/memory, so
-// iOS gets that instead of the live particle simulation. Everything else
-// (content, scrolling, buttons, warp) works normally.
-if (iOS) { throw new Error('iOS: using static galaxy backdrop for reliability'); }
+// Choose quality from capabilities rather than operating-system identity.
+// Every supported browser gets the same scene/layout; weaker devices simply
+// draw fewer samples from the same galaxy distributions and use less fill-rate.
+const MOBILE = innerWidth < 700;
+const reduced = () => motionPreference.matches;
+const viewportPixels = innerWidth * innerHeight;
+const cores = Number(navigator.hardwareConcurrency) || 4;
+const memory = Number(navigator.deviceMemory) || 4;
+const constrained = cores <= 4 || memory <= 2 || viewportPixels < 420000;
+const quality = constrained ? 'low' : (cores <= 6 || memory <= 4 || viewportPixels < 900000 ? 'medium' : 'high');
+const qualityConfig = {
+  low:    { count: 4200, dpr: 1.15, antialias: false, haze: false },
+  medium: { count: 8500, dpr: 1.35, antialias: false, haze: true },
+  high:   { count: 16000, dpr: 1.75, antialias: true, haze: true }
+}[quality];
+// Check capability before constructing Three's renderer. UA strings are not
+// reliable (and mobile browsers all use WebKit), while this reflects real support.
+const gl = canvas.getContext('webgl2', { alpha: true, antialias: false }) ||
+  canvas.getContext('webgl', { alpha: true, antialias: false });
+if (!gl) throw new Error('WebGL context unavailable');
 const renderer = new THREE.WebGLRenderer({
-  canvas, antialias: !MOBILE, alpha: true,
+  canvas, antialias: qualityConfig.antialias, alpha: true,
   powerPreference: 'default', failIfMajorPerformanceCaveat: false
 });
-renderer.setPixelRatio(Math.min(devicePixelRatio, iOS ? 1 : (MOBILE ? 1.25 : 2)));
-// If iOS drops the context under memory pressure, fall back to the static
-// backdrop instead of throwing on every frame.
+const dpr = Math.min(devicePixelRatio || 1, qualityConfig.dpr);
+renderer.setPixelRatio(dpr);
+let rendererFailed = false;
+function fallbackWebGL(reason) {
+  if (rendererFailed) return;
+  rendererFailed = true;
+  if (animationId) cancelAnimationFrame(animationId);
+  document.documentElement.classList.add('nowebgl');
+  console.warn('WebGL galaxy unavailable; using CSS fallback:', reason);
+}
 canvas.addEventListener('webglcontextlost', (e) => {
   e.preventDefault();
-  document.documentElement.classList.add('nowebgl');
+  fallbackWebGL('context lost');
 }, false);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.1, 4000);
@@ -364,7 +377,7 @@ function discTexture() {
 const disc = discTexture();
 
 /* --- build particle field --- */
-const COUNT = iOS ? 2600 : (MOBILE ? 6000 : 16000);
+const COUNT = qualityConfig.count;
 const geo = new THREE.BufferGeometry();
 const cur = new Float32Array(COUNT * 3);   // current animated position
 const uni = new Float32Array(COUNT * 3);   // scattered "universe" home
@@ -488,9 +501,9 @@ const haze = new THREE.Points(geo, hazeMat);
 const galaxy = new THREE.Group();
 galaxy.rotation.x = 1.02;   // lay the disk back
 galaxy.rotation.z = 0.28;   // slight roll
-// haze = large additive sprites → heavy overdraw/fill-rate, the main killer on
-// iOS Safari. Drop it on iOS; the dot field + core glow still read as a galaxy.
-if (!iOS) galaxy.add(haze);
+// Haze is the first layer removed on constrained hardware; the dot field,
+// core glow, colours and geometry remain the same visual composition.
+if (qualityConfig.haze) galaxy.add(haze);
 galaxy.add(points);
 scene.add(galaxy);
 
@@ -547,20 +560,25 @@ const easeInOut = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 const clock = new THREE.Clock();
 const pos = geo.attributes.position.array;
 let frame = 0;
-// pause rendering when the tab/page is hidden (saves GPU + battery on iOS and
-// avoids a big time-delta jump when the user returns)
+// Pause the render loop when hidden and resume cleanly when visible.
 let hidden = document.hidden;
+let animationId = 0;
 document.addEventListener('visibilitychange', () => {
   hidden = document.hidden;
-  if (!hidden) clock.getDelta();   // discard the elapsed gap so motion stays smooth
+  if (hidden) {
+    if (animationId) cancelAnimationFrame(animationId);
+    animationId = 0;
+  } else {
+    clock.getDelta(); // discard the elapsed gap so motion stays smooth
+    animate();
+  }
 });
-let animationId = 0;
 function animate() {
   animationId = 0;
-  // Preserve a still WebGL galaxy; do not schedule drift, parallax or convergence.
-  if (motionPreference.matches) { renderer.render(scene, camera); return; }
+  if (rendererFailed || hidden) return;
+  // Reduced motion keeps one composed frame: no drift, parallax or convergence.
+  if (reduced()) { renderer.render(scene, camera); return; }
   animationId = requestAnimationFrame(animate);
-  if (hidden) return;
   // frame-rate independent timing: dt normalized to 60fps so motion stays
   // perfectly smooth whether the device runs at 30, 60 or 120 fps
   const dt = Math.min(clock.getDelta(), 0.05);
@@ -637,7 +655,7 @@ function animate() {
   // particle disk at full brightness, breathing as it drifts, then
   // becomes the star of the show as everything converges into the sphere
   mat.opacity = 0.7 + Math.pow(c, 1.3) * 0.28;
-  hazeMat.opacity = 0.08 + Math.pow(c, 1.5) * 0.14;
+  if (qualityConfig.haze) hazeMat.opacity = 0.08 + Math.pow(c, 1.5) * 0.14;
 
   // warm golden bulge glow, tightens as it converges
   coreGlow.material.opacity = 0.5 + Math.pow(c, 1.6) * 0.35;
@@ -658,7 +676,8 @@ function animate() {
 }
 motionPreference.addEventListener('change', () => {
   if (animationId) cancelAnimationFrame(animationId);
-  clock.getDelta(); // discard elapsed time before resuming the ordinary animation
+  animationId = 0;
+  clock.getDelta();
   animate();
 });
 animate();
