@@ -294,21 +294,16 @@ setMenuOpen(false, false);
    ======================================================================= */
 try {   // ---- WebGL galaxy: degrade gracefully if the GPU/context fails ----
 const canvas = document.getElementById('space');
-// Choose quality from capabilities rather than operating-system identity.
-// Every supported browser gets the same scene/layout; weaker devices simply
-// draw fewer samples from the same galaxy distributions and use less fill-rate.
+// Keep the existing live desktop/Android renderer budget unchanged. The
+// previous revision selected lower tiers from guessed device capabilities,
+// which could downgrade ordinary desktop/Android browsers. Viewport width is
+// the existing scene split, not an OS or UA veto: iPhone/iPad can use this
+// same mobile renderer whenever WebGL is actually available.
 const MOBILE = innerWidth < 700;
 const reduced = () => motionPreference.matches;
-const viewportPixels = innerWidth * innerHeight;
-const cores = Number(navigator.hardwareConcurrency) || 4;
-const memory = Number(navigator.deviceMemory) || 4;
-const constrained = cores <= 4 || memory <= 2 || viewportPixels < 420000;
-const quality = constrained ? 'low' : (cores <= 6 || memory <= 4 || viewportPixels < 900000 ? 'medium' : 'high');
-const qualityConfig = {
-  low:    { count: 4200, dpr: 1.15, antialias: false, haze: false },
-  medium: { count: 8500, dpr: 1.35, antialias: false, haze: true },
-  high:   { count: 16000, dpr: 1.75, antialias: true, haze: true }
-}[quality];
+const qualityConfig = MOBILE
+  ? { count: 6000, dpr: 1.25, antialias: false, haze: true }
+  : { count: 16000, dpr: 2, antialias: true, haze: true };
 // Check capability before constructing Three's renderer. UA strings are not
 // reliable (and mobile browsers all use WebKit), while this reflects real support.
 const gl = canvas.getContext('webgl2', { alpha: true, antialias: false }) ||
@@ -501,9 +496,8 @@ const haze = new THREE.Points(geo, hazeMat);
 const galaxy = new THREE.Group();
 galaxy.rotation.x = 1.02;   // lay the disk back
 galaxy.rotation.z = 0.28;   // slight roll
-// Haze is the first layer removed on constrained hardware; the dot field,
-// core glow, colours and geometry remain the same visual composition.
-if (qualityConfig.haze) galaxy.add(haze);
+// Keep the existing haze layer on both the mobile and desktop baselines.
+galaxy.add(haze);
 galaxy.add(points);
 scene.add(galaxy);
 
@@ -655,7 +649,7 @@ function animate() {
   // particle disk at full brightness, breathing as it drifts, then
   // becomes the star of the show as everything converges into the sphere
   mat.opacity = 0.7 + Math.pow(c, 1.3) * 0.28;
-  if (qualityConfig.haze) hazeMat.opacity = 0.08 + Math.pow(c, 1.5) * 0.14;
+  hazeMat.opacity = 0.08 + Math.pow(c, 1.5) * 0.14;
 
   // warm golden bulge glow, tightens as it converges
   coreGlow.material.opacity = 0.5 + Math.pow(c, 1.6) * 0.35;
