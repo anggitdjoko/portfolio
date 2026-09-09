@@ -19,8 +19,8 @@ The improvement plan is being published before any frontend changes. Baseline co
 | Task | Status |
 |---|---|
 | T01 Mobile navigation | Complete; existing implementation retained; Pages build and live script verified |
-| T02 Factual video explanation | Implemented and locally tested in this commit; deployment verification follows |
-| T03 Video overlay keyboard support | Implemented and locally tested in this commit; deployment verification follows |
+| T02 Factual video explanation | Complete; tested, committed, Pages build and live text verified |
+| T03 Video overlay keyboard support | Complete; tested, committed, Pages build and live interaction verified |
 | T04 Readability / T05 Content order | Separate visual review; existing design retained for now |
 | T06 Ownership / T07 CV / T10 GearGrid video | Waiting for verified source material |
 | T08 Filters and labels | Retained pending evidence of a better alternative |
@@ -78,3 +78,32 @@ Local results:
 - JavaScript syntax validation passed. Application page errors: none in the local runs. Video request cancellations while pausing/closing were observed, not treated as failed playback.
 
 Limits: deterministic local runs block external CDNs and exercise the fallback; native dialog behavior was tested in Chromium, not certified on physical devices or with screen readers. Existing narrow-screen media geometry includes a small right-side overflow (about 8 px at 390 px); it was reproduced in baseline and retained to keep this keyboard task visually scoped. A separate media-layout review can address it. Final publication/build/live results follow after this implementation commit.
+
+## Final publication verification — first batch complete
+
+Checked: 2026-09-09T03:59:25.102Z (UTC; 2026-09-09 Asia/Jakarta).
+
+| Task | Implementation commit | GitHub Pages result |
+|---|---|---|
+| T01 (existing; retained) | [08d4f4e](https://github.com/anggitdjoko/portfolio/commit/08d4f4e423fb6e3f11dca457f89c781486024c7e) | Build 1203253158: built; live versioned navigation script verified |
+| T02 | [fe1bd6d6](https://github.com/anggitdjoko/portfolio/commit/fe1bd6d67752b6b559e36aa98f72fe622c0acff6) | Build 1203325773: built; fresh live HTML contains the factual sentence and no old private/on-premise claim |
+| T03 | [4ce418cc](https://github.com/anggitdjoko/portfolio/commit/4ce418cc3c35e8d3527b6fa0b77c404cc7a503fa) | Build 1203327466: built; fresh HTML and versioned JavaScript verified |
+
+Live site: https://anggitdjoko.github.io/portfolio/
+
+A fresh production browser session loaded the new dialog markup and app.js?v=ux-reel-20260909 (HTTP 200), with Three.js/GSAP and the WebGL galaxy present. Six project cards and all five filters remain. Native Enter on Watch reel opened the modal, focused Close video and blocked background focus. Tab and Escape were exercised; after the native close event settled, focus and the exact prior scroll position returned, the reel scroll-lock class was absent and the video was paused. Reopening played the production Servgo MP4 with readyState 4, advancing currentTime and no media error. All three recorded MP4s were separately playback-tested locally.
+
+Source integrity was checked against the fetched T01 revision: only index.html, app.js and this report changed across the implementation commits; all 26 other original file blobs, including project data, video/image assets, warp and data-page scripts, are unchanged. All 29 original paths remain. Production branch/root settings and workflows were not modified. Every branch update used force:false after checking the expected parent; no force push, history rewrite or reset occurred.
+
+Machine-readable verification: [verification-2026-09-09.json](verification-2026-09-09.json). This final commit adds documentation/evidence only; the verified application revision is the T03 commit above.
+
+### Retained, deferred and blocked
+
+- Retained: galaxy theme, cyan/purple palette, typography, ordinary animations, warp source, contacts, project records/tags, filters, recorded assets and section order. No hosted demo server was introduced.
+- T04/T05/T08/T09 remain separate review items, not silently implemented. T11 remains unnecessary.
+- T06 still requires verified ownership/status facts; T07 an approved current CV; T10 a genuine GearGrid recording. No placeholders or invented claims were published.
+- Remaining limits: Chromium responsive checks do not certify physical iPhone/Android, Safari, screen readers, performance, backend behavior or business outcomes. Live smoke testing covered the WebGL page; the deterministic local matrix covered the fallback. Full warp-transition end-to-end testing was not performed; warp source is byte-identical. Existing small mobile video overflow is documented above and was not redesigned in this keyboard task.
+
+### Rollback references
+
+T02 parent: [08d4f4e4](https://github.com/anggitdjoko/portfolio/commit/08d4f4e423fb6e3f11dca457f89c781486024c7e); T03 parent: [fe1bd6d6](https://github.com/anggitdjoko/portfolio/commit/fe1bd6d67752b6b559e36aa98f72fe622c0acff6). If a regression appears, check the latest branch and revert only the affected task in a new commit, preserving later work. No rollback was needed in this batch.

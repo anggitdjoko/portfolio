@@ -1,0 +1,144 @@
+{
+  "checkedAt": "2026-09-09T03:59:27.020Z",
+  "baseline": "08d4f4e423fb6e3f11dca457f89c781486024c7e",
+  "commits": {
+    "T02": "fe1bd6d67752b6b559e36aa98f72fe622c0acff6",
+    "T03": "4ce418cc3c35e8d3527b6fa0b77c404cc7a503fa"
+  },
+  "builds": {
+    "T02": {
+      "commit": "fe1bd6d67752b6b559e36aa98f72fe622c0acff6",
+      "status": "built",
+      "error": {
+        "message": null
+      },
+      "id": "1203325773",
+      "updated_at": "2026-09-09T03:56:35Z"
+    },
+    "T03": {
+      "commit": "4ce418cc3c35e8d3527b6fa0b77c404cc7a503fa",
+      "status": "built",
+      "error": {
+        "message": null
+      },
+      "id": "1203327466",
+      "updated_at": "2026-09-09T03:57:52Z"
+    }
+  },
+  "localTestSuites": {
+    "navigation": {
+      "passed": 27,
+      "total": 27
+    },
+    "runtimeParity": {
+      "passed": 5,
+      "total": 5
+    },
+    "layout": {
+      "passed": 1,
+      "total": 1
+    },
+    "overlay": {
+      "passed": 1,
+      "total": 1
+    },
+    "baselineDefectReproduced": {
+      "passed": 1,
+      "total": 1
+    },
+    "failsafeLock": {
+      "passed": 1,
+      "total": 1
+    },
+    "videoAndRerender": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "caveats": [
+    "Network route intentionally aborts external CDN font/Three/GSAP requests; app falls back to static/no-WebGL path in these runs.",
+    "Headless Chromium emitted baseline GL Driver Message GPU stall warnings; no pageerror was observed.",
+    "Some broad-run local video ERR_ABORTED request failures are expected when lazy media is paused/closed during interaction."
+  ],
+  "integrity": {
+    "baseline": "08d4f4e423fb6e3f11dca457f89c781486024c7e",
+    "published": "4ce418cc3c35e8d3527b6fa0b77c404cc7a503fa",
+    "changed": [
+      "app.js",
+      "docs/ux/REPORT.md",
+      "index.html"
+    ],
+    "unchangedBlobs": 26,
+    "pathsPreserved": 29
+  },
+  "live": {
+    "T01": {
+      "url": "https://anggitdjoko.github.io/portfolio/",
+      "script": "https://anggitdjoko.github.io/portfolio/app.js?v=ux-nav-20260909",
+      "status": 200,
+      "t01": true,
+      "menu": {
+        "label": "Open navigation",
+        "controls": "navlinks"
+      },
+      "cards": 6,
+      "filters": "All\nWeb App\nFull-Stack\nWeb\nData",
+      "fallback": false,
+      "three": true,
+      "gsap": true
+    },
+    "T02": {
+      "status": 200,
+      "explanation": "Watch recorded project demos using the video controls or open them in the full-screen viewer.",
+      "unsupported": false,
+      "script": "./app.js?v=ux-nav-20260909"
+    },
+    "T03": {
+      "source": {
+        "status": 200,
+        "script": "https://anggitdjoko.github.io/portfolio/app.js?v=ux-reel-20260909",
+        "dialog": "DIALOG",
+        "showModalCode": true,
+        "explanation": "Watch recorded project demos using the video controls or open them in the full-screen viewer.",
+        "three": true,
+        "gsap": true,
+        "fallback": false,
+        "cards": 6,
+        "filters": 5
+      },
+      "open": {
+        "open": true,
+        "modal": true,
+        "focusOnClose": true,
+        "backgroundBlocked": true,
+        "scrollLock": "hidden",
+        "video": {
+          "currentSrc": "https://anggitdjoko.github.io/portfolio/assets/video/servgo-demo.mp4",
+          "paused": false,
+          "currentTime": 0,
+          "readyState": 0,
+          "controls": true
+        },
+        "three": true,
+        "fallback": false
+      },
+      "closeAfterNativeEvent": {
+        "closed": true,
+        "focusRestored": true,
+        "scrollRestored": true,
+        "scrollLock": "visible",
+        "reelLock": false,
+        "videoPaused": true
+      },
+      "playback": {
+        "src": "https://anggitdjoko.github.io/portfolio/assets/video/servgo-demo.mp4",
+        "readyState": 4,
+        "duration": 81.067007,
+        "currentTime": 0.236923,
+        "paused": false,
+        "controls": true,
+        "error": null
+      }
+    }
+  }
+}
