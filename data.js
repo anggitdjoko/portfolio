@@ -123,7 +123,6 @@ window.PORTFOLIO = {
       title: "This Portfolio",
       desc: "Cinematic single-page developer portfolio with a Three.js particle universe that converges into one glowing sphere on scroll.",
       tech: ["Three.js", "GSAP", "JavaScript"],
-      code: "https://github.com/anggitdjoko/portfolio",
       demo: "https://anggitdjoko.github.io/portfolio/"
     },
     {
