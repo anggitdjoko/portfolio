@@ -92,7 +92,7 @@ window.PORTFOLIO = {
     {
       category: "Full-Stack",
       title: "GearGrid, equipment mapping and maintenance",
-      desc: "Web app to map building/mall equipment over engineering floor plans (DXF), with preventive/corrective maintenance management, logbook, shift scheduling, dashboards, reporting, and role-based access control (Guest/Supervisor/Admin). Equipment data is encrypted at rest (AES-256).",
+      desc: "Equipment mapping and maintenance app with interactive floor plans. Locate assets, view equipment details, manage corrective maintenance tickets and technician assignments, plan preventive maintenance by zone, and record inspection results. Includes maintenance history and dashboards for tracking inspection progress and ticket status.",
       tech: ["PHP 8.3", "SQLite", "JavaScript", "Canvas / DXF", "AES-256", "RBAC"],
       video: "assets/video/geargrid-demo.mp4",
       poster: "assets/video/geargrid-poster.jpg",
