@@ -177,22 +177,15 @@ if (P.projects && P.projects.length) {
   if (projNav) projNav.style.display = 'none';
 }
 
-/* ---------- contact methods ---------- */
+/* ---------- contact ---------- */
 document.getElementById('methods').innerHTML = `
-  <a class="cm" href="mailto:${P.email}"><span class="ic">📧</span><span class="tx"><small>Email</small><b>${P.email}</b></span></a>
-  <a class="cm" href="${P.whatsapp}" target="_blank" rel="noopener"><span class="ic">📱</span><span class="tx"><small>WhatsApp</small><b>${P.phone}</b></span></a>
-  <div class="cm"><span class="ic">📍</span><span class="tx"><small>Location</small><b>${P.location}</b></span></div>`;
-
-/* ---------- socials ---------- */
-const gh = `<svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.28 5.69.41.36.78 1.05.78 2.12v3.15c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>`;
-const li = `<svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9V9Z"/></svg>`;
-const em = `<svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4Zm2 2v.4l8 5 8-5V6H4Zm16 2.9-7.4 4.6a1 1 0 0 1-1.2 0L4 8.9V18h16V8.9Z"/></svg>`;
-const wa = `<svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.7-.83-1.96-.93-.26-.1-.45-.15-.64.15s-.74.92-.9 1.11c-.17.2-.33.22-.61.07a8 8 0 0 1-2.35-1.45 8.8 8.8 0 0 1-1.63-2.02c-.17-.3 0-.45.13-.6.13-.14.29-.34.43-.5.15-.18.2-.3.3-.5.1-.2 0-.37-.05-.52-.07-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.37-.26.3-1 .98-1 2.38s1.02 2.76 1.16 2.95c.15.2 2.02 3.08 4.9 4.32.68.3 1.22.47 1.63.6.69.22 1.32.19 1.81.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34ZM12 2a10 10 0 0 0-8.6 15.05L2 22l5.05-1.32A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3 .78.8-2.92-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>`;
+  <a class="contact-email" href="mailto:${P.email}"><span>${P.email}</span><span aria-hidden="true">↗</span></a>`;
 document.getElementById('socials').innerHTML = `
-  <a href="${P.github}" target="_blank" rel="noopener" title="GitHub">${gh}</a>
-  <a href="${P.linkedin}" target="_blank" rel="noopener" title="LinkedIn">${li}</a>
-  <a href="mailto:${P.email}" title="Email">${em}</a>
-  <a href="${P.whatsapp}" target="_blank" rel="noopener" title="WhatsApp">${wa}</a>`;
+  <a href="${P.whatsapp}" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
+  <a href="${P.github}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+  <a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>`;
+const contactLocation = document.getElementById('contact-location');
+if (contactLocation) contactLocation.textContent = P.location;
 
 /* ---------- reveal on scroll ---------- */
 const io = new IntersectionObserver(entries => {
