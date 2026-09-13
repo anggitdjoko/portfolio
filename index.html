@@ -241,12 +241,18 @@ h2.title{font-size:clamp(1.8rem,4.5vw,2.9rem);font-weight:600;line-height:1.1;ma
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:6px 11px;border-radius:999px}
 .pbadge i{width:7px;height:7px;border-radius:50%;background:#ff4d5e;box-shadow:0 0 10px #ff4d5e;animation:blip 1.8s infinite}
 @keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}
+.pplay{position:absolute;left:50%;top:50%;width:50px;height:50px;transform:translate(-50%,-50%);
+  display:grid;place-items:center;color:#04060d;background:linear-gradient(120deg,var(--accent),var(--accent2));
+  border:0;border-radius:50%;box-shadow:0 8px 24px rgba(2,4,10,.45);cursor:pointer;
+  transition:.25s;font-size:1rem;line-height:1}
+.pplay:hover,.pplay:focus-visible{transform:translate(-50%,-50%) scale(1.06)}
 .pfull{position:absolute;right:12px;bottom:12px;width:36px;height:36px;border-radius:11px;
   display:grid;place-items:center;color:#eaf0ff;background:rgba(4,6,13,.62);
   border:1px solid rgba(140,160,220,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   cursor:pointer;opacity:0;transform:translateY(6px);transition:.25s;font-size:.95rem;line-height:1}
 .pcard:hover .pfull,.pmedia:focus-within .pfull{opacity:1;transform:none}
 @media(hover:none){.pfull{opacity:1;transform:none}}
+.pmedia button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 #lbox{position:fixed;inset:0;z-index:9999;display:none;place-items:center;
   padding:calc(24px + env(safe-area-inset-top, 0px))
     calc(24px + env(safe-area-inset-right, 0px))
@@ -321,7 +327,7 @@ footer .heart{color:var(--accent)}
 </div>
 
 <nav id="nav">
-  <div class="brand"></div>
+  <a class="brand" href="#hero" aria-label="Anggit Djoko Wibowo, home"><span>Anggit</span> Djoko</a>
   <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navlinks">☰</button>
   <div class="navlinks" id="navlinks">
     <a href="#hero">Intro</a>
@@ -394,7 +400,7 @@ footer .heart{color:var(--accent)}
   </section>
 </main>
 
-<button id="sound" title="Toggle ambient sound">♪</button>
+<button id="sound" type="button" title="Toggle ambient sound" aria-label="Turn ambient sound on" aria-pressed="false">♪</button>
 
 <footer>Anggit Djoko Wibowo - 2025</footer>
 
