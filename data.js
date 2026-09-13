@@ -27,53 +27,94 @@ window.PORTFOLIO = {
   // Real work history (from LinkedIn)
   experience: [
     {
-      period: "Nov 2025 - Present",
-      role: "Software Engineer",
-      org: "Independent · Freelance · Remote",
-      desc: "Building web applications and software products end to end. My main project right now is Servgo, a POS and digital storefront platform for F&B businesses that's live in 2 locations with real daily transactions.",
-      tech: ["Next.js", "React", "TypeScript", "Supabase", "Vercel"]
+      "period": "Feb 2026 - Present",
+      "role": "Technician",
+      "org": "PT Angkasa Pura Indonesia · Full-time · Indonesia · On-site",
+      "desc": "Maintain airport electronic equipment and support servers and operational applications in the ELBAN (Airport Electronics) division at the Pontianak branch.<br>• Developed GearGrid as a personal project for equipment and maintenance management. The application is now used at the airport in Pontianak with approval from my division head.<br>• Support branch servers and applications used in airport operations, including GearGrid.<br>• Perform routine inspections, functional testing, maintenance, and troubleshooting of CCTV, Flight Information Display Systems (FIDS), public address and announcement systems, and PABX.<br>• Maintain and troubleshoot security screening equipment, including X-ray machines and metal detectors.<br>• Inspect and maintain fire alarm systems, including MCFA panels, and Building Automation Systems (BAS).",
+      "tech": [
+        "Software Development",
+        "Application Support"
+      ]
     },
     {
-      period: "Sep 2022 - Sep 2025",
-      role: "Store Assistant & Data Support",
-      org: "Pangkalan Gas 3kg Joeherman · Kubu Raya",
-      desc: "Managed daily transaction records, checked that payments added up, kept an eye on stock discrepancies, and documented sales and inventory patterns for reporting and internal audits. This is the data work that eventually pulled me into software.",
-      tech: ["Data Verification", "Reporting", "Inventory"]
+      "period": "Nov 2025 - Feb 2026",
+      "role": "Insinyur Full Stack",
+      "org": "Independent · Freelance · Indonesia · Remote",
+      "desc": "Building web applications and SaaS products.<br>Current project: Servgo — POS + digital storefront for F&amp;B (live, 2 locations).<br>Stack: Next.js, React, TypeScript, Supabase, Vercel.<br>Open to new projects and collaborations.",
+      "tech": []
     },
     {
-      period: "Aug 2023 - Apr 2024",
-      role: "Warehouse & Data Reporting",
-      org: "PT Daya Kobelco Construction Machinery Indonesia · Pontianak",
-      desc: "Validated delivery orders and stock positions to reduce data discrepancies, prepared operational reports on fuel, storage and maintenance spend, and improved picking-workflow efficiency across cross-functional teams.",
-      tech: ["Data Reporting", "SOP", "Logistics"]
+      "period": "Sep 2022 - Sep 2025",
+      "role": "Store Assistant &amp; Data Support",
+      "org": "Pangkalan Gas 3kg Joeherman · Full-time · Kubu Raya, West Kalimantan, Indonesia · On-site",
+      "desc": "• Managed daily transaction records and validated payment accuracy, reducing reconciliation errors by enhancing data verification processes<br>• Monitored product availability and identified stock discrepancies using manual data checks, contributing to more accurate demand forecasting<br>• Documented daily sales, inventory movements, and customer transaction patterns to support reporting activities<br>• Improved store workflow by organizing restocking processes, reducing operational delays and ensuring consistent shelf availability<br>• Collaborated with the store owner to provide insights on frequently purchased items, enabling better purchasing decisions<br>• Enhanced customer satisfaction by identifying patterns in product inquiries and reporting them for product placement improvements<br>• Maintained structured documentation for receipt issuance, stock levels, and store performance records to support internal audits",
+      "tech": [
+        "Management",
+        "Data Collection"
+      ]
     },
     {
-      period: "May 2024 - Jun 2024",
-      role: "Field Data Collector & Research Assistant",
-      org: "Untan × Stanford University Research Collaboration",
-      desc: "Collected and validated peatland field data (water quality, wind speed) with strict scientific methodology, cleaned datasets for researchers, and flagged measurement anomalies for resolution.",
-      tech: ["Data Collection", "Data Cleaning", "QA"]
+      "period": "May 2024 - Jun 2024",
+      "role": "Field Data Collector &amp; Research Assistant",
+      "org": "Research Collaboration Between Untan and Stanford University · Freelance · Pontianak, West Kalimantan, Indonesia · On-site",
+      "desc": "Supported peatland field research in a collaboration between Universitas Tanjungpura and Stanford University.<br>• Collected field data, including water quality and wind speed measurements, following established research procedures.<br>• Validated field measurements before preparing datasets for researchers.<br>• Cleaned and organized datasets for use by the research team.<br>• Flagged measurement anomalies for review and resolution.",
+      "tech": [
+        "Water Sampling",
+        "Survey Research"
+      ]
     },
     {
-      period: "May 2023 - Jun 2023",
-      role: "Project Assistant",
-      org: "PT Permata Sawit Mandiri · Sandai",
-      desc: "Collected environmental quality data (water, air, soil) for impact evaluations, documented sampling results and field conditions, and prepared summary reports and recommendations.",
-      tech: ["Environmental Data", "Reporting"]
+      "period": "Aug 2023 - Apr 2024",
+      "role": "Warehouse",
+      "org": "PT Daya Kobelco Construction Machinery Indonesia · Full-time · Pontianak, West Kalimantan, Indonesia · On-site",
+      "desc": "• Monitored inventory accuracy by validating delivery orders, stock positions, and dispatch records, reducing data discrepancies between warehouse and system records<br>• Prepared operational reports on fuel usage, storage cost, and maintenance spending, helping supervisors make data-driven budgeting decisions<br>• Improved picking workflow efficiency by mentoring team members and analyzing common bottlenecks, resulting in higher daily productivity<br>• Assisted in implementing standard operating procedures (SOP) and documented process deviations for continuous improvement<br>• Collaborated with cross-functional teams (logistics, maintenance, operations) to resolve product dispatch and stock movement issues<br>• Conducted quality checks on outgoing products and recorded recurring issues, contributing to root cause analysis and process fixes",
+      "tech": [
+        "Python (Programming Language)",
+        "Microsoft Power BI"
+      ]
     },
     {
-      period: "Apr 2023 - May 2023",
-      role: "Project Assistant",
-      org: "Stanford University · Remote",
-      desc: "Conducted peat-water sampling and recorded measurement data for chemical analysis, ensuring data quality through filtering and verification before submission.",
-      tech: ["Sampling", "Data Quality"]
+      "period": "May 2023 - Jun 2023",
+      "role": "Project Assistant",
+      "org": "PT Permata Sawit Mandiri · Contract · Sandai, West Kalimantan, Indonesia · On-site",
+      "desc": "• Collected environmental quality data (water, air, soil) and performed initial assessment to support environmental impact evaluations.<br>• Documented project activities, sampling results, and field conditions to maintain structured project information for stakeholder review.<br>• Identified potential risks related to environmental parameters and communicated them to project supervisors.<br>• Assisted in preparing summary reports and recommendations for improving environmental monitoring processes.",
+      "tech": [
+        "Public Relations",
+        "Data Collection"
+      ]
     },
     {
-      period: "Oct 2022 - Nov 2022",
-      role: "Project Assistant",
-      org: "Universitas Tanjungpura · Pontianak",
-      desc: "Performed groundwater data collection using standardized procedures and organized labeled datasets for university research teams.",
-      tech: ["Data Collection", "Documentation"]
+      "period": "Apr 2023 - May 2023",
+      "role": "Project Assistant",
+      "org": "Stanford University · Contract · Massachusetts, United States · Remote",
+      "desc": "• Conducted peat water sampling and recorded measurement data to support chemical condition analysis.<br>• Ensured data quality by filtering samples and verifying measurements before submission.<br>• Documented sampling procedures and collaborated with researchers for data review.",
+      "tech": []
+    },
+    {
+      "period": "Oct 2022 - Nov 2022",
+      "role": "Project Assistant",
+      "org": "Universitas Tanjungpura · Contract · Pontianak City, West Kalimantan, Indonesia · On-site",
+      "desc": "• Performed groundwater data collection using standardized procedures to ensure accuracy and consistency.<br>• Organized and labeled data samples to maintain structured datasets for university research teams.<br>• Supported reporting by summarizing field activities and findings for academic documentation.",
+      "tech": [
+        "Public Relations",
+        "Data Collection"
+      ]
+    },
+    {
+      "period": "Mar 2021 - Jun 2021",
+      "role": "Technician",
+      "org": "PT Angkasa Pura II (Persero) · Internship · Pontianak, West Kalimantan, Indonesia · On-site",
+      "desc": "Conducting inspections and maintenance at PT Angkasa Pura II, specifically in the field of electrical systems (low-voltage power)",
+      "tech": [
+        "Technician"
+      ]
+    },
+    {
+      "period": "Jun 2016 - Oct 2017",
+      "role": "Store Assistant",
+      "org": "Cafe Aviesta · Part-time · Kubu Raya, West Kalimantan, Indonesia · On-site",
+      "desc": "",
+      "tech": []
     }
   ],
 
