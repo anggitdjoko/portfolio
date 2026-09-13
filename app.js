@@ -71,11 +71,12 @@ if (P.projects && P.projects.length) {
     const list = cat === 'All' ? P.projects : P.projects.filter(p => p.category === cat);
     grid.innerHTML = list.map(p => {
       const media = p.video ? `
-        <div class="pmedia" data-src="${p.loop || p.video}" data-full="${p.video}" tabindex="0" role="button" aria-label="Play ${p.title} demo reel">
-          <video muted loop playsinline preload="none"${p.poster ? ` poster="${p.poster}"` : ''}></video>
+        <div class="pmedia" data-src="${p.loop || p.video}" data-full="${p.video}">
+          <video muted loop playsinline preload="none"${p.poster ? ` poster="${p.poster}"` : ''} aria-label="${p.title} recorded demo"></video>
           <div class="shade"></div>
           <span class="pbadge"><i></i>${p.reelLabel || 'Demo reel'}</span>
-          <button class="pfull" aria-label="Watch full screen">⛶</button>
+          <button class="pplay" type="button" aria-label="Watch ${p.title} demo">▶</button>
+          <button class="pfull" type="button" aria-label="Open ${p.title} demo in video viewer">⛶</button>
         </div>` : '';
       const body = `
         <div class="pcat">${p.category || ''}</div>
@@ -83,11 +84,11 @@ if (P.projects && P.projects.length) {
         <p class="pdesc">${p.desc || ''}</p>
         <div class="ptech">${(p.tech || []).map(t => `<span class="chip">${t}</span>`).join('')}</div>
         <div class="plinks">
-          ${p.video ? `<a href="#" data-play="${p.video}">Watch reel ▶</a>` : ''}
+          ${p.video ? `<a href="#" data-play="${p.video}">Watch ${p.title} demo ▶</a>` : ''}
           ${p.demo ? (/^https?:\/\//i.test(p.demo)
-            ? (p.video ? '' : `<a href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`)
-            : `<a href="${p.demo}" data-warp>Live Data ↗</a>`) : ''}
-          ${p.code ? `<a href="${p.code}" target="_blank" rel="noopener">Code ↗</a>` : ''}
+            ? (p.video ? '' : `<a href="${p.demo}" target="_blank" rel="noopener">Open live demo ↗</a>`)
+            : `<a href="${p.demo}" data-warp>Open live data ↗</a>`) : ''}
+          ${p.code ? `<a href="${p.code}" target="_blank" rel="noopener">View source code ↗</a>` : ''}
         </div>`;
       return `<article class="pcard reveal in${p.video ? ' has-media' : ''}">
         ${media}
@@ -155,10 +156,7 @@ if (P.projects && P.projects.length) {
     }, { threshold: 0.28 });
     cells.forEach(c => {
       reelIO.observe(c);
-      c.addEventListener('click', e => openReel(c.dataset.full || c.dataset.src, e.target.closest('.pfull') || c));
-      c.addEventListener('keydown', e => {
-        if (e.target === c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openReel(c.dataset.full || c.dataset.src, c); }
-      });
+      c.addEventListener('click', e => openReel(c.dataset.full || c.dataset.src, e.target.closest('button') || c));
     });
     grid.querySelectorAll('[data-play]').forEach(a => {
       a.addEventListener('click', e => { e.preventDefault(); openReel(a.dataset.play, a); });
@@ -689,14 +687,20 @@ setTimeout(hideLoader, 2200);
 /* ---------- ambient sound (WebAudio pad, off by default) ---------- */
 let audioCtx = null, playing = false, sndNodes = [];
 const soundBtn = document.getElementById('sound');
+function setSoundState(on) {
+  soundBtn.classList.toggle('on', on);
+  soundBtn.setAttribute('aria-pressed', String(on));
+  soundBtn.setAttribute('aria-label', on ? 'Turn ambient sound off' : 'Turn ambient sound on');
+  soundBtn.textContent = on ? '❚❚' : '♪';
+}
+setSoundState(false);
 soundBtn.addEventListener('click', () => {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if (playing) {
     sndNodes.forEach(n => { try { n.stop(); } catch (e) {} });
     sndNodes = [];
     playing = false;
-    soundBtn.classList.remove('on');
-    soundBtn.textContent = '♪';
+    setSoundState(false);
   } else {
     const master = audioCtx.createGain();
     master.gain.value = 0.06;
@@ -717,8 +721,7 @@ soundBtn.addEventListener('click', () => {
       sndNodes.push(o, lfo);
     });
     playing = true;
-    soundBtn.classList.add('on');
-    soundBtn.textContent = '❚❚';
+    setSoundState(true);
   }
 });
 
