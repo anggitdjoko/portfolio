@@ -25,8 +25,8 @@
 - Removed all AI/ML references from translations (EN/ID)
 - Updated hero text: "FULL-STACK DEVELOPER & DATA ANALYST"
 - Updated bio: "Full-Stack Developer building products from database to deployment"
-- Changed signature from "Azril" to "Anggit"
-- Updated all blog authors from Azril to Anggit
+- Updated signature text
+- Updated blog author display text
 - Avatar changed to Linkedin.jpg
 
 ### 4. Sections Removed
