@@ -1,16 +1,8 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
-export function proxy(request: NextRequest) {
-    const userAgent = request.headers.get('user-agent') || '';
-
-    // Check for mobile devices
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-
-    if (isMobile) {
-        return NextResponse.redirect('https://arfazrllworkspace.vercel.app/');
-    }
-
+// Keep the Next.js experiment available on every device; do not redirect
+// mobile visitors to an unrelated legacy template URL.
+export function proxy() {
     return NextResponse.next();
 }
 
