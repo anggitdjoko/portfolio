@@ -81,7 +81,7 @@ The `gh-pages` branch is the production static tree rather than a generated copy
 
 The confirmed repository owner and portfolio identity for this guide is **Anggit Djoko Wibowo**. This README does not relabel project records, employment history, credentials, images, raw data, or links whose provenance has not been confirmed. Those items require an owner-approved source-of-truth before they are consolidated, promoted, or removed.
 
-The existing `LICENSE` file and its copyright notice are intentionally unchanged. It currently contains the notice `Copyright (c) 2026 S. A. Almazril`; this guide does not infer or alter that notice while its provenance is being reviewed. Existing third-party package, font, asset, and template attributions must remain in place. No third-party work is claimed as Anggit's solely because it appears in the repository.
+The existing `LICENSE` file and its copyright notice are intentionally unchanged; it is retained as legal/provenance attribution separate from the portfolio identity. Existing third-party package, font, asset, and template attributions must remain in place. No third-party work is claimed as Anggit's solely because it appears in the repository.
 
 The repository is distributed under the MIT terms in `LICENSE`. Dependencies and externally sourced assets may carry additional terms; check their upstream notices before redistribution.
 
