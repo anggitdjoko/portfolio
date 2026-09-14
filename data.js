@@ -133,18 +133,18 @@ window.PORTFOLIO = {
       reelLabel: "Product demo · 70s"
     },
     {
+      category: "Data",
+      title: "Data Reporting Dashboards",
+      desc: "Dashboards built from transaction data for three companies. One question was which menu items sold most at PT JAR Andalan Rasa; Kare Ramen led with 893 units in October 2025.",
+      tech: ["Data Analysis", "Dashboards", "SQL"],
+      demo: "data.html"
+    },
+    {
       category: "Web",
       title: "This Portfolio",
       desc: "Cinematic single-page developer portfolio with a Three.js particle universe that converges into one glowing sphere on scroll.",
       tech: ["Three.js", "GSAP", "JavaScript"],
       demo: "https://anggitdjoko.github.io/portfolio/"
-    },
-    {
-      category: "Data",
-      title: "Data Reporting Dashboards",
-      desc: "Analytics dashboards built from real transaction data across three companies in LPG distribution, heavy equipment, and F&B. Covers revenue breakdowns, customer concentration, top-product analysis, and demand forecasting.",
-      tech: ["Data Analysis", "Dashboards", "SQL"],
-      demo: "data.html"
     }
   ]
 };
