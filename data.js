@@ -88,13 +88,6 @@ window.PORTFOLIO = {
       "org": "PT Angkasa Pura II (Persero) · Internship · Pontianak, West Kalimantan, Indonesia · On-site",
       "desc": "Conducting inspections and maintenance at PT Angkasa Pura II, specifically in the field of electrical systems (low-voltage power)",
       "tech": ["Electrical Systems","Technical Inspection"]
-    },
-    {
-      "period": "Jun 2016 - Oct 2017",
-      "role": "Store Assistant",
-      "org": "Cafe Aviesta · Part-time · Kubu Raya, West Kalimantan, Indonesia · On-site",
-      "desc": "",
-      "tech": []
     }
   ],
 
