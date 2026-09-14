@@ -179,9 +179,9 @@ if (P.projects && P.projects.length) {
 
 /* ---------- contact ---------- */
 document.getElementById('methods').innerHTML = `
-  <a class="contact-email" href="mailto:${P.email}"><span>${P.email}</span><span aria-hidden="true">↗</span></a>`;
+  <a class="contact-action contact-email" href="mailto:${P.email}"><span>Email</span><span>${P.email}</span></a>
+  <a class="contact-action contact-whatsapp" href="${P.whatsapp}" target="_blank" rel="noopener"><span>WhatsApp</span><span aria-hidden="true">↗</span></a>`;
 document.getElementById('socials').innerHTML = `
-  <a href="${P.whatsapp}" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
   <a href="${P.github}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
   <a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>`;
 const contactLocation = document.getElementById('contact-location');
