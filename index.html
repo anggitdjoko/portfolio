@@ -266,46 +266,44 @@ html.reel-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.pbadge i{animation:none}}
 
 /* ---------- contact ---------- */
-#contact{position:relative;max-width:none;overflow:hidden;padding:80px 32px 36px;background:radial-gradient(ellipse at 50% 48%,#0c1830 0%,#070c18 42%,#04060d 76%);text-align:left}
-#contact .contact-inner{position:relative;max-width:1040px;margin:0 auto;border:1px solid #27374d;border-radius:22px;background:radial-gradient(ellipse at 100% 0%,rgba(42,99,154,.2),transparent 58%),linear-gradient(125deg,#0c1320,#0a101d 65%,#0c1726);box-shadow:0 24px 70px #0004;overflow:hidden;padding:0}
-#contact .contact-inner::before{content:"";position:absolute;left:34px;right:34px;top:0;height:1px;background:linear-gradient(90deg,transparent,#69beea70,transparent);pointer-events:none}
-#contact .contact-layout{padding:52px;display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+#contact{position:relative;max-width:none;overflow:hidden;padding:18px 32px 64px;background:linear-gradient(180deg,#080d18 0%,#060a13 48%,#04060d 100%);text-align:center}
+#contact:before{content:"";position:absolute;top:0;left:clamp(24px,6vw,64px);right:clamp(24px,6vw,64px);height:1px;background:linear-gradient(90deg,transparent,#29445e,transparent);pointer-events:none}
+#contact .contact-inner{position:relative;max-width:980px;margin:0 auto;padding-top:42px}
+#contact .contact-layout{display:flex;flex-direction:column;align-items:center;gap:28px}
 #contact .contact-intro{min-width:0}
 #contact .title,#contact .lead,#contact .eyebrow{text-shadow:none}
-#contact .eyebrow{margin-bottom:24px}
-#contact .title{font-size:clamp(38px,4.7vw,54px);line-height:1.06;letter-spacing:-.045em;margin-bottom:18px}
-#contact .lead{font-size:15px;line-height:1.7;color:#a9b7cf;max-width:310px}
-#contact .contact-actions{min-width:0}
-#contact .contact-methods{display:flex;flex-direction:column;gap:12px}
-#contact .contact-action{display:flex;align-items:center;justify-content:flex-start;gap:14px;min-height:68px;padding:16px 20px;border-radius:11px;border:1px solid #35485d;font-size:15px;font-weight:600;transition:background .18s,border-color .18s;color:#deebfc}
-#contact .contact-action span:last-child{margin-left:auto;overflow-wrap:anywhere;min-width:0}
-#contact .contact-action.contact-email{background:#5ad1ff;color:#052231;border-color:#5ad1ff}
-#contact .contact-action.contact-email:hover{background:#8adeff;border-color:#8adeff}
-#contact .contact-action.contact-whatsapp{background:#101d2c;color:#deebfc}
-#contact .contact-action.contact-whatsapp:hover{background:#182b3d;border-color:#6e9bb8}
-#contact .contact-bottom{border-top:1px solid #91b8e21c;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px -52px -52px;padding:19px 52px;background:#050b141f}
-#contact .socials{display:flex;align-items:center;flex-wrap:wrap;gap:8px 26px}
-#contact .socials a{display:inline-flex;align-items:center;gap:8px;min-height:36px;color:#c9d6e9;font-size:13px}
+#contact .eyebrow{margin-bottom:18px}
+#contact .title{font-size:clamp(38px,6vw,58px);line-height:1.02;letter-spacing:-.045em;margin:0 0 13px}
+#contact .lead{font-size:15px;line-height:1.7;color:#a9b7cf;max-width:340px;margin:0 auto}
+#contact .contact-actions{min-width:0;display:flex;flex-direction:column;align-items:center;gap:15px}
+#contact .contact-methods{display:flex;flex-direction:column;align-items:center;gap:15px}
+#contact .contact-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:0;padding:0;border:0;border-radius:0;background:none;color:#b8c5d9;font-size:13px;font-weight:400;transition:color .18s}
+#contact .contact-action span:last-child{margin-left:0;overflow-wrap:normal;min-width:0}
+#contact .contact-action.contact-email{font-size:clamp(17px,2.3vw,23px);color:#eaf0ff;border-bottom:1px solid #5ad1ff;padding-bottom:4px;line-height:1.3}
+#contact .contact-action.contact-email span:last-child{color:#5ad1ff;font-size:18px}
+#contact .contact-action.contact-email:hover,#contact .contact-action.contact-whatsapp:hover{color:#5ad1ff}
+#contact .contact-action.contact-whatsapp{color:#b8c5d9}
+#contact .contact-bottom{width:100%;border-top:1px solid #172238;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin:19px 0 0;padding:14px 0 0;background:none}
+#contact .socials{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:20px}
+#contact .socials a{display:inline-flex;align-items:center;gap:8px;min-height:36px;color:#a9b3c8;font-size:12px}
 #contact .socials a span{color:inherit}
 #contact .socials a:hover{color:#5ad1ff;text-decoration:none}
-#contact a:focus-visible{outline:2px solid #eaf0ff;outline-offset:5px;border-radius:2px}
-#contact .contact-location{order:-1;color:#a2b1c9;font-size:12px;white-space:nowrap}
+#contact a:focus-visible{outline:2px solid #5ad1ff;outline-offset:5px;border-radius:2px}
+#contact .contact-location{order:0;color:#8b96b3;font-size:11px;white-space:nowrap;margin:0}
 @media(max-width:760px){
-  #contact{padding:44px 20px 20px}
-  #contact .contact-layout{grid-template-columns:1fr;gap:30px;padding:32px}
-  #contact .contact-bottom{margin:0 -32px -32px;padding:15px 32px}
+  #contact{padding:12px 24px 44px}
+  #contact .contact-inner{padding-top:34px}
+  #contact .contact-layout{gap:24px}
   #contact .title{font-size:42px}
-  #contact .lead{max-width:none}
-  #contact .eyebrow{margin-bottom:20px}
+  #contact .lead{max-width:340px}
 }
 @media(max-width:430px){
-  #contact{padding:30px 16px 16px}
-  #contact .contact-inner{border-radius:18px}
-  #contact .contact-layout{padding:28px 24px;gap:28px}
-  #contact .contact-bottom{margin:0 -24px -28px;padding:16px 24px;align-items:flex-start;flex-direction:column;gap:7px}
+  #contact{padding:12px 24px 44px}
+  #contact .contact-inner{padding-top:28px}
+  #contact .contact-layout{gap:24px}
   #contact .title{font-size:38px}
-  #contact .contact-action{padding:15px;gap:11px}
-  #contact .socials{gap:24px}
+  #contact .contact-action.contact-email{font-size:20px}
+  #contact .socials{gap:20px}
 }
 
 footer{text-align:center;padding:40px 20px 60px;color:var(--muted);font-size:.82rem;position:relative;z-index:10}
@@ -428,7 +426,7 @@ footer .heart{color:var(--accent)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="./data.js"></script>
 <script src="./warp.js?v=ux-motion-20260909"></script>
-<script src="./app.js?v=contact-20260914"></script>
+<script src="./app.js?v=contact-centered-20260916"></script>
 <!-- ===== hard content failsafe: the page must NEVER stay blank or stuck =====
      Independent of PORTFOLIO/THREE/GSAP/app.js. Even if any of them fail to load
      or throw during optional startup, this reveals all content, closes the "Hello!" loader,
