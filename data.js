@@ -28,7 +28,7 @@ window.PORTFOLIO = {
   experience: [
     {
       "period": "Feb 2026 - Present",
-      "role": "Technician",
+      "role": "Software Technician",
       "org": "PT Angkasa Pura Indonesia · Full-time · Indonesia · On-site",
       "desc": "Maintain airport electronic equipment and support servers and operational applications in the ELBAN (Airport Electronics) division at the Pontianak branch.<br>• Developed GearGrid as a personal project for equipment and maintenance management. The application is now used at the airport in Pontianak with approval from my division head.<br>• Support branch servers and applications used in airport operations, including GearGrid.<br>• Perform routine inspections, functional testing, maintenance, and troubleshooting of CCTV, Flight Information Display Systems (FIDS), public address and announcement systems, and PABX.<br>• Maintain and troubleshoot security screening equipment, including X-ray machines and metal detectors.<br>• Inspect and maintain fire alarm systems, including MCFA panels, and Building Automation Systems (BAS).",
       "tech": ["Software Development","Server Support","Application Support"]
